@@ -24,32 +24,27 @@ public:
   void check_type(tree f) {
     if (!f)
       return ;
-
     enum tree_code tc=f->typed.base.code;
-    cerr << "check field tc:" << tc << ":";
-    cerr << tree_code_name[tc];
-    cerr << endl;
+    // cerr << "check field tc:" << tc << ":";
+    // cerr << tree_code_name[tc];
+    // cerr << endl;
+  }
+
+  template <class T2,class Ret, class T > Ret call_type_ret(tree f, T fn) {
+    enum tree_code tc=f->typed.base.code;
+    CallBack * pT0=  callbacks[tc];
+    T2* pT= dynamic_cast<T2*> (pT0);
+    return fn(pT,f);
   }
 
   template <class T2,class T > void call_type(tree f, T fn) {
-    if (!f)
-      return;
     enum tree_code tc=f->typed.base.code;
     CallBack * pT0=  callbacks[tc];
-    if (pT0) {
-      T2* pT= dynamic_cast<T2*> (pT0);
-      fn(pT,f);
-    } else {
-      cerr << "no callback for field" << endl;
-    }
+    T2* pT= dynamic_cast<T2*> (pT0);
+     fn(pT,f);
   }
 
   virtual void finish_type (tree t, void *i){
-  cerr << t << "\t"
-       << (enum tree_code)t->typed.base.code//tree_base
-       << endl;
-
-    cerr << "none" << endl;
   }
 };
 
@@ -57,14 +52,17 @@ class TC_IDENTIFIER_NODE;
 
 // processing in the context of a global record object.
 class RecordContext {
+  static int classcount;
+  const char * class_name;
 public:
   //callbacks
-  void record_begin(){}
-  static void type_name ( TC_IDENTIFIER_NODE * cb,  tree_node* t) ;
-  void field_begin() {}
-  static void field_name(TC_IDENTIFIER_NODE * cb,  tree_node* t);
-  void field_end() {}
-  void record_end() {}
+  void record_begin(const char * pname);
+
+  static const char * type_name ( TC_IDENTIFIER_NODE * cb,  tree_node* t) ;
+  void field_begin(const char * name);
+  static const char * field_name(TC_IDENTIFIER_NODE * cb,  tree_node* t);
+  void field_end() ;
+  void record_end() ;
 };
 
 
@@ -72,11 +70,9 @@ public:
 template <enum tree_code tc> class TCWrapper : public CallBack {
 public:
   TCWrapper() {
-    cerr << "registerd:"<< tc << " name:" << tree_code_name[tc]<< endl;
     callbacks[tc]=this;   // save this
   };
   virtual  void finish_type (tree t, void *i){
-    cerr << "none" << tc<< endl;
   }
 };
 
@@ -85,10 +81,10 @@ public:
   const char * id_str(tree_node * t){
     return IDENTIFIER_POINTER(t);
   }  
-  void id(tree_node * t){
+  const char * id(tree_node * t){
     if (! t)
-      return;
-    cerr << "ID:"<< id_str(t) << endl;
+      return "NULL";
+    return id_str(t);
   };
 
 } aTC_IDENTIFIER_NODE;
@@ -100,15 +96,21 @@ public :
     return DECL_NAME(t);
   }
 
- void process_name(tree t) {   
-    check_type(name(t));
-    call_type<TC_IDENTIFIER_NODE>(name(t),RecordContext::field_name);
+  const char * process_name(tree t) {   
+   //    check_type(name(t));
+    if (!t)
+      return "No Name";
+    
+    tree n= name(t);
+    if (n) 
+      return call_type_ret<TC_IDENTIFIER_NODE,const char *>(n,RecordContext::field_name);
+    else
+      return "No Name2";
   }
 
-  static void finish_type_field(TC_FIELD_DECL* self,tree f)
+  static const char * finish_type_field(TC_FIELD_DECL* self,tree f)
   {
-    self->process_name(f);
-    cerr << "finish field:" << endl;    
+    return self->process_name(f);
   }
 } aTC_FIELD_DECL;
 
@@ -127,35 +129,59 @@ public :
     return TYPE_NAME(t);
   }
 
- 
-  void process_name(tree t) {   
-    check_type(name(t));
-    call_type<TC_IDENTIFIER_NODE>(name(t),RecordContext::type_name);
+  tree chain(tree t) {
+    return TREE_CHAIN(t);
   }
 
+  const char * process_name(tree t) {   
+    //    check_type(name(t));
+    if (!t)
+      return "No Name";
+        tree n= name(t);
+    if (n) 
+      return call_type_ret<TC_IDENTIFIER_NODE, const char *>(n,RecordContext::type_name);
+    else
+      return "";
+  }
 
-  void process_field(tree f) {   
+  void process_field(RecordContext & c,tree f) {   
     if (!f)
       return;
-    check_type(f);
-    call_type<TC_FIELD_DECL>(f,TC_FIELD_DECL::finish_type_field);
+
+
+    //    check_type(f); // type of the field
+    while (f) {
+      const char * n=call_type_ret<TC_FIELD_DECL,const char *>(f,TC_FIELD_DECL::finish_type_field);
+      c.field_begin(n);
+      f = chain(f);
+    }
 
   }
 
   virtual void finish_type (tree t, void *i){
-    cerr << "Record type begin" << endl;
-    process_name(t);
-    process_field(fields(t));
-    cerr << "Record type end" << endl;
-  }
 
-  } aTC_RECORD_TYPE;
+    RecordContext c;
+
+    const char *  n=process_name(t);
+    if (strcmp(n,"") == 0)
+      return;
+
+    c.record_begin(n);
+
+    //    cerr << "Record type begin" << endl;
+      
+    process_field(c,fields(t));
+    //    cerr << "Record type end" << endl;
+
+    c.record_end();
+  }
+  
+} aTC_RECORD_TYPE;
 
 void   cpp_callbackPLUGIN_START_UNIT ()
 {
 
 }
-
 
 void cpp_callbackPLUGIN_FINISH_TYPE (tree t, void *i)
 {
@@ -164,17 +190,51 @@ void cpp_callbackPLUGIN_FINISH_TYPE (tree t, void *i)
   if (pT) {
     pT->finish_type(t,i);
   } else {
-    cerr << "no callback" << endl;
+    //    cerr << "no callback" << endl;
   }
 
 }
 
-void RecordContext::type_name ( TC_IDENTIFIER_NODE * cb,  tree_node* t) {
-    //    cerr << "type_name:" << endl;    
-    cb->id(t);
-  };
+///////////////////////////////////////////////////////////////
 
-void RecordContext::field_name(TC_IDENTIFIER_NODE * cb,  tree_node* t){
-  cerr << "field_name:";    
-  cb->id(t);  
+// decorator::
+
+void RecordContext::record_begin(const char * pname){
+  class_name=pname;
+  cout << "class CLS_" << classcount++ << "_";
+
+  if (pname) {
+    cout << pname ;
+  }  else  {
+    cout << "unnamed" ;
+  }
+  cout << "{ " << endl;
+  cout << "\t generic_class_name <" << "\"" <<  pname << "\"," << pname << ">" << " the_class_name;"<< endl;      
+
 }
+
+const char *  RecordContext::type_name ( TC_IDENTIFIER_NODE * cb,  tree_node* t) {
+  const char * n= cb->id(t);
+  //  cerr << "type_name:" << n<< endl;    
+  return n;
+};
+
+const char * RecordContext::field_name(TC_IDENTIFIER_NODE * cb,  tree_node* t){
+  const char * n= cb->id(t);  
+  return n;
+}
+
+void RecordContext::field_begin(const char * name){
+  cout << "\t generic_field_name <\"" 
+       <<  name 
+       << "\"," 
+       << class_name        << "," 
+       << name            
+       << "> " <<  name << ";" << endl;      
+}
+
+void RecordContext::record_end(){
+  cout << "}; " << endl;
+}
+
+int RecordContext::classcount=0;
