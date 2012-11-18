@@ -8,18 +8,6 @@
 #include "RecordContext.hpp"
 #include <string.h>
 
-template <> TCWrapper<(tree_code)0>::TCWrapper(){}
-template <> TCWrapper<(tree_code)1>::TCWrapper(){}
-template <> TCWrapper<(tree_code)2>::TCWrapper(){}
-template <> TCWrapper<(tree_code)3>::TCWrapper(){}
-template <> TCWrapper<(tree_code)4>::TCWrapper(){}
-
-template <> void TCWrapper<(tree_code)4>::finish_type(tree_node*, void*){}
-template <> void TCWrapper<(tree_code)3>::finish_type(tree_node*, void*){}
-template <> void TCWrapper<(tree_code)2>::finish_type(tree_node*, void*){}
-template <> void TCWrapper<(tree_code)1>::finish_type(tree_node*, void*){}
-template <> void TCWrapper<(tree_code)0>::finish_type(tree_node*, void*){}
-
 //class tree_type;
 //typedef tree_type * tree;
 
@@ -61,9 +49,6 @@ class TC_IDENTIFIER_NODE;
 // processing in the context of a global record object.
 
 
-// TCWrapper::TCWrapper() {
-//   callbacks[tc]=this;   // save this
-// };
 
 const char * TC_IDENTIFIER_NODE::id_str(tree_node * t){
   return IDENTIFIER_POINTER(t);
@@ -151,7 +136,7 @@ void TC_RECORD_TYPE::finish_type (tree t, void *i){
 }
 TC_RECORD_TYPE aTC_RECORD_TYPE;
 
-void   cpp_callbackPLUGIN_START_UNIT ()
+void cpp_callbackPLUGIN_START_UNIT ()
 {
 
 }
@@ -168,8 +153,15 @@ void cpp_callbackPLUGIN_FINISH_TYPE (tree t, void *i)
   
 }
 
-///////////////////////////////////////////////////////////////
+void CallBack::save_callback(enum tree_code tc,CallBack * self)   // save this
+{
+  callbacks[tc]=self;
+}
 
-// decorator::
+CallBack::CallBack(){}
+CallBack::~CallBack(){}
 
+void CallBack::finish_type (tree t, void *i){}
+
+//RecordContext::type_name(TC_IDENTIFIER_NODE*, tree_node*)
 

@@ -10,19 +10,23 @@ class CallBack;
 
 class CallBack {
 public:
+  CallBack();
+  virtual ~CallBack();
   void check_type(tree f);
   template <class T2,class Ret, class T > Ret call_type_ret(tree f, T fn);
   template <class T2,class T > void call_type(tree f, T fn);
-  virtual void finish_type (tree t, void *i){
-  }
+  virtual void finish_type (tree t, void *i);
+  void save_callback(enum tree_code tc,CallBack * self);   // save this
 };
 
 class TC_IDENTIFIER_NODE;
 
 template <enum tree_code tc> class TCWrapper : public CallBack {
 public:
-  TCWrapper();
-  virtual  void finish_type (tree t, void *i);
+  TCWrapper() {
+    save_callback(tc,this);   // save this
+  };
+
 };
 
 class TC_IDENTIFIER_NODE  : public TCWrapper<IDENTIFIER_NODE>{

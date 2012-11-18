@@ -1,17 +1,12 @@
 GCC=gcc-4.7
 PLUGIN_SOURCE_FILES= plugin.c 
-PLUGIN_OBJECT_FILES= $(patsubst %.c,%.o,$(PLUGIN_SOURCE_FILES)) plugincpp.o
-
 TOP := $(dir $(lastword $(MAKEFILE_LIST)))
 GCCPLUGIN_HEADER_DIR=/usr/lib/gcc/x86_64-linux-gnu/4.7/plugin/include
 
 CFLAGS+= -g -O0 -save-temps  -I$(GCCPLUGIN_HEADER_DIR)  -fPIC -O2   -Wl,-E  -fstack-protector -ldl -lm -lpthread -lc -lcrypt
 
-OBJECTS=plugin.o plugincpp.o RecordContext.o
-
-
-plugin.so: $(PLUGIN_OBJECT_FILES)  $(OBJECTS)
-	g++ -shared -pthread  plugin.o plugincpp.o -o $@
+plugin.so:  plugin.o plugincpp.o RecordContext.o 
+	g++ -shared -pthread  plugin.o plugincpp.o RecordContext.o  -o $@
 
 plugincpp.o:  plugincpp.cpp 
 	g++ -std=c++0x -save-temps -fPIC -pthread -c -I$(GCCPLUGIN_HEADER_DIR)  $^ -o $@

@@ -1,11 +1,11 @@
 #include <iostream>
 #include <vector>
-
 #include <gcc-plugin.h>
 #include <coretypes.h>
 #include <tree.h>
 #include  "RecordContext.hpp"
 #include  "plugincpp.hpp"
+
 using namespace std;
 
 void RecordContext::record_begin(const char * pname){
