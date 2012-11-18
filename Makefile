@@ -7,13 +7,16 @@ GCCPLUGIN_HEADER_DIR=/usr/lib/gcc/x86_64-linux-gnu/4.7/plugin/include
 
 CFLAGS+= -g -O0 -save-temps  -I$(GCCPLUGIN_HEADER_DIR)  -fPIC -O2   -Wl,-E  -fstack-protector -ldl -lm -lpthread -lc -lcrypt
 
-OBJECTS=plugin.o plugincpp.o
+OBJECTS=plugin.o plugincpp.o RecordContext.o
 
 
 plugin.so: $(PLUGIN_OBJECT_FILES)  $(OBJECTS)
 	g++ -shared -pthread  plugin.o plugincpp.o -o $@
 
-plugincpp.o:  plugincpp.cpp Makefile
+plugincpp.o:  plugincpp.cpp 
+	g++ -std=c++0x -save-temps -fPIC -pthread -c -I$(GCCPLUGIN_HEADER_DIR)  $^ -o $@
+
+RecordContext.o:  RecordContext.cpp 
 	g++ -std=c++0x -save-temps -fPIC -pthread -c -I$(GCCPLUGIN_HEADER_DIR)  $^ -o $@
 
 plugin.o:  plugin.c
@@ -26,4 +29,7 @@ test : plugin.so
 clean :
 	rm plugin.so
 	rm *.o
+	rm *.i *.ii *.s
 
+static_test :
+	g++  -std=c++0x -I fake fake/tree.c plugincpp.cpp  RecordContext.cpp
