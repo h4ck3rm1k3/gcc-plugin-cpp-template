@@ -52,6 +52,7 @@ public:
   const char * id(tree_node * t);
 };
 
+
 class  TC_FIELD_DECL : public  TCWrapper<FIELD_DECL>
 {
 public :
@@ -61,6 +62,7 @@ public :
   static double_int  get_offset(TC_FIELD_DECL* self,tree f);
   static double_int  get_bit_offset(TC_FIELD_DECL* self,tree f);
   static double_int  get_bit_size(TC_FIELD_DECL* self,tree f);
+  static bool  get_bit_field(TC_FIELD_DECL* self,tree t) { return self->BIT_FIELD_TYPE(t); }
 
   bool C_BIT_FIELD(tree t);
   tree SIZE (tree t) { return DECL_SIZE(t);}

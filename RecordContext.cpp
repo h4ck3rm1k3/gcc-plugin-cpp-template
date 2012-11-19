@@ -18,9 +18,9 @@ void RecordContext::record_begin(const char * pname){
     cout << "unnamed" ;
   }
   cout << "{ " << endl;
-  cout << "\t generic_class_name <" 
-       << pname << ">" 
-       << " the_class_name(\"" <<  pname << "\",context,obj);"
+  cout << "\t define_generic_class_name (" 
+       << pname << "," 
+       << " \"" <<  pname << "\");"
        << endl;      
 
 }
@@ -35,19 +35,19 @@ const char * RecordContext::field_name(TC_IDENTIFIER_NODE * cb,  tree_node* t){
   return n;
 }
 
-void RecordContext::field_begin(const char * name, double_int offset, double_int bit_offset, double_int bit_size){
-  cout << "\t generic_field_name <" 
-       << class_name
-    //<< "," 
-    // << name            
-       << "> " 
-       <<  name 
-       << "(\"" 
-          <<  name 
-       << "\",context,obj,"
-       << offset.low <<","
-       << bit_offset.low <<","
-       << bit_size.low
+void RecordContext::field_begin(Field & fld){
+
+  if ( fld.bit_field) 
+    cout << "\t define_generic_bitfield (" ;
+  else
+    cout << "\t define_generic_field (" ;
+  cout << class_name <<","
+       << fld.name  <<","
+       << "\""<< fld.name << "\","
+       << fld.bit_field <<","
+       << fld.offset <<","
+       << fld.bit_offset <<","
+       << fld.bit_size       
        << ");" 
        << endl;      
 }
