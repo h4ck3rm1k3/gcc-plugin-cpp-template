@@ -5,14 +5,17 @@ GCCPLUGIN_HEADER_DIR=/usr/lib/gcc/x86_64-linux-gnu/4.7/plugin/include
 
 CFLAGS+= -g -O0 -save-temps  -I$(GCCPLUGIN_HEADER_DIR)  -fPIC -O2   -Wl,-E  -fstack-protector -ldl -lm -lpthread -lc -lcrypt
 
-plugin.so:  plugin.o plugincpp.o RecordContext.o 
-	g++ -shared -pthread  plugin.o plugincpp.o RecordContext.o  -o $@
+plugin.so:  plugin.o plugincpp.o RecordContext.o plugincpp.hpp RecordContext.hpp introspection.o
+	g++ -shared -pthread  plugin.o plugincpp.o RecordContext.o introspection.o -o $@
 
-plugincpp.o:  plugincpp.cpp 
-	g++ -std=c++0x -save-temps -fPIC -pthread -c -I$(GCCPLUGIN_HEADER_DIR)  $^ -o $@
+introspection.o : introspection.cpp introspection.hpp
+	g++ -std=c++0x -save-temps -fPIC -pthread -c -I$(GCCPLUGIN_HEADER_DIR)  $< -o $@
 
-RecordContext.o:  RecordContext.cpp 
-	g++ -std=c++0x -save-temps -fPIC -pthread -c -I$(GCCPLUGIN_HEADER_DIR)  $^ -o $@
+plugincpp.o:  plugincpp.cpp plugincpp.hpp
+	g++ -std=c++0x -save-temps -fPIC -pthread -c -I$(GCCPLUGIN_HEADER_DIR)  $< -o $@
+
+RecordContext.o:  RecordContext.cpp RecordContext.hpp plugincpp.hpp
+	g++ -std=c++0x -save-temps -fPIC -pthread -c -I$(GCCPLUGIN_HEADER_DIR)  $< -o $@
 
 plugin.o:  plugin.c
 	$(GCC) $(CFLAGS) -fPIC -shared -pthread  $^ -c -o $@
