@@ -35,7 +35,7 @@ void CallBack::check_type(tree f) {
     return ;
   enum tree_code tc=f->typed.base.code;
   cerr << "check field tc:" << tc << ":";
-  cerr << tree_code_name[tc];
+  cerr << get_tree_code_name (tc);
   CallBack * pT=  callbacks[tc];  
   cerr << pT;
   if (pT){

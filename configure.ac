@@ -5,7 +5,7 @@ AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_HEADERS([config.h])
 AM_MAINTAINER_MODE([disable])
 
-AC_CONFIG_SRCDIR([plugin.c])
+AC_CONFIG_SRCDIR([plugin.cpp])
 
 # Disable static libraries by default for now
 LT_INIT([disable-static])

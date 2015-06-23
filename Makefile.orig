@@ -20,9 +20,9 @@ RecordContext.o:  RecordContext.cpp RecordContext.hpp plugincpp.hpp
 plugin.o:  plugin.c
 	$(GCC) $(CFLAGS) -fPIC -shared -pthread  $^ -c -o $@
 
-test : plugin.so
-	$(GCC) -fplugin=$(TOP)/plugin.so -I$(GCCPLUGIN_HEADER_DIR)  plugin.c -c -o plugin-bootstrap.o
-
+test : #plugin.so
+	#$(GCC) -fplugin=$(TOP)/plugin.so -I$(GCCPLUGIN_HEADER_DIR)  plugin.c -c -o plugin-bootstrap.o
+	g++ -fplugin=./.libs/template_plugin.so plugin.cpp -I/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/ -c -o plugin-bootstrap.o
 
 clean :
 	rm plugin.so

@@ -1,3 +1,4 @@
+#include <iostream> 
 union tree_node;
 typedef union tree_node *tree;
 class RecordContext;
@@ -13,7 +14,7 @@ public:
   CallBack();
   virtual ~CallBack();
   static void check_type(tree f);
-  virtual void check() { cerr << "base class" << endl; }
+  virtual void check() { std::cerr << "base class" << std::endl; }
   template <class T2,class Ret, class T > Ret call_type_ret(tree f, T fn);
   template <class T2,class T > void call_type(tree f, T fn);
   static int finish_type_callback (CallBack *self, tree t);
@@ -24,7 +25,7 @@ public:
       Ret r=pT->call_type_ret<T2,Ret>(t,fn);
       return r;
     } else {
-      cerr << "no callback found" << endl;
+      std::cerr << "no callback found" << std::endl;
     } 
   }
 
@@ -41,7 +42,7 @@ public:
     save_callback(tc,this);   // save this
   };
 
-  virtual void check() { cerr << "wrapper class for type"<< tc << endl; }
+  virtual void check() { std::cerr << "wrapper class for type"<< tc << std::endl; }
   virtual tree_code get_treecode() { return tc; }
 
 };
@@ -81,9 +82,10 @@ public :
   tree BIT_FIELD_TYPE(tree t)  { return DECL_BIT_FIELD_TYPE(t);}
   int OFFSET_ALIGN(tree t)  { return DECL_OFFSET_ALIGN(t);}
 
-  bool DECL_C_BIT_FIELD(tree t){
-  return DECL_C_BIT_FIELD(t);
-}
+  bool _DECL_C_BIT_FIELD(tree t){
+    //return DECL_C_BIT_FIELD(t);
+    return 0;
+  }
 
 
 };
@@ -100,8 +102,8 @@ public :
   const char * process_name(tree t);
   void process_field(RecordContext * c,tree f);
   virtual void finish_type (tree t);
-  virtual void check() { cerr << " record type ("<< get_treecode()<<") " << endl; }
+  virtual void check() { std::cerr << " record type ("<< get_treecode()<<") " << std::endl; }
 };
 
-void   cpp_callbackPLUGIN_START_UNIT ();
+void cpp_callbackPLUGIN_START_UNIT ();
 void cpp_callbackPLUGIN_FINISH_TYPE (tree t, void *i);

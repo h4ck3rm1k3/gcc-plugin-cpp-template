@@ -11,7 +11,7 @@ pkglib_LTLIBRARIES = template_plugin.la
 EXTRA_DIST = 
 
 template_plugin_la_SOURCES = \
-	plugin.c \
+	plugin.cpp \
 	introspection.cpp \
 	introspection.hpp \
 	RecordContext.cpp \

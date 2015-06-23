@@ -595,7 +595,7 @@ PACKAGE_STRING='gcc-plugin-template 0.1.0'
 PACKAGE_BUGREPORT='m@thefr33.com'
 PACKAGE_URL=''
 
-ac_unique_file="plugin.c"
+ac_unique_file="plugin.cpp"
 # Factoring default headers for most tests.
 ac_includes_default="\
 #include <stdio.h>
