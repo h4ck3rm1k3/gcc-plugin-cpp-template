@@ -37,9 +37,9 @@ AC_CHECK_HEADERS([string.h])
 AC_ENABLE_SHARED
 AC_CHECK_HEADER_STDBOOL
 AC_FUNC_OBSTACK
-
+AC_LANG_PUSH([C++])
 AC_CHECK_HEADERS(`gcc -print-file-name=plugin/include/gcc-plugin.h`, [], [
 		      AC_MSG_ERROR([Unable to find gcc-plugin headers.])])
-
+AC_LANG_POP([C++])   
 AC_CONFIG_FILES([Makefile])
 AC_OUTPUT
