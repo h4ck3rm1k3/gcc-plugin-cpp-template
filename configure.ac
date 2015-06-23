@@ -19,7 +19,6 @@ AC_PROG_CPP
 AC_PROG_INSTALL
 AC_PROG_LN_S
 AC_PROG_MAKE_SET
-AC_PROG_RANLIB
 
 # FIXME: Replace `main' with a function in `-lc':
 AC_CHECK_LIB([c], [main])
@@ -37,7 +36,6 @@ AC_CHECK_HEADERS([string.h])
 
 AC_ENABLE_SHARED
 AC_CHECK_HEADER_STDBOOL
-AC_PROG_RANLIB
 AC_FUNC_OBSTACK
 
 AC_CHECK_HEADERS(`gcc -print-file-name=plugin/include/gcc-plugin.h`, [], [
