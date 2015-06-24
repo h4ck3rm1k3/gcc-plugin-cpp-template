@@ -34,10 +34,13 @@ void CallBack::check_type(tree f) {
   if (!f)
     return ;
   enum tree_code tc=f->typed.base.code;
-  cerr << "check field tc:" << tc << ":";
+  cerr << "check field tc (" << tc << ") ";
   cerr << get_tree_code_name (tc);
-  CallBack * pT=  callbacks[tc];  
-  cerr << pT;
+  
+  CallBack * pT=  callbacks[tc];
+  
+  //cerr << pT;
+  
   if (pT){
     pT->check();
   }
@@ -45,9 +48,17 @@ void CallBack::check_type(tree f) {
 }
 
 template <class T2,class Ret, class T > Ret CallBack::call_type_ret(tree f, T fn) {
+
+  // get the tree code from the node
   enum tree_code tc=f->typed.base.code;
+
+  // lookup the callback from the table
   CallBack * pT0=  callbacks[tc];
+
+  // cast the callback to the type T2
   T2* pT= dynamic_cast<T2*> (pT0);
+
+  // call the function with the new typed callback
   return fn(pT,f);
 }
 
@@ -64,7 +75,17 @@ template <class T2,class T > void CallBack::call_type(tree f, T fn) {
 
 class TC_IDENTIFIER_NODE;
 const char * TC_IDENTIFIER_NODE::id_str(tree_node * t){
-  return IDENTIFIER_POINTER(t);
+
+  cerr << "get id:" << t << endl;
+  check_type(t);
+  cerr << "STR:" << (t)->identifier.id.str << endl;
+    
+  const char * s = IDENTIFIER_POINTER(t);
+  
+  cerr << "check string:" << s << endl;
+
+  return s;
+  
 }  
 
 const char * TC_IDENTIFIER_NODE::id(tree_node * t){
@@ -83,22 +104,42 @@ tree TC_FIELD_DECL::name(tree t) {
   return DECL_NAME(t);
 }
 
-const char * TC_FIELD_DECL::process_name(tree t) {   
-  //    check_type(name(t));
+const char * TC_FIELD_DECL::process_name(tree t) {
+  std::cerr << "process_name " << std::endl;
+        
+  tree n= name(t);
+  //check_type(n);
   if (!t)
     return "No Name"; 
-  tree n= name(t);
-  if (n) 
-    return call_type_ret<TC_IDENTIFIER_NODE,const char *>(n,RecordContext::field_name);
+
+  if (n)
+    {
+      if (TC_TYPE_DECL::check_node(n)) {
+        return "TODO:TYPE_DECL";
+        //return call_type_ret<TC_TYPE_DECL,const char *>(n,RecordContext::field_name);
+      }
+      else if (TC_IDENTIFIER_NODE::check_node(n)) {
+        const char * ret= call_type_ret<TC_IDENTIFIER_NODE,const char *>(n,RecordContext::field_name);
+        cerr << "Found name ret:" << ret << endl;
+        return ret;
+        
+      }
+    }
   else
     return "No Name2";
 }
 const char * TC_FIELD_DECL::finish_type_field(TC_FIELD_DECL* self,tree f)
 {
-  return self->process_name(f);
+  std::cerr << "finish_type_field" << std::endl;
+  const char * r= self->process_name(f);
+  std::cerr << "got name" << r << std::endl;
+  return r;
+  
 }
 
 double_int TC_FIELD_DECL::get_offset(TC_FIELD_DECL* self,tree f) {
+  std::cerr << "TC_FIELD_DECL::get_offset" << std::endl;
+  check_type(f);
   return self->FIELD_OFFSET_I(f);
 }
 
@@ -135,13 +176,17 @@ tree TC_RECORD_TYPE::name(tree t) {
 tree TC_RECORD_TYPE::chain(tree t) {
   return TREE_CHAIN(t);
 }
-const char * TC_RECORD_TYPE::process_name(tree t) {   
-  //    check_type(name(t));
+const char * TC_RECORD_TYPE::process_name(tree t) {
+  std::cerr << "TC_RECORD_TYPE::process_name" << std::endl;
+  check_type(name(t));
   if (!t)
     return "No Name";
   tree n= name(t);
-  if (n) 
-    return call_type_ret<TC_IDENTIFIER_NODE, const char *>(n,RecordContext::type_name);
+  if (n) {
+    std::cerr << "got name " << n << std::endl;
+    //return call_type_ret<TC_IDENTIFIER_NODE, const char *>(n,RecordContext::type_name);
+    return "TODO";
+  }
   else
     return "";
 }
@@ -150,26 +195,33 @@ void TC_RECORD_TYPE::process_field(RecordContext * c,tree f) {
     return;
   //    check_type(f); // type of the field
   while (f) {
-    Field fld;
-    fld.name=call_type_ret<TC_FIELD_DECL,const char *>(f,TC_FIELD_DECL::finish_type_field);
-    fld.offset=call_type_ret<TC_FIELD_DECL,double_int>(f,TC_FIELD_DECL::get_offset).low;
-    fld.bit_offset=call_type_ret<TC_FIELD_DECL,double_int>(f,TC_FIELD_DECL::get_bit_offset).low;
-    fld.bit_size  =call_type_ret<TC_FIELD_DECL,double_int>(f,TC_FIELD_DECL::get_bit_size).low;
-    fld.bit_field  =call_type_ret<TC_FIELD_DECL,bool>(f,TC_FIELD_DECL::get_bit_field);
-    c->field_begin(fld);
+    std::cerr << "got field " << f << std::endl;
+    if (TC_FIELD_DECL::check_node(f)) {
+        Field fld;
+        fld.name=call_type_ret<TC_FIELD_DECL,const char *>(f,TC_FIELD_DECL::finish_type_field);
+        fld.offset=call_type_ret<TC_FIELD_DECL,double_int>(f,TC_FIELD_DECL::get_offset).low;
+        fld.bit_offset=call_type_ret<TC_FIELD_DECL,double_int>(f,TC_FIELD_DECL::get_bit_offset).low;
+        fld.bit_size  =call_type_ret<TC_FIELD_DECL,double_int>(f,TC_FIELD_DECL::get_bit_size).low;
+        fld.bit_field  =call_type_ret<TC_FIELD_DECL,bool>(f,TC_FIELD_DECL::get_bit_field);
+        c->field_begin(fld);
+      }
     f = chain(f);
   }  
 }
 void TC_RECORD_TYPE::finish_type (tree t){
   RecordContext c;
   introspect_struct<tree_base>((tree_base*)t);
+  std::cerr << "finish_type " << std::endl;
   const char *  n=process_name(t);
+  std::cerr << "finish_type2: " << std::endl;
+  std::cerr << "finish_type1: " << n << std::endl;
   if (strcmp(n,"") == 0)
     return;
+  std::cerr << "finish_type2 " << std::endl;
   c.record_begin(n);
-  //    cerr << "Record type begin" << endl;
+  cerr << "Record type begin" << endl;
   process_field(&c,fields(t));
-  //    cerr << "Record type end" << endl;
+  cerr << "Record type end" << endl;
   c.record_end();
 }
 TC_RECORD_TYPE aTC_RECORD_TYPE;

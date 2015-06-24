@@ -31,20 +31,25 @@ const char *  RecordContext::type_name ( TC_IDENTIFIER_NODE * cb,  tree_node* t)
 };
 
 const char * RecordContext::field_name(TC_IDENTIFIER_NODE * cb,  tree_node* t){
-  const char * n= cb->id(t);  
+  const char * n= cb->id(t);
+  std::cerr << "Field Name:" << n << std::endl;
   return n;
 }
 
 void RecordContext::field_begin(Field & fld){
 
+  cerr << "RecordContext::field_begin" << endl;
+    
   if ( fld.bit_field) 
     cout << "\t define_generic_bitfield (" ;
   else
     cout << "\t define_generic_field (" ;
-  cout << class_name <<","
-       << fld.name  <<","
-       << "\""<< fld.name << "\","
-       << fld.bit_field <<","
+  cout << class_name <<",";
+  if (fld.name) {
+    cout << fld.name  <<",";
+    cout << "\""<< fld.name << "\",";
+  }
+  cout     << fld.bit_field <<","
        << fld.offset <<","
        << fld.bit_offset <<","
        << fld.bit_size       

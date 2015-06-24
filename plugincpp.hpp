@@ -22,10 +22,16 @@ public:
   template <class T2,class Ret, class T > static Ret call_type_ret_static(tree t, T fn){
     CallBack* pT= CallBack::lookup_callback((tree_code)t->typed.base.code);
     if (pT) {
+      std::cerr << "going to call back " << (tree_code)t->typed.base.code << " : ";
+      cerr << get_tree_code_name ((tree_code)t->typed.base.code );
+      cerr << std::endl;
       Ret r=pT->call_type_ret<T2,Ret>(t,fn);
       return r;
     } else {
-      std::cerr << "no callback found" << std::endl;
+      std::cerr << "no callback found" << (tree_code)t->typed.base.code << " : ";
+      cerr << get_tree_code_name ((tree_code)t->typed.base.code );
+      cerr << std::endl;
+
     } 
   }
 
@@ -42,7 +48,22 @@ public:
     save_callback(tc,this);   // save this
   };
 
-  virtual void check() { std::cerr << "wrapper class for type"<< tc << std::endl; }
+  virtual void check() {
+    std::cerr << "wrapper class for type ("
+              << tc
+              << ") "
+              << get_tree_code_name (tc)
+              << std::endl; }
+  static bool check_node(tree f) {
+    enum tree_code atc=f->typed.base.code;
+    std::cerr << "check type "
+              << get_tree_code_name (atc)
+              << " vs type "
+              << get_tree_code_name (tc)
+              << std::endl;
+    return atc == tc;
+  }
+
   virtual tree_code get_treecode() { return tc; }
 
 };
@@ -53,6 +74,9 @@ public:
   const char * id(tree_node * t);
 };
 
+class TC_TYPE_DECL  : public TCWrapper<TYPE_DECL>{
+public:
+};
 
 class  TC_FIELD_DECL : public  TCWrapper<FIELD_DECL>
 {
