@@ -9,23 +9,39 @@ using namespace std;
 class CallBack;
 //extern vector<CallBack*> callbacks(MAX_TREE_CODES);
 
+class MismatchedType
+{
+};
+
 class CallBack {
 public:
   CallBack();
   virtual ~CallBack();
   static void check_type(tree f);
   virtual void check() { std::cerr << "base class" << std::endl; }
-  template <class T2,class Ret, class T > Ret call_type_ret(tree f, T fn);
-  template <class T2,class T > void call_type(tree f, T fn);
+  template <class EXPECTED_NODE_TYPE,class EXPECTED_RETURN_TYPE, class METHOD_TO_CALL > EXPECTED_RETURN_TYPE call_type_ret(tree f, METHOD_TO_CALL fn);
+  template <class EXPECTED_NODE_TYPE,class METHOD_TO_CALL > void call_type(tree f, METHOD_TO_CALL fn);
   static int finish_type_callback (CallBack *self, tree t);
 
-  template <class T2,class Ret, class T > static Ret call_type_ret_static(tree t, T fn){
+  /**
+   * check node type in the base class always returns true because no type is specified. 
+   * this method is designed to be called statically in the subclasses given a type expected and some node.
+   */
+  static bool check_node(tree f) {
+    return true;
+  }
+      
+  template <class EXPECTED_NODE_TYPE,class EXPECTED_RETURN_TYPE, class METHOD_TO_CALL > static EXPECTED_RETURN_TYPE call_type_ret_static(tree t, METHOD_TO_CALL fn){
+    if (!EXPECTED_NODE_TYPE::check_node(t)) {
+      throw MismatchedType();
+    }
+            
     CallBack* pT= CallBack::lookup_callback((tree_code)t->typed.base.code);
     if (pT) {
       std::cerr << "going to call back " << (tree_code)t->typed.base.code << " : ";
       cerr << get_tree_code_name ((tree_code)t->typed.base.code );
       cerr << std::endl;
-      Ret r=pT->call_type_ret<T2,Ret>(t,fn);
+      EXPECTED_RETURN_TYPE r=pT->call_type_ret<EXPECTED_NODE_TYPE,EXPECTED_RETURN_TYPE>(t,fn);
       return r;
     } else {
       std::cerr << "no callback found" << (tree_code)t->typed.base.code << " : ";
