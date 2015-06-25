@@ -38,3 +38,4 @@ a.out
 /stamp-h1
 /template_plugin.la
 /test.c
+/#plugincpp_test.cpp#
