@@ -18,7 +18,9 @@ public:
   CallBack();
   virtual ~CallBack();
   static void check_type(tree f);
-  virtual void check() { std::cerr << "base class" << std::endl; }
+  virtual void check() {
+    //std::cerr << "base class" << std::endl;
+  }
   template <class EXPECTED_NODE_TYPE,class EXPECTED_RETURN_TYPE, class METHOD_TO_CALL > EXPECTED_RETURN_TYPE call_type_ret(tree f, METHOD_TO_CALL fn);
   template <class EXPECTED_NODE_TYPE,class METHOD_TO_CALL > void call_type(tree f, METHOD_TO_CALL fn);
   static int finish_type_callback (CallBack *self, tree t);
@@ -38,15 +40,15 @@ public:
             
     CallBack* pT= CallBack::lookup_callback((tree_code)t->typed.base.code);
     if (pT) {
-      std::cerr << "going to call back " << (tree_code)t->typed.base.code << " : ";
-      cerr << get_tree_code_name ((tree_code)t->typed.base.code );
-      cerr << std::endl;
+      //std::cerr << "going to call back " << (tree_code)t->typed.base.code << " : ";
+      //cerr << get_tree_code_name ((tree_code)t->typed.base.code );
+      //cerr << std::endl;
       EXPECTED_RETURN_TYPE r=pT->call_type_ret<EXPECTED_NODE_TYPE,EXPECTED_RETURN_TYPE>(t,fn);
       return r;
     } else {
-      std::cerr << "no callback found" << (tree_code)t->typed.base.code << " : ";
-      cerr << get_tree_code_name ((tree_code)t->typed.base.code );
-      cerr << std::endl;
+      //std::cerr << "no callback found" << (tree_code)t->typed.base.code << " : ";
+      //cerr << get_tree_code_name ((tree_code)t->typed.base.code );
+      //cerr << std::endl;
 
     } 
   }
@@ -65,18 +67,19 @@ public:
   };
 
   virtual void check() {
-    std::cerr << "wrapper class for type ("
-              << tc
-              << ") "
-              << get_tree_code_name (tc)
-              << std::endl; }
+    // std::cerr << "wrapper class for type ("
+    //           << tc
+    //           << ") "
+    //           << get_tree_code_name (tc)
+    //           << std::endl;
+  }
   static bool check_node(tree f) {
     enum tree_code atc=f->typed.base.code;
-    std::cerr << "check type "
-              << get_tree_code_name (atc)
-              << " vs type "
-              << get_tree_code_name (tc)
-              << std::endl;
+    // std::cerr << "check type "
+    //           << get_tree_code_name (atc)
+    //           << " vs type "
+    //           << get_tree_code_name (tc)
+    //           << std::endl;
     return atc == tc;
   }
 
@@ -140,9 +143,11 @@ public :
   tree name(tree t);
   tree chain(tree t);
   const char * process_name(tree t);
-  void process_field(RecordContext * c,tree f);
+  void process_fields(RecordContext * c,tree f);
   virtual void finish_type (tree t);
-  virtual void check() { std::cerr << " record type ("<< get_treecode()<<") " << std::endl; }
+  virtual void check() {
+    //std::cerr << " record type ("<< get_treecode()<<") " << std::endl;
+  }
 };
 
 void cpp_callbackPLUGIN_START_UNIT ();

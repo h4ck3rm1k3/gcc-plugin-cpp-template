@@ -4,7 +4,7 @@
 #include <coretypes.h>
 #include <tree.h>
 #include "plugincpp.hpp"
-#include "RecordContext.hpp"
+#include "record_context.hpp"
 #include <string.h>
 #include "introspection.hpp"
 using namespace std;
@@ -34,17 +34,13 @@ void CallBack::check_type(tree f) {
   if (!f)
     return ;
   enum tree_code tc=f->typed.base.code;
-  cerr << "check field tc (" << tc << ") ";
-  cerr << get_tree_code_name (tc);
-  
+  //cerr << "check field tc (" << tc << ") ";
+  //cerr << get_tree_code_name (tc);
   CallBack * pT=  callbacks[tc];
-  
-  //cerr << pT;
-  
   if (pT){
     pT->check();
   }
-  cerr << endl;
+  //cerr << endl;
 }
 
 template <class T2,class Ret, class T > Ret CallBack::call_type_ret(tree f, T fn) {
@@ -75,15 +71,8 @@ template <class T2,class T > void CallBack::call_type(tree f, T fn) {
 
 class TC_IDENTIFIER_NODE;
 const char * TC_IDENTIFIER_NODE::id_str(tree_node * t){
-
-  cerr << "get id:" << t << endl;
   check_type(t);
-  cerr << "STR:" << (t)->identifier.id.str << endl;
-    
   const char * s = IDENTIFIER_POINTER(t);
-  
-  cerr << "check string:" << s << endl;
-
   return s;
   
 }  
@@ -105,7 +94,7 @@ tree TC_FIELD_DECL::name(tree t) {
 }
 
 const char * TC_FIELD_DECL::process_name(tree t) {
-  std::cerr << "process_name " << std::endl;
+  //std::cerr << "process_name " << std::endl;
         
   tree n= name(t);
   //check_type(n);
@@ -120,7 +109,7 @@ const char * TC_FIELD_DECL::process_name(tree t) {
       }
       else if (TC_IDENTIFIER_NODE::check_node(n)) {
         const char * ret= call_type_ret<TC_IDENTIFIER_NODE,const char *>(n,RecordContext::field_name);
-        cerr << "Found name ret:" << ret << endl;
+        //cerr << "Found name ret:" << ret << endl;
         return ret;
         
       }
@@ -130,15 +119,15 @@ const char * TC_FIELD_DECL::process_name(tree t) {
 }
 const char * TC_FIELD_DECL::finish_type_field(TC_FIELD_DECL* self,tree f)
 {
-  std::cerr << "finish_type_field" << std::endl;
+  //std::cerr << "finish_type_field" << std::endl;
   const char * r= self->process_name(f);
-  std::cerr << "got name" << r << std::endl;
+  //std::cerr << "got name" << r << std::endl;
   return r;
   
 }
 
 double_int TC_FIELD_DECL::get_offset(TC_FIELD_DECL* self,tree f) {
-  std::cerr << "TC_FIELD_DECL::get_offset" << std::endl;
+  //std::cerr << "TC_FIELD_DECL::get_offset" << std::endl;
   check_type(f);
   return self->FIELD_OFFSET_I(f);
 }
@@ -177,25 +166,23 @@ tree TC_RECORD_TYPE::chain(tree t) {
   return TREE_CHAIN(t);
 }
 const char * TC_RECORD_TYPE::process_name(tree t) {
-  std::cerr << "TC_RECORD_TYPE::process_name" << std::endl;
+  //std::cerr << "TC_RECORD_TYPE::process_name" << std::endl;
   check_type(name(t));
   if (!t)
     return "No Name";
   tree n= name(t);
   if (n) {
-    std::cerr << "got name " << n << std::endl;
+    //std::cerr << "got name " << n << std::endl;
     //return call_type_ret<TC_IDENTIFIER_NODE, const char *>(n,RecordContext::type_name);
     return "TODO";
   }
   else
     return "";
 }
-void TC_RECORD_TYPE::process_field(RecordContext * c,tree f) {   
+void TC_RECORD_TYPE::process_fields(RecordContext * c,tree f) {   
   if (!f)
     return;
-  //    check_type(f); // type of the field
   while (f) {
-    std::cerr << "got field " << f << std::endl;
     if (TC_FIELD_DECL::check_node(f)) {
         Field fld;
         fld.name=call_type_ret<TC_FIELD_DECL,const char *>(f,TC_FIELD_DECL::finish_type_field);
@@ -211,17 +198,11 @@ void TC_RECORD_TYPE::process_field(RecordContext * c,tree f) {
 void TC_RECORD_TYPE::finish_type (tree t){
   RecordContext c;
   introspect_struct<tree_base>((tree_base*)t);
-  std::cerr << "finish_type " << std::endl;
   const char *  n=process_name(t);
-  std::cerr << "finish_type2: " << std::endl;
-  std::cerr << "finish_type1: " << n << std::endl;
   if (strcmp(n,"") == 0)
     return;
-  std::cerr << "finish_type2 " << std::endl;
   c.record_begin(n);
-  cerr << "Record type begin" << endl;
-  process_field(&c,fields(t));
-  cerr << "Record type end" << endl;
+  process_fields(&c,fields(t));
   c.record_end();
 }
 TC_RECORD_TYPE aTC_RECORD_TYPE;
