@@ -3,7 +3,7 @@
 #include <gcc-plugin.h>
 #include <coretypes.h>
 #include <tree.h>
-#include  "RecordContext.hpp"
+#include  "record_context.hpp"
 #include  "plugincpp.hpp"
 
 using namespace std;

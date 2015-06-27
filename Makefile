@@ -128,7 +128,7 @@ am__installdirs = "$(DESTDIR)$(pkglibdir)"
 LTLIBRARIES = $(pkglib_LTLIBRARIES)
 template_plugin_la_DEPENDENCIES =
 am_template_plugin_la_OBJECTS = plugin.lo introspection.lo \
-	RecordContext.lo plugincpp.lo
+	record_context.lo plugincpp.lo
 template_plugin_la_OBJECTS = $(am_template_plugin_la_OBJECTS)
 AM_V_lt = $(am__v_lt_$(V))
 am__v_lt_ = $(am__v_lt_$(AM_DEFAULT_VERBOSITY))
@@ -359,15 +359,15 @@ top_srcdir = .
 ACLOCAL_AMFLAGS = -I m4
 GCCPLUGINS_DIR = `gcc -print-file-name=plugin`
 AM_CPPFLAGS = -I $(GCCPLUGINS_DIR)/include -I $(srcdir)/../libgdl $(GMP_INC)
-AM_CFLAGS = -Wall
+AM_CFLAGS = -Wall -std=gnu++11
 pkglib_LTLIBRARIES = template_plugin.la
 EXTRA_DIST = 
 template_plugin_la_SOURCES = \
 	plugin.cpp \
 	introspection.cpp \
 	introspection.hpp \
-	RecordContext.cpp \
-	RecordContext.hpp \
+	record_context.cpp \
+	record_context.hpp \
 	plugincpp.cpp \
 	plugincpp.hpp
 
@@ -472,10 +472,10 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-include ./$(DEPDIR)/RecordContext.Plo
 include ./$(DEPDIR)/introspection.Plo
 include ./$(DEPDIR)/plugin.Plo
 include ./$(DEPDIR)/plugincpp.Plo
+include ./$(DEPDIR)/record_context.Plo
 
 .cpp.o:
 	$(AM_V_CXX)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.o$$||'`;\

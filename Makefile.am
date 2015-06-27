@@ -4,7 +4,7 @@ GCCPLUGINS_DIR = `gcc -print-file-name=plugin`
 
 AM_CPPFLAGS = -I $(GCCPLUGINS_DIR)/include -I $(srcdir)/../libgdl $(GMP_INC)
 
-AM_CFLAGS = -Wall
+AM_CFLAGS = -Wall -std=gnu++11
 
 pkglib_LTLIBRARIES = template_plugin.la
 
@@ -14,8 +14,8 @@ template_plugin_la_SOURCES = \
 	plugin.cpp \
 	introspection.cpp \
 	introspection.hpp \
-	RecordContext.cpp \
-	RecordContext.hpp \
+	record_context.cpp \
+	record_context.hpp \
 	plugincpp.cpp \
 	plugincpp.hpp
 

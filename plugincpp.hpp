@@ -66,6 +66,9 @@ public:
     save_callback(tc,this);   // save this
   };
 
+  const enum tree_code t_code() const { return tc; }
+  static const enum tree_code t_code_c=tc;
+  
   virtual void check() {
     // std::cerr << "wrapper class for type ("
     //           << tc

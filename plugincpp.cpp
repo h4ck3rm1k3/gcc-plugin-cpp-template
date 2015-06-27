@@ -165,19 +165,54 @@ tree TC_RECORD_TYPE::name(tree t) {
 tree TC_RECORD_TYPE::chain(tree t) {
   return TREE_CHAIN(t);
 }
+
+class NameWrapper {
+  /*
+    Wrapper around the results of a name field for a thing.
+    resolves the name string
+  */
+  tree name;
+public:
+  NameWrapper(tree name):
+    name(name){}
+  const char * resolve() {
+    enum tree_code tc=name->typed.base.code;
+    switch(tc) {
+      
+    case TC_IDENTIFIER_NODE::t_code_c:
+      return "ID";
+      //return call_type_ret<TC_IDENTIFIER_NODE, const char *>(name,RecordContext::type_name);
+      break;
+      
+    case TC_TYPE_DECL::t_code_c:
+      return "TYPEDECL";
+      //return call_type_ret<TC_TYPE_DECL, const char *>(name,RecordContext::type_name);
+      break;
+      
+    default:
+      return "TODO";
+      break;
+    }
+
+  }
+};
+
 const char * TC_RECORD_TYPE::process_name(tree t) {
   //std::cerr << "TC_RECORD_TYPE::process_name" << std::endl;
   check_type(name(t));
   if (!t)
     return "No Name";
   tree n= name(t);
+
+  NameWrapper name(n);
+  return name.resolve();
+  /*
   if (n) {
-    //std::cerr << "got name " << n << std::endl;
-    //return call_type_ret<TC_IDENTIFIER_NODE, const char *>(n,RecordContext::type_name);
-    return "TODO";
+    return call_type_ret<TC_IDENTIFIER_NODE, const char *>(n,RecordContext::type_name);
   }
   else
-    return "";
+    return "<NULL>";
+  */
 }
 void TC_RECORD_TYPE::process_fields(RecordContext * c,tree f) {   
   if (!f)
@@ -224,8 +259,6 @@ void cpp_callbackPLUGIN_FINISH_TYPE (tree t, void *i)
 void CallBack::finish_type (tree t){
   cerr << "unhandled pure virtual" << endl;
 }
-
-//RecordContext::type_name(TC_IDENTIFIER_NODE*, tree_node*)
 
 int CallBack::finish_type_callback(CallBack* c, tree_node* t)
 {

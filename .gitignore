@@ -39,3 +39,8 @@ a.out
 /template_plugin.la
 /test.c
 /#plugincpp_test.cpp#
+/#Makefile.am#
+/.#Makefile.am
+/.deps/record_context.Plo
+/.libs/record_context.o
+/record_context.lo
