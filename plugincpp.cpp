@@ -34,11 +34,12 @@ void CallBack::check_type(tree f) {
   if (!f)
     return ;
   enum tree_code tc=f->typed.base.code;
-  //cerr << "check field tc (" << tc << ") ";
-  //cerr << get_tree_code_name (tc);
   CallBack * pT=  callbacks[tc];
   if (pT){
-    pT->check();
+    cerr << "check field tc (" << tc << ") ";
+    cerr << get_tree_code_name (tc);
+    cerr << "PT (" << pT << ") ";
+    //pT->check();
   }
   //cerr << endl;
 }
@@ -166,7 +167,30 @@ tree TC_RECORD_TYPE::chain(tree t) {
   return TREE_CHAIN(t);
 }
 
-class NameWrapper {
+//template <class EXPECTED_NODE_TYPE,class EXPECTED_RETURN_TYPE, class METHOD_TO_CALL > EXPECTED_RETURN_TYPE call_f_type_ret(tree f, METHOD_TO_CALL fn);
+
+template <class Return> class SwitchCall {
+public:  
+  template<class Node>Return call_type(Node a, tree b);
+      
+  template <class Context> Return call(Context c, tree t) {
+    enum tree_code tc=t->typed.base.code;
+    switch(tc) {     
+    case TC_IDENTIFIER_NODE::t_code_c:
+      return c.call_type(TC_IDENTIFIER_NODE(),t);
+      break;     
+    case TC_TYPE_DECL::t_code_c:
+      return c.call_type(TC_TYPE_DECL(),t);
+      break;     
+    default:
+      return "TODO";
+      break;
+    }
+
+  }
+};
+  
+class NameWrapper : public SwitchCall<const char *>{
   /*
     Wrapper around the results of a name field for a thing.
     resolves the name string
@@ -175,26 +199,21 @@ class NameWrapper {
 public:
   NameWrapper(tree name):
     name(name){}
-  const char * resolve() {
-    enum tree_code tc=name->typed.base.code;
-    switch(tc) {
-      
-    case TC_IDENTIFIER_NODE::t_code_c:
-      return "ID";
-      //return call_type_ret<TC_IDENTIFIER_NODE, const char *>(name,RecordContext::type_name);
-      break;
-      
-    case TC_TYPE_DECL::t_code_c:
-      return "TYPEDECL";
-      //return call_type_ret<TC_TYPE_DECL, const char *>(name,RecordContext::type_name);
-      break;
-      
-    default:
-      return "TODO";
-      break;
-    }
 
+  const char * call_type(TC_IDENTIFIER_NODE a,tree b) {
+    std::cerr << "NAME:ID" << std::endl;
   }
+  const char * call_type(TC_TYPE_DECL a,tree b) {
+    std::cerr << "NAME:TYPE" << std::endl;
+  }
+  const char * call_type(TC_RECORD_TYPE a,tree b) {
+    std::cerr << "NAME:RECORD" << std::endl;
+  }
+  
+  const char * resolve() {
+    return call(*this,name);
+  }
+  
 };
 
 const char * TC_RECORD_TYPE::process_name(tree t) {
