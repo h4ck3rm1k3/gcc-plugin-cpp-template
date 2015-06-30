@@ -167,13 +167,13 @@ public:
     enum tree_code tc=t->typed.base.code;
     switch(tc) {
     case TC_IDENTIFIER_NODE::t_code_c:
-      return ((Context*)this)->call_type(TC_IDENTIFIER_NODE(),t);
+      return ((Context*)this)->call_type_IDENTIFIER_NODE(t);
       break;
     case TC_TYPE_DECL::t_code_c:
-      return ((Context*)this)->call_type(TC_TYPE_DECL(),t);
+      return ((Context*)this)->call_type_TYPE_DECL(t);
       break;
     case TC_RECORD_TYPE::t_code_c:
-      return ((Context*)this)->call_type(TC_RECORD_TYPE(),t);
+      return ((Context*)this)->call_type_RECORD_TYPE(t);
       break;
     default:
       enum tree_code tc=t->typed.base.code;
@@ -196,9 +196,11 @@ public:
   NameWrapper(tree name):
     name(name){}
 
-  const char * call_type(TC_IDENTIFIER_NODE a,tree b); // {    std::cerr << "NAME:ID" << std::endl;  }
-  const char * call_type(TC_TYPE_DECL a,tree b); // {    std::cerr << "NAME:TYPE" << std::endl;  }
-  const char * call_type(TC_RECORD_TYPE a,tree b); // {    std::cerr << "NAME:RECORD" << std::endl;  }
+  //template <class T> const char * call_type(T,tree b);
+  
+  const char * call_type_IDENTIFIER_NODE(tree b);
+  const char * call_type_TYPE_DECL(tree b);
+  const char * call_type_RECORD_TYPE(tree b);
 
   const char * resolve() {
     return call<NameWrapper>(name);
