@@ -19,7 +19,7 @@ public:
   virtual ~CallBack();
   static void check_type(tree f);
   virtual void check() {
-    //std::cerr << "base class" << std::endl;
+    std::cerr << "base class" << std::endl;
   }
   template <class EXPECTED_NODE_TYPE,class EXPECTED_RETURN_TYPE, class METHOD_TO_CALL > EXPECTED_RETURN_TYPE call_type_ret(tree f, METHOD_TO_CALL fn);
   template <class EXPECTED_NODE_TYPE,class METHOD_TO_CALL > void call_type(tree f, METHOD_TO_CALL fn);
@@ -70,11 +70,11 @@ public:
   static const enum tree_code t_code_c=tc;
   
   virtual void check() {
-    // std::cerr << "wrapper class for type ("
-    //           << tc
-    //           << ") "
-    //           << get_tree_code_name (tc)
-    //           << std::endl;
+    std::cerr << "wrapper class for type (";
+    std::cerr << tc;
+    std::cerr << ") ";
+    //std::cerr << get_tree_code_name (tc);
+    std::cerr << std::endl;
   }
   static bool check_node(tree f) {
     enum tree_code atc=f->typed.base.code;
@@ -149,9 +149,59 @@ public :
   void process_fields(RecordContext * c,tree f);
   virtual void finish_type (tree t);
   virtual void check() {
-    //std::cerr << " record type ("<< get_treecode()<<") " << std::endl;
+    std::cerr << " record type ("<< get_treecode()<<") " << std::endl;
   }
 };
 
 void cpp_callbackPLUGIN_START_UNIT ();
 void cpp_callbackPLUGIN_FINISH_TYPE (tree t, void *i);
+
+
+//template <class EXPECTED_NODE_TYPE,class EXPECTED_RETURN_TYPE, class METHOD_TO_CALL > EXPECTED_RETURN_TYPE call_f_type_ret(tree f, METHOD_TO_CALL fn);
+
+template <class Return> class SwitchCall {
+public:
+  template<class Node>Return call_type(Node a, tree b);
+
+  template<class Context> Return call(tree t) {
+    enum tree_code tc=t->typed.base.code;
+    switch(tc) {
+    case TC_IDENTIFIER_NODE::t_code_c:
+      return ((Context*)this)->call_type(TC_IDENTIFIER_NODE(),t);
+      break;
+    case TC_TYPE_DECL::t_code_c:
+      return ((Context*)this)->call_type(TC_TYPE_DECL(),t);
+      break;
+    case TC_RECORD_TYPE::t_code_c:
+      return ((Context*)this)->call_type(TC_RECORD_TYPE(),t);
+      break;
+    default:
+      enum tree_code tc=t->typed.base.code;
+      cerr << get_tree_code_name (tc);
+      return get_tree_code_name (tc);
+        //return "TODO";
+      break;
+    }
+
+  }
+};
+
+class NameWrapper : public SwitchCall<const char *>{
+  /*
+    Wrapper around the results of a name field for a thing.
+    resolves the name string
+  */
+  tree name;
+public:
+  NameWrapper(tree name):
+    name(name){}
+
+  const char * call_type(TC_IDENTIFIER_NODE a,tree b); // {    std::cerr << "NAME:ID" << std::endl;  }
+  const char * call_type(TC_TYPE_DECL a,tree b); // {    std::cerr << "NAME:TYPE" << std::endl;  }
+  const char * call_type(TC_RECORD_TYPE a,tree b); // {    std::cerr << "NAME:RECORD" << std::endl;  }
+
+  const char * resolve() {
+    return call<NameWrapper>(name);
+  }
+
+};
