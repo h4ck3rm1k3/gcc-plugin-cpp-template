@@ -33,6 +33,9 @@ test3:
 test4:
 	g++ -fplugin=./.libs/template_plugin.so test_tree.cpp
 
+testgen:
+	g++ -save-temps -Wall -std=gnu++11 test_cpp_out.cpp
+
 clean :
 	rm plugin.so
 	rm *.o

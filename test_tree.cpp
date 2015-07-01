@@ -1,421 +1,424 @@
-template <class A, class B> class vec {
+template < class A, class B > class vec
+{
 };
-class va_gc {};
+
+class va_gc
+{
+};
 union tree_node;
 typedef union tree_node *tree;
 typedef const union tree_node *const_tree;
-enum tree_code {
-// ////# 1 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/all-tree.def" 1
-// ////# 1 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def" 1
-// ////# 41 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
-ERROR_MARK,
-IDENTIFIER_NODE,
-TREE_LIST,
-TREE_VEC,
-// ////# 78 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
-BLOCK,
-// ////# 122 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
-OFFSET_TYPE,
-// ////# 135 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
-ENUMERAL_TYPE,
-BOOLEAN_TYPE,
-// ////# 149 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
-INTEGER_TYPE,
-REAL_TYPE,
-// ////# 162 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
-POINTER_TYPE,
-REFERENCE_TYPE,
-NULLPTR_TYPE,
-FIXED_POINT_TYPE,
-// ////# 183 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
-COMPLEX_TYPE,
-VECTOR_TYPE,
-// ////# 204 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
-ARRAY_TYPE,
-// ////# 214 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
-RECORD_TYPE,
-UNION_TYPE,
-QUAL_UNION_TYPE,
-VOID_TYPE,
-FUNCTION_TYPE,
-METHOD_TYPE,
-LANG_TYPE,
-// ////# 267 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
-INTEGER_CST,
-REAL_CST,
-FIXED_CST,
-COMPLEX_CST,
-VECTOR_CST,
-STRING_CST,
-// ////# 343 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
-FUNCTION_DECL,
-LABEL_DECL,
-FIELD_DECL,
-VAR_DECL,
-CONST_DECL,
-PARM_DECL,
-TYPE_DECL,
-RESULT_DECL,
-DEBUG_EXPR_DECL,
-NAMESPACE_DECL,
-// ////# 373 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
-IMPORTED_DECL,
-// ////# 383 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
-NAMELIST_DECL,
-TRANSLATION_UNIT_DECL,
-// ////# 400 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
-COMPONENT_REF,
-// ////# 410 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
-BIT_FIELD_REF,
-ARRAY_REF,
-ARRAY_RANGE_REF,
-REALPART_EXPR,
-IMAGPART_EXPR,
-// ////# 439 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
-VIEW_CONVERT_EXPR,
-INDIRECT_REF,
-// ////# 451 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
-OBJ_TYPE_REF,
-// ////# 470 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
-CONSTRUCTOR,
-// ////# 480 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
-COMPOUND_EXPR,
-MODIFY_EXPR,
-INIT_EXPR,
-TARGET_EXPR,
-// ////# 510 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
-COND_EXPR,
-// ////# 522 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
-VEC_COND_EXPR,
-// ////# 536 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
-VEC_PERM_EXPR,
-// ////# 559 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
-BIND_EXPR,
-CALL_EXPR,
-WITH_CLEANUP_EXPR,
-// ////# 591 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
-CLEANUP_POINT_EXPR,
-// ////# 643 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
-PLACEHOLDER_EXPR,
-PLUS_EXPR,
-MINUS_EXPR,
-MULT_EXPR,
-POINTER_PLUS_EXPR,
-MULT_HIGHPART_EXPR,
-TRUNC_DIV_EXPR,
-CEIL_DIV_EXPR,
-FLOOR_DIV_EXPR,
-ROUND_DIV_EXPR,
-TRUNC_MOD_EXPR,
-CEIL_MOD_EXPR,
-FLOOR_MOD_EXPR,
-ROUND_MOD_EXPR,
-RDIV_EXPR,
-EXACT_DIV_EXPR,
-FIX_TRUNC_EXPR,
-FLOAT_EXPR,
-NEGATE_EXPR,
-MIN_EXPR,
-MAX_EXPR,
-ABS_EXPR,
-// ////# 717 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
-LSHIFT_EXPR,
-RSHIFT_EXPR,
-LROTATE_EXPR,
-RROTATE_EXPR,
-BIT_IOR_EXPR,
-BIT_XOR_EXPR,
-BIT_AND_EXPR,
-BIT_NOT_EXPR,
-// ////# 737 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
-TRUTH_ANDIF_EXPR,
-TRUTH_ORIF_EXPR,
-TRUTH_AND_EXPR,
-TRUTH_OR_EXPR,
-TRUTH_XOR_EXPR,
-TRUTH_NOT_EXPR,
-// ////# 753 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
-LT_EXPR,
-LE_EXPR,
-GT_EXPR,
-GE_EXPR,
-EQ_EXPR,
-NE_EXPR,
-UNORDERED_EXPR,
-ORDERED_EXPR,
-UNLT_EXPR,
-UNLE_EXPR,
-UNGT_EXPR,
-UNGE_EXPR,
-UNEQ_EXPR,
-LTGT_EXPR,
-RANGE_EXPR,
-PAREN_EXPR,
-CONVERT_EXPR,
-ADDR_SPACE_CONVERT_EXPR,
-FIXED_CONVERT_EXPR,
-NOP_EXPR,
-NON_LVALUE_EXPR,
-COMPOUND_LITERAL_EXPR,
-SAVE_EXPR,
-ADDR_EXPR,
-FDESC_EXPR,
-COMPLEX_EXPR,
-CONJ_EXPR,
-PREDECREMENT_EXPR,
-PREINCREMENT_EXPR,
-POSTDECREMENT_EXPR,
-POSTINCREMENT_EXPR,
-VA_ARG_EXPR,
-TRY_CATCH_EXPR,
-TRY_FINALLY_EXPR,
-DECL_EXPR,
-LABEL_EXPR,
-GOTO_EXPR,
-RETURN_EXPR,
-EXIT_EXPR,
-LOOP_EXPR,
-// ////# 893 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
-SWITCH_EXPR,
-// ////# 905 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
-CASE_LABEL_EXPR,
-ASM_EXPR,
-SSA_NAME,
-CATCH_EXPR,
-EH_FILTER_EXPR,
-SCEV_KNOWN,
-SCEV_NOT_KNOWN,
-POLYNOMIAL_CHREC,
-STATEMENT_LIST,
-// ////# 961 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
-ASSERT_EXPR,
-TREE_BINFO,
-WITH_SIZE_EXPR,
-// ////# 983 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
-REALIGN_LOAD_EXPR,
-// ////# 999 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
-TARGET_MEM_REF,
-// ////# 1009 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
-MEM_REF,
-OMP_PARALLEL,
-OMP_TASK,
-// ////# 1044 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
-OMP_FOR,
-OMP_SIMD,
-CILK_SIMD,
-OMP_DISTRIBUTE,
-OMP_TEAMS,
-OMP_TARGET_DATA,
-OMP_TARGET,
-OMP_SECTIONS,
-OMP_SINGLE,
-OMP_SECTION,
-OMP_MASTER,
-OMP_TASKGROUP,
-OMP_ORDERED,
-OMP_CRITICAL,
-OMP_TARGET_UPDATE,
-// ////# 1117 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
-OMP_ATOMIC,
-OMP_ATOMIC_READ,
-// ////# 1132 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
-OMP_ATOMIC_CAPTURE_OLD,
-OMP_ATOMIC_CAPTURE_NEW,
-OMP_CLAUSE,
-TRANSACTION_EXPR,
-// ////# 1151 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
-REDUC_MAX_EXPR,
-REDUC_MIN_EXPR,
-REDUC_PLUS_EXPR,
-// ////# 1164 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
-DOT_PROD_EXPR,
-// ////# 1173 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
-WIDEN_SUM_EXPR,
-WIDEN_MULT_EXPR,
-// ////# 1189 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
-WIDEN_MULT_PLUS_EXPR,
-WIDEN_MULT_MINUS_EXPR,
-// ////# 1205 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
-WIDEN_LSHIFT_EXPR,
-FMA_EXPR,
-VEC_LSHIFT_EXPR,
-VEC_RSHIFT_EXPR,
-VEC_WIDEN_MULT_HI_EXPR,
-VEC_WIDEN_MULT_LO_EXPR,
-VEC_WIDEN_MULT_EVEN_EXPR,
-VEC_WIDEN_MULT_ODD_EXPR,
-VEC_UNPACK_HI_EXPR,
-VEC_UNPACK_LO_EXPR,
-VEC_UNPACK_FLOAT_HI_EXPR,
-VEC_UNPACK_FLOAT_LO_EXPR,
-VEC_PACK_TRUNC_EXPR,
-VEC_PACK_SAT_EXPR,
-VEC_PACK_FIX_TRUNC_EXPR,
-// ////# 1265 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
-VEC_WIDEN_LSHIFT_HI_EXPR,
-VEC_WIDEN_LSHIFT_LO_EXPR,
-PREDICT_EXPR,
-OPTIMIZATION_NODE,
-TARGET_OPTION_NODE,
-ANNOTATE_EXPR,
-CILK_SPAWN_STMT,
-CILK_SYNC_STMT,
-// ////# 2 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/all-tree.def" 2
-LAST_AND_UNUSED_TREE_CODE,
-// ////# 1 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/c-family/c-common.def" 1
-// ////# 39 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/c-family/c-common.def"
-C_MAYBE_CONST_EXPR,
-EXCESS_PRECISION_EXPR,
-USERDEF_LITERAL,
-SIZEOF_EXPR,
-ARRAY_NOTATION_REF,
-// ////# 4 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/all-tree.def" 2
-// ////# 1 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/ada/gcc-interface/ada-tree.def" 1
-// ////# 29 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/ada/gcc-interface/ada-tree.def"
-UNCONSTRAINED_ARRAY_TYPE,
-UNCONSTRAINED_ARRAY_REF,
-NULL_EXPR,
-PLUS_NOMOD_EXPR,
-MINUS_NOMOD_EXPR,
-ATTR_ADDR_EXPR,
-// ////# 62 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/ada/gcc-interface/ada-tree.def"
-STMT_STMT,
-LOOP_STMT,
-EXIT_STMT,
-// ////# 5 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/all-tree.def" 2
-// ////# 1 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/cp/cp-tree.def" 1
-// ////# 41 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/cp/cp-tree.def"
-OFFSET_REF,
-PTRMEM_CST,
-NEW_EXPR,
-VEC_NEW_EXPR,
-DELETE_EXPR,
-VEC_DELETE_EXPR,
-SCOPE_REF,
-MEMBER_REF,
-TYPE_EXPR,
-AGGR_INIT_EXPR,
-VEC_INIT_EXPR,
-THROW_EXPR,
-EMPTY_CLASS_EXPR,
-// ////# 107 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/cp/cp-tree.def"
-BASELINK,
-// ////# 124 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/cp/cp-tree.def"
-TEMPLATE_DECL,
-// ////# 159 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/cp/cp-tree.def"
-TEMPLATE_PARM_INDEX,
-// ////# 168 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/cp/cp-tree.def"
-TEMPLATE_TEMPLATE_PARM,
-// ////# 177 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/cp/cp-tree.def"
-TEMPLATE_TYPE_PARM,
-TYPENAME_TYPE,
-TYPEOF_TYPE,
-BOUND_TEMPLATE_TEMPLATE_PARM,
-UNBOUND_CLASS_TEMPLATE,
-USING_DECL,
-USING_STMT,
-DEFAULT_ARG,
-DEFERRED_NOEXCEPT,
-TEMPLATE_ID_EXPR,
-OVERLOAD,
-// ////# 241 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/cp/cp-tree.def"
-PSEUDO_DTOR_EXPR,
-MODOP_EXPR,
-CAST_EXPR,
-REINTERPRET_CAST_EXPR,
-CONST_CAST_EXPR,
-STATIC_CAST_EXPR,
-DYNAMIC_CAST_EXPR,
-IMPLICIT_CONV_EXPR,
-DOTSTAR_EXPR,
-TYPEID_EXPR,
-NOEXCEPT_EXPR,
-// ////# 265 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/cp/cp-tree.def"
-NON_DEPENDENT_EXPR,
-CTOR_INITIALIZER,
-TRY_BLOCK,
-EH_SPEC_BLOCK,
-HANDLER,
-MUST_NOT_THROW_EXPR,
-CLEANUP_STMT,
-IF_STMT,
-FOR_STMT,
-RANGE_FOR_STMT,
-WHILE_STMT,
-DO_STMT,
-BREAK_STMT,
-CONTINUE_STMT,
-SWITCH_STMT,
-EXPR_STMT,
-TAG_DEFN,
-OFFSETOF_EXPR,
-ARROW_EXPR,
-ALIGNOF_EXPR,
-AT_ENCODE_EXPR,
-STMT_EXPR,
-UNARY_PLUS_EXPR,
-STATIC_ASSERT,
-// ////# 379 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/cp/cp-tree.def"
-TYPE_ARGUMENT_PACK,
-// ////# 388 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/cp/cp-tree.def"
-NONTYPE_ARGUMENT_PACK,
-// ////# 411 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/cp/cp-tree.def"
-TYPE_PACK_EXPANSION,
-EXPR_PACK_EXPANSION,
-// ////# 430 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/cp/cp-tree.def"
-ARGUMENT_PACK_SELECT,
-TRAIT_EXPR,
-// ////# 446 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/cp/cp-tree.def"
-LAMBDA_EXPR,
-// ////# 455 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/cp/cp-tree.def"
-DECLTYPE_TYPE,
-UNDERLYING_TYPE,
-BASES,
-// ////# 473 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/cp/cp-tree.def"
-TEMPLATE_INFO,
-// ////# 6 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/all-tree.def" 2
-// ////# 1 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/d/d-tree.def" 1
-// ////# 22 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/d/d-tree.def"
-IASM_EXPR,
-UNSIGNED_RSHIFT_EXPR,
-FLOAT_MOD_EXPR,
-// ////# 7 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/all-tree.def" 2
-// ////# 1 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/java/java-tree.def" 1
-// ////# 23 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/java/java-tree.def"
-URSHIFT_EXPR,
-COMPARE_EXPR,
-COMPARE_L_EXPR,
-COMPARE_G_EXPR,
-// ////# 8 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/all-tree.def" 2
-// ////# 1 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/objc/objc-tree.def" 1
-// ////# 24 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/objc/objc-tree.def"
-CLASS_INTERFACE_TYPE,
-CLASS_IMPLEMENTATION_TYPE,
-CATEGORY_INTERFACE_TYPE,
-CATEGORY_IMPLEMENTATION_TYPE,
-PROTOCOL_INTERFACE_TYPE,
-KEYWORD_DECL,
-INSTANCE_METHOD_DECL,
-CLASS_METHOD_DECL,
-PROPERTY_DECL,
-MESSAGE_SEND_EXPR,
-CLASS_REFERENCE_EXPR,
-// ////# 70 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/objc/objc-tree.def"
-PROPERTY_REF,
-// ////# 8 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/all-tree.def" 2
-// ////# 138 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree-core.h" 2
-MAX_TREE_CODES
+enum tree_code
+{
+  // ////# 1 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/all-tree.def" 1
+  // ////# 1 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def" 1
+  // ////# 41 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
+  ERROR_MARK,
+  IDENTIFIER_NODE,
+  TREE_LIST,
+  TREE_VEC,
+  // ////# 78 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
+  BLOCK,
+  // ////# 122 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
+  OFFSET_TYPE,
+  // ////# 135 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
+  ENUMERAL_TYPE,
+  BOOLEAN_TYPE,
+  // ////# 149 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
+  INTEGER_TYPE,
+  REAL_TYPE,
+  // ////# 162 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
+  POINTER_TYPE,
+  REFERENCE_TYPE,
+  NULLPTR_TYPE,
+  FIXED_POINT_TYPE,
+  // ////# 183 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
+  COMPLEX_TYPE,
+  VECTOR_TYPE,
+  // ////# 204 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
+  ARRAY_TYPE,
+  // ////# 214 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
+  RECORD_TYPE,
+  UNION_TYPE,
+  QUAL_UNION_TYPE,
+  VOID_TYPE,
+  FUNCTION_TYPE,
+  METHOD_TYPE,
+  LANG_TYPE,
+  // ////# 267 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
+  INTEGER_CST,
+  REAL_CST,
+  FIXED_CST,
+  COMPLEX_CST,
+  VECTOR_CST,
+  STRING_CST,
+  // ////# 343 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
+  FUNCTION_DECL,
+  LABEL_DECL,
+  FIELD_DECL,
+  VAR_DECL,
+  CONST_DECL,
+  PARM_DECL,
+  TYPE_DECL,
+  RESULT_DECL,
+  DEBUG_EXPR_DECL,
+  NAMESPACE_DECL,
+  // ////# 373 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
+  IMPORTED_DECL,
+  // ////# 383 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
+  NAMELIST_DECL,
+  TRANSLATION_UNIT_DECL,
+  // ////# 400 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
+  COMPONENT_REF,
+  // ////# 410 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
+  BIT_FIELD_REF,
+  ARRAY_REF,
+  ARRAY_RANGE_REF,
+  REALPART_EXPR,
+  IMAGPART_EXPR,
+  // ////# 439 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
+  VIEW_CONVERT_EXPR,
+  INDIRECT_REF,
+  // ////# 451 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
+  OBJ_TYPE_REF,
+  // ////# 470 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
+  CONSTRUCTOR,
+  // ////# 480 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
+  COMPOUND_EXPR,
+  MODIFY_EXPR,
+  INIT_EXPR,
+  TARGET_EXPR,
+  // ////# 510 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
+  COND_EXPR,
+  // ////# 522 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
+  VEC_COND_EXPR,
+  // ////# 536 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
+  VEC_PERM_EXPR,
+  // ////# 559 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
+  BIND_EXPR,
+  CALL_EXPR,
+  WITH_CLEANUP_EXPR,
+  // ////# 591 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
+  CLEANUP_POINT_EXPR,
+  // ////# 643 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
+  PLACEHOLDER_EXPR,
+  PLUS_EXPR,
+  MINUS_EXPR,
+  MULT_EXPR,
+  POINTER_PLUS_EXPR,
+  MULT_HIGHPART_EXPR,
+  TRUNC_DIV_EXPR,
+  CEIL_DIV_EXPR,
+  FLOOR_DIV_EXPR,
+  ROUND_DIV_EXPR,
+  TRUNC_MOD_EXPR,
+  CEIL_MOD_EXPR,
+  FLOOR_MOD_EXPR,
+  ROUND_MOD_EXPR,
+  RDIV_EXPR,
+  EXACT_DIV_EXPR,
+  FIX_TRUNC_EXPR,
+  FLOAT_EXPR,
+  NEGATE_EXPR,
+  MIN_EXPR,
+  MAX_EXPR,
+  ABS_EXPR,
+  // ////# 717 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
+  LSHIFT_EXPR,
+  RSHIFT_EXPR,
+  LROTATE_EXPR,
+  RROTATE_EXPR,
+  BIT_IOR_EXPR,
+  BIT_XOR_EXPR,
+  BIT_AND_EXPR,
+  BIT_NOT_EXPR,
+  // ////# 737 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
+  TRUTH_ANDIF_EXPR,
+  TRUTH_ORIF_EXPR,
+  TRUTH_AND_EXPR,
+  TRUTH_OR_EXPR,
+  TRUTH_XOR_EXPR,
+  TRUTH_NOT_EXPR,
+  // ////# 753 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
+  LT_EXPR,
+  LE_EXPR,
+  GT_EXPR,
+  GE_EXPR,
+  EQ_EXPR,
+  NE_EXPR,
+  UNORDERED_EXPR,
+  ORDERED_EXPR,
+  UNLT_EXPR,
+  UNLE_EXPR,
+  UNGT_EXPR,
+  UNGE_EXPR,
+  UNEQ_EXPR,
+  LTGT_EXPR,
+  RANGE_EXPR,
+  PAREN_EXPR,
+  CONVERT_EXPR,
+  ADDR_SPACE_CONVERT_EXPR,
+  FIXED_CONVERT_EXPR,
+  NOP_EXPR,
+  NON_LVALUE_EXPR,
+  COMPOUND_LITERAL_EXPR,
+  SAVE_EXPR,
+  ADDR_EXPR,
+  FDESC_EXPR,
+  COMPLEX_EXPR,
+  CONJ_EXPR,
+  PREDECREMENT_EXPR,
+  PREINCREMENT_EXPR,
+  POSTDECREMENT_EXPR,
+  POSTINCREMENT_EXPR,
+  VA_ARG_EXPR,
+  TRY_CATCH_EXPR,
+  TRY_FINALLY_EXPR,
+  DECL_EXPR,
+  LABEL_EXPR,
+  GOTO_EXPR,
+  RETURN_EXPR,
+  EXIT_EXPR,
+  LOOP_EXPR,
+  // ////# 893 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
+  SWITCH_EXPR,
+  // ////# 905 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
+  CASE_LABEL_EXPR,
+  ASM_EXPR,
+  SSA_NAME,
+  CATCH_EXPR,
+  EH_FILTER_EXPR,
+  SCEV_KNOWN,
+  SCEV_NOT_KNOWN,
+  POLYNOMIAL_CHREC,
+  STATEMENT_LIST,
+  // ////# 961 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
+  ASSERT_EXPR,
+  TREE_BINFO,
+  WITH_SIZE_EXPR,
+  // ////# 983 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
+  REALIGN_LOAD_EXPR,
+  // ////# 999 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
+  TARGET_MEM_REF,
+  // ////# 1009 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
+  MEM_REF,
+  OMP_PARALLEL,
+  OMP_TASK,
+  // ////# 1044 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
+  OMP_FOR,
+  OMP_SIMD,
+  CILK_SIMD,
+  OMP_DISTRIBUTE,
+  OMP_TEAMS,
+  OMP_TARGET_DATA,
+  OMP_TARGET,
+  OMP_SECTIONS,
+  OMP_SINGLE,
+  OMP_SECTION,
+  OMP_MASTER,
+  OMP_TASKGROUP,
+  OMP_ORDERED,
+  OMP_CRITICAL,
+  OMP_TARGET_UPDATE,
+  // ////# 1117 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
+  OMP_ATOMIC,
+  OMP_ATOMIC_READ,
+  // ////# 1132 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
+  OMP_ATOMIC_CAPTURE_OLD,
+  OMP_ATOMIC_CAPTURE_NEW,
+  OMP_CLAUSE,
+  TRANSACTION_EXPR,
+  // ////# 1151 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
+  REDUC_MAX_EXPR,
+  REDUC_MIN_EXPR,
+  REDUC_PLUS_EXPR,
+  // ////# 1164 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
+  DOT_PROD_EXPR,
+  // ////# 1173 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
+  WIDEN_SUM_EXPR,
+  WIDEN_MULT_EXPR,
+  // ////# 1189 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
+  WIDEN_MULT_PLUS_EXPR,
+  WIDEN_MULT_MINUS_EXPR,
+  // ////# 1205 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
+  WIDEN_LSHIFT_EXPR,
+  FMA_EXPR,
+  VEC_LSHIFT_EXPR,
+  VEC_RSHIFT_EXPR,
+  VEC_WIDEN_MULT_HI_EXPR,
+  VEC_WIDEN_MULT_LO_EXPR,
+  VEC_WIDEN_MULT_EVEN_EXPR,
+  VEC_WIDEN_MULT_ODD_EXPR,
+  VEC_UNPACK_HI_EXPR,
+  VEC_UNPACK_LO_EXPR,
+  VEC_UNPACK_FLOAT_HI_EXPR,
+  VEC_UNPACK_FLOAT_LO_EXPR,
+  VEC_PACK_TRUNC_EXPR,
+  VEC_PACK_SAT_EXPR,
+  VEC_PACK_FIX_TRUNC_EXPR,
+  // ////# 1265 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.def"
+  VEC_WIDEN_LSHIFT_HI_EXPR,
+  VEC_WIDEN_LSHIFT_LO_EXPR,
+  PREDICT_EXPR,
+  OPTIMIZATION_NODE,
+  TARGET_OPTION_NODE,
+  ANNOTATE_EXPR,
+  CILK_SPAWN_STMT,
+  CILK_SYNC_STMT,
+  // ////# 2 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/all-tree.def" 2
+  LAST_AND_UNUSED_TREE_CODE,
+  // ////# 1 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/c-family/c-common.def" 1
+  // ////# 39 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/c-family/c-common.def"
+  C_MAYBE_CONST_EXPR,
+  EXCESS_PRECISION_EXPR,
+  USERDEF_LITERAL,
+  SIZEOF_EXPR,
+  ARRAY_NOTATION_REF,
+  // ////# 4 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/all-tree.def" 2
+  // ////# 1 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/ada/gcc-interface/ada-tree.def" 1
+  // ////# 29 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/ada/gcc-interface/ada-tree.def"
+  UNCONSTRAINED_ARRAY_TYPE,
+  UNCONSTRAINED_ARRAY_REF,
+  NULL_EXPR,
+  PLUS_NOMOD_EXPR,
+  MINUS_NOMOD_EXPR,
+  ATTR_ADDR_EXPR,
+  // ////# 62 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/ada/gcc-interface/ada-tree.def"
+  STMT_STMT,
+  LOOP_STMT,
+  EXIT_STMT,
+  // ////# 5 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/all-tree.def" 2
+  // ////# 1 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/cp/cp-tree.def" 1
+  // ////# 41 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/cp/cp-tree.def"
+  OFFSET_REF,
+  PTRMEM_CST,
+  NEW_EXPR,
+  VEC_NEW_EXPR,
+  DELETE_EXPR,
+  VEC_DELETE_EXPR,
+  SCOPE_REF,
+  MEMBER_REF,
+  TYPE_EXPR,
+  AGGR_INIT_EXPR,
+  VEC_INIT_EXPR,
+  THROW_EXPR,
+  EMPTY_CLASS_EXPR,
+  // ////# 107 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/cp/cp-tree.def"
+  BASELINK,
+  // ////# 124 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/cp/cp-tree.def"
+  TEMPLATE_DECL,
+  // ////# 159 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/cp/cp-tree.def"
+  TEMPLATE_PARM_INDEX,
+  // ////# 168 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/cp/cp-tree.def"
+  TEMPLATE_TEMPLATE_PARM,
+  // ////# 177 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/cp/cp-tree.def"
+  TEMPLATE_TYPE_PARM,
+  TYPENAME_TYPE,
+  TYPEOF_TYPE,
+  BOUND_TEMPLATE_TEMPLATE_PARM,
+  UNBOUND_CLASS_TEMPLATE,
+  USING_DECL,
+  USING_STMT,
+  DEFAULT_ARG,
+  DEFERRED_NOEXCEPT,
+  TEMPLATE_ID_EXPR,
+  OVERLOAD,
+  // ////# 241 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/cp/cp-tree.def"
+  PSEUDO_DTOR_EXPR,
+  MODOP_EXPR,
+  CAST_EXPR,
+  REINTERPRET_CAST_EXPR,
+  CONST_CAST_EXPR,
+  STATIC_CAST_EXPR,
+  DYNAMIC_CAST_EXPR,
+  IMPLICIT_CONV_EXPR,
+  DOTSTAR_EXPR,
+  TYPEID_EXPR,
+  NOEXCEPT_EXPR,
+  // ////# 265 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/cp/cp-tree.def"
+  NON_DEPENDENT_EXPR,
+  CTOR_INITIALIZER,
+  TRY_BLOCK,
+  EH_SPEC_BLOCK,
+  HANDLER,
+  MUST_NOT_THROW_EXPR,
+  CLEANUP_STMT,
+  IF_STMT,
+  FOR_STMT,
+  RANGE_FOR_STMT,
+  WHILE_STMT,
+  DO_STMT,
+  BREAK_STMT,
+  CONTINUE_STMT,
+  SWITCH_STMT,
+  EXPR_STMT,
+  TAG_DEFN,
+  OFFSETOF_EXPR,
+  ARROW_EXPR,
+  ALIGNOF_EXPR,
+  AT_ENCODE_EXPR,
+  STMT_EXPR,
+  UNARY_PLUS_EXPR,
+  STATIC_ASSERT,
+  // ////# 379 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/cp/cp-tree.def"
+  TYPE_ARGUMENT_PACK,
+  // ////# 388 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/cp/cp-tree.def"
+  NONTYPE_ARGUMENT_PACK,
+  // ////# 411 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/cp/cp-tree.def"
+  TYPE_PACK_EXPANSION,
+  EXPR_PACK_EXPANSION,
+  // ////# 430 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/cp/cp-tree.def"
+  ARGUMENT_PACK_SELECT,
+  TRAIT_EXPR,
+  // ////# 446 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/cp/cp-tree.def"
+  LAMBDA_EXPR,
+  // ////# 455 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/cp/cp-tree.def"
+  DECLTYPE_TYPE,
+  UNDERLYING_TYPE,
+  BASES,
+  // ////# 473 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/cp/cp-tree.def"
+  TEMPLATE_INFO,
+  // ////# 6 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/all-tree.def" 2
+  // ////# 1 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/d/d-tree.def" 1
+  // ////# 22 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/d/d-tree.def"
+  IASM_EXPR,
+  UNSIGNED_RSHIFT_EXPR,
+  FLOAT_MOD_EXPR,
+  // ////# 7 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/all-tree.def" 2
+  // ////# 1 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/java/java-tree.def" 1
+  // ////# 23 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/java/java-tree.def"
+  URSHIFT_EXPR,
+  COMPARE_EXPR,
+  COMPARE_L_EXPR,
+  COMPARE_G_EXPR,
+  // ////# 8 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/all-tree.def" 2
+  // ////# 1 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/objc/objc-tree.def" 1
+  // ////# 24 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/objc/objc-tree.def"
+  CLASS_INTERFACE_TYPE,
+  CLASS_IMPLEMENTATION_TYPE,
+  CATEGORY_INTERFACE_TYPE,
+  CATEGORY_IMPLEMENTATION_TYPE,
+  PROTOCOL_INTERFACE_TYPE,
+  KEYWORD_DECL,
+  INSTANCE_METHOD_DECL,
+  CLASS_METHOD_DECL,
+  PROPERTY_DECL,
+  MESSAGE_SEND_EXPR,
+  CLASS_REFERENCE_EXPR,
+  // ////# 70 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/objc/objc-tree.def"
+  PROPERTY_REF,
+  // ////# 8 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/all-tree.def" 2
+  // ////# 138 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree-core.h" 2
+  MAX_TREE_CODES
 };
-
-
 typedef struct ht_identifier ht_identifier;
 typedef struct ht_identifier *ht_identifier_ptr;
-struct ht_identifier {
+struct ht_identifier
+{
   const unsigned char *str;
   unsigned int len;
   unsigned int hash_value;
 };
-
 enum machine_mode
 {
   VOIDmode,
@@ -516,2222 +519,1260 @@ enum machine_mode
   V16DFmode,
   V8TFmode,
   MAX_MACHINE_MODE,
-
   MIN_MODE_RANDOM = VOIDmode,
   MAX_MODE_RANDOM = BLKmode,
-
   MIN_MODE_CC = CCmode,
   MAX_MODE_CC = CCFPUmode,
-
   MIN_MODE_INT = QImode,
   MAX_MODE_INT = XImode,
-
   MIN_MODE_PARTIAL_INT = VOIDmode,
   MAX_MODE_PARTIAL_INT = VOIDmode,
-
   MIN_MODE_FRACT = QQmode,
   MAX_MODE_FRACT = TQmode,
-
   MIN_MODE_UFRACT = UQQmode,
   MAX_MODE_UFRACT = UTQmode,
-
   MIN_MODE_ACCUM = HAmode,
   MAX_MODE_ACCUM = TAmode,
-
   MIN_MODE_UACCUM = UHAmode,
   MAX_MODE_UACCUM = UTAmode,
-
   MIN_MODE_FLOAT = SFmode,
   MAX_MODE_FLOAT = TFmode,
-
   MIN_MODE_DECIMAL_FLOAT = SDmode,
   MAX_MODE_DECIMAL_FLOAT = TDmode,
-
   MIN_MODE_COMPLEX_INT = CQImode,
   MAX_MODE_COMPLEX_INT = CXImode,
-
   MIN_MODE_COMPLEX_FLOAT = SCmode,
   MAX_MODE_COMPLEX_FLOAT = TCmode,
-
   MIN_MODE_VECTOR_INT = V2QImode,
   MAX_MODE_VECTOR_INT = V8TImode,
-
   MIN_MODE_VECTOR_FRACT = VOIDmode,
   MAX_MODE_VECTOR_FRACT = VOIDmode,
-
   MIN_MODE_VECTOR_UFRACT = VOIDmode,
   MAX_MODE_VECTOR_UFRACT = VOIDmode,
-
   MIN_MODE_VECTOR_ACCUM = VOIDmode,
   MAX_MODE_VECTOR_ACCUM = VOIDmode,
-
   MIN_MODE_VECTOR_UACCUM = VOIDmode,
   MAX_MODE_VECTOR_UACCUM = VOIDmode,
-
   MIN_MODE_VECTOR_FLOAT = V2SFmode,
   MAX_MODE_VECTOR_FLOAT = V8TFmode,
-
   NUM_MACHINE_MODES = MAX_MACHINE_MODE
 };
 ////# 25 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/machmode.h" 2
-
-
-
-extern const char * const mode_name[NUM_MACHINE_MODES];
-
-
-
-
+extern const char *const mode_name[NUM_MACHINE_MODES];
 ////# 1 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/mode-classes.def" 1
 ////# 34 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/machmode.h" 2
-
-enum mode_class { MODE_RANDOM, MODE_CC, MODE_INT, MODE_PARTIAL_INT, MODE_FRACT, MODE_UFRACT, MODE_ACCUM, MODE_UACCUM, MODE_FLOAT, MODE_DECIMAL_FLOAT, MODE_COMPLEX_INT, MODE_COMPLEX_FLOAT, MODE_VECTOR_INT, MODE_VECTOR_FRACT, MODE_VECTOR_UFRACT, MODE_VECTOR_ACCUM, MODE_VECTOR_UACCUM, MODE_VECTOR_FLOAT, MAX_MODE_CLASS };
-
-
-
-
-
-
+enum mode_class
+{ MODE_RANDOM, MODE_CC, MODE_INT, MODE_PARTIAL_INT, MODE_FRACT, MODE_UFRACT,
+  MODE_ACCUM, MODE_UACCUM, MODE_FLOAT, MODE_DECIMAL_FLOAT, MODE_COMPLEX_INT,
+  MODE_COMPLEX_FLOAT, MODE_VECTOR_INT, MODE_VECTOR_FRACT,
+  MODE_VECTOR_UFRACT, MODE_VECTOR_ACCUM, MODE_VECTOR_UACCUM,
+  MODE_VECTOR_FLOAT, MAX_MODE_CLASS
+};
 extern const unsigned char mode_class[NUM_MACHINE_MODES];
 ////# 179 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/machmode.h"
 extern unsigned char mode_size[NUM_MACHINE_MODES];
-
-
-
-
 typedef struct ht cpp_hash_table;
 typedef struct ht_identifier *hashnode;
-
-enum ht_lookup_option {HT_NO_INSERT = 0, HT_ALLOC};
-
-struct obstack {};
+enum ht_lookup_option
+{ HT_NO_INSERT = 0, HT_ALLOC };
+struct obstack
+{
+};
 struct ht
 {
-
   struct obstack stack;
-
   hashnode *entries;
-
   //  hashnode (*alloc_node) (cpp_hash_table *);
   //  void * (*alloc_subobject) (size_t);
-
   unsigned int nslots;
   unsigned int nelements;
-
-
   struct cpp_reader *pfile;
-
-
   unsigned int searches;
   unsigned int collisions;
-
-
   bool entries_owned;
 };
-
-
-enum tree_node_structure_enum {
+enum tree_node_structure_enum
+{
 ////# 1 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/treestruct.def" 1
 ////# 33 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/treestruct.def"
-TS_BASE,
-TS_TYPED,
-TS_COMMON,
-TS_INT_CST,
-TS_REAL_CST,
-TS_FIXED_CST,
-TS_VECTOR,
-TS_STRING,
-TS_COMPLEX,
-TS_IDENTIFIER,
-TS_DECL_MINIMAL,
-TS_DECL_COMMON,
-TS_DECL_WRTL,
-TS_DECL_NON_COMMON,
-TS_DECL_WITH_VIS,
-TS_FIELD_DECL,
-TS_VAR_DECL,
-TS_PARM_DECL,
-TS_LABEL_DECL,
-TS_RESULT_DECL,
-TS_CONST_DECL,
-TS_TYPE_DECL,
-TS_FUNCTION_DECL,
-TS_TRANSLATION_UNIT_DECL,
-TS_TYPE_COMMON,
-TS_TYPE_WITH_LANG_SPECIFIC,
-TS_TYPE_NON_COMMON,
-TS_LIST,
-TS_VEC,
-TS_EXP,
-TS_SSA_NAME,
-TS_BLOCK,
-TS_BINFO,
-TS_STATEMENT_LIST,
-TS_CONSTRUCTOR,
-TS_OMP_CLAUSE,
-TS_OPTIMIZATION,
-TS_TARGET_OPTION,
+  TS_BASE,
+  TS_TYPED,
+  TS_COMMON,
+  TS_INT_CST,
+  TS_REAL_CST,
+  TS_FIXED_CST,
+  TS_VECTOR,
+  TS_STRING,
+  TS_COMPLEX,
+  TS_IDENTIFIER,
+  TS_DECL_MINIMAL,
+  TS_DECL_COMMON,
+  TS_DECL_WRTL,
+  TS_DECL_NON_COMMON,
+  TS_DECL_WITH_VIS,
+  TS_FIELD_DECL,
+  TS_VAR_DECL,
+  TS_PARM_DECL,
+  TS_LABEL_DECL,
+  TS_RESULT_DECL,
+  TS_CONST_DECL,
+  TS_TYPE_DECL,
+  TS_FUNCTION_DECL,
+  TS_TRANSLATION_UNIT_DECL,
+  TS_TYPE_COMMON,
+  TS_TYPE_WITH_LANG_SPECIFIC,
+  TS_TYPE_NON_COMMON,
+  TS_LIST,
+  TS_VEC,
+  TS_EXP,
+  TS_SSA_NAME,
+  TS_BLOCK,
+  TS_BINFO,
+  TS_STATEMENT_LIST,
+  TS_CONSTRUCTOR,
+  TS_OMP_CLAUSE,
+  TS_OPTIMIZATION,
+  TS_TARGET_OPTION,
 ////# 344 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree-core.h" 2
   LAST_TS_ENUM
 };
-
-enum built_in_class {
+enum built_in_class
+{
   NOT_BUILT_IN = 0,
   BUILT_IN_FRONTEND,
   BUILT_IN_MD,
   BUILT_IN_NORMAL
 };
 ////# 168 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree-core.h"
-enum built_in_function {
+enum built_in_function
+{
 ////# 1 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/builtins.def" 1
 ////# 217 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/builtins.def"
-BUILT_IN_NONE,
-
-
-BUILT_IN_ACOS,
-BUILT_IN_ACOSF,
-BUILT_IN_ACOSH,
-BUILT_IN_ACOSHF,
-BUILT_IN_ACOSHL,
-BUILT_IN_ACOSL,
-BUILT_IN_ASIN,
-BUILT_IN_ASINF,
-BUILT_IN_ASINH,
-BUILT_IN_ASINHF,
-BUILT_IN_ASINHL,
-BUILT_IN_ASINL,
-BUILT_IN_ATAN,
-BUILT_IN_ATAN2,
-BUILT_IN_ATAN2F,
-BUILT_IN_ATAN2L,
-BUILT_IN_ATANF,
-BUILT_IN_ATANH,
-BUILT_IN_ATANHF,
-BUILT_IN_ATANHL,
-BUILT_IN_ATANL,
-BUILT_IN_CBRT,
-BUILT_IN_CBRTF,
-BUILT_IN_CBRTL,
-BUILT_IN_CEIL,
-BUILT_IN_CEILF,
-BUILT_IN_CEILL,
-BUILT_IN_COPYSIGN,
-BUILT_IN_COPYSIGNF,
-BUILT_IN_COPYSIGNL,
-BUILT_IN_COS,
-BUILT_IN_COSF,
-BUILT_IN_COSH,
-BUILT_IN_COSHF,
-BUILT_IN_COSHL,
-BUILT_IN_COSL,
-BUILT_IN_DREM,
-BUILT_IN_DREMF,
-BUILT_IN_DREML,
-BUILT_IN_ERF,
-BUILT_IN_ERFC,
-BUILT_IN_ERFCF,
-BUILT_IN_ERFCL,
-BUILT_IN_ERFF,
-BUILT_IN_ERFL,
-BUILT_IN_EXP,
-BUILT_IN_EXP10,
-BUILT_IN_EXP10F,
-BUILT_IN_EXP10L,
-BUILT_IN_EXP2,
-BUILT_IN_EXP2F,
-BUILT_IN_EXP2L,
-BUILT_IN_EXPF,
-BUILT_IN_EXPL,
-BUILT_IN_EXPM1,
-BUILT_IN_EXPM1F,
-BUILT_IN_EXPM1L,
-BUILT_IN_FABS,
-BUILT_IN_FABSF,
-BUILT_IN_FABSL,
-BUILT_IN_FABSD32,
-BUILT_IN_FABSD64,
-BUILT_IN_FABSD128,
-BUILT_IN_FDIM,
-BUILT_IN_FDIMF,
-BUILT_IN_FDIML,
-BUILT_IN_FLOOR,
-BUILT_IN_FLOORF,
-BUILT_IN_FLOORL,
-BUILT_IN_FMA,
-BUILT_IN_FMAF,
-BUILT_IN_FMAL,
-BUILT_IN_FMAX,
-BUILT_IN_FMAXF,
-BUILT_IN_FMAXL,
-BUILT_IN_FMIN,
-BUILT_IN_FMINF,
-BUILT_IN_FMINL,
-BUILT_IN_FMOD,
-BUILT_IN_FMODF,
-BUILT_IN_FMODL,
-BUILT_IN_FREXP,
-BUILT_IN_FREXPF,
-BUILT_IN_FREXPL,
-BUILT_IN_GAMMA,
-BUILT_IN_GAMMAF,
-BUILT_IN_GAMMAL,
-BUILT_IN_GAMMA_R,
-BUILT_IN_GAMMAF_R,
-BUILT_IN_GAMMAL_R,
-BUILT_IN_HUGE_VAL,
-BUILT_IN_HUGE_VALF,
-BUILT_IN_HUGE_VALL,
-BUILT_IN_HYPOT,
-BUILT_IN_HYPOTF,
-BUILT_IN_HYPOTL,
-BUILT_IN_ICEIL,
-BUILT_IN_ICEILF,
-BUILT_IN_ICEILL,
-BUILT_IN_IFLOOR,
-BUILT_IN_IFLOORF,
-BUILT_IN_IFLOORL,
-BUILT_IN_ILOGB,
-BUILT_IN_ILOGBF,
-BUILT_IN_ILOGBL,
-BUILT_IN_INF,
-BUILT_IN_INFF,
-BUILT_IN_INFL,
-BUILT_IN_INFD32,
-BUILT_IN_INFD64,
-BUILT_IN_INFD128,
-BUILT_IN_IRINT,
-BUILT_IN_IRINTF,
-BUILT_IN_IRINTL,
-BUILT_IN_IROUND,
-BUILT_IN_IROUNDF,
-BUILT_IN_IROUNDL,
-BUILT_IN_J0,
-BUILT_IN_J0F,
-BUILT_IN_J0L,
-BUILT_IN_J1,
-BUILT_IN_J1F,
-BUILT_IN_J1L,
-BUILT_IN_JN,
-BUILT_IN_JNF,
-BUILT_IN_JNL,
-BUILT_IN_LCEIL,
-BUILT_IN_LCEILF,
-BUILT_IN_LCEILL,
-BUILT_IN_LDEXP,
-BUILT_IN_LDEXPF,
-BUILT_IN_LDEXPL,
-BUILT_IN_LFLOOR,
-BUILT_IN_LFLOORF,
-BUILT_IN_LFLOORL,
-BUILT_IN_LGAMMA,
-BUILT_IN_LGAMMAF,
-BUILT_IN_LGAMMAL,
-BUILT_IN_LGAMMA_R,
-BUILT_IN_LGAMMAF_R,
-BUILT_IN_LGAMMAL_R,
-BUILT_IN_LLCEIL,
-BUILT_IN_LLCEILF,
-BUILT_IN_LLCEILL,
-BUILT_IN_LLFLOOR,
-BUILT_IN_LLFLOORF,
-BUILT_IN_LLFLOORL,
-BUILT_IN_LLRINT,
-BUILT_IN_LLRINTF,
-BUILT_IN_LLRINTL,
-BUILT_IN_LLROUND,
-BUILT_IN_LLROUNDF,
-BUILT_IN_LLROUNDL,
-BUILT_IN_LOG,
-BUILT_IN_LOG10,
-BUILT_IN_LOG10F,
-BUILT_IN_LOG10L,
-BUILT_IN_LOG1P,
-BUILT_IN_LOG1PF,
-BUILT_IN_LOG1PL,
-BUILT_IN_LOG2,
-BUILT_IN_LOG2F,
-BUILT_IN_LOG2L,
-BUILT_IN_LOGB,
-BUILT_IN_LOGBF,
-BUILT_IN_LOGBL,
-BUILT_IN_LOGF,
-BUILT_IN_LOGL,
-BUILT_IN_LRINT,
-BUILT_IN_LRINTF,
-BUILT_IN_LRINTL,
-BUILT_IN_LROUND,
-BUILT_IN_LROUNDF,
-BUILT_IN_LROUNDL,
-BUILT_IN_MODF,
-BUILT_IN_MODFF,
-BUILT_IN_MODFL,
-BUILT_IN_NAN,
-BUILT_IN_NANF,
-BUILT_IN_NANL,
-BUILT_IN_NAND32,
-BUILT_IN_NAND64,
-BUILT_IN_NAND128,
-BUILT_IN_NANS,
-BUILT_IN_NANSF,
-BUILT_IN_NANSL,
-BUILT_IN_NEARBYINT,
-BUILT_IN_NEARBYINTF,
-BUILT_IN_NEARBYINTL,
-BUILT_IN_NEXTAFTER,
-BUILT_IN_NEXTAFTERF,
-BUILT_IN_NEXTAFTERL,
-BUILT_IN_NEXTTOWARD,
-BUILT_IN_NEXTTOWARDF,
-BUILT_IN_NEXTTOWARDL,
-BUILT_IN_POW,
-BUILT_IN_POW10,
-BUILT_IN_POW10F,
-BUILT_IN_POW10L,
-BUILT_IN_POWF,
-BUILT_IN_POWI,
-BUILT_IN_POWIF,
-BUILT_IN_POWIL,
-BUILT_IN_POWL,
-BUILT_IN_REMAINDER,
-BUILT_IN_REMAINDERF,
-BUILT_IN_REMAINDERL,
-BUILT_IN_REMQUO,
-BUILT_IN_REMQUOF,
-BUILT_IN_REMQUOL,
-BUILT_IN_RINT,
-BUILT_IN_RINTF,
-BUILT_IN_RINTL,
-BUILT_IN_ROUND,
-BUILT_IN_ROUNDF,
-BUILT_IN_ROUNDL,
-BUILT_IN_SCALB,
-BUILT_IN_SCALBF,
-BUILT_IN_SCALBL,
-BUILT_IN_SCALBLN,
-BUILT_IN_SCALBLNF,
-BUILT_IN_SCALBLNL,
-BUILT_IN_SCALBN,
-BUILT_IN_SCALBNF,
-BUILT_IN_SCALBNL,
-BUILT_IN_SIGNBIT,
-BUILT_IN_SIGNBITF,
-BUILT_IN_SIGNBITL,
-BUILT_IN_SIGNBITD32,
-BUILT_IN_SIGNBITD64,
-BUILT_IN_SIGNBITD128,
-BUILT_IN_SIGNIFICAND,
-BUILT_IN_SIGNIFICANDF,
-BUILT_IN_SIGNIFICANDL,
-BUILT_IN_SIN,
-BUILT_IN_SINCOS,
-BUILT_IN_SINCOSF,
-BUILT_IN_SINCOSL,
-BUILT_IN_SINF,
-BUILT_IN_SINH,
-BUILT_IN_SINHF,
-BUILT_IN_SINHL,
-BUILT_IN_SINL,
-BUILT_IN_SQRT,
-BUILT_IN_SQRTF,
-BUILT_IN_SQRTL,
-BUILT_IN_TAN,
-BUILT_IN_TANF,
-BUILT_IN_TANH,
-BUILT_IN_TANHF,
-BUILT_IN_TANHL,
-BUILT_IN_TANL,
-BUILT_IN_TGAMMA,
-BUILT_IN_TGAMMAF,
-BUILT_IN_TGAMMAL,
-BUILT_IN_TRUNC,
-BUILT_IN_TRUNCF,
-BUILT_IN_TRUNCL,
-BUILT_IN_Y0,
-BUILT_IN_Y0F,
-BUILT_IN_Y0L,
-BUILT_IN_Y1,
-BUILT_IN_Y1F,
-BUILT_IN_Y1L,
-BUILT_IN_YN,
-BUILT_IN_YNF,
-BUILT_IN_YNL,
-
-
-BUILT_IN_CABS,
-BUILT_IN_CABSF,
-BUILT_IN_CABSL,
-BUILT_IN_CACOS,
-BUILT_IN_CACOSF,
-BUILT_IN_CACOSH,
-BUILT_IN_CACOSHF,
-BUILT_IN_CACOSHL,
-BUILT_IN_CACOSL,
-BUILT_IN_CARG,
-BUILT_IN_CARGF,
-BUILT_IN_CARGL,
-BUILT_IN_CASIN,
-BUILT_IN_CASINF,
-BUILT_IN_CASINH,
-BUILT_IN_CASINHF,
-BUILT_IN_CASINHL,
-BUILT_IN_CASINL,
-BUILT_IN_CATAN,
-BUILT_IN_CATANF,
-BUILT_IN_CATANH,
-BUILT_IN_CATANHF,
-BUILT_IN_CATANHL,
-BUILT_IN_CATANL,
-BUILT_IN_CCOS,
-BUILT_IN_CCOSF,
-BUILT_IN_CCOSH,
-BUILT_IN_CCOSHF,
-BUILT_IN_CCOSHL,
-BUILT_IN_CCOSL,
-BUILT_IN_CEXP,
-BUILT_IN_CEXPF,
-BUILT_IN_CEXPL,
-BUILT_IN_CEXPI,
-BUILT_IN_CEXPIF,
-BUILT_IN_CEXPIL,
-BUILT_IN_CIMAG,
-BUILT_IN_CIMAGF,
-BUILT_IN_CIMAGL,
-BUILT_IN_CLOG,
-BUILT_IN_CLOGF,
-BUILT_IN_CLOGL,
-BUILT_IN_CLOG10,
-BUILT_IN_CLOG10F,
-BUILT_IN_CLOG10L,
-BUILT_IN_CONJ,
-BUILT_IN_CONJF,
-BUILT_IN_CONJL,
-BUILT_IN_CPOW,
-BUILT_IN_CPOWF,
-BUILT_IN_CPOWL,
-BUILT_IN_CPROJ,
-BUILT_IN_CPROJF,
-BUILT_IN_CPROJL,
-BUILT_IN_CREAL,
-BUILT_IN_CREALF,
-BUILT_IN_CREALL,
-BUILT_IN_CSIN,
-BUILT_IN_CSINF,
-BUILT_IN_CSINH,
-BUILT_IN_CSINHF,
-BUILT_IN_CSINHL,
-BUILT_IN_CSINL,
-BUILT_IN_CSQRT,
-BUILT_IN_CSQRTF,
-BUILT_IN_CSQRTL,
-BUILT_IN_CTAN,
-BUILT_IN_CTANF,
-BUILT_IN_CTANH,
-BUILT_IN_CTANHF,
-BUILT_IN_CTANHL,
-BUILT_IN_CTANL,
-
-
-
-
-BUILT_IN_BCMP,
-BUILT_IN_BCOPY,
-BUILT_IN_BZERO,
-BUILT_IN_INDEX,
-BUILT_IN_MEMCHR,
-BUILT_IN_MEMCMP,
-BUILT_IN_MEMCPY,
-BUILT_IN_MEMMOVE,
-BUILT_IN_MEMPCPY,
-BUILT_IN_MEMSET,
-BUILT_IN_RINDEX,
-BUILT_IN_STPCPY,
-BUILT_IN_STPNCPY,
-BUILT_IN_STRCASECMP,
-BUILT_IN_STRCAT,
-BUILT_IN_STRCHR,
-BUILT_IN_STRCMP,
-BUILT_IN_STRCPY,
-BUILT_IN_STRCSPN,
-BUILT_IN_STRDUP,
-BUILT_IN_STRNDUP,
-BUILT_IN_STRLEN,
-BUILT_IN_STRNCASECMP,
-BUILT_IN_STRNCAT,
-BUILT_IN_STRNCMP,
-BUILT_IN_STRNCPY,
-BUILT_IN_STRPBRK,
-BUILT_IN_STRRCHR,
-BUILT_IN_STRSPN,
-BUILT_IN_STRSTR,
-
-
-BUILT_IN_FPRINTF,
-BUILT_IN_FPRINTF_UNLOCKED,
-BUILT_IN_PUTC,
-BUILT_IN_PUTC_UNLOCKED,
-BUILT_IN_FPUTC,
-BUILT_IN_FPUTC_UNLOCKED,
-BUILT_IN_FPUTS,
-BUILT_IN_FPUTS_UNLOCKED,
-BUILT_IN_FSCANF,
-BUILT_IN_FWRITE,
-BUILT_IN_FWRITE_UNLOCKED,
-BUILT_IN_PRINTF,
-BUILT_IN_PRINTF_UNLOCKED,
-BUILT_IN_PUTCHAR,
-BUILT_IN_PUTCHAR_UNLOCKED,
-BUILT_IN_PUTS,
-BUILT_IN_PUTS_UNLOCKED,
-BUILT_IN_SCANF,
-BUILT_IN_SNPRINTF,
-BUILT_IN_SPRINTF,
-BUILT_IN_SSCANF,
-BUILT_IN_VFPRINTF,
-BUILT_IN_VFSCANF,
-BUILT_IN_VPRINTF,
-BUILT_IN_VSCANF,
-BUILT_IN_VSNPRINTF,
-BUILT_IN_VSPRINTF,
-BUILT_IN_VSSCANF,
-
-
-BUILT_IN_ISALNUM,
-BUILT_IN_ISALPHA,
-BUILT_IN_ISASCII,
-BUILT_IN_ISBLANK,
-BUILT_IN_ISCNTRL,
-BUILT_IN_ISDIGIT,
-BUILT_IN_ISGRAPH,
-BUILT_IN_ISLOWER,
-BUILT_IN_ISPRINT,
-BUILT_IN_ISPUNCT,
-BUILT_IN_ISSPACE,
-BUILT_IN_ISUPPER,
-BUILT_IN_ISXDIGIT,
-BUILT_IN_TOASCII,
-BUILT_IN_TOLOWER,
-BUILT_IN_TOUPPER,
-
-
-BUILT_IN_ISWALNUM,
-BUILT_IN_ISWALPHA,
-BUILT_IN_ISWBLANK,
-BUILT_IN_ISWCNTRL,
-BUILT_IN_ISWDIGIT,
-BUILT_IN_ISWGRAPH,
-BUILT_IN_ISWLOWER,
-BUILT_IN_ISWPRINT,
-BUILT_IN_ISWPUNCT,
-BUILT_IN_ISWSPACE,
-BUILT_IN_ISWUPPER,
-BUILT_IN_ISWXDIGIT,
-BUILT_IN_TOWLOWER,
-BUILT_IN_TOWUPPER,
-
-
-BUILT_IN_ABORT,
-BUILT_IN_ABS,
-BUILT_IN_AGGREGATE_INCOMING_ADDRESS,
-BUILT_IN_ALLOCA,
-BUILT_IN_APPLY,
-BUILT_IN_APPLY_ARGS,
-BUILT_IN_BSWAP16,
-BUILT_IN_BSWAP32,
-BUILT_IN_BSWAP64,
-BUILT_IN_CLEAR_CACHE,
-
-BUILT_IN_CALLOC,
-BUILT_IN_CLASSIFY_TYPE,
-BUILT_IN_CLZ,
-BUILT_IN_CLZIMAX,
-BUILT_IN_CLZL,
-BUILT_IN_CLZLL,
-BUILT_IN_CONSTANT_P,
-BUILT_IN_CTZ,
-BUILT_IN_CTZIMAX,
-BUILT_IN_CTZL,
-BUILT_IN_CTZLL,
-BUILT_IN_CLRSB,
-BUILT_IN_CLRSBIMAX,
-BUILT_IN_CLRSBL,
-BUILT_IN_CLRSBLL,
-BUILT_IN_DCGETTEXT,
-BUILT_IN_DGETTEXT,
-BUILT_IN_DWARF_CFA,
-BUILT_IN_DWARF_SP_COLUMN,
-BUILT_IN_EH_RETURN,
-BUILT_IN_EH_RETURN_DATA_REGNO,
-BUILT_IN_EXECL,
-BUILT_IN_EXECLP,
-BUILT_IN_EXECLE,
-BUILT_IN_EXECV,
-BUILT_IN_EXECVP,
-BUILT_IN_EXECVE,
-BUILT_IN_EXIT,
-BUILT_IN_EXPECT,
-BUILT_IN_ASSUME_ALIGNED,
-BUILT_IN_EXTEND_POINTER,
-BUILT_IN_EXTRACT_RETURN_ADDR,
-BUILT_IN_FFS,
-BUILT_IN_FFSIMAX,
-BUILT_IN_FFSL,
-BUILT_IN_FFSLL,
-BUILT_IN_FORK,
-BUILT_IN_FRAME_ADDRESS,
-
-BUILT_IN_FREE,
-BUILT_IN_FROB_RETURN_ADDR,
-BUILT_IN_GETTEXT,
-BUILT_IN_IMAXABS,
-BUILT_IN_INIT_DWARF_REG_SIZES,
-BUILT_IN_FINITE,
-BUILT_IN_FINITEF,
-BUILT_IN_FINITEL,
-BUILT_IN_FINITED32,
-BUILT_IN_FINITED64,
-BUILT_IN_FINITED128,
-BUILT_IN_FPCLASSIFY,
-BUILT_IN_ISFINITE,
-BUILT_IN_ISINF_SIGN,
-BUILT_IN_ISINF,
-BUILT_IN_ISINFF,
-BUILT_IN_ISINFL,
-BUILT_IN_ISINFD32,
-BUILT_IN_ISINFD64,
-BUILT_IN_ISINFD128,
-BUILT_IN_ISNAN,
-BUILT_IN_ISNANF,
-BUILT_IN_ISNANL,
-BUILT_IN_ISNAND32,
-BUILT_IN_ISNAND64,
-BUILT_IN_ISNAND128,
-BUILT_IN_ISNORMAL,
-BUILT_IN_ISGREATER,
-BUILT_IN_ISGREATEREQUAL,
-BUILT_IN_ISLESS,
-BUILT_IN_ISLESSEQUAL,
-BUILT_IN_ISLESSGREATER,
-BUILT_IN_ISUNORDERED,
-BUILT_IN_LABS,
-BUILT_IN_LLABS,
-BUILT_IN_LONGJMP,
-
-BUILT_IN_MALLOC,
-BUILT_IN_NEXT_ARG,
-BUILT_IN_PARITY,
-BUILT_IN_PARITYIMAX,
-BUILT_IN_PARITYL,
-BUILT_IN_PARITYLL,
-BUILT_IN_POPCOUNT,
-BUILT_IN_POPCOUNTIMAX,
-BUILT_IN_POPCOUNTL,
-BUILT_IN_POPCOUNTLL,
-BUILT_IN_POSIX_MEMALIGN,
-BUILT_IN_PREFETCH,
-BUILT_IN_REALLOC,
-BUILT_IN_RETURN,
-BUILT_IN_RETURN_ADDRESS,
-BUILT_IN_SAVEREGS,
-BUILT_IN_SETJMP,
-BUILT_IN_STRFMON,
-BUILT_IN_STRFTIME,
-BUILT_IN_TRAP,
-BUILT_IN_UNREACHABLE,
-BUILT_IN_UNWIND_INIT,
-BUILT_IN_UPDATE_SETJMP_BUF,
-BUILT_IN_VA_COPY,
-BUILT_IN_VA_END,
-BUILT_IN_VA_START,
-BUILT_IN_VA_ARG_PACK,
-BUILT_IN_VA_ARG_PACK_LEN,
-BUILT_IN__EXIT,
-BUILT_IN__EXIT2,
-
-
-BUILT_IN_INIT_TRAMPOLINE,
-BUILT_IN_INIT_HEAP_TRAMPOLINE,
-BUILT_IN_ADJUST_TRAMPOLINE,
-BUILT_IN_NONLOCAL_GOTO,
-
-
-BUILT_IN_SETJMP_SETUP,
-BUILT_IN_SETJMP_RECEIVER,
-
-
-BUILT_IN_STACK_SAVE,
-BUILT_IN_STACK_RESTORE,
-BUILT_IN_ALLOCA_WITH_ALIGN,
-
-
-BUILT_IN_OBJECT_SIZE,
-BUILT_IN_MEMCPY_CHK,
-BUILT_IN_MEMMOVE_CHK,
-BUILT_IN_MEMPCPY_CHK,
-BUILT_IN_MEMSET_CHK,
-BUILT_IN_STPCPY_CHK,
-BUILT_IN_STPNCPY_CHK,
-BUILT_IN_STRCAT_CHK,
-BUILT_IN_STRCPY_CHK,
-BUILT_IN_STRNCAT_CHK,
-BUILT_IN_STRNCPY_CHK,
-BUILT_IN_SNPRINTF_CHK,
-BUILT_IN_SPRINTF_CHK,
-BUILT_IN_VSNPRINTF_CHK,
-BUILT_IN_VSPRINTF_CHK,
-BUILT_IN_FPRINTF_CHK,
-BUILT_IN_PRINTF_CHK,
-BUILT_IN_VFPRINTF_CHK,
-BUILT_IN_VPRINTF_CHK,
-
-
-BUILT_IN_PROFILE_FUNC_ENTER,
-
-BUILT_IN_PROFILE_FUNC_EXIT,
-
-
-
-BUILT_IN_THREAD_POINTER,
-
-
-
-
-BUILT_IN_SET_THREAD_POINTER,
-
-
-
-
-
-BUILT_IN_EMUTLS_GET_ADDRESS,
-
-
-
-
-BUILT_IN_EMUTLS_REGISTER_COMMON,
-
-
-
-
-
-
-BUILT_IN_UNWIND_RESUME,
-BUILT_IN_CXA_END_CLEANUP,
-BUILT_IN_EH_POINTER,
-BUILT_IN_EH_FILTER,
-BUILT_IN_EH_COPY_VALUES,
-
-
-BUILT_IN_FILE,
-BUILT_IN_FUNCTION,
-BUILT_IN_LINE,
-
-
+  BUILT_IN_NONE,
+  BUILT_IN_ACOS,
+  BUILT_IN_ACOSF,
+  BUILT_IN_ACOSH,
+  BUILT_IN_ACOSHF,
+  BUILT_IN_ACOSHL,
+  BUILT_IN_ACOSL,
+  BUILT_IN_ASIN,
+  BUILT_IN_ASINF,
+  BUILT_IN_ASINH,
+  BUILT_IN_ASINHF,
+  BUILT_IN_ASINHL,
+  BUILT_IN_ASINL,
+  BUILT_IN_ATAN,
+  BUILT_IN_ATAN2,
+  BUILT_IN_ATAN2F,
+  BUILT_IN_ATAN2L,
+  BUILT_IN_ATANF,
+  BUILT_IN_ATANH,
+  BUILT_IN_ATANHF,
+  BUILT_IN_ATANHL,
+  BUILT_IN_ATANL,
+  BUILT_IN_CBRT,
+  BUILT_IN_CBRTF,
+  BUILT_IN_CBRTL,
+  BUILT_IN_CEIL,
+  BUILT_IN_CEILF,
+  BUILT_IN_CEILL,
+  BUILT_IN_COPYSIGN,
+  BUILT_IN_COPYSIGNF,
+  BUILT_IN_COPYSIGNL,
+  BUILT_IN_COS,
+  BUILT_IN_COSF,
+  BUILT_IN_COSH,
+  BUILT_IN_COSHF,
+  BUILT_IN_COSHL,
+  BUILT_IN_COSL,
+  BUILT_IN_DREM,
+  BUILT_IN_DREMF,
+  BUILT_IN_DREML,
+  BUILT_IN_ERF,
+  BUILT_IN_ERFC,
+  BUILT_IN_ERFCF,
+  BUILT_IN_ERFCL,
+  BUILT_IN_ERFF,
+  BUILT_IN_ERFL,
+  BUILT_IN_EXP,
+  BUILT_IN_EXP10,
+  BUILT_IN_EXP10F,
+  BUILT_IN_EXP10L,
+  BUILT_IN_EXP2,
+  BUILT_IN_EXP2F,
+  BUILT_IN_EXP2L,
+  BUILT_IN_EXPF,
+  BUILT_IN_EXPL,
+  BUILT_IN_EXPM1,
+  BUILT_IN_EXPM1F,
+  BUILT_IN_EXPM1L,
+  BUILT_IN_FABS,
+  BUILT_IN_FABSF,
+  BUILT_IN_FABSL,
+  BUILT_IN_FABSD32,
+  BUILT_IN_FABSD64,
+  BUILT_IN_FABSD128,
+  BUILT_IN_FDIM,
+  BUILT_IN_FDIMF,
+  BUILT_IN_FDIML,
+  BUILT_IN_FLOOR,
+  BUILT_IN_FLOORF,
+  BUILT_IN_FLOORL,
+  BUILT_IN_FMA,
+  BUILT_IN_FMAF,
+  BUILT_IN_FMAL,
+  BUILT_IN_FMAX,
+  BUILT_IN_FMAXF,
+  BUILT_IN_FMAXL,
+  BUILT_IN_FMIN,
+  BUILT_IN_FMINF,
+  BUILT_IN_FMINL,
+  BUILT_IN_FMOD,
+  BUILT_IN_FMODF,
+  BUILT_IN_FMODL,
+  BUILT_IN_FREXP,
+  BUILT_IN_FREXPF,
+  BUILT_IN_FREXPL,
+  BUILT_IN_GAMMA,
+  BUILT_IN_GAMMAF,
+  BUILT_IN_GAMMAL,
+  BUILT_IN_GAMMA_R,
+  BUILT_IN_GAMMAF_R,
+  BUILT_IN_GAMMAL_R,
+  BUILT_IN_HUGE_VAL,
+  BUILT_IN_HUGE_VALF,
+  BUILT_IN_HUGE_VALL,
+  BUILT_IN_HYPOT,
+  BUILT_IN_HYPOTF,
+  BUILT_IN_HYPOTL,
+  BUILT_IN_ICEIL,
+  BUILT_IN_ICEILF,
+  BUILT_IN_ICEILL,
+  BUILT_IN_IFLOOR,
+  BUILT_IN_IFLOORF,
+  BUILT_IN_IFLOORL,
+  BUILT_IN_ILOGB,
+  BUILT_IN_ILOGBF,
+  BUILT_IN_ILOGBL,
+  BUILT_IN_INF,
+  BUILT_IN_INFF,
+  BUILT_IN_INFL,
+  BUILT_IN_INFD32,
+  BUILT_IN_INFD64,
+  BUILT_IN_INFD128,
+  BUILT_IN_IRINT,
+  BUILT_IN_IRINTF,
+  BUILT_IN_IRINTL,
+  BUILT_IN_IROUND,
+  BUILT_IN_IROUNDF,
+  BUILT_IN_IROUNDL,
+  BUILT_IN_J0,
+  BUILT_IN_J0F,
+  BUILT_IN_J0L,
+  BUILT_IN_J1,
+  BUILT_IN_J1F,
+  BUILT_IN_J1L,
+  BUILT_IN_JN,
+  BUILT_IN_JNF,
+  BUILT_IN_JNL,
+  BUILT_IN_LCEIL,
+  BUILT_IN_LCEILF,
+  BUILT_IN_LCEILL,
+  BUILT_IN_LDEXP,
+  BUILT_IN_LDEXPF,
+  BUILT_IN_LDEXPL,
+  BUILT_IN_LFLOOR,
+  BUILT_IN_LFLOORF,
+  BUILT_IN_LFLOORL,
+  BUILT_IN_LGAMMA,
+  BUILT_IN_LGAMMAF,
+  BUILT_IN_LGAMMAL,
+  BUILT_IN_LGAMMA_R,
+  BUILT_IN_LGAMMAF_R,
+  BUILT_IN_LGAMMAL_R,
+  BUILT_IN_LLCEIL,
+  BUILT_IN_LLCEILF,
+  BUILT_IN_LLCEILL,
+  BUILT_IN_LLFLOOR,
+  BUILT_IN_LLFLOORF,
+  BUILT_IN_LLFLOORL,
+  BUILT_IN_LLRINT,
+  BUILT_IN_LLRINTF,
+  BUILT_IN_LLRINTL,
+  BUILT_IN_LLROUND,
+  BUILT_IN_LLROUNDF,
+  BUILT_IN_LLROUNDL,
+  BUILT_IN_LOG,
+  BUILT_IN_LOG10,
+  BUILT_IN_LOG10F,
+  BUILT_IN_LOG10L,
+  BUILT_IN_LOG1P,
+  BUILT_IN_LOG1PF,
+  BUILT_IN_LOG1PL,
+  BUILT_IN_LOG2,
+  BUILT_IN_LOG2F,
+  BUILT_IN_LOG2L,
+  BUILT_IN_LOGB,
+  BUILT_IN_LOGBF,
+  BUILT_IN_LOGBL,
+  BUILT_IN_LOGF,
+  BUILT_IN_LOGL,
+  BUILT_IN_LRINT,
+  BUILT_IN_LRINTF,
+  BUILT_IN_LRINTL,
+  BUILT_IN_LROUND,
+  BUILT_IN_LROUNDF,
+  BUILT_IN_LROUNDL,
+  BUILT_IN_MODF,
+  BUILT_IN_MODFF,
+  BUILT_IN_MODFL,
+  BUILT_IN_NAN,
+  BUILT_IN_NANF,
+  BUILT_IN_NANL,
+  BUILT_IN_NAND32,
+  BUILT_IN_NAND64,
+  BUILT_IN_NAND128,
+  BUILT_IN_NANS,
+  BUILT_IN_NANSF,
+  BUILT_IN_NANSL,
+  BUILT_IN_NEARBYINT,
+  BUILT_IN_NEARBYINTF,
+  BUILT_IN_NEARBYINTL,
+  BUILT_IN_NEXTAFTER,
+  BUILT_IN_NEXTAFTERF,
+  BUILT_IN_NEXTAFTERL,
+  BUILT_IN_NEXTTOWARD,
+  BUILT_IN_NEXTTOWARDF,
+  BUILT_IN_NEXTTOWARDL,
+  BUILT_IN_POW,
+  BUILT_IN_POW10,
+  BUILT_IN_POW10F,
+  BUILT_IN_POW10L,
+  BUILT_IN_POWF,
+  BUILT_IN_POWI,
+  BUILT_IN_POWIF,
+  BUILT_IN_POWIL,
+  BUILT_IN_POWL,
+  BUILT_IN_REMAINDER,
+  BUILT_IN_REMAINDERF,
+  BUILT_IN_REMAINDERL,
+  BUILT_IN_REMQUO,
+  BUILT_IN_REMQUOF,
+  BUILT_IN_REMQUOL,
+  BUILT_IN_RINT,
+  BUILT_IN_RINTF,
+  BUILT_IN_RINTL,
+  BUILT_IN_ROUND,
+  BUILT_IN_ROUNDF,
+  BUILT_IN_ROUNDL,
+  BUILT_IN_SCALB,
+  BUILT_IN_SCALBF,
+  BUILT_IN_SCALBL,
+  BUILT_IN_SCALBLN,
+  BUILT_IN_SCALBLNF,
+  BUILT_IN_SCALBLNL,
+  BUILT_IN_SCALBN,
+  BUILT_IN_SCALBNF,
+  BUILT_IN_SCALBNL,
+  BUILT_IN_SIGNBIT,
+  BUILT_IN_SIGNBITF,
+  BUILT_IN_SIGNBITL,
+  BUILT_IN_SIGNBITD32,
+  BUILT_IN_SIGNBITD64,
+  BUILT_IN_SIGNBITD128,
+  BUILT_IN_SIGNIFICAND,
+  BUILT_IN_SIGNIFICANDF,
+  BUILT_IN_SIGNIFICANDL,
+  BUILT_IN_SIN,
+  BUILT_IN_SINCOS,
+  BUILT_IN_SINCOSF,
+  BUILT_IN_SINCOSL,
+  BUILT_IN_SINF,
+  BUILT_IN_SINH,
+  BUILT_IN_SINHF,
+  BUILT_IN_SINHL,
+  BUILT_IN_SINL,
+  BUILT_IN_SQRT,
+  BUILT_IN_SQRTF,
+  BUILT_IN_SQRTL,
+  BUILT_IN_TAN,
+  BUILT_IN_TANF,
+  BUILT_IN_TANH,
+  BUILT_IN_TANHF,
+  BUILT_IN_TANHL,
+  BUILT_IN_TANL,
+  BUILT_IN_TGAMMA,
+  BUILT_IN_TGAMMAF,
+  BUILT_IN_TGAMMAL,
+  BUILT_IN_TRUNC,
+  BUILT_IN_TRUNCF,
+  BUILT_IN_TRUNCL,
+  BUILT_IN_Y0,
+  BUILT_IN_Y0F,
+  BUILT_IN_Y0L,
+  BUILT_IN_Y1,
+  BUILT_IN_Y1F,
+  BUILT_IN_Y1L,
+  BUILT_IN_YN,
+  BUILT_IN_YNF,
+  BUILT_IN_YNL,
+  BUILT_IN_CABS,
+  BUILT_IN_CABSF,
+  BUILT_IN_CABSL,
+  BUILT_IN_CACOS,
+  BUILT_IN_CACOSF,
+  BUILT_IN_CACOSH,
+  BUILT_IN_CACOSHF,
+  BUILT_IN_CACOSHL,
+  BUILT_IN_CACOSL,
+  BUILT_IN_CARG,
+  BUILT_IN_CARGF,
+  BUILT_IN_CARGL,
+  BUILT_IN_CASIN,
+  BUILT_IN_CASINF,
+  BUILT_IN_CASINH,
+  BUILT_IN_CASINHF,
+  BUILT_IN_CASINHL,
+  BUILT_IN_CASINL,
+  BUILT_IN_CATAN,
+  BUILT_IN_CATANF,
+  BUILT_IN_CATANH,
+  BUILT_IN_CATANHF,
+  BUILT_IN_CATANHL,
+  BUILT_IN_CATANL,
+  BUILT_IN_CCOS,
+  BUILT_IN_CCOSF,
+  BUILT_IN_CCOSH,
+  BUILT_IN_CCOSHF,
+  BUILT_IN_CCOSHL,
+  BUILT_IN_CCOSL,
+  BUILT_IN_CEXP,
+  BUILT_IN_CEXPF,
+  BUILT_IN_CEXPL,
+  BUILT_IN_CEXPI,
+  BUILT_IN_CEXPIF,
+  BUILT_IN_CEXPIL,
+  BUILT_IN_CIMAG,
+  BUILT_IN_CIMAGF,
+  BUILT_IN_CIMAGL,
+  BUILT_IN_CLOG,
+  BUILT_IN_CLOGF,
+  BUILT_IN_CLOGL,
+  BUILT_IN_CLOG10,
+  BUILT_IN_CLOG10F,
+  BUILT_IN_CLOG10L,
+  BUILT_IN_CONJ,
+  BUILT_IN_CONJF,
+  BUILT_IN_CONJL,
+  BUILT_IN_CPOW,
+  BUILT_IN_CPOWF,
+  BUILT_IN_CPOWL,
+  BUILT_IN_CPROJ,
+  BUILT_IN_CPROJF,
+  BUILT_IN_CPROJL,
+  BUILT_IN_CREAL,
+  BUILT_IN_CREALF,
+  BUILT_IN_CREALL,
+  BUILT_IN_CSIN,
+  BUILT_IN_CSINF,
+  BUILT_IN_CSINH,
+  BUILT_IN_CSINHF,
+  BUILT_IN_CSINHL,
+  BUILT_IN_CSINL,
+  BUILT_IN_CSQRT,
+  BUILT_IN_CSQRTF,
+  BUILT_IN_CSQRTL,
+  BUILT_IN_CTAN,
+  BUILT_IN_CTANF,
+  BUILT_IN_CTANH,
+  BUILT_IN_CTANHF,
+  BUILT_IN_CTANHL,
+  BUILT_IN_CTANL,
+  BUILT_IN_BCMP,
+  BUILT_IN_BCOPY,
+  BUILT_IN_BZERO,
+  BUILT_IN_INDEX,
+  BUILT_IN_MEMCHR,
+  BUILT_IN_MEMCMP,
+  BUILT_IN_MEMCPY,
+  BUILT_IN_MEMMOVE,
+  BUILT_IN_MEMPCPY,
+  BUILT_IN_MEMSET,
+  BUILT_IN_RINDEX,
+  BUILT_IN_STPCPY,
+  BUILT_IN_STPNCPY,
+  BUILT_IN_STRCASECMP,
+  BUILT_IN_STRCAT,
+  BUILT_IN_STRCHR,
+  BUILT_IN_STRCMP,
+  BUILT_IN_STRCPY,
+  BUILT_IN_STRCSPN,
+  BUILT_IN_STRDUP,
+  BUILT_IN_STRNDUP,
+  BUILT_IN_STRLEN,
+  BUILT_IN_STRNCASECMP,
+  BUILT_IN_STRNCAT,
+  BUILT_IN_STRNCMP,
+  BUILT_IN_STRNCPY,
+  BUILT_IN_STRPBRK,
+  BUILT_IN_STRRCHR,
+  BUILT_IN_STRSPN,
+  BUILT_IN_STRSTR,
+  BUILT_IN_FPRINTF,
+  BUILT_IN_FPRINTF_UNLOCKED,
+  BUILT_IN_PUTC,
+  BUILT_IN_PUTC_UNLOCKED,
+  BUILT_IN_FPUTC,
+  BUILT_IN_FPUTC_UNLOCKED,
+  BUILT_IN_FPUTS,
+  BUILT_IN_FPUTS_UNLOCKED,
+  BUILT_IN_FSCANF,
+  BUILT_IN_FWRITE,
+  BUILT_IN_FWRITE_UNLOCKED,
+  BUILT_IN_PRINTF,
+  BUILT_IN_PRINTF_UNLOCKED,
+  BUILT_IN_PUTCHAR,
+  BUILT_IN_PUTCHAR_UNLOCKED,
+  BUILT_IN_PUTS,
+  BUILT_IN_PUTS_UNLOCKED,
+  BUILT_IN_SCANF,
+  BUILT_IN_SNPRINTF,
+  BUILT_IN_SPRINTF,
+  BUILT_IN_SSCANF,
+  BUILT_IN_VFPRINTF,
+  BUILT_IN_VFSCANF,
+  BUILT_IN_VPRINTF,
+  BUILT_IN_VSCANF,
+  BUILT_IN_VSNPRINTF,
+  BUILT_IN_VSPRINTF,
+  BUILT_IN_VSSCANF,
+  BUILT_IN_ISALNUM,
+  BUILT_IN_ISALPHA,
+  BUILT_IN_ISASCII,
+  BUILT_IN_ISBLANK,
+  BUILT_IN_ISCNTRL,
+  BUILT_IN_ISDIGIT,
+  BUILT_IN_ISGRAPH,
+  BUILT_IN_ISLOWER,
+  BUILT_IN_ISPRINT,
+  BUILT_IN_ISPUNCT,
+  BUILT_IN_ISSPACE,
+  BUILT_IN_ISUPPER,
+  BUILT_IN_ISXDIGIT,
+  BUILT_IN_TOASCII,
+  BUILT_IN_TOLOWER,
+  BUILT_IN_TOUPPER,
+  BUILT_IN_ISWALNUM,
+  BUILT_IN_ISWALPHA,
+  BUILT_IN_ISWBLANK,
+  BUILT_IN_ISWCNTRL,
+  BUILT_IN_ISWDIGIT,
+  BUILT_IN_ISWGRAPH,
+  BUILT_IN_ISWLOWER,
+  BUILT_IN_ISWPRINT,
+  BUILT_IN_ISWPUNCT,
+  BUILT_IN_ISWSPACE,
+  BUILT_IN_ISWUPPER,
+  BUILT_IN_ISWXDIGIT,
+  BUILT_IN_TOWLOWER,
+  BUILT_IN_TOWUPPER,
+  BUILT_IN_ABORT,
+  BUILT_IN_ABS,
+  BUILT_IN_AGGREGATE_INCOMING_ADDRESS,
+  BUILT_IN_ALLOCA,
+  BUILT_IN_APPLY,
+  BUILT_IN_APPLY_ARGS,
+  BUILT_IN_BSWAP16,
+  BUILT_IN_BSWAP32,
+  BUILT_IN_BSWAP64,
+  BUILT_IN_CLEAR_CACHE,
+  BUILT_IN_CALLOC,
+  BUILT_IN_CLASSIFY_TYPE,
+  BUILT_IN_CLZ,
+  BUILT_IN_CLZIMAX,
+  BUILT_IN_CLZL,
+  BUILT_IN_CLZLL,
+  BUILT_IN_CONSTANT_P,
+  BUILT_IN_CTZ,
+  BUILT_IN_CTZIMAX,
+  BUILT_IN_CTZL,
+  BUILT_IN_CTZLL,
+  BUILT_IN_CLRSB,
+  BUILT_IN_CLRSBIMAX,
+  BUILT_IN_CLRSBL,
+  BUILT_IN_CLRSBLL,
+  BUILT_IN_DCGETTEXT,
+  BUILT_IN_DGETTEXT,
+  BUILT_IN_DWARF_CFA,
+  BUILT_IN_DWARF_SP_COLUMN,
+  BUILT_IN_EH_RETURN,
+  BUILT_IN_EH_RETURN_DATA_REGNO,
+  BUILT_IN_EXECL,
+  BUILT_IN_EXECLP,
+  BUILT_IN_EXECLE,
+  BUILT_IN_EXECV,
+  BUILT_IN_EXECVP,
+  BUILT_IN_EXECVE,
+  BUILT_IN_EXIT,
+  BUILT_IN_EXPECT,
+  BUILT_IN_ASSUME_ALIGNED,
+  BUILT_IN_EXTEND_POINTER,
+  BUILT_IN_EXTRACT_RETURN_ADDR,
+  BUILT_IN_FFS,
+  BUILT_IN_FFSIMAX,
+  BUILT_IN_FFSL,
+  BUILT_IN_FFSLL,
+  BUILT_IN_FORK,
+  BUILT_IN_FRAME_ADDRESS,
+  BUILT_IN_FREE,
+  BUILT_IN_FROB_RETURN_ADDR,
+  BUILT_IN_GETTEXT,
+  BUILT_IN_IMAXABS,
+  BUILT_IN_INIT_DWARF_REG_SIZES,
+  BUILT_IN_FINITE,
+  BUILT_IN_FINITEF,
+  BUILT_IN_FINITEL,
+  BUILT_IN_FINITED32,
+  BUILT_IN_FINITED64,
+  BUILT_IN_FINITED128,
+  BUILT_IN_FPCLASSIFY,
+  BUILT_IN_ISFINITE,
+  BUILT_IN_ISINF_SIGN,
+  BUILT_IN_ISINF,
+  BUILT_IN_ISINFF,
+  BUILT_IN_ISINFL,
+  BUILT_IN_ISINFD32,
+  BUILT_IN_ISINFD64,
+  BUILT_IN_ISINFD128,
+  BUILT_IN_ISNAN,
+  BUILT_IN_ISNANF,
+  BUILT_IN_ISNANL,
+  BUILT_IN_ISNAND32,
+  BUILT_IN_ISNAND64,
+  BUILT_IN_ISNAND128,
+  BUILT_IN_ISNORMAL,
+  BUILT_IN_ISGREATER,
+  BUILT_IN_ISGREATEREQUAL,
+  BUILT_IN_ISLESS,
+  BUILT_IN_ISLESSEQUAL,
+  BUILT_IN_ISLESSGREATER,
+  BUILT_IN_ISUNORDERED,
+  BUILT_IN_LABS,
+  BUILT_IN_LLABS,
+  BUILT_IN_LONGJMP,
+  BUILT_IN_MALLOC,
+  BUILT_IN_NEXT_ARG,
+  BUILT_IN_PARITY,
+  BUILT_IN_PARITYIMAX,
+  BUILT_IN_PARITYL,
+  BUILT_IN_PARITYLL,
+  BUILT_IN_POPCOUNT,
+  BUILT_IN_POPCOUNTIMAX,
+  BUILT_IN_POPCOUNTL,
+  BUILT_IN_POPCOUNTLL,
+  BUILT_IN_POSIX_MEMALIGN,
+  BUILT_IN_PREFETCH,
+  BUILT_IN_REALLOC,
+  BUILT_IN_RETURN,
+  BUILT_IN_RETURN_ADDRESS,
+  BUILT_IN_SAVEREGS,
+  BUILT_IN_SETJMP,
+  BUILT_IN_STRFMON,
+  BUILT_IN_STRFTIME,
+  BUILT_IN_TRAP,
+  BUILT_IN_UNREACHABLE,
+  BUILT_IN_UNWIND_INIT,
+  BUILT_IN_UPDATE_SETJMP_BUF,
+  BUILT_IN_VA_COPY,
+  BUILT_IN_VA_END,
+  BUILT_IN_VA_START,
+  BUILT_IN_VA_ARG_PACK,
+  BUILT_IN_VA_ARG_PACK_LEN,
+  BUILT_IN__EXIT,
+  BUILT_IN__EXIT2,
+  BUILT_IN_INIT_TRAMPOLINE,
+  BUILT_IN_INIT_HEAP_TRAMPOLINE,
+  BUILT_IN_ADJUST_TRAMPOLINE,
+  BUILT_IN_NONLOCAL_GOTO,
+  BUILT_IN_SETJMP_SETUP,
+  BUILT_IN_SETJMP_RECEIVER,
+  BUILT_IN_STACK_SAVE,
+  BUILT_IN_STACK_RESTORE,
+  BUILT_IN_ALLOCA_WITH_ALIGN,
+  BUILT_IN_OBJECT_SIZE,
+  BUILT_IN_MEMCPY_CHK,
+  BUILT_IN_MEMMOVE_CHK,
+  BUILT_IN_MEMPCPY_CHK,
+  BUILT_IN_MEMSET_CHK,
+  BUILT_IN_STPCPY_CHK,
+  BUILT_IN_STPNCPY_CHK,
+  BUILT_IN_STRCAT_CHK,
+  BUILT_IN_STRCPY_CHK,
+  BUILT_IN_STRNCAT_CHK,
+  BUILT_IN_STRNCPY_CHK,
+  BUILT_IN_SNPRINTF_CHK,
+  BUILT_IN_SPRINTF_CHK,
+  BUILT_IN_VSNPRINTF_CHK,
+  BUILT_IN_VSPRINTF_CHK,
+  BUILT_IN_FPRINTF_CHK,
+  BUILT_IN_PRINTF_CHK,
+  BUILT_IN_VFPRINTF_CHK,
+  BUILT_IN_VPRINTF_CHK,
+  BUILT_IN_PROFILE_FUNC_ENTER,
+  BUILT_IN_PROFILE_FUNC_EXIT,
+  BUILT_IN_THREAD_POINTER,
+  BUILT_IN_SET_THREAD_POINTER,
+  BUILT_IN_EMUTLS_GET_ADDRESS,
+  BUILT_IN_EMUTLS_REGISTER_COMMON,
+  BUILT_IN_UNWIND_RESUME,
+  BUILT_IN_CXA_END_CLEANUP,
+  BUILT_IN_EH_POINTER,
+  BUILT_IN_EH_FILTER,
+  BUILT_IN_EH_COPY_VALUES,
+  BUILT_IN_FILE,
+  BUILT_IN_FUNCTION,
+  BUILT_IN_LINE,
 ////# 1 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/sync-builtins.def" 1
 ////# 31 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/sync-builtins.def"
-BUILT_IN_SYNC_FETCH_AND_ADD_N,
-
-BUILT_IN_SYNC_FETCH_AND_ADD_1,
-
-BUILT_IN_SYNC_FETCH_AND_ADD_2,
-
-BUILT_IN_SYNC_FETCH_AND_ADD_4,
-
-BUILT_IN_SYNC_FETCH_AND_ADD_8,
-
-BUILT_IN_SYNC_FETCH_AND_ADD_16,
-
-
-BUILT_IN_SYNC_FETCH_AND_SUB_N,
-
-BUILT_IN_SYNC_FETCH_AND_SUB_1,
-
-BUILT_IN_SYNC_FETCH_AND_SUB_2,
-
-BUILT_IN_SYNC_FETCH_AND_SUB_4,
-
-BUILT_IN_SYNC_FETCH_AND_SUB_8,
-
-BUILT_IN_SYNC_FETCH_AND_SUB_16,
-
-
-BUILT_IN_SYNC_FETCH_AND_OR_N,
-
-BUILT_IN_SYNC_FETCH_AND_OR_1,
-
-BUILT_IN_SYNC_FETCH_AND_OR_2,
-
-BUILT_IN_SYNC_FETCH_AND_OR_4,
-
-BUILT_IN_SYNC_FETCH_AND_OR_8,
-
-BUILT_IN_SYNC_FETCH_AND_OR_16,
-
-
-BUILT_IN_SYNC_FETCH_AND_AND_N,
-
-BUILT_IN_SYNC_FETCH_AND_AND_1,
-
-BUILT_IN_SYNC_FETCH_AND_AND_2,
-
-BUILT_IN_SYNC_FETCH_AND_AND_4,
-
-BUILT_IN_SYNC_FETCH_AND_AND_8,
-
-BUILT_IN_SYNC_FETCH_AND_AND_16,
-
-
-BUILT_IN_SYNC_FETCH_AND_XOR_N,
-
-BUILT_IN_SYNC_FETCH_AND_XOR_1,
-
-BUILT_IN_SYNC_FETCH_AND_XOR_2,
-
-BUILT_IN_SYNC_FETCH_AND_XOR_4,
-
-BUILT_IN_SYNC_FETCH_AND_XOR_8,
-
-BUILT_IN_SYNC_FETCH_AND_XOR_16,
-
-
-BUILT_IN_SYNC_FETCH_AND_NAND_N,
-
-BUILT_IN_SYNC_FETCH_AND_NAND_1,
-
-BUILT_IN_SYNC_FETCH_AND_NAND_2,
-
-BUILT_IN_SYNC_FETCH_AND_NAND_4,
-
-BUILT_IN_SYNC_FETCH_AND_NAND_8,
-
-BUILT_IN_SYNC_FETCH_AND_NAND_16,
-
-
-BUILT_IN_SYNC_ADD_AND_FETCH_N,
-
-BUILT_IN_SYNC_ADD_AND_FETCH_1,
-
-BUILT_IN_SYNC_ADD_AND_FETCH_2,
-
-BUILT_IN_SYNC_ADD_AND_FETCH_4,
-
-BUILT_IN_SYNC_ADD_AND_FETCH_8,
-
-BUILT_IN_SYNC_ADD_AND_FETCH_16,
-
-
-BUILT_IN_SYNC_SUB_AND_FETCH_N,
-
-BUILT_IN_SYNC_SUB_AND_FETCH_1,
-
-BUILT_IN_SYNC_SUB_AND_FETCH_2,
-
-BUILT_IN_SYNC_SUB_AND_FETCH_4,
-
-BUILT_IN_SYNC_SUB_AND_FETCH_8,
-
-BUILT_IN_SYNC_SUB_AND_FETCH_16,
-
-
-BUILT_IN_SYNC_OR_AND_FETCH_N,
-
-BUILT_IN_SYNC_OR_AND_FETCH_1,
-
-BUILT_IN_SYNC_OR_AND_FETCH_2,
-
-BUILT_IN_SYNC_OR_AND_FETCH_4,
-
-BUILT_IN_SYNC_OR_AND_FETCH_8,
-
-BUILT_IN_SYNC_OR_AND_FETCH_16,
-
-
-BUILT_IN_SYNC_AND_AND_FETCH_N,
-
-BUILT_IN_SYNC_AND_AND_FETCH_1,
-
-BUILT_IN_SYNC_AND_AND_FETCH_2,
-
-BUILT_IN_SYNC_AND_AND_FETCH_4,
-
-BUILT_IN_SYNC_AND_AND_FETCH_8,
-
-BUILT_IN_SYNC_AND_AND_FETCH_16,
-
-
-BUILT_IN_SYNC_XOR_AND_FETCH_N,
-
-BUILT_IN_SYNC_XOR_AND_FETCH_1,
-
-BUILT_IN_SYNC_XOR_AND_FETCH_2,
-
-BUILT_IN_SYNC_XOR_AND_FETCH_4,
-
-BUILT_IN_SYNC_XOR_AND_FETCH_8,
-
-BUILT_IN_SYNC_XOR_AND_FETCH_16,
-
-
-BUILT_IN_SYNC_NAND_AND_FETCH_N,
-
-BUILT_IN_SYNC_NAND_AND_FETCH_1,
-
-BUILT_IN_SYNC_NAND_AND_FETCH_2,
-
-BUILT_IN_SYNC_NAND_AND_FETCH_4,
-
-BUILT_IN_SYNC_NAND_AND_FETCH_8,
-
-BUILT_IN_SYNC_NAND_AND_FETCH_16,
-
-
-BUILT_IN_SYNC_BOOL_COMPARE_AND_SWAP_N,
-
-
-BUILT_IN_SYNC_BOOL_COMPARE_AND_SWAP_1,
-
-
-BUILT_IN_SYNC_BOOL_COMPARE_AND_SWAP_2,
-
-
-BUILT_IN_SYNC_BOOL_COMPARE_AND_SWAP_4,
-
-
-BUILT_IN_SYNC_BOOL_COMPARE_AND_SWAP_8,
-
-
-BUILT_IN_SYNC_BOOL_COMPARE_AND_SWAP_16,
-
-
-
-BUILT_IN_SYNC_VAL_COMPARE_AND_SWAP_N,
-
-
-BUILT_IN_SYNC_VAL_COMPARE_AND_SWAP_1,
-
-
-BUILT_IN_SYNC_VAL_COMPARE_AND_SWAP_2,
-
-
-BUILT_IN_SYNC_VAL_COMPARE_AND_SWAP_4,
-
-
-BUILT_IN_SYNC_VAL_COMPARE_AND_SWAP_8,
-
-
-BUILT_IN_SYNC_VAL_COMPARE_AND_SWAP_16,
-
-
-
-BUILT_IN_SYNC_LOCK_TEST_AND_SET_N,
-
-
-BUILT_IN_SYNC_LOCK_TEST_AND_SET_1,
-
-
-BUILT_IN_SYNC_LOCK_TEST_AND_SET_2,
-
-
-BUILT_IN_SYNC_LOCK_TEST_AND_SET_4,
-
-
-BUILT_IN_SYNC_LOCK_TEST_AND_SET_8,
-
-
-BUILT_IN_SYNC_LOCK_TEST_AND_SET_16,
-
-
-
-BUILT_IN_SYNC_LOCK_RELEASE_N,
-
-BUILT_IN_SYNC_LOCK_RELEASE_1,
-
-BUILT_IN_SYNC_LOCK_RELEASE_2,
-
-BUILT_IN_SYNC_LOCK_RELEASE_4,
-
-BUILT_IN_SYNC_LOCK_RELEASE_8,
-
-BUILT_IN_SYNC_LOCK_RELEASE_16,
-
-
-BUILT_IN_SYNC_SYNCHRONIZE,
-
-
-
-
-BUILT_IN_ATOMIC_TEST_AND_SET,
-
-
-BUILT_IN_ATOMIC_CLEAR,
-
-
-BUILT_IN_ATOMIC_EXCHANGE,
-
-
-BUILT_IN_ATOMIC_EXCHANGE_N,
-
-
-BUILT_IN_ATOMIC_EXCHANGE_1,
-
-
-BUILT_IN_ATOMIC_EXCHANGE_2,
-
-
-BUILT_IN_ATOMIC_EXCHANGE_4,
-
-
-BUILT_IN_ATOMIC_EXCHANGE_8,
-
-
-BUILT_IN_ATOMIC_EXCHANGE_16,
-
-
-
-BUILT_IN_ATOMIC_LOAD,
-
-
-
-BUILT_IN_ATOMIC_LOAD_N,
-
-
-BUILT_IN_ATOMIC_LOAD_1,
-
-
-BUILT_IN_ATOMIC_LOAD_2,
-
-
-BUILT_IN_ATOMIC_LOAD_4,
-
-
-BUILT_IN_ATOMIC_LOAD_8,
-
-
-BUILT_IN_ATOMIC_LOAD_16,
-
-
-
-BUILT_IN_ATOMIC_COMPARE_EXCHANGE,
-
-
-
-BUILT_IN_ATOMIC_COMPARE_EXCHANGE_N,
-
-
-BUILT_IN_ATOMIC_COMPARE_EXCHANGE_1,
-
-
-
-BUILT_IN_ATOMIC_COMPARE_EXCHANGE_2,
-
-
-
-BUILT_IN_ATOMIC_COMPARE_EXCHANGE_4,
-
-
-
-BUILT_IN_ATOMIC_COMPARE_EXCHANGE_8,
-
-
-
-BUILT_IN_ATOMIC_COMPARE_EXCHANGE_16,
-
-
-
-
-BUILT_IN_ATOMIC_STORE,
-
-
-BUILT_IN_ATOMIC_STORE_N,
-
-
-BUILT_IN_ATOMIC_STORE_1,
-
-
-BUILT_IN_ATOMIC_STORE_2,
-
-
-BUILT_IN_ATOMIC_STORE_4,
-
-
-BUILT_IN_ATOMIC_STORE_8,
-
-
-BUILT_IN_ATOMIC_STORE_16,
-
-
-
-BUILT_IN_ATOMIC_ADD_FETCH_N,
-
-
-BUILT_IN_ATOMIC_ADD_FETCH_1,
-
-
-BUILT_IN_ATOMIC_ADD_FETCH_2,
-
-
-BUILT_IN_ATOMIC_ADD_FETCH_4,
-
-
-BUILT_IN_ATOMIC_ADD_FETCH_8,
-
-
-BUILT_IN_ATOMIC_ADD_FETCH_16,
-
-
-
-BUILT_IN_ATOMIC_SUB_FETCH_N,
-
-
-BUILT_IN_ATOMIC_SUB_FETCH_1,
-
-
-BUILT_IN_ATOMIC_SUB_FETCH_2,
-
-
-BUILT_IN_ATOMIC_SUB_FETCH_4,
-
-
-BUILT_IN_ATOMIC_SUB_FETCH_8,
-
-
-BUILT_IN_ATOMIC_SUB_FETCH_16,
-
-
-
-BUILT_IN_ATOMIC_AND_FETCH_N,
-
-
-BUILT_IN_ATOMIC_AND_FETCH_1,
-
-
-BUILT_IN_ATOMIC_AND_FETCH_2,
-
-
-BUILT_IN_ATOMIC_AND_FETCH_4,
-
-
-BUILT_IN_ATOMIC_AND_FETCH_8,
-
-
-BUILT_IN_ATOMIC_AND_FETCH_16,
-
-
-
-BUILT_IN_ATOMIC_NAND_FETCH_N,
-
-
-BUILT_IN_ATOMIC_NAND_FETCH_1,
-
-
-BUILT_IN_ATOMIC_NAND_FETCH_2,
-
-
-BUILT_IN_ATOMIC_NAND_FETCH_4,
-
-
-BUILT_IN_ATOMIC_NAND_FETCH_8,
-
-
-BUILT_IN_ATOMIC_NAND_FETCH_16,
-
-
-
-BUILT_IN_ATOMIC_XOR_FETCH_N,
-
-
-BUILT_IN_ATOMIC_XOR_FETCH_1,
-
-
-BUILT_IN_ATOMIC_XOR_FETCH_2,
-
-
-BUILT_IN_ATOMIC_XOR_FETCH_4,
-
-
-BUILT_IN_ATOMIC_XOR_FETCH_8,
-
-
-BUILT_IN_ATOMIC_XOR_FETCH_16,
-
-
-
-BUILT_IN_ATOMIC_OR_FETCH_N,
-
-
-BUILT_IN_ATOMIC_OR_FETCH_1,
-
-
-BUILT_IN_ATOMIC_OR_FETCH_2,
-
-
-BUILT_IN_ATOMIC_OR_FETCH_4,
-
-
-BUILT_IN_ATOMIC_OR_FETCH_8,
-
-
-BUILT_IN_ATOMIC_OR_FETCH_16,
-
-
-
-BUILT_IN_ATOMIC_FETCH_ADD_N,
-
-
-BUILT_IN_ATOMIC_FETCH_ADD_1,
-
-
-BUILT_IN_ATOMIC_FETCH_ADD_2,
-
-
-BUILT_IN_ATOMIC_FETCH_ADD_4,
-
-
-BUILT_IN_ATOMIC_FETCH_ADD_8,
-
-
-BUILT_IN_ATOMIC_FETCH_ADD_16,
-
-
-
-BUILT_IN_ATOMIC_FETCH_SUB_N,
-
-
-BUILT_IN_ATOMIC_FETCH_SUB_1,
-
-
-BUILT_IN_ATOMIC_FETCH_SUB_2,
-
-
-BUILT_IN_ATOMIC_FETCH_SUB_4,
-
-
-BUILT_IN_ATOMIC_FETCH_SUB_8,
-
-
-BUILT_IN_ATOMIC_FETCH_SUB_16,
-
-
-
-BUILT_IN_ATOMIC_FETCH_AND_N,
-
-
-BUILT_IN_ATOMIC_FETCH_AND_1,
-
-
-BUILT_IN_ATOMIC_FETCH_AND_2,
-
-
-BUILT_IN_ATOMIC_FETCH_AND_4,
-
-
-BUILT_IN_ATOMIC_FETCH_AND_8,
-
-
-BUILT_IN_ATOMIC_FETCH_AND_16,
-
-
-
-BUILT_IN_ATOMIC_FETCH_NAND_N,
-
-
-BUILT_IN_ATOMIC_FETCH_NAND_1,
-
-
-BUILT_IN_ATOMIC_FETCH_NAND_2,
-
-
-BUILT_IN_ATOMIC_FETCH_NAND_4,
-
-
-BUILT_IN_ATOMIC_FETCH_NAND_8,
-
-
-BUILT_IN_ATOMIC_FETCH_NAND_16,
-
-
-
-BUILT_IN_ATOMIC_FETCH_XOR_N,
-
-
-BUILT_IN_ATOMIC_FETCH_XOR_1,
-
-
-BUILT_IN_ATOMIC_FETCH_XOR_2,
-
-
-BUILT_IN_ATOMIC_FETCH_XOR_4,
-
-
-BUILT_IN_ATOMIC_FETCH_XOR_8,
-
-
-BUILT_IN_ATOMIC_FETCH_XOR_16,
-
-
-
-
-BUILT_IN_ATOMIC_FETCH_OR_N,
-
-
-BUILT_IN_ATOMIC_FETCH_OR_1,
-
-
-BUILT_IN_ATOMIC_FETCH_OR_2,
-
-
-BUILT_IN_ATOMIC_FETCH_OR_4,
-
-
-BUILT_IN_ATOMIC_FETCH_OR_8,
-
-
-BUILT_IN_ATOMIC_FETCH_OR_16,
-
-
-
-BUILT_IN_ATOMIC_ALWAYS_LOCK_FREE,
-
-
-
-BUILT_IN_ATOMIC_IS_LOCK_FREE,
-
-
-
-
-BUILT_IN_ATOMIC_THREAD_FENCE,
-
-
-
-BUILT_IN_ATOMIC_SIGNAL_FENCE,
-
-
-
-
-
-
-BUILT_IN_ATOMIC_FERAISEEXCEPT,
+  BUILT_IN_SYNC_FETCH_AND_ADD_N,
+  BUILT_IN_SYNC_FETCH_AND_ADD_1,
+  BUILT_IN_SYNC_FETCH_AND_ADD_2,
+  BUILT_IN_SYNC_FETCH_AND_ADD_4,
+  BUILT_IN_SYNC_FETCH_AND_ADD_8,
+  BUILT_IN_SYNC_FETCH_AND_ADD_16,
+  BUILT_IN_SYNC_FETCH_AND_SUB_N,
+  BUILT_IN_SYNC_FETCH_AND_SUB_1,
+  BUILT_IN_SYNC_FETCH_AND_SUB_2,
+  BUILT_IN_SYNC_FETCH_AND_SUB_4,
+  BUILT_IN_SYNC_FETCH_AND_SUB_8,
+  BUILT_IN_SYNC_FETCH_AND_SUB_16,
+  BUILT_IN_SYNC_FETCH_AND_OR_N,
+  BUILT_IN_SYNC_FETCH_AND_OR_1,
+  BUILT_IN_SYNC_FETCH_AND_OR_2,
+  BUILT_IN_SYNC_FETCH_AND_OR_4,
+  BUILT_IN_SYNC_FETCH_AND_OR_8,
+  BUILT_IN_SYNC_FETCH_AND_OR_16,
+  BUILT_IN_SYNC_FETCH_AND_AND_N,
+  BUILT_IN_SYNC_FETCH_AND_AND_1,
+  BUILT_IN_SYNC_FETCH_AND_AND_2,
+  BUILT_IN_SYNC_FETCH_AND_AND_4,
+  BUILT_IN_SYNC_FETCH_AND_AND_8,
+  BUILT_IN_SYNC_FETCH_AND_AND_16,
+  BUILT_IN_SYNC_FETCH_AND_XOR_N,
+  BUILT_IN_SYNC_FETCH_AND_XOR_1,
+  BUILT_IN_SYNC_FETCH_AND_XOR_2,
+  BUILT_IN_SYNC_FETCH_AND_XOR_4,
+  BUILT_IN_SYNC_FETCH_AND_XOR_8,
+  BUILT_IN_SYNC_FETCH_AND_XOR_16,
+  BUILT_IN_SYNC_FETCH_AND_NAND_N,
+  BUILT_IN_SYNC_FETCH_AND_NAND_1,
+  BUILT_IN_SYNC_FETCH_AND_NAND_2,
+  BUILT_IN_SYNC_FETCH_AND_NAND_4,
+  BUILT_IN_SYNC_FETCH_AND_NAND_8,
+  BUILT_IN_SYNC_FETCH_AND_NAND_16,
+  BUILT_IN_SYNC_ADD_AND_FETCH_N,
+  BUILT_IN_SYNC_ADD_AND_FETCH_1,
+  BUILT_IN_SYNC_ADD_AND_FETCH_2,
+  BUILT_IN_SYNC_ADD_AND_FETCH_4,
+  BUILT_IN_SYNC_ADD_AND_FETCH_8,
+  BUILT_IN_SYNC_ADD_AND_FETCH_16,
+  BUILT_IN_SYNC_SUB_AND_FETCH_N,
+  BUILT_IN_SYNC_SUB_AND_FETCH_1,
+  BUILT_IN_SYNC_SUB_AND_FETCH_2,
+  BUILT_IN_SYNC_SUB_AND_FETCH_4,
+  BUILT_IN_SYNC_SUB_AND_FETCH_8,
+  BUILT_IN_SYNC_SUB_AND_FETCH_16,
+  BUILT_IN_SYNC_OR_AND_FETCH_N,
+  BUILT_IN_SYNC_OR_AND_FETCH_1,
+  BUILT_IN_SYNC_OR_AND_FETCH_2,
+  BUILT_IN_SYNC_OR_AND_FETCH_4,
+  BUILT_IN_SYNC_OR_AND_FETCH_8,
+  BUILT_IN_SYNC_OR_AND_FETCH_16,
+  BUILT_IN_SYNC_AND_AND_FETCH_N,
+  BUILT_IN_SYNC_AND_AND_FETCH_1,
+  BUILT_IN_SYNC_AND_AND_FETCH_2,
+  BUILT_IN_SYNC_AND_AND_FETCH_4,
+  BUILT_IN_SYNC_AND_AND_FETCH_8,
+  BUILT_IN_SYNC_AND_AND_FETCH_16,
+  BUILT_IN_SYNC_XOR_AND_FETCH_N,
+  BUILT_IN_SYNC_XOR_AND_FETCH_1,
+  BUILT_IN_SYNC_XOR_AND_FETCH_2,
+  BUILT_IN_SYNC_XOR_AND_FETCH_4,
+  BUILT_IN_SYNC_XOR_AND_FETCH_8,
+  BUILT_IN_SYNC_XOR_AND_FETCH_16,
+  BUILT_IN_SYNC_NAND_AND_FETCH_N,
+  BUILT_IN_SYNC_NAND_AND_FETCH_1,
+  BUILT_IN_SYNC_NAND_AND_FETCH_2,
+  BUILT_IN_SYNC_NAND_AND_FETCH_4,
+  BUILT_IN_SYNC_NAND_AND_FETCH_8,
+  BUILT_IN_SYNC_NAND_AND_FETCH_16,
+  BUILT_IN_SYNC_BOOL_COMPARE_AND_SWAP_N,
+  BUILT_IN_SYNC_BOOL_COMPARE_AND_SWAP_1,
+  BUILT_IN_SYNC_BOOL_COMPARE_AND_SWAP_2,
+  BUILT_IN_SYNC_BOOL_COMPARE_AND_SWAP_4,
+  BUILT_IN_SYNC_BOOL_COMPARE_AND_SWAP_8,
+  BUILT_IN_SYNC_BOOL_COMPARE_AND_SWAP_16,
+  BUILT_IN_SYNC_VAL_COMPARE_AND_SWAP_N,
+  BUILT_IN_SYNC_VAL_COMPARE_AND_SWAP_1,
+  BUILT_IN_SYNC_VAL_COMPARE_AND_SWAP_2,
+  BUILT_IN_SYNC_VAL_COMPARE_AND_SWAP_4,
+  BUILT_IN_SYNC_VAL_COMPARE_AND_SWAP_8,
+  BUILT_IN_SYNC_VAL_COMPARE_AND_SWAP_16,
+  BUILT_IN_SYNC_LOCK_TEST_AND_SET_N,
+  BUILT_IN_SYNC_LOCK_TEST_AND_SET_1,
+  BUILT_IN_SYNC_LOCK_TEST_AND_SET_2,
+  BUILT_IN_SYNC_LOCK_TEST_AND_SET_4,
+  BUILT_IN_SYNC_LOCK_TEST_AND_SET_8,
+  BUILT_IN_SYNC_LOCK_TEST_AND_SET_16,
+  BUILT_IN_SYNC_LOCK_RELEASE_N,
+  BUILT_IN_SYNC_LOCK_RELEASE_1,
+  BUILT_IN_SYNC_LOCK_RELEASE_2,
+  BUILT_IN_SYNC_LOCK_RELEASE_4,
+  BUILT_IN_SYNC_LOCK_RELEASE_8,
+  BUILT_IN_SYNC_LOCK_RELEASE_16,
+  BUILT_IN_SYNC_SYNCHRONIZE,
+  BUILT_IN_ATOMIC_TEST_AND_SET,
+  BUILT_IN_ATOMIC_CLEAR,
+  BUILT_IN_ATOMIC_EXCHANGE,
+  BUILT_IN_ATOMIC_EXCHANGE_N,
+  BUILT_IN_ATOMIC_EXCHANGE_1,
+  BUILT_IN_ATOMIC_EXCHANGE_2,
+  BUILT_IN_ATOMIC_EXCHANGE_4,
+  BUILT_IN_ATOMIC_EXCHANGE_8,
+  BUILT_IN_ATOMIC_EXCHANGE_16,
+  BUILT_IN_ATOMIC_LOAD,
+  BUILT_IN_ATOMIC_LOAD_N,
+  BUILT_IN_ATOMIC_LOAD_1,
+  BUILT_IN_ATOMIC_LOAD_2,
+  BUILT_IN_ATOMIC_LOAD_4,
+  BUILT_IN_ATOMIC_LOAD_8,
+  BUILT_IN_ATOMIC_LOAD_16,
+  BUILT_IN_ATOMIC_COMPARE_EXCHANGE,
+  BUILT_IN_ATOMIC_COMPARE_EXCHANGE_N,
+  BUILT_IN_ATOMIC_COMPARE_EXCHANGE_1,
+  BUILT_IN_ATOMIC_COMPARE_EXCHANGE_2,
+  BUILT_IN_ATOMIC_COMPARE_EXCHANGE_4,
+  BUILT_IN_ATOMIC_COMPARE_EXCHANGE_8,
+  BUILT_IN_ATOMIC_COMPARE_EXCHANGE_16,
+  BUILT_IN_ATOMIC_STORE,
+  BUILT_IN_ATOMIC_STORE_N,
+  BUILT_IN_ATOMIC_STORE_1,
+  BUILT_IN_ATOMIC_STORE_2,
+  BUILT_IN_ATOMIC_STORE_4,
+  BUILT_IN_ATOMIC_STORE_8,
+  BUILT_IN_ATOMIC_STORE_16,
+  BUILT_IN_ATOMIC_ADD_FETCH_N,
+  BUILT_IN_ATOMIC_ADD_FETCH_1,
+  BUILT_IN_ATOMIC_ADD_FETCH_2,
+  BUILT_IN_ATOMIC_ADD_FETCH_4,
+  BUILT_IN_ATOMIC_ADD_FETCH_8,
+  BUILT_IN_ATOMIC_ADD_FETCH_16,
+  BUILT_IN_ATOMIC_SUB_FETCH_N,
+  BUILT_IN_ATOMIC_SUB_FETCH_1,
+  BUILT_IN_ATOMIC_SUB_FETCH_2,
+  BUILT_IN_ATOMIC_SUB_FETCH_4,
+  BUILT_IN_ATOMIC_SUB_FETCH_8,
+  BUILT_IN_ATOMIC_SUB_FETCH_16,
+  BUILT_IN_ATOMIC_AND_FETCH_N,
+  BUILT_IN_ATOMIC_AND_FETCH_1,
+  BUILT_IN_ATOMIC_AND_FETCH_2,
+  BUILT_IN_ATOMIC_AND_FETCH_4,
+  BUILT_IN_ATOMIC_AND_FETCH_8,
+  BUILT_IN_ATOMIC_AND_FETCH_16,
+  BUILT_IN_ATOMIC_NAND_FETCH_N,
+  BUILT_IN_ATOMIC_NAND_FETCH_1,
+  BUILT_IN_ATOMIC_NAND_FETCH_2,
+  BUILT_IN_ATOMIC_NAND_FETCH_4,
+  BUILT_IN_ATOMIC_NAND_FETCH_8,
+  BUILT_IN_ATOMIC_NAND_FETCH_16,
+  BUILT_IN_ATOMIC_XOR_FETCH_N,
+  BUILT_IN_ATOMIC_XOR_FETCH_1,
+  BUILT_IN_ATOMIC_XOR_FETCH_2,
+  BUILT_IN_ATOMIC_XOR_FETCH_4,
+  BUILT_IN_ATOMIC_XOR_FETCH_8,
+  BUILT_IN_ATOMIC_XOR_FETCH_16,
+  BUILT_IN_ATOMIC_OR_FETCH_N,
+  BUILT_IN_ATOMIC_OR_FETCH_1,
+  BUILT_IN_ATOMIC_OR_FETCH_2,
+  BUILT_IN_ATOMIC_OR_FETCH_4,
+  BUILT_IN_ATOMIC_OR_FETCH_8,
+  BUILT_IN_ATOMIC_OR_FETCH_16,
+  BUILT_IN_ATOMIC_FETCH_ADD_N,
+  BUILT_IN_ATOMIC_FETCH_ADD_1,
+  BUILT_IN_ATOMIC_FETCH_ADD_2,
+  BUILT_IN_ATOMIC_FETCH_ADD_4,
+  BUILT_IN_ATOMIC_FETCH_ADD_8,
+  BUILT_IN_ATOMIC_FETCH_ADD_16,
+  BUILT_IN_ATOMIC_FETCH_SUB_N,
+  BUILT_IN_ATOMIC_FETCH_SUB_1,
+  BUILT_IN_ATOMIC_FETCH_SUB_2,
+  BUILT_IN_ATOMIC_FETCH_SUB_4,
+  BUILT_IN_ATOMIC_FETCH_SUB_8,
+  BUILT_IN_ATOMIC_FETCH_SUB_16,
+  BUILT_IN_ATOMIC_FETCH_AND_N,
+  BUILT_IN_ATOMIC_FETCH_AND_1,
+  BUILT_IN_ATOMIC_FETCH_AND_2,
+  BUILT_IN_ATOMIC_FETCH_AND_4,
+  BUILT_IN_ATOMIC_FETCH_AND_8,
+  BUILT_IN_ATOMIC_FETCH_AND_16,
+  BUILT_IN_ATOMIC_FETCH_NAND_N,
+  BUILT_IN_ATOMIC_FETCH_NAND_1,
+  BUILT_IN_ATOMIC_FETCH_NAND_2,
+  BUILT_IN_ATOMIC_FETCH_NAND_4,
+  BUILT_IN_ATOMIC_FETCH_NAND_8,
+  BUILT_IN_ATOMIC_FETCH_NAND_16,
+  BUILT_IN_ATOMIC_FETCH_XOR_N,
+  BUILT_IN_ATOMIC_FETCH_XOR_1,
+  BUILT_IN_ATOMIC_FETCH_XOR_2,
+  BUILT_IN_ATOMIC_FETCH_XOR_4,
+  BUILT_IN_ATOMIC_FETCH_XOR_8,
+  BUILT_IN_ATOMIC_FETCH_XOR_16,
+  BUILT_IN_ATOMIC_FETCH_OR_N,
+  BUILT_IN_ATOMIC_FETCH_OR_1,
+  BUILT_IN_ATOMIC_FETCH_OR_2,
+  BUILT_IN_ATOMIC_FETCH_OR_4,
+  BUILT_IN_ATOMIC_FETCH_OR_8,
+  BUILT_IN_ATOMIC_FETCH_OR_16,
+  BUILT_IN_ATOMIC_ALWAYS_LOCK_FREE,
+  BUILT_IN_ATOMIC_IS_LOCK_FREE,
+  BUILT_IN_ATOMIC_THREAD_FENCE,
+  BUILT_IN_ATOMIC_SIGNAL_FENCE,
+  BUILT_IN_ATOMIC_FERAISEEXCEPT,
 ////# 858 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/builtins.def" 2
-
-
 ////# 1 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/omp-builtins.def" 1
 ////# 27 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/omp-builtins.def"
-BUILT_IN_OMP_GET_THREAD_NUM,
-
-BUILT_IN_OMP_GET_NUM_THREADS,
-
-BUILT_IN_OMP_GET_TEAM_NUM,
-
-BUILT_IN_OMP_GET_NUM_TEAMS,
-
-
-BUILT_IN_GOMP_ATOMIC_START,
-
-BUILT_IN_GOMP_ATOMIC_END,
-
-BUILT_IN_GOMP_BARRIER,
-
-BUILT_IN_GOMP_BARRIER_CANCEL,
-
-BUILT_IN_GOMP_TASKWAIT,
-
-BUILT_IN_GOMP_TASKYIELD,
-
-BUILT_IN_GOMP_TASKGROUP_START,
-
-BUILT_IN_GOMP_TASKGROUP_END,
-
-BUILT_IN_GOMP_CANCEL,
-
-BUILT_IN_GOMP_CANCELLATION_POINT,
-
-BUILT_IN_GOMP_CRITICAL_START,
-
-BUILT_IN_GOMP_CRITICAL_END,
-
-BUILT_IN_GOMP_CRITICAL_NAME_START,
-
-
-BUILT_IN_GOMP_CRITICAL_NAME_END,
-
-
-
-
-
-BUILT_IN_GOMP_LOOP_STATIC_START,
-
-
-
-BUILT_IN_GOMP_LOOP_DYNAMIC_START,
-
-
-
-BUILT_IN_GOMP_LOOP_GUIDED_START,
-
-
-
-BUILT_IN_GOMP_LOOP_RUNTIME_START,
-
-
-
-BUILT_IN_GOMP_LOOP_ORDERED_STATIC_START,
-
-
-
-BUILT_IN_GOMP_LOOP_ORDERED_DYNAMIC_START,
-
-
-
-BUILT_IN_GOMP_LOOP_ORDERED_GUIDED_START,
-
-
-
-BUILT_IN_GOMP_LOOP_ORDERED_RUNTIME_START,
-
-
-
-BUILT_IN_GOMP_LOOP_STATIC_NEXT,
-
-BUILT_IN_GOMP_LOOP_DYNAMIC_NEXT,
-
-BUILT_IN_GOMP_LOOP_GUIDED_NEXT,
-
-BUILT_IN_GOMP_LOOP_RUNTIME_NEXT,
-
-BUILT_IN_GOMP_LOOP_ORDERED_STATIC_NEXT,
-
-
-BUILT_IN_GOMP_LOOP_ORDERED_DYNAMIC_NEXT,
-
-
-BUILT_IN_GOMP_LOOP_ORDERED_GUIDED_NEXT,
-
-
-BUILT_IN_GOMP_LOOP_ORDERED_RUNTIME_NEXT,
-
-
-BUILT_IN_GOMP_LOOP_ULL_STATIC_START,
-
-
-
-BUILT_IN_GOMP_LOOP_ULL_DYNAMIC_START,
-
-
-
-BUILT_IN_GOMP_LOOP_ULL_GUIDED_START,
-
-
-
-BUILT_IN_GOMP_LOOP_ULL_RUNTIME_START,
-
-
-
-BUILT_IN_GOMP_LOOP_ULL_ORDERED_STATIC_START,
-
-
-
-BUILT_IN_GOMP_LOOP_ULL_ORDERED_DYNAMIC_START,
-
-
-
-BUILT_IN_GOMP_LOOP_ULL_ORDERED_GUIDED_START,
-
-
-
-BUILT_IN_GOMP_LOOP_ULL_ORDERED_RUNTIME_START,
-
-
-
-BUILT_IN_GOMP_LOOP_ULL_STATIC_NEXT,
-
-BUILT_IN_GOMP_LOOP_ULL_DYNAMIC_NEXT,
-
-BUILT_IN_GOMP_LOOP_ULL_GUIDED_NEXT,
-
-BUILT_IN_GOMP_LOOP_ULL_RUNTIME_NEXT,
-
-BUILT_IN_GOMP_LOOP_ULL_ORDERED_STATIC_NEXT,
-
-
-BUILT_IN_GOMP_LOOP_ULL_ORDERED_DYNAMIC_NEXT,
-
-
-BUILT_IN_GOMP_LOOP_ULL_ORDERED_GUIDED_NEXT,
-
-
-BUILT_IN_GOMP_LOOP_ULL_ORDERED_RUNTIME_NEXT,
-
-
-
-
-
-BUILT_IN_GOMP_PARALLEL_LOOP_STATIC,
-
-
-
-BUILT_IN_GOMP_PARALLEL_LOOP_DYNAMIC,
-
-
-
-BUILT_IN_GOMP_PARALLEL_LOOP_GUIDED,
-
-
-
-BUILT_IN_GOMP_PARALLEL_LOOP_RUNTIME,
-
-
-
-BUILT_IN_GOMP_LOOP_END,
-
-BUILT_IN_GOMP_LOOP_END_CANCEL,
-
-BUILT_IN_GOMP_LOOP_END_NOWAIT,
-
-BUILT_IN_GOMP_ORDERED_START,
-
-BUILT_IN_GOMP_ORDERED_END,
-
-BUILT_IN_GOMP_PARALLEL,
-
-BUILT_IN_GOMP_TASK,
-
-
-BUILT_IN_GOMP_SECTIONS_START,
-
-BUILT_IN_GOMP_SECTIONS_NEXT,
-
-BUILT_IN_GOMP_PARALLEL_SECTIONS,
-
-
-BUILT_IN_GOMP_SECTIONS_END,
-
-BUILT_IN_GOMP_SECTIONS_END_CANCEL,
-
-
-BUILT_IN_GOMP_SECTIONS_END_NOWAIT,
-
-
-BUILT_IN_GOMP_SINGLE_START,
-
-BUILT_IN_GOMP_SINGLE_COPY_START,
-
-BUILT_IN_GOMP_SINGLE_COPY_END,
-
-BUILT_IN_GOMP_TARGET,
-
-
-BUILT_IN_GOMP_TARGET_DATA,
-
-BUILT_IN_GOMP_TARGET_END_DATA,
-
-BUILT_IN_GOMP_TARGET_UPDATE,
-
-BUILT_IN_GOMP_TEAMS,
+  BUILT_IN_OMP_GET_THREAD_NUM,
+  BUILT_IN_OMP_GET_NUM_THREADS,
+  BUILT_IN_OMP_GET_TEAM_NUM,
+  BUILT_IN_OMP_GET_NUM_TEAMS,
+  BUILT_IN_GOMP_ATOMIC_START,
+  BUILT_IN_GOMP_ATOMIC_END,
+  BUILT_IN_GOMP_BARRIER,
+  BUILT_IN_GOMP_BARRIER_CANCEL,
+  BUILT_IN_GOMP_TASKWAIT,
+  BUILT_IN_GOMP_TASKYIELD,
+  BUILT_IN_GOMP_TASKGROUP_START,
+  BUILT_IN_GOMP_TASKGROUP_END,
+  BUILT_IN_GOMP_CANCEL,
+  BUILT_IN_GOMP_CANCELLATION_POINT,
+  BUILT_IN_GOMP_CRITICAL_START,
+  BUILT_IN_GOMP_CRITICAL_END,
+  BUILT_IN_GOMP_CRITICAL_NAME_START,
+  BUILT_IN_GOMP_CRITICAL_NAME_END,
+  BUILT_IN_GOMP_LOOP_STATIC_START,
+  BUILT_IN_GOMP_LOOP_DYNAMIC_START,
+  BUILT_IN_GOMP_LOOP_GUIDED_START,
+  BUILT_IN_GOMP_LOOP_RUNTIME_START,
+  BUILT_IN_GOMP_LOOP_ORDERED_STATIC_START,
+  BUILT_IN_GOMP_LOOP_ORDERED_DYNAMIC_START,
+  BUILT_IN_GOMP_LOOP_ORDERED_GUIDED_START,
+  BUILT_IN_GOMP_LOOP_ORDERED_RUNTIME_START,
+  BUILT_IN_GOMP_LOOP_STATIC_NEXT,
+  BUILT_IN_GOMP_LOOP_DYNAMIC_NEXT,
+  BUILT_IN_GOMP_LOOP_GUIDED_NEXT,
+  BUILT_IN_GOMP_LOOP_RUNTIME_NEXT,
+  BUILT_IN_GOMP_LOOP_ORDERED_STATIC_NEXT,
+  BUILT_IN_GOMP_LOOP_ORDERED_DYNAMIC_NEXT,
+  BUILT_IN_GOMP_LOOP_ORDERED_GUIDED_NEXT,
+  BUILT_IN_GOMP_LOOP_ORDERED_RUNTIME_NEXT,
+  BUILT_IN_GOMP_LOOP_ULL_STATIC_START,
+  BUILT_IN_GOMP_LOOP_ULL_DYNAMIC_START,
+  BUILT_IN_GOMP_LOOP_ULL_GUIDED_START,
+  BUILT_IN_GOMP_LOOP_ULL_RUNTIME_START,
+  BUILT_IN_GOMP_LOOP_ULL_ORDERED_STATIC_START,
+  BUILT_IN_GOMP_LOOP_ULL_ORDERED_DYNAMIC_START,
+  BUILT_IN_GOMP_LOOP_ULL_ORDERED_GUIDED_START,
+  BUILT_IN_GOMP_LOOP_ULL_ORDERED_RUNTIME_START,
+  BUILT_IN_GOMP_LOOP_ULL_STATIC_NEXT,
+  BUILT_IN_GOMP_LOOP_ULL_DYNAMIC_NEXT,
+  BUILT_IN_GOMP_LOOP_ULL_GUIDED_NEXT,
+  BUILT_IN_GOMP_LOOP_ULL_RUNTIME_NEXT,
+  BUILT_IN_GOMP_LOOP_ULL_ORDERED_STATIC_NEXT,
+  BUILT_IN_GOMP_LOOP_ULL_ORDERED_DYNAMIC_NEXT,
+  BUILT_IN_GOMP_LOOP_ULL_ORDERED_GUIDED_NEXT,
+  BUILT_IN_GOMP_LOOP_ULL_ORDERED_RUNTIME_NEXT,
+  BUILT_IN_GOMP_PARALLEL_LOOP_STATIC,
+  BUILT_IN_GOMP_PARALLEL_LOOP_DYNAMIC,
+  BUILT_IN_GOMP_PARALLEL_LOOP_GUIDED,
+  BUILT_IN_GOMP_PARALLEL_LOOP_RUNTIME,
+  BUILT_IN_GOMP_LOOP_END,
+  BUILT_IN_GOMP_LOOP_END_CANCEL,
+  BUILT_IN_GOMP_LOOP_END_NOWAIT,
+  BUILT_IN_GOMP_ORDERED_START,
+  BUILT_IN_GOMP_ORDERED_END,
+  BUILT_IN_GOMP_PARALLEL,
+  BUILT_IN_GOMP_TASK,
+  BUILT_IN_GOMP_SECTIONS_START,
+  BUILT_IN_GOMP_SECTIONS_NEXT,
+  BUILT_IN_GOMP_PARALLEL_SECTIONS,
+  BUILT_IN_GOMP_SECTIONS_END,
+  BUILT_IN_GOMP_SECTIONS_END_CANCEL,
+  BUILT_IN_GOMP_SECTIONS_END_NOWAIT,
+  BUILT_IN_GOMP_SINGLE_START,
+  BUILT_IN_GOMP_SINGLE_COPY_START,
+  BUILT_IN_GOMP_SINGLE_COPY_END,
+  BUILT_IN_GOMP_TARGET,
+  BUILT_IN_GOMP_TARGET_DATA,
+  BUILT_IN_GOMP_TARGET_END_DATA,
+  BUILT_IN_GOMP_TARGET_UPDATE,
+  BUILT_IN_GOMP_TEAMS,
 ////# 861 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/builtins.def" 2
-
-
 ////# 1 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/cilk-builtins.def" 1
 ////# 24 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/cilk-builtins.def"
-BUILT_IN_CILK_ENTER_FRAME,
-BUILT_IN_CILK_ENTER_FRAME_FAST,
-
-BUILT_IN_CILK_DETACH,
-BUILT_IN_CILK_RETHROW,
-BUILT_IN_CILK_SYNCHED,
-BUILT_IN_CILK_SYNC,
-BUILT_IN_CILK_LEAVE_FRAME,
-BUILT_IN_CILK_POP_FRAME,
-BUILT_IN_CILK_SAVE_FP,
+  BUILT_IN_CILK_ENTER_FRAME,
+  BUILT_IN_CILK_ENTER_FRAME_FAST,
+  BUILT_IN_CILK_DETACH,
+  BUILT_IN_CILK_RETHROW,
+  BUILT_IN_CILK_SYNCHED,
+  BUILT_IN_CILK_SYNC,
+  BUILT_IN_CILK_LEAVE_FRAME,
+  BUILT_IN_CILK_POP_FRAME,
+  BUILT_IN_CILK_SAVE_FP,
 ////# 864 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/builtins.def" 2
-
-
 ////# 1 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/gtm-builtins.def" 1
-BUILT_IN_TM_START,
-
-
-BUILT_IN_TM_COMMIT,
-
-BUILT_IN_TM_COMMIT_EH,
-
-BUILT_IN_TM_ABORT,
-
-BUILT_IN_TM_IRREVOCABLE,
-
-
-BUILT_IN_TM_MEMCPY,
-
-BUILT_IN_TM_MEMMOVE,
-
-BUILT_IN_TM_MEMSET,
-
-
-BUILT_IN_TM_GETTMCLONE_IRR,
-
-BUILT_IN_TM_GETTMCLONE_SAFE,
-
-
-
-BUILT_IN_TM_MALLOC,
-
-BUILT_IN_TM_CALLOC,
-
-BUILT_IN_TM_FREE,
-
-
-
-BUILT_IN_TM_LOG_1,
-
-BUILT_IN_TM_LOG_2,
-
-BUILT_IN_TM_LOG_4,
-
-BUILT_IN_TM_LOG_8,
-
-BUILT_IN_TM_LOG_FLOAT,
-
-BUILT_IN_TM_LOG_DOUBLE,
-
-BUILT_IN_TM_LOG_LDOUBLE,
-
-BUILT_IN_TM_LOG,
-
-
-
-BUILT_IN_TM_LOG_M64,
-BUILT_IN_TM_LOG_M128,
-BUILT_IN_TM_LOG_M256,
+  BUILT_IN_TM_START,
+  BUILT_IN_TM_COMMIT,
+  BUILT_IN_TM_COMMIT_EH,
+  BUILT_IN_TM_ABORT,
+  BUILT_IN_TM_IRREVOCABLE,
+  BUILT_IN_TM_MEMCPY,
+  BUILT_IN_TM_MEMMOVE,
+  BUILT_IN_TM_MEMSET,
+  BUILT_IN_TM_GETTMCLONE_IRR,
+  BUILT_IN_TM_GETTMCLONE_SAFE,
+  BUILT_IN_TM_MALLOC,
+  BUILT_IN_TM_CALLOC,
+  BUILT_IN_TM_FREE,
+  BUILT_IN_TM_LOG_1,
+  BUILT_IN_TM_LOG_2,
+  BUILT_IN_TM_LOG_4,
+  BUILT_IN_TM_LOG_8,
+  BUILT_IN_TM_LOG_FLOAT,
+  BUILT_IN_TM_LOG_DOUBLE,
+  BUILT_IN_TM_LOG_LDOUBLE,
+  BUILT_IN_TM_LOG,
+  BUILT_IN_TM_LOG_M64,
+  BUILT_IN_TM_LOG_M128,
+  BUILT_IN_TM_LOG_M256,
 ////# 63 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/gtm-builtins.def"
-BUILT_IN_TM_STORE_1,
-
-BUILT_IN_TM_STORE_WAR_1,
-
-BUILT_IN_TM_STORE_WAW_1,
-
-
-BUILT_IN_TM_STORE_2,
-
-BUILT_IN_TM_STORE_WAR_2,
-
-BUILT_IN_TM_STORE_WAW_2,
-
-
-BUILT_IN_TM_STORE_4,
-
-BUILT_IN_TM_STORE_WAR_4,
-
-BUILT_IN_TM_STORE_WAW_4,
-
-
-BUILT_IN_TM_STORE_8,
-
-BUILT_IN_TM_STORE_WAR_8,
-
-BUILT_IN_TM_STORE_WAW_8,
-
-
-BUILT_IN_TM_STORE_FLOAT,
-
-BUILT_IN_TM_STORE_WAR_FLOAT,
-
-BUILT_IN_TM_STORE_WAW_FLOAT,
-
-
-BUILT_IN_TM_STORE_DOUBLE,
-
-BUILT_IN_TM_STORE_WAR_DOUBLE,
-
-BUILT_IN_TM_STORE_WAW_DOUBLE,
-
-
-
-BUILT_IN_TM_STORE_M64,
-BUILT_IN_TM_STORE_WAR_M64,
-BUILT_IN_TM_STORE_WAW_M64,
-BUILT_IN_TM_STORE_M128,
-BUILT_IN_TM_STORE_WAR_M128,
-BUILT_IN_TM_STORE_WAW_M128,
-BUILT_IN_TM_STORE_M256,
-BUILT_IN_TM_STORE_WAR_M256,
-BUILT_IN_TM_STORE_WAW_M256,
-
-BUILT_IN_TM_STORE_LDOUBLE,
-
-BUILT_IN_TM_STORE_WAR_LDOUBLE,
-
-BUILT_IN_TM_STORE_WAW_LDOUBLE,
+  BUILT_IN_TM_STORE_1,
+  BUILT_IN_TM_STORE_WAR_1,
+  BUILT_IN_TM_STORE_WAW_1,
+  BUILT_IN_TM_STORE_2,
+  BUILT_IN_TM_STORE_WAR_2,
+  BUILT_IN_TM_STORE_WAW_2,
+  BUILT_IN_TM_STORE_4,
+  BUILT_IN_TM_STORE_WAR_4,
+  BUILT_IN_TM_STORE_WAW_4,
+  BUILT_IN_TM_STORE_8,
+  BUILT_IN_TM_STORE_WAR_8,
+  BUILT_IN_TM_STORE_WAW_8,
+  BUILT_IN_TM_STORE_FLOAT,
+  BUILT_IN_TM_STORE_WAR_FLOAT,
+  BUILT_IN_TM_STORE_WAW_FLOAT,
+  BUILT_IN_TM_STORE_DOUBLE,
+  BUILT_IN_TM_STORE_WAR_DOUBLE,
+  BUILT_IN_TM_STORE_WAW_DOUBLE,
+  BUILT_IN_TM_STORE_M64,
+  BUILT_IN_TM_STORE_WAR_M64,
+  BUILT_IN_TM_STORE_WAW_M64,
+  BUILT_IN_TM_STORE_M128,
+  BUILT_IN_TM_STORE_WAR_M128,
+  BUILT_IN_TM_STORE_WAW_M128,
+  BUILT_IN_TM_STORE_M256,
+  BUILT_IN_TM_STORE_WAR_M256,
+  BUILT_IN_TM_STORE_WAW_M256,
+  BUILT_IN_TM_STORE_LDOUBLE,
+  BUILT_IN_TM_STORE_WAR_LDOUBLE,
+  BUILT_IN_TM_STORE_WAW_LDOUBLE,
 ////# 129 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/gtm-builtins.def"
-BUILT_IN_TM_LOAD_1,
-
-BUILT_IN_TM_LOAD_RAR_1,
-
-BUILT_IN_TM_LOAD_RAW_1,
-
-BUILT_IN_TM_LOAD_RFW_1,
-
-
-BUILT_IN_TM_LOAD_2,
-
-BUILT_IN_TM_LOAD_RAR_2,
-
-BUILT_IN_TM_LOAD_RAW_2,
-
-BUILT_IN_TM_LOAD_RFW_2,
-
-
-BUILT_IN_TM_LOAD_4,
-
-BUILT_IN_TM_LOAD_RAR_4,
-
-BUILT_IN_TM_LOAD_RAW_4,
-
-BUILT_IN_TM_LOAD_RFW_4,
-
-
-BUILT_IN_TM_LOAD_8,
-
-BUILT_IN_TM_LOAD_RAR_8,
-
-BUILT_IN_TM_LOAD_RAW_8,
-
-BUILT_IN_TM_LOAD_RFW_8,
-
-
-BUILT_IN_TM_LOAD_FLOAT,
-
-BUILT_IN_TM_LOAD_RAR_FLOAT,
-
-BUILT_IN_TM_LOAD_RAW_FLOAT,
-
-BUILT_IN_TM_LOAD_RFW_FLOAT,
-
-
-BUILT_IN_TM_LOAD_DOUBLE,
-
-BUILT_IN_TM_LOAD_RAR_DOUBLE,
-
-BUILT_IN_TM_LOAD_RAW_DOUBLE,
-
-BUILT_IN_TM_LOAD_RFW_DOUBLE,
-
-
-
-BUILT_IN_TM_LOAD_M64,
-BUILT_IN_TM_LOAD_RAR_M64,
-BUILT_IN_TM_LOAD_RAW_M64,
-BUILT_IN_TM_LOAD_RFW_M64,
-BUILT_IN_TM_LOAD_M128,
-BUILT_IN_TM_LOAD_RAR_M128,
-BUILT_IN_TM_LOAD_RAW_M128,
-BUILT_IN_TM_LOAD_RFW_M128,
-BUILT_IN_TM_LOAD_M256,
-BUILT_IN_TM_LOAD_RAR_M256,
-BUILT_IN_TM_LOAD_RAW_M256,
-BUILT_IN_TM_LOAD_RFW_M256,
-
-BUILT_IN_TM_LOAD_LDOUBLE,
-
-BUILT_IN_TM_LOAD_RAR_LDOUBLE,
-
-BUILT_IN_TM_LOAD_RAW_LDOUBLE,
-
-BUILT_IN_TM_LOAD_RFW_LDOUBLE,
+  BUILT_IN_TM_LOAD_1,
+  BUILT_IN_TM_LOAD_RAR_1,
+  BUILT_IN_TM_LOAD_RAW_1,
+  BUILT_IN_TM_LOAD_RFW_1,
+  BUILT_IN_TM_LOAD_2,
+  BUILT_IN_TM_LOAD_RAR_2,
+  BUILT_IN_TM_LOAD_RAW_2,
+  BUILT_IN_TM_LOAD_RFW_2,
+  BUILT_IN_TM_LOAD_4,
+  BUILT_IN_TM_LOAD_RAR_4,
+  BUILT_IN_TM_LOAD_RAW_4,
+  BUILT_IN_TM_LOAD_RFW_4,
+  BUILT_IN_TM_LOAD_8,
+  BUILT_IN_TM_LOAD_RAR_8,
+  BUILT_IN_TM_LOAD_RAW_8,
+  BUILT_IN_TM_LOAD_RFW_8,
+  BUILT_IN_TM_LOAD_FLOAT,
+  BUILT_IN_TM_LOAD_RAR_FLOAT,
+  BUILT_IN_TM_LOAD_RAW_FLOAT,
+  BUILT_IN_TM_LOAD_RFW_FLOAT,
+  BUILT_IN_TM_LOAD_DOUBLE,
+  BUILT_IN_TM_LOAD_RAR_DOUBLE,
+  BUILT_IN_TM_LOAD_RAW_DOUBLE,
+  BUILT_IN_TM_LOAD_RFW_DOUBLE,
+  BUILT_IN_TM_LOAD_M64,
+  BUILT_IN_TM_LOAD_RAR_M64,
+  BUILT_IN_TM_LOAD_RAW_M64,
+  BUILT_IN_TM_LOAD_RFW_M64,
+  BUILT_IN_TM_LOAD_M128,
+  BUILT_IN_TM_LOAD_RAR_M128,
+  BUILT_IN_TM_LOAD_RAW_M128,
+  BUILT_IN_TM_LOAD_RFW_M128,
+  BUILT_IN_TM_LOAD_M256,
+  BUILT_IN_TM_LOAD_RAR_M256,
+  BUILT_IN_TM_LOAD_RAW_M256,
+  BUILT_IN_TM_LOAD_RFW_M256,
+  BUILT_IN_TM_LOAD_LDOUBLE,
+  BUILT_IN_TM_LOAD_RAR_LDOUBLE,
+  BUILT_IN_TM_LOAD_RAW_LDOUBLE,
+  BUILT_IN_TM_LOAD_RFW_LDOUBLE,
 ////# 867 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/builtins.def" 2
-
-
 ////# 1 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/sanitizer.def" 1
 ////# 30 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/sanitizer.def"
-BUILT_IN_ASAN_INIT,
-
-
-
-BUILT_IN_ASAN_REPORT_LOAD1,
-
-BUILT_IN_ASAN_REPORT_LOAD2,
-
-BUILT_IN_ASAN_REPORT_LOAD4,
-
-BUILT_IN_ASAN_REPORT_LOAD8,
-
-BUILT_IN_ASAN_REPORT_LOAD16,
-
-BUILT_IN_ASAN_REPORT_LOAD_N,
-
-
-BUILT_IN_ASAN_REPORT_STORE1,
-
-BUILT_IN_ASAN_REPORT_STORE2,
-
-BUILT_IN_ASAN_REPORT_STORE4,
-
-BUILT_IN_ASAN_REPORT_STORE8,
-
-BUILT_IN_ASAN_REPORT_STORE16,
-
-BUILT_IN_ASAN_REPORT_STORE_N,
-
-
-BUILT_IN_ASAN_LOAD1,
-
-BUILT_IN_ASAN_LOAD2,
-
-BUILT_IN_ASAN_LOAD4,
-
-BUILT_IN_ASAN_LOAD8,
-
-BUILT_IN_ASAN_LOAD16,
-
-BUILT_IN_ASAN_LOADN,
-
-BUILT_IN_ASAN_STORE1,
-
-BUILT_IN_ASAN_STORE2,
-
-BUILT_IN_ASAN_STORE4,
-
-BUILT_IN_ASAN_STORE8,
-
-BUILT_IN_ASAN_STORE16,
-
-BUILT_IN_ASAN_STOREN,
-
-BUILT_IN_ASAN_REGISTER_GLOBALS,
-
-
-BUILT_IN_ASAN_UNREGISTER_GLOBALS,
-
-
-BUILT_IN_ASAN_HANDLE_NO_RETURN,
-
-
-BUILT_IN_ASAN_BEFORE_DYNAMIC_INIT,
-
-
-BUILT_IN_ASAN_AFTER_DYNAMIC_INIT,
-
-
-
-
-BUILT_IN_TSAN_INIT,
-
-BUILT_IN_TSAN_FUNC_ENTRY,
-
-BUILT_IN_TSAN_FUNC_EXIT,
-
-BUILT_IN_TSAN_VPTR_UPDATE,
-
-BUILT_IN_TSAN_READ1,
-
-BUILT_IN_TSAN_READ2,
-
-BUILT_IN_TSAN_READ4,
-
-BUILT_IN_TSAN_READ8,
-
-BUILT_IN_TSAN_READ16,
-
-BUILT_IN_TSAN_WRITE1,
-
-BUILT_IN_TSAN_WRITE2,
-
-BUILT_IN_TSAN_WRITE4,
-
-BUILT_IN_TSAN_WRITE8,
-
-BUILT_IN_TSAN_WRITE16,
-
-
-BUILT_IN_TSAN_ATOMIC8_LOAD,
-
-
-BUILT_IN_TSAN_ATOMIC16_LOAD,
-
-
-BUILT_IN_TSAN_ATOMIC32_LOAD,
-
-
-BUILT_IN_TSAN_ATOMIC64_LOAD,
-
-
-BUILT_IN_TSAN_ATOMIC128_LOAD,
-
-
-
-BUILT_IN_TSAN_ATOMIC8_STORE,
-
-
-BUILT_IN_TSAN_ATOMIC16_STORE,
-
-
-BUILT_IN_TSAN_ATOMIC32_STORE,
-
-
-BUILT_IN_TSAN_ATOMIC64_STORE,
-
-
-BUILT_IN_TSAN_ATOMIC128_STORE,
-
-
-
-BUILT_IN_TSAN_ATOMIC8_EXCHANGE,
-
-
-BUILT_IN_TSAN_ATOMIC16_EXCHANGE,
-
-
-BUILT_IN_TSAN_ATOMIC32_EXCHANGE,
-
-
-BUILT_IN_TSAN_ATOMIC64_EXCHANGE,
-
-
-BUILT_IN_TSAN_ATOMIC128_EXCHANGE,
-
-
-
-BUILT_IN_TSAN_ATOMIC8_FETCH_ADD,
-
-
-BUILT_IN_TSAN_ATOMIC16_FETCH_ADD,
-
-
-BUILT_IN_TSAN_ATOMIC32_FETCH_ADD,
-
-
-BUILT_IN_TSAN_ATOMIC64_FETCH_ADD,
-
-
-BUILT_IN_TSAN_ATOMIC128_FETCH_ADD,
-
-
-
-BUILT_IN_TSAN_ATOMIC8_FETCH_SUB,
-
-
-BUILT_IN_TSAN_ATOMIC16_FETCH_SUB,
-
-
-BUILT_IN_TSAN_ATOMIC32_FETCH_SUB,
-
-
-BUILT_IN_TSAN_ATOMIC64_FETCH_SUB,
-
-
-BUILT_IN_TSAN_ATOMIC128_FETCH_SUB,
-
-
-
-BUILT_IN_TSAN_ATOMIC8_FETCH_AND,
-
-
-BUILT_IN_TSAN_ATOMIC16_FETCH_AND,
-
-
-BUILT_IN_TSAN_ATOMIC32_FETCH_AND,
-
-
-BUILT_IN_TSAN_ATOMIC64_FETCH_AND,
-
-
-BUILT_IN_TSAN_ATOMIC128_FETCH_AND,
-
-
-
-BUILT_IN_TSAN_ATOMIC8_FETCH_OR,
-
-
-BUILT_IN_TSAN_ATOMIC16_FETCH_OR,
-
-
-BUILT_IN_TSAN_ATOMIC32_FETCH_OR,
-
-
-BUILT_IN_TSAN_ATOMIC64_FETCH_OR,
-
-
-BUILT_IN_TSAN_ATOMIC128_FETCH_OR,
-
-
-
-BUILT_IN_TSAN_ATOMIC8_FETCH_XOR,
-
-
-BUILT_IN_TSAN_ATOMIC16_FETCH_XOR,
-
-
-BUILT_IN_TSAN_ATOMIC32_FETCH_XOR,
-
-
-BUILT_IN_TSAN_ATOMIC64_FETCH_XOR,
-
-
-BUILT_IN_TSAN_ATOMIC128_FETCH_XOR,
-
-
-
-BUILT_IN_TSAN_ATOMIC8_FETCH_NAND,
-
-
-BUILT_IN_TSAN_ATOMIC16_FETCH_NAND,
-
-
-BUILT_IN_TSAN_ATOMIC32_FETCH_NAND,
-
-
-BUILT_IN_TSAN_ATOMIC64_FETCH_NAND,
-
-
-BUILT_IN_TSAN_ATOMIC128_FETCH_NAND,
-
-
-
-BUILT_IN_TSAN_ATOMIC8_COMPARE_EXCHANGE_STRONG,
-
-
-
-BUILT_IN_TSAN_ATOMIC16_COMPARE_EXCHANGE_STRONG,
-
-
-
-BUILT_IN_TSAN_ATOMIC32_COMPARE_EXCHANGE_STRONG,
-
-
-
-BUILT_IN_TSAN_ATOMIC64_COMPARE_EXCHANGE_STRONG,
-
-
-
-BUILT_IN_TSAN_ATOMIC128_COMPARE_EXCHANGE_STRONG,
-
-
-
-
-BUILT_IN_TSAN_ATOMIC8_COMPARE_EXCHANGE_WEAK,
-
-
-
-BUILT_IN_TSAN_ATOMIC16_COMPARE_EXCHANGE_WEAK,
-
-
-
-BUILT_IN_TSAN_ATOMIC32_COMPARE_EXCHANGE_WEAK,
-
-
-
-BUILT_IN_TSAN_ATOMIC64_COMPARE_EXCHANGE_WEAK,
-
-
-
-BUILT_IN_TSAN_ATOMIC128_COMPARE_EXCHANGE_WEAK,
-
-
-
-
-BUILT_IN_TSAN_ATOMIC_THREAD_FENCE,
-
-
-BUILT_IN_TSAN_ATOMIC_SIGNAL_FENCE,
-
-
-
-
-BUILT_IN_UBSAN_HANDLE_DIVREM_OVERFLOW,
-
-
-
-BUILT_IN_UBSAN_HANDLE_SHIFT_OUT_OF_BOUNDS,
-
-
-
-BUILT_IN_UBSAN_HANDLE_BUILTIN_UNREACHABLE,
-
-
-
-BUILT_IN_UBSAN_HANDLE_MISSING_RETURN,
-
-
-
-BUILT_IN_UBSAN_HANDLE_VLA_BOUND_NOT_POSITIVE,
-
-
-
-BUILT_IN_UBSAN_HANDLE_TYPE_MISMATCH,
-
-
-
-BUILT_IN_UBSAN_HANDLE_ADD_OVERFLOW,
-
-
-
-BUILT_IN_UBSAN_HANDLE_SUB_OVERFLOW,
-
-
-
-BUILT_IN_UBSAN_HANDLE_MUL_OVERFLOW,
-
-
-
-BUILT_IN_UBSAN_HANDLE_NEGATE_OVERFLOW,
-
-
-
-BUILT_IN_UBSAN_HANDLE_LOAD_INVALID_VALUE,
+  BUILT_IN_ASAN_INIT,
+  BUILT_IN_ASAN_REPORT_LOAD1,
+  BUILT_IN_ASAN_REPORT_LOAD2,
+  BUILT_IN_ASAN_REPORT_LOAD4,
+  BUILT_IN_ASAN_REPORT_LOAD8,
+  BUILT_IN_ASAN_REPORT_LOAD16,
+  BUILT_IN_ASAN_REPORT_LOAD_N,
+  BUILT_IN_ASAN_REPORT_STORE1,
+  BUILT_IN_ASAN_REPORT_STORE2,
+  BUILT_IN_ASAN_REPORT_STORE4,
+  BUILT_IN_ASAN_REPORT_STORE8,
+  BUILT_IN_ASAN_REPORT_STORE16,
+  BUILT_IN_ASAN_REPORT_STORE_N,
+  BUILT_IN_ASAN_LOAD1,
+  BUILT_IN_ASAN_LOAD2,
+  BUILT_IN_ASAN_LOAD4,
+  BUILT_IN_ASAN_LOAD8,
+  BUILT_IN_ASAN_LOAD16,
+  BUILT_IN_ASAN_LOADN,
+  BUILT_IN_ASAN_STORE1,
+  BUILT_IN_ASAN_STORE2,
+  BUILT_IN_ASAN_STORE4,
+  BUILT_IN_ASAN_STORE8,
+  BUILT_IN_ASAN_STORE16,
+  BUILT_IN_ASAN_STOREN,
+  BUILT_IN_ASAN_REGISTER_GLOBALS,
+  BUILT_IN_ASAN_UNREGISTER_GLOBALS,
+  BUILT_IN_ASAN_HANDLE_NO_RETURN,
+  BUILT_IN_ASAN_BEFORE_DYNAMIC_INIT,
+  BUILT_IN_ASAN_AFTER_DYNAMIC_INIT,
+  BUILT_IN_TSAN_INIT,
+  BUILT_IN_TSAN_FUNC_ENTRY,
+  BUILT_IN_TSAN_FUNC_EXIT,
+  BUILT_IN_TSAN_VPTR_UPDATE,
+  BUILT_IN_TSAN_READ1,
+  BUILT_IN_TSAN_READ2,
+  BUILT_IN_TSAN_READ4,
+  BUILT_IN_TSAN_READ8,
+  BUILT_IN_TSAN_READ16,
+  BUILT_IN_TSAN_WRITE1,
+  BUILT_IN_TSAN_WRITE2,
+  BUILT_IN_TSAN_WRITE4,
+  BUILT_IN_TSAN_WRITE8,
+  BUILT_IN_TSAN_WRITE16,
+  BUILT_IN_TSAN_ATOMIC8_LOAD,
+  BUILT_IN_TSAN_ATOMIC16_LOAD,
+  BUILT_IN_TSAN_ATOMIC32_LOAD,
+  BUILT_IN_TSAN_ATOMIC64_LOAD,
+  BUILT_IN_TSAN_ATOMIC128_LOAD,
+  BUILT_IN_TSAN_ATOMIC8_STORE,
+  BUILT_IN_TSAN_ATOMIC16_STORE,
+  BUILT_IN_TSAN_ATOMIC32_STORE,
+  BUILT_IN_TSAN_ATOMIC64_STORE,
+  BUILT_IN_TSAN_ATOMIC128_STORE,
+  BUILT_IN_TSAN_ATOMIC8_EXCHANGE,
+  BUILT_IN_TSAN_ATOMIC16_EXCHANGE,
+  BUILT_IN_TSAN_ATOMIC32_EXCHANGE,
+  BUILT_IN_TSAN_ATOMIC64_EXCHANGE,
+  BUILT_IN_TSAN_ATOMIC128_EXCHANGE,
+  BUILT_IN_TSAN_ATOMIC8_FETCH_ADD,
+  BUILT_IN_TSAN_ATOMIC16_FETCH_ADD,
+  BUILT_IN_TSAN_ATOMIC32_FETCH_ADD,
+  BUILT_IN_TSAN_ATOMIC64_FETCH_ADD,
+  BUILT_IN_TSAN_ATOMIC128_FETCH_ADD,
+  BUILT_IN_TSAN_ATOMIC8_FETCH_SUB,
+  BUILT_IN_TSAN_ATOMIC16_FETCH_SUB,
+  BUILT_IN_TSAN_ATOMIC32_FETCH_SUB,
+  BUILT_IN_TSAN_ATOMIC64_FETCH_SUB,
+  BUILT_IN_TSAN_ATOMIC128_FETCH_SUB,
+  BUILT_IN_TSAN_ATOMIC8_FETCH_AND,
+  BUILT_IN_TSAN_ATOMIC16_FETCH_AND,
+  BUILT_IN_TSAN_ATOMIC32_FETCH_AND,
+  BUILT_IN_TSAN_ATOMIC64_FETCH_AND,
+  BUILT_IN_TSAN_ATOMIC128_FETCH_AND,
+  BUILT_IN_TSAN_ATOMIC8_FETCH_OR,
+  BUILT_IN_TSAN_ATOMIC16_FETCH_OR,
+  BUILT_IN_TSAN_ATOMIC32_FETCH_OR,
+  BUILT_IN_TSAN_ATOMIC64_FETCH_OR,
+  BUILT_IN_TSAN_ATOMIC128_FETCH_OR,
+  BUILT_IN_TSAN_ATOMIC8_FETCH_XOR,
+  BUILT_IN_TSAN_ATOMIC16_FETCH_XOR,
+  BUILT_IN_TSAN_ATOMIC32_FETCH_XOR,
+  BUILT_IN_TSAN_ATOMIC64_FETCH_XOR,
+  BUILT_IN_TSAN_ATOMIC128_FETCH_XOR,
+  BUILT_IN_TSAN_ATOMIC8_FETCH_NAND,
+  BUILT_IN_TSAN_ATOMIC16_FETCH_NAND,
+  BUILT_IN_TSAN_ATOMIC32_FETCH_NAND,
+  BUILT_IN_TSAN_ATOMIC64_FETCH_NAND,
+  BUILT_IN_TSAN_ATOMIC128_FETCH_NAND,
+  BUILT_IN_TSAN_ATOMIC8_COMPARE_EXCHANGE_STRONG,
+  BUILT_IN_TSAN_ATOMIC16_COMPARE_EXCHANGE_STRONG,
+  BUILT_IN_TSAN_ATOMIC32_COMPARE_EXCHANGE_STRONG,
+  BUILT_IN_TSAN_ATOMIC64_COMPARE_EXCHANGE_STRONG,
+  BUILT_IN_TSAN_ATOMIC128_COMPARE_EXCHANGE_STRONG,
+  BUILT_IN_TSAN_ATOMIC8_COMPARE_EXCHANGE_WEAK,
+  BUILT_IN_TSAN_ATOMIC16_COMPARE_EXCHANGE_WEAK,
+  BUILT_IN_TSAN_ATOMIC32_COMPARE_EXCHANGE_WEAK,
+  BUILT_IN_TSAN_ATOMIC64_COMPARE_EXCHANGE_WEAK,
+  BUILT_IN_TSAN_ATOMIC128_COMPARE_EXCHANGE_WEAK,
+  BUILT_IN_TSAN_ATOMIC_THREAD_FENCE,
+  BUILT_IN_TSAN_ATOMIC_SIGNAL_FENCE,
+  BUILT_IN_UBSAN_HANDLE_DIVREM_OVERFLOW,
+  BUILT_IN_UBSAN_HANDLE_SHIFT_OUT_OF_BOUNDS,
+  BUILT_IN_UBSAN_HANDLE_BUILTIN_UNREACHABLE,
+  BUILT_IN_UBSAN_HANDLE_MISSING_RETURN,
+  BUILT_IN_UBSAN_HANDLE_VLA_BOUND_NOT_POSITIVE,
+  BUILT_IN_UBSAN_HANDLE_TYPE_MISMATCH,
+  BUILT_IN_UBSAN_HANDLE_ADD_OVERFLOW,
+  BUILT_IN_UBSAN_HANDLE_SUB_OVERFLOW,
+  BUILT_IN_UBSAN_HANDLE_MUL_OVERFLOW,
+  BUILT_IN_UBSAN_HANDLE_NEGATE_OVERFLOW,
+  BUILT_IN_UBSAN_HANDLE_LOAD_INVALID_VALUE,
 ////# 870 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/builtins.def" 2
-
-
 ////# 1 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/cilkplus.def" 1
 ////# 27 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/cilkplus.def"
-BUILT_IN_CILKPLUS_SEC_REDUCE_ADD,
-
-BUILT_IN_CILKPLUS_SEC_REDUCE_MUL,
-
-BUILT_IN_CILKPLUS_SEC_REDUCE_ALL_ZERO,
-
-BUILT_IN_CILKPLUS_SEC_REDUCE_ANY_ZERO,
-
-BUILT_IN_CILKPLUS_SEC_REDUCE_MAX,
-
-BUILT_IN_CILKPLUS_SEC_REDUCE_MIN,
-
-BUILT_IN_CILKPLUS_SEC_REDUCE_MIN_IND,
-
-BUILT_IN_CILKPLUS_SEC_REDUCE_MAX_IND,
-
-BUILT_IN_CILKPLUS_SEC_REDUCE_ANY_NONZERO,
-
-BUILT_IN_CILKPLUS_SEC_REDUCE_ALL_NONZERO,
-
-BUILT_IN_CILKPLUS_SEC_REDUCE,
-
-BUILT_IN_CILKPLUS_SEC_REDUCE_MUTATING,
-
-
-BUILT_IN_CILKPLUS_SEC_IMPLICIT_INDEX,
+  BUILT_IN_CILKPLUS_SEC_REDUCE_ADD,
+  BUILT_IN_CILKPLUS_SEC_REDUCE_MUL,
+  BUILT_IN_CILKPLUS_SEC_REDUCE_ALL_ZERO,
+  BUILT_IN_CILKPLUS_SEC_REDUCE_ANY_ZERO,
+  BUILT_IN_CILKPLUS_SEC_REDUCE_MAX,
+  BUILT_IN_CILKPLUS_SEC_REDUCE_MIN,
+  BUILT_IN_CILKPLUS_SEC_REDUCE_MIN_IND,
+  BUILT_IN_CILKPLUS_SEC_REDUCE_MAX_IND,
+  BUILT_IN_CILKPLUS_SEC_REDUCE_ANY_NONZERO,
+  BUILT_IN_CILKPLUS_SEC_REDUCE_ALL_NONZERO,
+  BUILT_IN_CILKPLUS_SEC_REDUCE,
+  BUILT_IN_CILKPLUS_SEC_REDUCE_MUTATING,
+  BUILT_IN_CILKPLUS_SEC_IMPLICIT_INDEX,
 ////# 872 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/builtins.def" 2
 ////# 170 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree-core.h" 2
-
-
-
   BUILT_IN_COMPLEX_MUL_MIN,
   BUILT_IN_COMPLEX_MUL_MAX
     = BUILT_IN_COMPLEX_MUL_MIN
-      + MAX_MODE_COMPLEX_FLOAT
-      - MIN_MODE_COMPLEX_FLOAT,
-
+    + MAX_MODE_COMPLEX_FLOAT - MIN_MODE_COMPLEX_FLOAT,
   BUILT_IN_COMPLEX_DIV_MIN,
   BUILT_IN_COMPLEX_DIV_MAX
     = BUILT_IN_COMPLEX_DIV_MIN
-      + MAX_MODE_COMPLEX_FLOAT
-      - MIN_MODE_COMPLEX_FLOAT,
-
-
+    + MAX_MODE_COMPLEX_FLOAT - MIN_MODE_COMPLEX_FLOAT,
   END_BUILTINS
 };
-
-
-
-
-enum tree_code_class {
+enum tree_code_class
+{
   tcc_exceptional,
   tcc_constant,
-
   tcc_type,
   tcc_declaration,
   tcc_reference,
@@ -2739,141 +1780,55 @@ enum tree_code_class {
   tcc_unary,
   tcc_binary,
   tcc_statement,
-
   tcc_vl_exp,
-
   tcc_expression
 };
-
-
-
-enum omp_clause_code {
-
-
+enum omp_clause_code
+{
   OMP_CLAUSE_ERROR = 0,
-
-
   OMP_CLAUSE_PRIVATE,
-
-
   OMP_CLAUSE_SHARED,
-
-
   OMP_CLAUSE_FIRSTPRIVATE,
-
-
   OMP_CLAUSE_LASTPRIVATE,
 ////# 235 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree-core.h"
   OMP_CLAUSE_REDUCTION,
-
-
   OMP_CLAUSE_COPYIN,
-
-
   OMP_CLAUSE_COPYPRIVATE,
-
-
   OMP_CLAUSE_LINEAR,
-
-
   OMP_CLAUSE_ALIGNED,
-
-
   OMP_CLAUSE_DEPEND,
-
-
   OMP_CLAUSE_UNIFORM,
-
-
   OMP_CLAUSE_FROM,
-
-
   OMP_CLAUSE_TO,
-
-
   OMP_CLAUSE_MAP,
-
-
   OMP_CLAUSE__LOOPTEMP_,
-
-
   OMP_CLAUSE_IF,
-
-
   OMP_CLAUSE_NUM_THREADS,
-
-
   OMP_CLAUSE_SCHEDULE,
-
-
   OMP_CLAUSE_NOWAIT,
-
-
   OMP_CLAUSE_ORDERED,
-
-
   OMP_CLAUSE_DEFAULT,
-
-
   OMP_CLAUSE_COLLAPSE,
-
-
   OMP_CLAUSE_UNTIED,
-
-
   OMP_CLAUSE_FINAL,
-
-
   OMP_CLAUSE_MERGEABLE,
-
-
   OMP_CLAUSE_DEVICE,
-
-
   OMP_CLAUSE_DIST_SCHEDULE,
-
-
   OMP_CLAUSE_INBRANCH,
-
-
   OMP_CLAUSE_NOTINBRANCH,
-
-
   OMP_CLAUSE_NUM_TEAMS,
-
-
   OMP_CLAUSE_THREAD_LIMIT,
-
-
   OMP_CLAUSE_PROC_BIND,
-
-
   OMP_CLAUSE_SAFELEN,
-
-
   OMP_CLAUSE_SIMDLEN,
-
-
   OMP_CLAUSE_FOR,
-
-
   OMP_CLAUSE_PARALLEL,
-
-
   OMP_CLAUSE_SECTIONS,
-
-
   OMP_CLAUSE_TASKGROUP,
-
-
   OMP_CLAUSE__SIMDUID_
 };
-
-
-
-
-
-enum omp_clause_schedule_kind {
+enum omp_clause_schedule_kind
+{
   OMP_CLAUSE_SCHEDULE_STATIC,
   OMP_CLAUSE_SCHEDULE_DYNAMIC,
   OMP_CLAUSE_SCHEDULE_GUIDED,
@@ -2881,8 +1836,8 @@ enum omp_clause_schedule_kind {
   OMP_CLAUSE_SCHEDULE_RUNTIME,
   OMP_CLAUSE_SCHEDULE_LAST
 };
-
-enum omp_clause_default_kind {
+enum omp_clause_default_kind
+{
   OMP_CLAUSE_DEFAULT_UNSPECIFIED,
   OMP_CLAUSE_DEFAULT_SHARED,
   OMP_CLAUSE_DEFAULT_NONE,
@@ -2890,11 +1845,8 @@ enum omp_clause_default_kind {
   OMP_CLAUSE_DEFAULT_FIRSTPRIVATE,
   OMP_CLAUSE_DEFAULT_LAST
 };
-
-
-
-
-enum cv_qualifier {
+enum cv_qualifier
+{
   TYPE_UNQUALIFIED = 0x0,
   TYPE_QUAL_CONST = 0x1,
   TYPE_QUAL_VOLATILE = 0x2,
@@ -2902,64 +1854,53 @@ enum cv_qualifier {
   TYPE_QUAL_ATOMIC = 0x8
 };
 ////# 389 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree-core.h"
-enum tree_index {
+enum tree_index
+{
   TI_ERROR_MARK,
   TI_INTQI_TYPE,
   TI_INTHI_TYPE,
   TI_INTSI_TYPE,
   TI_INTDI_TYPE,
   TI_INTTI_TYPE,
-
   TI_UINTQI_TYPE,
   TI_UINTHI_TYPE,
   TI_UINTSI_TYPE,
   TI_UINTDI_TYPE,
   TI_UINTTI_TYPE,
-
   TI_ATOMICQI_TYPE,
   TI_ATOMICHI_TYPE,
   TI_ATOMICSI_TYPE,
   TI_ATOMICDI_TYPE,
   TI_ATOMICTI_TYPE,
-
   TI_UINT16_TYPE,
   TI_UINT32_TYPE,
   TI_UINT64_TYPE,
-
   TI_INTEGER_ZERO,
   TI_INTEGER_ONE,
   TI_INTEGER_THREE,
   TI_INTEGER_MINUS_ONE,
   TI_NULL_POINTER,
-
   TI_SIZE_ZERO,
   TI_SIZE_ONE,
-
   TI_BITSIZE_ZERO,
   TI_BITSIZE_ONE,
   TI_BITSIZE_UNIT,
-
   TI_PUBLIC,
   TI_PROTECTED,
   TI_PRIVATE,
-
   TI_BOOLEAN_FALSE,
   TI_BOOLEAN_TRUE,
-
   TI_COMPLEX_INTEGER_TYPE,
   TI_COMPLEX_FLOAT_TYPE,
   TI_COMPLEX_DOUBLE_TYPE,
   TI_COMPLEX_LONG_DOUBLE_TYPE,
-
   TI_FLOAT_TYPE,
   TI_DOUBLE_TYPE,
   TI_LONG_DOUBLE_TYPE,
-
   TI_FLOAT_PTR_TYPE,
   TI_DOUBLE_PTR_TYPE,
   TI_LONG_DOUBLE_PTR_TYPE,
   TI_INTEGER_PTR_TYPE,
-
   TI_VOID_TYPE,
   TI_PTR_TYPE,
   TI_CONST_PTR_TYPE,
@@ -2972,18 +1913,14 @@ enum tree_index {
   TI_BOOLEAN_TYPE,
   TI_FILEPTR_TYPE,
   TI_POINTER_SIZED_TYPE,
-
   TI_DFLOAT32_TYPE,
   TI_DFLOAT64_TYPE,
   TI_DFLOAT128_TYPE,
   TI_DFLOAT32_PTR_TYPE,
   TI_DFLOAT64_PTR_TYPE,
   TI_DFLOAT128_PTR_TYPE,
-
   TI_VOID_LIST_NODE,
-
   TI_MAIN_IDENTIFIER,
-
   TI_SAT_SFRACT_TYPE,
   TI_SAT_FRACT_TYPE,
   TI_SAT_LFRACT_TYPE,
@@ -3052,22 +1989,16 @@ enum tree_index {
   TI_SAT_USA_TYPE,
   TI_SAT_UDA_TYPE,
   TI_SAT_UTA_TYPE,
-
   TI_OPTIMIZATION_DEFAULT,
   TI_OPTIMIZATION_CURRENT,
   TI_TARGET_OPTION_DEFAULT,
   TI_TARGET_OPTION_CURRENT,
   TI_CURRENT_TARGET_PRAGMA,
   TI_CURRENT_OPTIMIZE_PRAGMA,
-
   TI_MAX
 };
-
-
-
-
-
-enum integer_type_kind {
+enum integer_type_kind
+{
   itk_char,
   itk_signed_char,
   itk_unsigned_char,
@@ -3084,55 +2015,36 @@ enum integer_type_kind {
   itk_none
 };
 ////# 591 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree-core.h"
-enum ptrmemfunc_vbit_where_t {
+enum ptrmemfunc_vbit_where_t
+{
   ptrmemfunc_vbit_in_pfn,
   ptrmemfunc_vbit_in_delta
 };
-
-
-
-enum attribute_flags {
-
-
-
+enum attribute_flags
+{
   ATTR_FLAG_DECL_NEXT = 1,
-
-
-
   ATTR_FLAG_FUNCTION_NEXT = 2,
-
-
-
   ATTR_FLAG_ARRAY_NEXT = 4,
-
-
   ATTR_FLAG_TYPE_IN_PLACE = 8,
-
-
-
   ATTR_FLAG_BUILT_IN = 16,
-
   ATTR_FLAG_CXX11 = 32
 };
-
-
-enum size_type_kind {
+enum size_type_kind
+{
   stk_sizetype,
   stk_ssizetype,
   stk_bitsizetype,
   stk_sbitsizetype,
   stk_type_kind_last
 };
-
-enum operand_equal_flag {
+enum operand_equal_flag
+{
   OEP_ONLY_CONST = 1,
   OEP_PURE_SAME = 2,
   OEP_CONSTANT_ADDRESS_OF = 4
 };
-
-
-
-enum tree_node_kind {
+enum tree_node_kind
+{
   d_kind,
   t_kind,
   b_kind,
@@ -3151,166 +2063,110 @@ enum tree_node_kind {
   omp_clause_kind,
   all_kinds
 };
-
-enum annot_expr_kind {
+enum annot_expr_kind
+{
   annot_expr_ivdep_kind
 };
 ////# 670 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree-core.h"
-struct alias_pair {
+struct alias_pair
+{
   tree decl;
   tree target;
 };
-
-
 typedef unsigned short priority_type;
-
-
 typedef tree (*walk_tree_fn) (tree *, int *, void *);
-
-
-typedef tree (*walk_tree_lh) (tree *, int *, tree (*) (tree *, int *, void *),
-         void *, struct pointer_set_t*);
+typedef tree (*walk_tree_lh) (tree *, int *, tree (*)(tree *, int *, void *),
+			      void *, struct pointer_set_t *);
 ////# 710 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree-core.h"
-struct tree_base {
-  enum tree_code code : 16;
-
-  unsigned side_effects_flag : 1;
-  unsigned constant_flag : 1;
-  unsigned addressable_flag : 1;
-  unsigned volatile_flag : 1;
-  unsigned readonly_flag : 1;
-  unsigned asm_written_flag: 1;
-  unsigned nowarning_flag : 1;
-  unsigned visited : 1;
-
-  unsigned used_flag : 1;
-  unsigned nothrow_flag : 1;
-  unsigned static_flag : 1;
-  unsigned public_flag : 1;
-  unsigned private_flag : 1;
-  unsigned protected_flag : 1;
-  unsigned deprecated_flag : 1;
-  unsigned default_def_flag : 1;
-
-  union {
-
-
-    struct {
-      unsigned lang_flag_0 : 1;
-      unsigned lang_flag_1 : 1;
-      unsigned lang_flag_2 : 1;
-      unsigned lang_flag_3 : 1;
-      unsigned lang_flag_4 : 1;
-      unsigned lang_flag_5 : 1;
-      unsigned lang_flag_6 : 1;
-      unsigned saturating_flag : 1;
-
-      unsigned unsigned_flag : 1;
-      unsigned packed_flag : 1;
-      unsigned user_align : 1;
-      unsigned nameless_flag : 1;
-      unsigned atomic_flag : 1;
-      unsigned spare0 : 3;
-
-      unsigned spare1 : 8;
-
-
-
-
-      unsigned address_space : 8;
+struct tree_base
+{
+  enum tree_code code:16;
+  unsigned side_effects_flag:1;
+  unsigned constant_flag:1;
+  unsigned addressable_flag:1;
+  unsigned volatile_flag:1;
+  unsigned readonly_flag:1;
+  unsigned asm_written_flag:1;
+  unsigned nowarning_flag:1;
+  unsigned visited:1;
+  unsigned used_flag:1;
+  unsigned nothrow_flag:1;
+  unsigned static_flag:1;
+  unsigned public_flag:1;
+  unsigned private_flag:1;
+  unsigned protected_flag:1;
+  unsigned deprecated_flag:1;
+  unsigned default_def_flag:1;
+  union tree_base_union
+  {
+    struct tree_base_flags
+    {
+      unsigned lang_flag_0:1;
+      unsigned lang_flag_1:1;
+      unsigned lang_flag_2:1;
+      unsigned lang_flag_3:1;
+      unsigned lang_flag_4:1;
+      unsigned lang_flag_5:1;
+      unsigned lang_flag_6:1;
+      unsigned saturating_flag:1;
+      unsigned unsigned_flag:1;
+      unsigned packed_flag:1;
+      unsigned user_align:1;
+      unsigned nameless_flag:1;
+      unsigned atomic_flag:1;
+      unsigned spare0:3;
+      unsigned spare1:8;
+      unsigned address_space:8;
     } bits;
-
-
-
-
     int length;
-
     unsigned int version;
   } u;
 };
 ////# 1039 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree-core.h"
-struct tree_typed {
+struct tree_typed
+{
   struct tree_base base;
   tree type;
 };
-
-struct tree_common {
+struct tree_common
+{
   struct tree_typed typed;
   tree chain;
 };
-
 struct double_int
 {
-
-
-
-
-
-
-
   static double_int from_uhwi (unsigned long cst);
   static double_int from_shwi (long cst);
   static double_int from_pair (long high, unsigned long low);
-
-
-
   static double_int from_buffer (const unsigned char *buffer, int len);
-
-
-
-
-
   static double_int mask (unsigned prec);
   static double_int max_value (unsigned int prec, bool uns);
   static double_int min_value (unsigned int prec, bool uns);
-
-
-
-  double_int &operator ++ ();
-  double_int &operator -- ();
-  double_int &operator *= (double_int);
-  double_int &operator += (double_int);
-  double_int &operator -= (double_int);
-  double_int &operator &= (double_int);
-  double_int &operator ^= (double_int);
-  double_int &operator |= (double_int);
-
-
-
-
-
+    double_int & operator ++ ();
+    double_int & operator -- ();
+    double_int & operator *= (double_int);
+    double_int & operator += (double_int);
+    double_int & operator -= (double_int);
+    double_int & operator &= (double_int);
+    double_int & operator ^= (double_int);
+    double_int & operator |= (double_int);
   long to_shwi () const;
   unsigned long to_uhwi () const;
-
-
-
   bool fits_uhwi () const;
   bool fits_shwi () const;
   bool fits_hwi (bool uns) const;
-
-
-
   int trailing_zeros () const;
   int popcount () const;
-
-
-
   bool multiple_of (double_int, bool, double_int *) const;
-
-
-
-
-
-
-
   double_int set_bit (unsigned) const;
-  double_int mul_with_sign (double_int, bool unsigned_p, bool *overflow) const;
+  double_int mul_with_sign (double_int, bool unsigned_p,
+			    bool * overflow) const;
   double_int wide_mul_with_sign (double_int, bool unsigned_p,
-     double_int *higher, bool *overflow) const;
-  double_int add_with_sign (double_int, bool unsigned_p, bool *overflow) const;
-  double_int sub_with_overflow (double_int, bool *overflow) const;
-  double_int neg_with_overflow (bool *overflow) const;
-
+				 double_int * higher, bool * overflow) const;
+  double_int add_with_sign (double_int, bool unsigned_p,
+			    bool * overflow) const;
+  double_int sub_with_overflow (double_int, bool * overflow) const;
+  double_int neg_with_overflow (bool * overflow) const;
   double_int operator * (double_int) const;
   double_int operator + (double_int) const;
   double_int operator - (double_int) const;
@@ -3320,7 +2176,6 @@ struct double_int
   double_int operator | (double_int) const;
   double_int operator ^ (double_int) const;
   double_int and_not (double_int) const;
-
   double_int lshift (long count) const;
   double_int lshift (long count, unsigned int prec, bool arith) const;
   double_int rshift (long count) const;
@@ -3331,11 +2186,6 @@ struct double_int
   double_int lrshift (long count, unsigned int prec) const;
   double_int lrotate (long count, unsigned int prec) const;
   double_int rrotate (long count, unsigned int prec) const;
-
-
-
-
-
   double_int div (double_int, bool, unsigned) const;
   double_int sdiv (double_int, unsigned) const;
   double_int udiv (double_int, unsigned) const;
@@ -3343,117 +2193,95 @@ struct double_int
   double_int smod (double_int, unsigned) const;
   double_int umod (double_int, unsigned) const;
   double_int divmod_with_overflow (double_int, bool, unsigned,
-       double_int *, bool *) const;
+				   double_int *, bool *) const;
   double_int divmod (double_int, bool, unsigned, double_int *) const;
   double_int sdivmod (double_int, unsigned, double_int *) const;
   double_int udivmod (double_int, unsigned, double_int *) const;
-
-
-
   double_int ext (unsigned prec, bool uns) const;
   double_int zext (unsigned prec) const;
   double_int sext (unsigned prec) const;
-
-
-
   bool is_zero () const;
   bool is_one () const;
   bool is_minus_one () const;
   bool is_negative () const;
-
   int cmp (double_int b, bool uns) const;
   int ucmp (double_int b) const;
   int scmp (double_int b) const;
-
   bool ult (double_int b) const;
   bool ule (double_int b) const;
   bool ugt (double_int b) const;
   bool slt (double_int b) const;
   bool sle (double_int b) const;
   bool sgt (double_int b) const;
-
   double_int max (double_int b, bool uns);
   double_int smax (double_int b);
   double_int umax (double_int b);
-
   double_int min (double_int b, bool uns);
   double_int smin (double_int b);
   double_int umin (double_int b);
-
   bool operator == (double_int cst2) const;
   bool operator != (double_int cst2) const;
-
-
-
   unsigned long low;
   long high;
-
 };
-
-struct tree_int_cst {
+struct tree_int_cst
+{
   struct tree_typed typed;
   double_int int_cst;
 };
-
-
-struct tree_real_cst {
+struct tree_real_cst
+{
   struct tree_typed typed;
-  struct real_value * real_cst_ptr;
+  struct real_value *real_cst_ptr;
 };
-
-struct tree_fixed_cst {
+struct tree_fixed_cst
+{
   struct tree_typed typed;
-  struct fixed_value * fixed_cst_ptr;
+  struct fixed_value *fixed_cst_ptr;
 };
-
-struct tree_string {
+struct tree_string
+{
   struct tree_typed typed;
   int length;
   char str[1];
 };
-
-struct tree_complex {
+struct tree_complex
+{
   struct tree_typed typed;
   tree real;
   tree imag;
 };
-
-struct tree_vector {
+struct tree_vector
+{
   struct tree_typed typed;
   tree elts[1];
 };
-
-struct tree_identifier {
+struct tree_identifier
+{
   struct tree_common common;
   struct ht_identifier id;
 };
-
-struct tree_list {
+struct tree_list
+{
   struct tree_common common;
   tree purpose;
   tree value;
 };
-
-struct tree_vec {
+struct tree_vec
+{
   struct tree_common common;
   tree a[1];
 };
-
-
-
-
-
-struct constructor_elt {
+struct constructor_elt
+{
   tree index;
   tree value;
 };
-
-
-struct tree_constructor {
+struct tree_constructor
+{
   struct tree_typed typed;
-  vec<constructor_elt, va_gc> *elts;
+    vec < constructor_elt, va_gc > *elts;
 };
-
 enum omp_clause_depend_kind
 {
   OMP_CLAUSE_DEPEND_IN,
@@ -3461,28 +2289,18 @@ enum omp_clause_depend_kind
   OMP_CLAUSE_DEPEND_INOUT,
   OMP_CLAUSE_DEPEND_LAST
 };
-
 enum omp_clause_map_kind
 {
   OMP_CLAUSE_MAP_ALLOC,
   OMP_CLAUSE_MAP_TO,
   OMP_CLAUSE_MAP_FROM,
   OMP_CLAUSE_MAP_TOFROM,
-
-
-
   OMP_CLAUSE_MAP_POINTER,
-
-
-
-
   OMP_CLAUSE_MAP_TO_PSET,
   OMP_CLAUSE_MAP_LAST
 };
-
 enum omp_clause_proc_bind_kind
 {
-
   OMP_CLAUSE_PROC_BIND_FALSE = 0,
   OMP_CLAUSE_PROC_BIND_TRUE = 1,
   OMP_CLAUSE_PROC_BIND_MASTER = 2,
@@ -3492,9 +2310,7 @@ enum omp_clause_proc_bind_kind
 };
 typedef unsigned int linenum_type;
 typedef unsigned int source_location;
-
 typedef source_location location_t;
-
 enum lc_reason
 {
   LC_ENTER = 0,
@@ -3502,69 +2318,53 @@ enum lc_reason
   LC_RENAME,
   LC_RENAME_VERBATIM,
   LC_ENTER_MACRO
-
 };
-
-
-struct tree_exp {
+struct tree_exp
+{
   struct tree_typed typed;
   location_t locus;
-  tree
-
-    operands[1];
+  tree operands[1];
 };
-
-
-
 struct gimple_statement_base;
-
 typedef struct gimple_statement_base *gimple;
-
-struct ssa_use_operand_t {
-  struct ssa_use_operand_t* prev;
-  struct ssa_use_operand_t* next;
-
-  union { gimple stmt; tree ssa_name; } loc;
-  tree * use;
+struct ssa_use_operand_t
+{
+  struct ssa_use_operand_t *prev;
+  struct ssa_use_operand_t *next;
+  union
+  {
+    gimple stmt;
+    tree ssa_name;
+  } loc;
+  tree *use;
 };
-
-struct tree_ssa_name {
+struct tree_ssa_name
+{
   struct tree_typed typed;
-
-
   tree var;
-
-
   gimple def_stmt;
-
-
-  union ssa_name_info_type {
-
+  union ssa_name_info_type
+  {
     struct ptr_info_def *ptr_info;
-
     struct range_info_def *range_info;
   }
-                                                   info;
-
-
+  info;
   struct ssa_use_operand_t imm_uses;
 };
-
-struct phi_arg_d {
-
-
+struct phi_arg_d
+{
   struct ssa_use_operand_t imm_use;
   tree def;
   location_t locus;
 };
-
 typedef gimple gimple_seq;
-
-struct tree_omp_clause {
+struct tree_omp_clause
+{
   struct tree_common common;
   location_t locus;
   enum omp_clause_code code;
-  union omp_clause_subcode {
+  union omp_clause_subcode
+  {
     enum omp_clause_default_kind default_kind;
     enum omp_clause_schedule_kind schedule_kind;
     enum omp_clause_depend_kind depend_kind;
@@ -3572,28 +2372,19 @@ struct tree_omp_clause {
     enum omp_clause_proc_bind_kind proc_bind_kind;
     enum tree_code reduction_code;
   } subcode;
-
-
-
   gimple_seq gimple_reduction_init;
   gimple_seq gimple_reduction_merge;
-
-  tree
-    ops[1];
+  tree ops[1];
 };
-
-struct tree_block {
+struct tree_block
+{
   struct tree_base base;
   tree chain;
-
-  unsigned abstract_flag : 1;
-  unsigned block_num : 31;
-
+  unsigned abstract_flag:1;
+  unsigned block_num:31;
   location_t locus;
-
   tree vars;
-  vec<tree, va_gc> *nonlocalized_vars;
-
+    vec < tree, va_gc > *nonlocalized_vars;
   tree subblocks;
   tree supercontext;
   tree abstract_origin;
@@ -3601,40 +2392,37 @@ struct tree_block {
   tree fragment_chain;
 };
 typedef int alias_set_type;
-
-struct tree_type_common {
+struct tree_type_common
+{
   struct tree_common common;
   tree size;
   tree size_unit;
   tree attributes;
   unsigned int uid;
-
-  unsigned int precision : 10;
-  unsigned no_force_blk_flag : 1;
-  unsigned needs_constructing_flag : 1;
-  unsigned transparent_aggr_flag : 1;
-  unsigned restrict_flag : 1;
-  unsigned contains_placeholder_bits : 2;
-
-  enum machine_mode mode : 8;
-
-  unsigned string_flag : 1;
-  unsigned lang_flag_0 : 1;
-  unsigned lang_flag_1 : 1;
-  unsigned lang_flag_2 : 1;
-  unsigned lang_flag_3 : 1;
-  unsigned lang_flag_4 : 1;
-  unsigned lang_flag_5 : 1;
-  unsigned lang_flag_6 : 1;
-
+  unsigned int precision:10;
+  unsigned no_force_blk_flag:1;
+  unsigned needs_constructing_flag:1;
+  unsigned transparent_aggr_flag:1;
+  unsigned restrict_flag:1;
+  unsigned contains_placeholder_bits:2;
+  enum machine_mode mode:8;
+  unsigned string_flag:1;
+  unsigned lang_flag_0:1;
+  unsigned lang_flag_1:1;
+  unsigned lang_flag_2:1;
+  unsigned lang_flag_3:1;
+  unsigned lang_flag_4:1;
+  unsigned lang_flag_5:1;
+  unsigned lang_flag_6:1;
   unsigned int align;
   alias_set_type alias_set;
   tree pointer_to;
   tree reference_to;
-  union tree_type_symtab {
+  union tree_type_symtab
+  {
     int address;
-    const char * pointer;
-    struct die_struct * die;
+    const char *pointer;
+    struct die_struct *die;
   } symtab;
   tree canonical;
   tree next_variant;
@@ -3642,149 +2430,114 @@ struct tree_type_common {
   tree context;
   tree name;
 };
-
-struct tree_type_with_lang_specific {
+struct tree_type_with_lang_specific
+{
   struct tree_type_common common;
-
   struct lang_type *lang_specific;
 };
-
-struct tree_type_non_common {
+struct tree_type_non_common
+{
   struct tree_type_with_lang_specific with_lang_specific;
   tree values;
   tree minval;
   tree maxval;
   tree binfo;
 };
-
-struct tree_binfo {
+struct tree_binfo
+{
   struct tree_common common;
-
   tree offset;
   tree vtable;
   tree virtuals;
   tree vptr_field;
-  vec<tree, va_gc> *base_accesses;
+    vec < tree, va_gc > *base_accesses;
   tree inheritance;
-
   tree vtt_subvtt;
   tree vtt_vptr;
-
-  vec<tree, va_gc> base_binfos;
+    vec < tree, va_gc > base_binfos;
 };
-
-struct tree_decl_minimal {
+struct tree_decl_minimal
+{
   struct tree_common common;
   location_t locus;
   unsigned int uid;
   tree name;
   tree context;
 };
-
-struct tree_decl_common {
+struct tree_decl_common
+{
   struct tree_decl_minimal common;
   tree size;
-
-  enum machine_mode mode : 8;
-
-  unsigned nonlocal_flag : 1;
-  unsigned virtual_flag : 1;
-  unsigned ignored_flag : 1;
-  unsigned abstract_flag : 1;
-  unsigned artificial_flag : 1;
-  unsigned preserve_flag: 1;
-  unsigned debug_expr_is_from : 1;
-
-  unsigned lang_flag_0 : 1;
-  unsigned lang_flag_1 : 1;
-  unsigned lang_flag_2 : 1;
-  unsigned lang_flag_3 : 1;
-  unsigned lang_flag_4 : 1;
-  unsigned lang_flag_5 : 1;
-  unsigned lang_flag_6 : 1;
-  unsigned lang_flag_7 : 1;
-  unsigned lang_flag_8 : 1;
-
-
-  unsigned decl_flag_0 : 1;
-
-
-
-  unsigned decl_flag_1 : 1;
-
-
-
-  unsigned decl_flag_2 : 1;
-
-  unsigned decl_flag_3 : 1;
-
-
-  unsigned gimple_reg_flag : 1;
-
-  unsigned decl_by_reference_flag : 1;
-
-  unsigned decl_read_flag : 1;
-
-  unsigned decl_nonshareable_flag : 1;
-
-
-  unsigned int off_align : 8;
-
-
-
-
+  enum machine_mode mode:8;
+  unsigned nonlocal_flag:1;
+  unsigned virtual_flag:1;
+  unsigned ignored_flag:1;
+  unsigned abstract_flag:1;
+  unsigned artificial_flag:1;
+  unsigned preserve_flag:1;
+  unsigned debug_expr_is_from:1;
+  unsigned lang_flag_0:1;
+  unsigned lang_flag_1:1;
+  unsigned lang_flag_2:1;
+  unsigned lang_flag_3:1;
+  unsigned lang_flag_4:1;
+  unsigned lang_flag_5:1;
+  unsigned lang_flag_6:1;
+  unsigned lang_flag_7:1;
+  unsigned lang_flag_8:1;
+  unsigned decl_flag_0:1;
+  unsigned decl_flag_1:1;
+  unsigned decl_flag_2:1;
+  unsigned decl_flag_3:1;
+  unsigned gimple_reg_flag:1;
+  unsigned decl_by_reference_flag:1;
+  unsigned decl_read_flag:1;
+  unsigned decl_nonshareable_flag:1;
+  unsigned int off_align:8;
   unsigned int align;
-
-
   unsigned int pt_uid;
-
   tree size_unit;
   tree initial;
   tree attributes;
   tree abstract_origin;
-
-
   struct lang_decl *lang_specific;
 };
-
 struct rtx_def;
 typedef struct rtx_def *rtx;
 typedef const struct rtx_def *const_rtx;
-
-struct tree_decl_with_rtl {
+struct tree_decl_with_rtl
+{
   struct tree_decl_common common;
   rtx rtl;
 };
-
-struct tree_field_decl {
+struct tree_field_decl
+{
   struct tree_decl_common common;
-
   tree offset;
   tree bit_field_type;
   tree qualifier;
   tree bit_offset;
   tree fcontext;
 };
-
-struct tree_label_decl {
+struct tree_label_decl
+{
   struct tree_decl_with_rtl common;
   int label_decl_uid;
   int eh_landing_pad_nr;
 };
-
-struct tree_result_decl {
+struct tree_result_decl
+{
   struct tree_decl_with_rtl common;
 };
-
-struct tree_const_decl {
+struct tree_const_decl
+{
   struct tree_decl_common common;
 };
-
-struct tree_parm_decl {
+struct tree_parm_decl
+{
   struct tree_decl_with_rtl common;
   rtx incoming_rtl;
 };
-
 enum symbol_visibility
 {
   VISIBILITY_DEFAULT,
@@ -3792,8 +2545,8 @@ enum symbol_visibility
   VISIBILITY_HIDDEN,
   VISIBILITY_INTERNAL
 };
-
-enum tls_model {
+enum tls_model
+{
   TLS_MODEL_NONE,
   TLS_MODEL_EMULATED,
   TLS_MODEL_REAL,
@@ -3802,151 +2555,113 @@ enum tls_model {
   TLS_MODEL_INITIAL_EXEC,
   TLS_MODEL_LOCAL_EXEC
 };
-
-struct tree_decl_with_vis {
- struct tree_decl_with_rtl common;
- tree assembler_name;
- tree section_name;
- tree comdat_group;
- unsigned defer_output : 1;
- unsigned hard_register : 1;
- unsigned common_flag : 1;
- unsigned in_text_section : 1;
- unsigned in_constant_pool : 1;
- unsigned dllimport_flag : 1;
- unsigned weak_flag : 1;
- unsigned implicit_section_name_p : 1;
- unsigned seen_in_bind_expr : 1;
- unsigned comdat_flag : 1;
- enum symbol_visibility visibility : 2;
- unsigned visibility_specified : 1;
- enum tls_model tls_model : 3;
- unsigned init_priority_p : 1;
- unsigned shadowed_for_var_p : 1;
- unsigned cxx_constructor : 1;
- unsigned cxx_destructor : 1;
- unsigned final : 1;
+struct tree_decl_with_vis
+{
+  struct tree_decl_with_rtl common;
+  tree assembler_name;
+  tree section_name;
+  tree comdat_group;
+  unsigned defer_output:1;
+  unsigned hard_register:1;
+  unsigned common_flag:1;
+  unsigned in_text_section:1;
+  unsigned in_constant_pool:1;
+  unsigned dllimport_flag:1;
+  unsigned weak_flag:1;
+  unsigned implicit_section_name_p:1;
+  unsigned seen_in_bind_expr:1;
+  unsigned comdat_flag:1;
+  enum symbol_visibility visibility:2;
+  unsigned visibility_specified:1;
+  enum tls_model tls_model:3;
+  unsigned init_priority_p:1;
+  unsigned shadowed_for_var_p:1;
+  unsigned cxx_constructor:1;
+  unsigned cxx_destructor:1;
+  unsigned final:1;
 };
-
-struct tree_var_decl {
+struct tree_var_decl
+{
   struct tree_decl_with_vis common;
 };
-
-struct tree_decl_non_common {
+struct tree_decl_non_common
+{
   struct tree_decl_with_vis common;
-
   tree saved_tree;
-
   tree arguments;
-
   tree result;
-
   tree vindex;
 };
-
-
-
-
-
-
-struct tree_function_decl {
+struct tree_function_decl
+{
   struct tree_decl_non_common common;
-
   struct function *f;
-
-
   tree personality;
-
-
   tree function_specific_target;
   tree function_specific_optimization;
-
-
-
-
-
-  enum built_in_function function_code : 11;
-  enum built_in_class built_in_class : 2;
-
-  unsigned static_ctor_flag : 1;
-  unsigned static_dtor_flag : 1;
-  unsigned uninlinable : 1;
-
-  unsigned possibly_inlined : 1;
-  unsigned novops_flag : 1;
-  unsigned returns_twice_flag : 1;
-  unsigned malloc_flag : 1;
-  unsigned operator_new_flag : 1;
-  unsigned declared_inline_flag : 1;
-  unsigned regdecl_flag : 1;
-  unsigned no_inline_warning_flag : 1;
-
-  unsigned no_instrument_function_entry_exit : 1;
-  unsigned no_limit_stack : 1;
-  unsigned disregard_inline_limits : 1;
-  unsigned pure_flag : 1;
-  unsigned looping_const_or_pure_flag : 1;
-  unsigned has_debug_args_flag : 1;
-  unsigned tm_clone_flag : 1;
-  unsigned versioned_function : 1;
-
+  enum built_in_function function_code:11;
+  enum built_in_class built_in_class:2;
+  unsigned static_ctor_flag:1;
+  unsigned static_dtor_flag:1;
+  unsigned uninlinable:1;
+  unsigned possibly_inlined:1;
+  unsigned novops_flag:1;
+  unsigned returns_twice_flag:1;
+  unsigned malloc_flag:1;
+  unsigned operator_new_flag:1;
+  unsigned declared_inline_flag:1;
+  unsigned regdecl_flag:1;
+  unsigned no_inline_warning_flag:1;
+  unsigned no_instrument_function_entry_exit:1;
+  unsigned no_limit_stack:1;
+  unsigned disregard_inline_limits:1;
+  unsigned pure_flag:1;
+  unsigned looping_const_or_pure_flag:1;
+  unsigned has_debug_args_flag:1;
+  unsigned tm_clone_flag:1;
+  unsigned versioned_function:1;
 };
-
-struct tree_translation_unit_decl {
+struct tree_translation_unit_decl
+{
   struct tree_decl_common common;
-
-  const char * language;
-
-
+  const char *language;
 };
-
-struct tree_type_decl {
+struct tree_type_decl
+{
   struct tree_decl_non_common common;
-
 };
-
 struct tree_statement_list_node
- {
+{
   struct tree_statement_list_node *prev;
   struct tree_statement_list_node *next;
   tree stmt;
 };
-
 struct tree_statement_list
- {
+{
   struct tree_typed typed;
   struct tree_statement_list_node *head;
   struct tree_statement_list_node *tail;
 };
-
-
-
-enum fp_contract_mode {
+enum fp_contract_mode
+{
   FP_CONTRACT_OFF = 0,
   FP_CONTRACT_ON = 1,
   FP_CONTRACT_FAST = 2
 };
-
-
-enum vect_cost_model {
+enum vect_cost_model
+{
   VECT_COST_MODEL_UNLIMITED = 0,
   VECT_COST_MODEL_CHEAP = 1,
   VECT_COST_MODEL_DYNAMIC = 2,
   VECT_COST_MODEL_DEFAULT = 3
 };
-
-
-
-enum sanitize_code {
-
+enum sanitize_code
+{
   SANITIZE_ADDRESS = 1 << 0,
   SANITIZE_USER_ADDRESS = 1 << 1,
   SANITIZE_KERNEL_ADDRESS = 1 << 2,
-
   SANITIZE_THREAD = 1 << 3,
-
   SANITIZE_LEAK = 1 << 4,
-
   SANITIZE_SHIFT = 1 << 5,
   SANITIZE_DIVIDE = 1 << 6,
   SANITIZE_UNREACHABLE = 1 << 7,
@@ -3957,83 +2672,53 @@ enum sanitize_code {
   SANITIZE_BOOL = 1 << 12,
   SANITIZE_ENUM = 1 << 13,
   SANITIZE_UNDEFINED = SANITIZE_SHIFT | SANITIZE_DIVIDE | SANITIZE_UNREACHABLE
-         | SANITIZE_VLA | SANITIZE_NULL | SANITIZE_RETURN
-         | SANITIZE_SI_OVERFLOW | SANITIZE_BOOL | SANITIZE_ENUM
+    | SANITIZE_VLA | SANITIZE_NULL | SANITIZE_RETURN
+    | SANITIZE_SI_OVERFLOW | SANITIZE_BOOL | SANITIZE_ENUM
 };
-
-
-enum vtv_priority {
+enum vtv_priority
+{
   VTV_NO_PRIORITY = 0,
   VTV_STANDARD_PRIORITY = 1,
   VTV_PREINIT_PRIORITY = 2
 };
 //# 24 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/flags.h" 2
 //# 1 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/options.h" 1
-
-
-
-
-
-
-
 //# 1 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/config/i386/i386-opts.h" 1
 //# 29 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/config/i386/i386-opts.h"
 enum stringop_alg
 {
-
-
-
-
-
-
 //# 1 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/config/i386/stringop.def" 1
 //# 20 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/config/i386/stringop.def"
-
-no_stringop,
-
-libcall,
-
-rep_prefix_1_byte,
-
-rep_prefix_4_byte,
-
-rep_prefix_8_byte,
-
-loop_1_byte,
-
-loop,
-
-unrolled_loop,
-
-vector_loop,
+  no_stringop,
+  libcall,
+  rep_prefix_1_byte,
+  rep_prefix_4_byte,
+  rep_prefix_8_byte,
+  loop_1_byte,
+  loop,
+  unrolled_loop,
+  vector_loop,
 //# 38 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/config/i386/i386-opts.h" 2
-last_alg
-
-
-
+  last_alg
 };
-
-
 enum calling_abi
 {
   SYSV_ABI = 0,
   MS_ABI = 1
 };
-
 enum fpmath_unit
 {
   FPMATH_387 = 1,
   FPMATH_SSE = 2
 };
-
 enum tls_dialect
 {
   TLS_DIALECT_GNU,
   TLS_DIALECT_GNU2,
   TLS_DIALECT_SUN
 };
-
-enum cmodel {
+enum cmodel
+{
   CM_32,
   CM_SMALL,
   CM_KERNEL,
@@ -4043,32 +2728,28 @@ enum cmodel {
   CM_MEDIUM_PIC,
   CM_LARGE_PIC
 };
-
-enum pmode {
+enum pmode
+{
   PMODE_SI,
   PMODE_DI
 };
-
-enum asm_dialect {
+enum asm_dialect
+{
   ASM_ATT,
   ASM_INTEL
 };
-
-enum ix86_veclibabi {
+enum ix86_veclibabi
+{
   ix86_veclibabi_type_none,
   ix86_veclibabi_type_svml,
   ix86_veclibabi_type_acml
 };
-
-enum stack_protector_guard {
+enum stack_protector_guard
+{
   SSP_TLS,
   SSP_GLOBAL
 };
 //# 9 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/options.h" 2
-
-
-
-
 struct cl_optimization
 {
   int x_align_functions;
@@ -4261,8 +2942,6 @@ struct cl_optimization
   signed char x_flag_whole_program;
   signed char x_flag_wrapv;
 };
-
-
 struct cl_target_option
 {
   long x_ix86_isa_flags_explicit;
@@ -4303,43 +2982,22 @@ struct cl_target_option
   unsigned char tune;
   unsigned char tune_defaulted;
 };
-
-struct tree_optimization_option {
+struct tree_optimization_option
+{
   struct tree_common common;
-
-
   struct cl_optimization opts;
-
-
-
-  void * optabs;
-
-
-
-  struct target_optabs * base_optabs;
+  void *optabs;
+  struct target_optabs *base_optabs;
 };
-
-
-
 struct target_globals;
-
-
-
-struct tree_target_option {
+struct tree_target_option
+{
   struct tree_common common;
-
-
   struct target_globals *globals;
-
-
   struct cl_target_option opts;
 };
-
-
-
-
-union
-                                                         tree_node {
+union tree_node
+{
   struct tree_base base;
   struct tree_typed typed;
   struct tree_common common;
@@ -4353,8 +3011,7 @@ union
   struct tree_decl_minimal decl_minimal;
   struct tree_decl_common decl_common;
   struct tree_decl_with_rtl decl_with_rtl;
-  struct tree_decl_non_common
-    decl_non_common;
+  struct tree_decl_non_common decl_non_common;
   struct tree_parm_decl parm_decl;
   struct tree_decl_with_vis decl_with_vis;
   struct tree_var_decl var_decl;
@@ -4364,13 +3021,10 @@ union
   struct tree_const_decl const_decl;
   struct tree_type_decl type_decl;
   struct tree_function_decl function_decl;
-  struct tree_translation_unit_decl
-    translation_unit_decl;
+  struct tree_translation_unit_decl translation_unit_decl;
   struct tree_type_common type_common;
-  struct tree_type_with_lang_specific
-    type_with_lang_specific;
-  struct tree_type_non_common
-    type_non_common;
+  struct tree_type_with_lang_specific type_with_lang_specific;
+  struct tree_type_non_common type_non_common;
   struct tree_list list;
   struct tree_vec vec;
   struct tree_exp exp;
@@ -4383,213 +3037,106 @@ union
   struct tree_optimization_option optimization;
   struct tree_target_option target_option;
 };
-
-
-struct attribute_spec {
-
-
+struct attribute_spec
+{
   const char *name;
-
   int min_length;
-
-
   int max_length;
-
-
-
-
-
-
-
   bool decl_required;
-
-
   bool type_required;
-
-
-
-
   bool function_type_required;
 ////# 1673 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree-core.h"
-  tree (*handler) (tree *node, tree name, tree args,
-     int flags, bool *no_add_attrs);
-
+    tree (*handler) (tree * node, tree name, tree args,
+		     int flags, bool * no_add_attrs);
   bool affects_type_identity;
 };
-
-
-
-
-
-
-
-typedef struct record_layout_info_s {
-
+typedef struct record_layout_info_s
+{
   tree t;
-
-
   tree offset;
-
   unsigned int offset_align;
-
   tree bitpos;
-
   unsigned int record_align;
-
-
   unsigned int unpacked_align;
-
   tree prev_field;
-
-
-  vec<tree, va_gc> *pending_statics;
-
+    vec < tree, va_gc > *pending_statics;
   int remaining_in_alignment;
-
-
   int packed_maybe_necessary;
 } *record_layout_info;
-
-
-struct function_args_iterator {
+struct function_args_iterator
+{
   tree next;
 };
-
-
-struct tree_map_base {
+struct tree_map_base
+{
   tree from;
 };
-
-
-
-struct tree_map {
+struct tree_map
+{
   struct tree_map_base base;
   unsigned int hash;
   tree to;
 };
-
-
-struct tree_decl_map {
+struct tree_decl_map
+{
   struct tree_map_base base;
   tree to;
 };
-
-
-struct tree_int_map {
+struct tree_int_map
+{
   struct tree_map_base base;
   unsigned int to;
 };
-
-
-struct tree_priority_map {
+struct tree_priority_map
+{
   struct tree_map_base base;
   priority_type init;
   priority_type fini;
 };
-
-
-struct tree_vec_map {
+struct tree_vec_map
+{
   struct tree_map_base base;
-  vec<tree, va_gc> *to;
+    vec < tree, va_gc > *to;
 };
-
-
-
-
-
-
-struct call_expr_arg_iterator {
+struct call_expr_arg_iterator
+{
   tree t;
   int n;
   int i;
 };
-
-struct const_call_expr_arg_iterator {
+struct const_call_expr_arg_iterator
+{
   const_tree t;
   int n;
   int i;
 };
-
-
-
-
-struct builtin_info_type {
-  tree decl[(int)END_BUILTINS];
-  bool implicit_p[(int)END_BUILTINS];
+struct builtin_info_type
+{
+  tree decl[(int) END_BUILTINS];
+  bool implicit_p[(int) END_BUILTINS];
 };
-
-
-
-
-
-
 extern unsigned char tree_contains_struct[MAX_TREE_CODES][64];
-
-
 extern const enum tree_code_class tree_code_type[];
-
-
-
 extern const char *const tree_code_class_strings[];
-
-
 extern const unsigned char tree_code_length[];
-
 //extern vec<alias_pair, va_gc> *alias_pairs;
-
-
 extern const char *const built_in_class_names[(BUILT_IN_NORMAL + 1)];
-
-
-extern const char * built_in_names[(int) END_BUILTINS];
-
-
+extern const char *built_in_names[(int) END_BUILTINS];
 extern unsigned const char omp_clause_num_ops[];
-extern const char * const omp_clause_code_name[];
-
-
+extern const char *const omp_clause_code_name[];
 //extern vec<tree, va_gc> *all_translation_units;
-
-
 extern tree global_trees[TI_MAX];
-
-
-
 extern tree integer_types[itk_none];
-
-
 extern tree sizetype_tab[(int) stk_type_kind_last];
-
-
 extern int tree_node_counts[];
 extern int tree_node_sizes[];
-
-
-
-
 extern bool in_gimple_form;
-
-
 extern builtin_info_type builtin_info;
-
-
 extern unsigned int maximum_field_alignment;
-
-
-
 extern int pedantic_lvalues;
-
-
 extern tree current_function_decl;
-
-
-extern const char * current_function_func_begin_label;
+extern const char *current_function_func_begin_label;
 ////# 24 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree.h" 2
-
-
-
-
-
 ////# 1 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/fold-const.h" 1
 ////# 25 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/fold-const.h"
 extern int folding_initializer;

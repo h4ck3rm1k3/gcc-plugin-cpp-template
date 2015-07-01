@@ -10,17 +10,17 @@ using namespace std;
 
 void RecordContext::record_begin(const char * pname){
   class_name=pname;
-  cout << "class CLS_" << classcount++ << "_";
+  cout << "void define_class_CLS_" << classcount++ << "_";
 
   if (pname) {
     cout << pname ;
   }  else  {
     cout << "unnamed" ;
   }
-  cout << "{ " << endl;
-  cout << "\t define_generic_class_name (" 
-       << pname << "," 
-       << " \"" <<  pname << "\");"
+  cout << "() { " << endl;
+  cout << "\t define_generic_class_name<" 
+       << pname
+       << ">(\"" <<  pname << "\");"
        << endl;      
 
 }
@@ -40,16 +40,26 @@ void RecordContext::field_begin(Field & fld){
 
   //cerr << "RecordContext::field_begin" << endl;
     
-  if ( fld.bit_field) 
-    cout << "\t define_generic_bitfield (" ;
-  else
+  if ( fld.bit_field)
+    {
+      cout << "\t define_generic_bitfield<" ;
+      cout << class_name ;
+      cout << ">(" ;
+      if (fld.name) {
+        cout << "\""<< fld.name << "\",";
+      }
+    }    
+  else {
     cout << "\t define_generic_field (" ;
-  cout << class_name <<",";
-  if (fld.name) {
-    cout << fld.name  <<",";
-    cout << "\""<< fld.name << "\",";
+    cout << "&" << class_name <<"::";
+    if (fld.name) {
+      cout << fld.name;
+      cout <<",";
+      cout << "\""<< fld.name << "\",";
+    }    
   }
-  cout     << fld.bit_field <<","
+  
+  cout << fld.bit_field <<","
        << fld.offset <<","
        << fld.bit_offset <<","
        << fld.bit_size       

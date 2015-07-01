@@ -44,3 +44,4 @@ a.out
 /.deps/record_context.Plo
 /.libs/record_context.o
 /record_context.lo
+/test_cpp_out.o
