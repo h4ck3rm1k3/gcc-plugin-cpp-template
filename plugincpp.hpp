@@ -161,7 +161,13 @@ void cpp_callbackPLUGIN_FINISH_TYPE (tree t, void *i);
 
 template <class Return> class SwitchCall {
 public:
-  template<class Node>Return call_type(Node a, tree b);
+  /*
+   * Default implementation returns the template parameter Default.
+   */
+  Return call_type_IDENTIFIER_NODE(tree b) { return 0; }
+  Return call_type_TYPE_DECL(tree b) { return 0; }
+  Return call_type_RECORD_TYPE(tree b) { return 0; }
+
 
   template<class Context> Return call(tree t) {
     enum tree_code tc=t->typed.base.code;

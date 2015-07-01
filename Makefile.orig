@@ -30,6 +30,9 @@ test2:
 test3:
 	g++ -fplugin=./.libs/template_plugin.so test.c
 
+test4:
+	g++ -fplugin=./.libs/template_plugin.so test_tree.cpp
+
 clean :
 	rm plugin.so
 	rm *.o
