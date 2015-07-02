@@ -1,4 +1,5 @@
-#include <iostream> 
+#include <iostream>
+#include <vector> 
 union tree_node;
 typedef union tree_node *tree;
 class RecordContext;
@@ -138,3 +139,19 @@ void cpp_callbackPLUGIN_FINISH_TYPE (tree t, void *i);
 //template <class EXPECTED_NODE_TYPE,class EXPECTED_RETURN_TYPE, class METHOD_TO_CALL > EXPECTED_RETURN_TYPE call_f_type_ret(tree f, METHOD_TO_CALL fn);
 
 
+extern vector<CallBack*> callbacks;
+
+template <class T2,class Ret, class T > Ret CallBack::call_type_ret(tree f, T fn) {
+
+  // get the tree code from the node
+  enum tree_code tc=f->typed.base.code;
+
+  // lookup the callback from the table
+  CallBack * pT0=  callbacks[tc];
+
+  // cast the callback to the type T2
+  T2* pT= dynamic_cast<T2*> (pT0);
+
+  // call the function with the new typed callback
+  return fn(pT,f);
+}

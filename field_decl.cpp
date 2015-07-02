@@ -1,6 +1,17 @@
 /////////////////////////////////////////////////////////////////
 // FIELD_DECL
 /////////////////////////////////////////////////////////////////
+#include <iostream>
+#include <vector>
+#include <gcc-plugin.h>
+#include <coretypes.h>
+#include <tree.h>
+#include "plugincpp.hpp"
+#include "field_decl.hpp"
+#include "identifer_node.hpp"
+#include "record_type.hpp"
+#include "switchcall.hpp"
+#include "name.hpp"
 
 tree TC_FIELD_DECL::name(tree t) {
   return DECL_NAME(t);

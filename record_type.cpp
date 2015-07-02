@@ -1,3 +1,17 @@
+#include <iostream>
+#include <vector>
+#include <gcc-plugin.h>
+#include <coretypes.h>
+#include <tree.h>
+#include "plugincpp.hpp"
+#include "field_decl.hpp"
+#include "identifer_node.hpp"
+#include "record_type.hpp"
+#include "switchcall.hpp"
+#include "name.hpp"
+#include "record_context.hpp"
+#include "introspection.hpp"
+
 /////////////////////////////////////////////////////////////////
 
 tree TC_RECORD_TYPE::fields(tree t) {

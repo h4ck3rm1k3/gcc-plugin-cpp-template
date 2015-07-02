@@ -14,7 +14,8 @@ public:
   
   virtual void finish_type (tree t)
   {
-    while (t) {
+    cerr << "ENUM" << get_tree_code_name (tc);
+    while (t) {      
       ProcEnum(t).resolve();
       f = chain(f);      
     }

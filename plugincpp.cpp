@@ -20,7 +20,7 @@ extern "C" void   cpp_callbackPLUGIN_START_UNIT ();
 
 /////////////////////////////////////////////////////////////////
 class CallBack;
-vector<CallBack*> callbacks(MAX_TREE_CODES);
+
 void CallBack::save_callback(enum tree_code tc,CallBack * self)   // save this
 {
   //cerr << "save callback tc (" << tc << ") ";
@@ -52,20 +52,6 @@ void CallBack::check_type(tree f) {
   //cerr << endl;
 }
 
-template <class T2,class Ret, class T > Ret CallBack::call_type_ret(tree f, T fn) {
-
-  // get the tree code from the node
-  enum tree_code tc=f->typed.base.code;
-
-  // lookup the callback from the table
-  CallBack * pT0=  callbacks[tc];
-
-  // cast the callback to the type T2
-  T2* pT= dynamic_cast<T2*> (pT0);
-
-  // call the function with the new typed callback
-  return fn(pT,f);
-}
 
 template <class T2,class T > void CallBack::call_type(tree f, T fn) {
     enum tree_code tc=f->typed.base.code;

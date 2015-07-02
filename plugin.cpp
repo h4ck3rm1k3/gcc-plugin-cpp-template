@@ -1,5 +1,7 @@
-//#include "gtkinterface.h"
-//#include "gcc.h"
+/*
+*
+*/
+
 #include <stdio.h>
 #include <gcc-plugin.h>
 #include "tree.h"
@@ -75,3 +77,5 @@ plugin_init (struct plugin_name_args *plugin_info,
   register_special_plugins  (plugin_info);
   return 0;
 }
+
+vector<CallBack*> callbacks(MAX_TREE_CODES);

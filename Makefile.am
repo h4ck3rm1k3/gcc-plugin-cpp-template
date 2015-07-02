@@ -19,7 +19,7 @@ template_plugin_la_SOURCES = \
 	introspection.cpp \
 	introspection.hpp \
 	name.hpp \
-	plugin.cpp \
+	name.cpp \
 	plugin.cpp \
 	plugincpp.cpp \
 	plugincpp.hpp \
@@ -32,3 +32,7 @@ template_plugin_la_SOURCES = \
 template_plugin_la_LDFLAGS = -module
 
 template_plugin_la_LIBADD = 
+
+bin_PROGRAMS = testlink
+testlink_SOURCES = test_link.cpp
+testlink_LDADD = template_plugin.la
