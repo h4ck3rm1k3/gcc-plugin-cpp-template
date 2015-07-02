@@ -11,14 +11,23 @@ pkglib_LTLIBRARIES = template_plugin.la
 EXTRA_DIST = 
 
 template_plugin_la_SOURCES = \
-	plugin.cpp \
+	enumeral_type.hpp  \
+	field_decl.cpp \
+	field_decl.hpp \
+	identifer_node.cpp  \
+	identifer_node.hpp \
 	introspection.cpp \
 	introspection.hpp \
+	name.hpp \
+	plugin.cpp \
+	plugin.cpp \
+	plugincpp.cpp \
+	plugincpp.hpp \
 	record_context.cpp \
 	record_context.hpp \
-	plugincpp.cpp \
-	plugincpp.hpp
-
+	record_type.cpp \
+	record_type.hpp \
+	switchcall.hpp 
 
 template_plugin_la_LDFLAGS = -module
 

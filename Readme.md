@@ -1,3 +1,25 @@
+# Flow of function calls
+
+1. plugin.cpp has the entry point, plugin_init.
+2. register_special_plugins calls a macro *DEFEVENTSPECIAL* which
+registers a set of callbacks with the pattern generic_callback_*NAME* which
+were created as external c callbacks for an older version of GCC.
+3. plugincpp.cpp contains the c++ side of the code.
+4. cpp_callbackPLUGIN_FINISH_TYPE is the entry point
+It calls into the finish type callback CallBack::finish_type_callback method that then delegates the function
+to a derived class via a virtual callback.
+the method *finish_type* is delegated based on the type.
+
+4.1 Each type of node that you want to derive from is created by deriving from
+TCWrapper with the enum value as a parameter.
+
+an example of the node :
+
+    class TC_IDENTIFIER_NODE  : public TCWrapper<IDENTIFIER_NODE> ...
+
+finish a type field:
+
+       virtual void finish_type (tree t);
 
 uses the Debian package for the gcc plugin gcc-5-plugin-dev
 and the header file /usr/lib/gcc/x86_64-linux-gnu/5/plugin/include/gcc-plugin.h

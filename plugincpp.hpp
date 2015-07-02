@@ -58,7 +58,6 @@ public:
   static CallBack * lookup_callback(enum tree_code tc);   // lookup
 };
 
-class TC_IDENTIFIER_NODE;
 
 template <enum tree_code tc> class TCWrapper : public CallBack {
 public:
@@ -90,68 +89,47 @@ public:
 
 };
 
-class TC_IDENTIFIER_NODE  : public TCWrapper<IDENTIFIER_NODE>{
-public:
-  const char * id_str(tree_node * t);
-  const char * id(tree_node * t);
-};
+
+/*
+  OFFSET_TYPE
+
+  BOOLEAN_TYPE
+  INTEGER_TYPE
+  REAL_TYPE
+  POINTER_TYPE
+  REFERENCE_TYPE
+  NULLPTR_TYPE
+  FIXED_POINT_TYPE
+  COMPLEX_TYPE
+  VECTOR_TYPE
+  ARRAY_TYPE
+  RECORD_TYPE
+  UNION_TYPE
+  QUAL_UNION_TYPE
+  VOID_TYPE
+  FUNCTION_TYPE
+  METHOD_TYPE
+  LANG_TYPE
+  UNCONSTRAINED_ARRAY_TYPE
+  TYPENAME_TYPE
+  TYPEOF_TYPE
+  DECLTYPE_TYPE
+  UNDERLYING_TYPE
+  CLASS_INTERFACE_TYPE
+  CLASS_IMPLEMENTATION_TYPE
+  CATEGORY_INTERFACE_TYPE
+  CATEGORY_IMPLEMENTATION_TYPE
+  PROTOCOL_INTERFACE_TYPE
+*/
+  
 
 class TC_TYPE_DECL  : public TCWrapper<TYPE_DECL>{
 public:
 };
 
-class  TC_FIELD_DECL : public  TCWrapper<FIELD_DECL>
-{
-public :
-  tree name(tree t);
-  const char * process_name(tree t);
-  static const char * finish_type_field(TC_FIELD_DECL* self,tree f);
-  static double_int  get_offset(TC_FIELD_DECL* self,tree f);
-  static double_int  get_bit_offset(TC_FIELD_DECL* self,tree f);
-  static double_int  get_bit_size(TC_FIELD_DECL* self,tree f);
-  static bool  get_bit_field(TC_FIELD_DECL* self,tree t) { return self->BIT_FIELD_TYPE(t); }
-
-  bool C_BIT_FIELD(tree t);
-  tree SIZE (tree t) { return DECL_SIZE(t);}
-  double_int SIZE_I (tree t) { return TREE_INT_CST(SIZE(t));}
-  int ALIGN (tree t) { return DECL_ALIGN(t);}
-  //
-
-  tree FIELD_CONTEXT(tree t) { return DECL_FIELD_CONTEXT(t);}
-
-  tree FIELD_OFFSET(tree t) { return DECL_FIELD_OFFSET(t);}
-  tree FIELD_BIT_OFFSET(tree t) { return DECL_FIELD_BIT_OFFSET(t);}
-
-  double_int FIELD_OFFSET_I(tree t) { return TREE_INT_CST(FIELD_OFFSET(t));}
-  double_int FIELD_BIT_OFFSET_I(tree t) { return TREE_INT_CST(FIELD_BIT_OFFSET(t));}
-
-  tree BIT_FIELD_TYPE(tree t)  { return DECL_BIT_FIELD_TYPE(t);}
-  int OFFSET_ALIGN(tree t)  { return DECL_OFFSET_ALIGN(t);}
-
-  bool _DECL_C_BIT_FIELD(tree t){
-    //return DECL_C_BIT_FIELD(t);
-    return 0;
-  }
-
-
-};
 
 class TC_LABEL_DECL  : public  TCWrapper<LABEL_DECL>{};
 class TC_VOID_TYPE  : public  TCWrapper<VOID_TYPE>{};
-
-class TC_RECORD_TYPE: public  TCWrapper<RECORD_TYPE>
-{
-public :
-  tree fields(tree t);
-  tree name(tree t);
-  tree chain(tree t);
-  const char * process_name(tree t);
-  void process_fields(RecordContext * c,tree f);
-  virtual void finish_type (tree t);
-  virtual void check() {
-    std::cerr << " record type ("<< get_treecode()<<") " << std::endl;
-  }
-};
 
 void cpp_callbackPLUGIN_START_UNIT ();
 void cpp_callbackPLUGIN_FINISH_TYPE (tree t, void *i);
@@ -159,57 +137,4 @@ void cpp_callbackPLUGIN_FINISH_TYPE (tree t, void *i);
 
 //template <class EXPECTED_NODE_TYPE,class EXPECTED_RETURN_TYPE, class METHOD_TO_CALL > EXPECTED_RETURN_TYPE call_f_type_ret(tree f, METHOD_TO_CALL fn);
 
-template <class Return> class SwitchCall {
-public:
-  /*
-   * Default implementation returns the template parameter Default.
-   */
-  Return call_type_IDENTIFIER_NODE(tree b) { return 0; }
-  Return call_type_TYPE_DECL(tree b) { return 0; }
-  Return call_type_RECORD_TYPE(tree b) { return 0; }
 
-
-  template<class Context> Return call(tree t) {
-    enum tree_code tc=t->typed.base.code;
-    switch(tc) {
-    case TC_IDENTIFIER_NODE::t_code_c:
-      return ((Context*)this)->call_type_IDENTIFIER_NODE(t);
-      break;
-    case TC_TYPE_DECL::t_code_c:
-      return ((Context*)this)->call_type_TYPE_DECL(t);
-      break;
-    case TC_RECORD_TYPE::t_code_c:
-      return ((Context*)this)->call_type_RECORD_TYPE(t);
-      break;
-    default:
-      enum tree_code tc=t->typed.base.code;
-      cerr << get_tree_code_name (tc);
-      return get_tree_code_name (tc);
-        //return "TODO";
-      break;
-    }
-
-  }
-};
-
-class NameWrapper : public SwitchCall<const char *>{
-  /*
-    Wrapper around the results of a name field for a thing.
-    resolves the name string
-  */
-  tree name;
-public:
-  NameWrapper(tree name):
-    name(name){}
-
-  //template <class T> const char * call_type(T,tree b);
-  
-  const char * call_type_IDENTIFIER_NODE(tree b);
-  const char * call_type_TYPE_DECL(tree b);
-  const char * call_type_RECORD_TYPE(tree b);
-
-  const char * resolve() {
-    return call<NameWrapper>(name);
-  }
-
-};

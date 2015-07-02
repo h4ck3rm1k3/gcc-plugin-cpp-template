@@ -45,3 +45,5 @@ a.out
 /.libs/record_context.o
 /record_context.lo
 /test_cpp_out.o
+/#plugin.cpp#
+/.#plugin.cpp
