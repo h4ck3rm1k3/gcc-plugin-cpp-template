@@ -132,7 +132,7 @@ template_plugin_la_DEPENDENCIES =
 am_template_plugin_la_OBJECTS = __callback.lo callback.lo \
 	field_decl.lo identifer_node.lo introspection.lo name.lo \
 	plugin.lo plugincpp.lo record_context.lo record_type.lo \
-	label_decl.lo void_type.lo field.lo
+	label_decl.lo void_type.lo field.lo type_decl.lo
 template_plugin_la_OBJECTS = $(am_template_plugin_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
@@ -399,7 +399,8 @@ template_plugin_la_SOURCES = \
 	field.hpp \
 	field.cpp \
 	tcwrapper.hpp \
-	type_decl.hpp
+	type_decl.hpp \
+	type_decl.cpp
 
 template_plugin_la_LDFLAGS = -module
 template_plugin_la_LIBADD = 
@@ -570,6 +571,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/record_context.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/record_type.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test_link.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/type_decl.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/void_type.Plo@am__quote@
 
 .cpp.o:

@@ -10,7 +10,7 @@ const char *get_tree_code_name (enum tree_code) {
 }
 
 extern void register_callback (const char *plugin_name,
-          int event,
+                               int event,
                                plugin_callback_func callback,
                                void *user_data){}
 

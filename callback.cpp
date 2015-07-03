@@ -26,12 +26,16 @@ void CallBack::check_type(tree f) {
   enum tree_code tc=f->typed.base.code;
   CallBack * pT=  callbacks[tc];
   if (pT){
-    //cerr << "check field tc (" << tc << ") ";
-    //cerr << get_tree_code_name (tc);
-    //cerr << "PT (" << pT << ") ";
+    cerr << "check field tc (" << tc << ") ";
+    cerr << get_tree_code_name (tc);
+    cerr << "PT (" << pT << ") ";
     //pT->check();
   }
-  //cerr << endl;
+  else{
+    cerr << "no callback defined for tc (" << tc << ") ";
+    cerr << get_tree_code_name (tc);
+  }
+  cerr << endl;
 }
 
 
