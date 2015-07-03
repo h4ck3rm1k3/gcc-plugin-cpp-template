@@ -7,9 +7,6 @@
 #include <coretypes.h>
 #include <tree.h>
 #include "plugincpp.hpp"
-#include "field_decl.hpp"
-#include "identifer_node.hpp"
-#include "record_type.hpp"
 #include "switchcall.hpp"
 #include "name.hpp"
 

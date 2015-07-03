@@ -11,6 +11,10 @@ pkglib_LTLIBRARIES = template_plugin.la
 EXTRA_DIST = 
 
 template_plugin_la_SOURCES = \
+	__callback.cpp \
+	callback.cpp \
+	callback.hpp \
+	callbacks.hpp \
 	enumeral_type.hpp  \
 	field_decl.cpp \
 	field_decl.hpp \
@@ -29,7 +33,13 @@ template_plugin_la_SOURCES = \
 	record_type.hpp \
 	switchcall.hpp \
 	label_decl.cpp \
-	void_type.cpp
+	void_type.cpp \
+	label_decl.hpp \
+	void_type.hpp \
+	field.hpp \
+	field.cpp \
+	tcwrapper.hpp \
+	type_decl.hpp
 
 template_plugin_la_LDFLAGS = -module
 

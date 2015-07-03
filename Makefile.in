@@ -129,9 +129,10 @@ am__uninstall_files_from_dir = { \
 am__installdirs = "$(DESTDIR)$(pkglibdir)" "$(DESTDIR)$(bindir)"
 LTLIBRARIES = $(pkglib_LTLIBRARIES)
 template_plugin_la_DEPENDENCIES =
-am_template_plugin_la_OBJECTS = field_decl.lo identifer_node.lo \
-	introspection.lo name.lo plugin.lo plugincpp.lo \
-	record_context.lo record_type.lo
+am_template_plugin_la_OBJECTS = __callback.lo callback.lo \
+	field_decl.lo identifer_node.lo introspection.lo name.lo \
+	plugin.lo plugincpp.lo record_context.lo record_type.lo \
+	label_decl.lo void_type.lo field.lo
 template_plugin_la_OBJECTS = $(am_template_plugin_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
@@ -370,6 +371,8 @@ AM_CFLAGS = -Wall -std=gnu++11
 pkglib_LTLIBRARIES = template_plugin.la
 EXTRA_DIST = 
 template_plugin_la_SOURCES = \
+	__callback.cpp \
+	callback.cpp \
 	enumeral_type.hpp  \
 	field_decl.cpp \
 	field_decl.hpp \
@@ -386,7 +389,13 @@ template_plugin_la_SOURCES = \
 	record_context.hpp \
 	record_type.cpp \
 	record_type.hpp \
-	switchcall.hpp 
+	switchcall.hpp \
+	label_decl.cpp \
+	void_type.cpp \
+	label_decl.hpp \
+	void_type.hpp \
+	field.hpp \
+	field.cpp
 
 template_plugin_la_LDFLAGS = -module
 template_plugin_la_LIBADD = 
@@ -544,15 +553,20 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/__callback.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/callback.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/field.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/field_decl.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/identifer_node.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/introspection.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/label_decl.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/name.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/plugin.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/plugincpp.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/record_context.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/record_type.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test_link.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/void_type.Plo@am__quote@
 
 .cpp.o:
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.o$$||'`;\

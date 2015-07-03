@@ -5,8 +5,6 @@
 #include <tree.h>
 #include "record_context.hpp"
 #include "plugincpp.hpp"
-#include "identifer_node.hpp"
-#include "record_type.hpp"
 #include "switchcall.hpp"
 #include "name.hpp"
 

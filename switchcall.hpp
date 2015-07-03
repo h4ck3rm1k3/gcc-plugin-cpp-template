@@ -1,3 +1,9 @@
+#include "tcwrapper.hpp"
+#include "field_decl.hpp"
+#include "identifer_node.hpp"
+#include "record_type.hpp"
+#include "type_decl.hpp"
+
 template <class Return> class SwitchCall {
 public:
   /*

@@ -1,3 +1,4 @@
+class RecordContext;
 class TC_RECORD_TYPE: public  TCWrapper<RECORD_TYPE>
 {
 public :

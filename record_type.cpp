@@ -4,9 +4,7 @@
 #include <coretypes.h>
 #include <tree.h>
 #include "plugincpp.hpp"
-#include "field_decl.hpp"
-#include "identifer_node.hpp"
-#include "record_type.hpp"
+
 #include "switchcall.hpp"
 #include "name.hpp"
 #include "record_context.hpp"
@@ -41,14 +39,9 @@ void TC_RECORD_TYPE::process_fields(RecordContext * c,tree f) {
     return;
   while (f) {
     if (TC_FIELD_DECL::check_node(f)) {
-        Field fld;
-        fld.name=call_type_ret<TC_FIELD_DECL,const char *>(f,TC_FIELD_DECL::finish_type_field);
-        fld.offset=call_type_ret<TC_FIELD_DECL,double_int>(f,TC_FIELD_DECL::get_offset).low;
-        fld.bit_offset=call_type_ret<TC_FIELD_DECL,double_int>(f,TC_FIELD_DECL::get_bit_offset).low;
-        fld.bit_size  =call_type_ret<TC_FIELD_DECL,double_int>(f,TC_FIELD_DECL::get_bit_size).low;
-        fld.bit_field  =call_type_ret<TC_FIELD_DECL,bool>(f,TC_FIELD_DECL::get_bit_field);
-        c->field_begin(fld);
-      }
+      Field fld(f);      
+      c->field_begin(fld);
+    }
     f = chain(f);
   }
 }

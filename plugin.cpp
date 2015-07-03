@@ -14,7 +14,7 @@
 #include <coretypes.h>
 #include <tm.h>
 #include <basic-block.h>
-
+#include "callback.hpp"
 #include "plugincpp.hpp"
 
 
@@ -78,4 +78,5 @@ plugin_init (struct plugin_name_args *plugin_info,
   return 0;
 }
 
-vector<CallBack*> callbacks(MAX_TREE_CODES);
+
+
