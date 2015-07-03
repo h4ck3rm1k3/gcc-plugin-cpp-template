@@ -27,7 +27,9 @@ template_plugin_la_SOURCES = \
 	record_context.hpp \
 	record_type.cpp \
 	record_type.hpp \
-	switchcall.hpp 
+	switchcall.hpp \
+	label_decl.cpp \
+	void_type.cpp
 
 template_plugin_la_LDFLAGS = -module
 

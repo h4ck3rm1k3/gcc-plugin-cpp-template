@@ -1,5 +1,5 @@
 /*
- * 
+ *
 */
 #include <iostream>
 #include <vector>
@@ -15,17 +15,31 @@ using namespace std;
 union tree_node;
 typedef union tree_node *tree;
 
-extern "C" void cpp_callbackPLUGIN_FINISH_TYPE (tree t, void *i);
+/*
+  entry points from the c plugin
+*/
 extern "C" void   cpp_callbackPLUGIN_START_UNIT ();
+void cpp_callbackPLUGIN_START_UNIT ()
+{
+}
 
-/////////////////////////////////////////////////////////////////
-class CallBack;
+extern "C" void cpp_callbackPLUGIN_FINISH_TYPE (tree t, void *i);
+void cpp_callbackPLUGIN_FINISH_TYPE (tree t, void *i)
+{
+  int x= CallBack::call_type_ret_static <CallBack,int>(
+                   t,
+                   CallBack::finish_type_callback
+                   );
+}
 
+/*
+  The call back base class implementation
+*/
 void CallBack::save_callback(enum tree_code tc,CallBack * self)   // save this
 {
-  //cerr << "save callback tc (" << tc << ") ";
-  //cerr << get_tree_code_name (tc);
-  //cerr << "self (" << self << ")\n";
+  cerr << "save callback tc (" << tc << ") ";
+  cerr << get_tree_code_name (tc);
+  cerr << "self (" << self << ")\n";
   ///self->check();
 
   callbacks[tc]=self;
@@ -60,32 +74,6 @@ template <class T2,class T > void CallBack::call_type(tree f, T fn) {
     fn(pT,f);
 }
 
-
-// TODO, not implemented yet
-bool BIT_FIELD_EXPR (int word, int value, int pos, int width) {
-  //return word & (-1u >> (BS(word) - width) << pos) | (((unsigned word)value & (-1u >> (BS(word) - width)) << pos));
-  return false;
-}
-
-/////////////////////////////////////////////////////////////////
-TC_LABEL_DECL  aTC_LABEL_DECL;
-/////////////////////////////////////////////////////////////////
-TC_VOID_TYPE  aTC_VOID_TYPE;
-
-
-void cpp_callbackPLUGIN_START_UNIT ()
-{
-
-}
-
-void cpp_callbackPLUGIN_FINISH_TYPE (tree t, void *i)
-{
-  int x= CallBack::call_type_ret_static<CallBack,int>(t,CallBack::finish_type_callback);
-  /*
-  */
-}
-/////////////////////////////////////////////////////////////////
-
 void CallBack::finish_type (tree t){
   cerr << "unhandled pure virtual" << endl;
 }
@@ -96,5 +84,3 @@ int CallBack::finish_type_callback(CallBack* c, tree_node* t)
   if(c)
     c->finish_type(t);
 }
-
-

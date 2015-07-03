@@ -74,3 +74,4 @@ a.out
 /record_type.lo
 /test_link.o
 /testlink
+/#test_link.c#
