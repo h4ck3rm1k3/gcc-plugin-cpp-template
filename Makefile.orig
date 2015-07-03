@@ -28,10 +28,13 @@ test2:
 	g++ -fplugin=./.libs/template_plugin.so plugincpp_test.cpp
 
 test3:
-	g++ -fplugin=./.libs/template_plugin.so test.c
+	g++ -fplugin=./.libs/template_plugin.so -c test.c
 
 test4:
-	g++ -fplugin=./.libs/template_plugin.so test_tree.cpp
+	g++ -fplugin=./.libs/template_plugin.so -c test_tree.cpp
+
+test5:
+	g++ -fplugin=./.libs/template_plugin.so -c test_enum.cpp
 
 testgen:
 	g++ -save-temps -Wall -std=gnu++11 test_cpp_out.cpp
@@ -43,3 +46,6 @@ clean :
 
 static_test :
 	g++  -std=c++0x -I fake fake/tree.c plugincpp.cpp  RecordContext.cpp
+
+distclean:
+	make distclean; autoreconf; ./configure; make
