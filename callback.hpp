@@ -48,6 +48,6 @@ public:
   */
   
   virtual void finish_type (tree t);
-  void save_callback(enum tree_code tc,CallBack * self);   // save this
-  static CallBack * lookup_callback(enum tree_code tc);   // lookup
+  //void save_callback(enum tree_code tc,CallBack * self);   // save this
+  //static CallBack * lookup_callback(enum tree_code tc);   // lookup
 };
