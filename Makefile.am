@@ -40,7 +40,11 @@ template_plugin_la_SOURCES = \
 	field.cpp \
 	tcwrapper.hpp \
 	type_decl.hpp \
-	type_decl.cpp
+	type_decl.cpp \
+	error_mark.cpp \
+	error_mark.hpp \
+	union_type.cpp \
+	union_type.hpp
 
 template_plugin_la_LDFLAGS = -module
 

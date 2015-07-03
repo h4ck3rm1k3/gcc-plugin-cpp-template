@@ -54,8 +54,8 @@ void CallBack::finish_type (tree t){
 
 int CallBack::finish_type_callback(CallBack* c, tree_node* t)
 {
-  std::cerr << "finish type callback" << std::endl;
-  //  CallBack::check_type(t);
+  std::cerr << "finish type callback: " << c << " Node:" << t << std::endl;
+  CallBack::check_type(t);
   if(c)
     c->finish_type(t);
 }
