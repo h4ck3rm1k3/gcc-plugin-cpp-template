@@ -25,7 +25,7 @@ tree TC_RECORD_TYPE::chain(tree t) {
 
 const char * TC_RECORD_TYPE::process_name(tree t) {
   //std::cerr << "TC_RECORD_TYPE::process_name" << std::endl;
-  check_type(name(t));
+  //check_type(name(t));
   if (!t)
     return "No Name";
   tree n= name(t);

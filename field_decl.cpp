@@ -41,7 +41,7 @@ const char * TC_FIELD_DECL::finish_type_field(TC_FIELD_DECL* self,tree f)
 
 double_int TC_FIELD_DECL::get_offset(TC_FIELD_DECL* self,tree f) {
   //std::cerr << "TC_FIELD_DECL::get_offset" << std::endl;
-  check_type(f);
+  //check_type(f);
   return self->FIELD_OFFSET_I(f);
 }
 

@@ -5,6 +5,10 @@ class CallBack;
 #include <iostream>
 #include <string.h>
 
+#include <gcc-plugin.h>
+#include <coretypes.h>
+#include <tree.h>
+
 using namespace std;
 extern vector<CallBack*> callbacks;
 

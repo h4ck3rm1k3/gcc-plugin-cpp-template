@@ -25,10 +25,11 @@ void CallBack::check_type(tree f) {
     return ;
   enum tree_code tc=f->typed.base.code;
   CallBack * pT=  callbacks[tc];
+  
   if (pT){
     cerr << "check field tc (" << tc << ") ";
     cerr << get_tree_code_name (tc);
-    cerr << "PT (" << pT << ") ";
+    cerr << " callback object (" << pT << ") ";
     //pT->check();
   }
   else{
@@ -53,6 +54,7 @@ void CallBack::finish_type (tree t){
 
 int CallBack::finish_type_callback(CallBack* c, tree_node* t)
 {
+  std::cerr << "finish type callback" << std::endl;
   //  CallBack::check_type(t);
   if(c)
     c->finish_type(t);
