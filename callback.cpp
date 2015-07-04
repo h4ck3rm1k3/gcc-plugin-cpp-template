@@ -57,6 +57,10 @@ void CallBack::finish_decl (tree t){
 
 void CallBack::finish_unit (tree t){
   cerr << "finish unit:unhandled pure virtual" << endl;
+  enum tree_code tc=t->typed.base.code;
+  cerr << "check field tc (" << tc << ") ";
+  cerr << get_tree_code_name (tc) << endl;
+
 }
 
 int CallBack::finish_type_callback(CallBack* c, tree_node* t)
@@ -77,8 +81,8 @@ int CallBack::finish_decl_callback(CallBack* c, tree_node* t)
 
 int CallBack::finish_unit_callback(CallBack* c, tree_node* t)
 {
-  std::cerr << "finish unit callback: " << c << " Node:" << t << std::endl;
-  CallBack::check_type(t);
+  //std::cerr << "finish unit callback: " << c << " Node:" << t << std::endl;
+  //CallBack::check_type(t);
   if(c)
     c->finish_unit(t);
 }

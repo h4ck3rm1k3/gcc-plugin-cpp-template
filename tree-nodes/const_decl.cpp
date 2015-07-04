@@ -11,6 +11,9 @@ void TC_CONST_DECL::finish_decl (tree t) {
 };
 
 void TC_CONST_DECL::finish_unit (tree t) {
-        cerr << "finish_unit: CONST_DECL" << t << endl;
+  cerr << "finish_unit: CONST_DECL(";
+  cerr << " Name:" << IDENTIFIER_POINTER (DECL_NAME (t));
+  cerr << " Value: " << TREE_INT_CST_LOW (DECL_INITIAL (t));
+  cerr << ")" << endl;
 };
 

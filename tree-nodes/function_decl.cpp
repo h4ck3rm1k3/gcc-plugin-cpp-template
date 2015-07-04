@@ -11,6 +11,8 @@ void TC_FUNCTION_DECL::finish_decl (tree t) {
 };
 
 void TC_FUNCTION_DECL::finish_unit (tree t) {
-        cerr << "finish_unit: FUNCTION_DECL" << t << endl;
+  cerr << "finish_unit: FUNCTION_DECL:" ;
+  cerr << " Name:" << IDENTIFIER_POINTER (DECL_NAME (t));
+  cerr << endl;
 };
 

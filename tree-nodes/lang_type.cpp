@@ -11,6 +11,8 @@ void TC_LANG_TYPE::finish_decl (tree t) {
 };
 
 void TC_LANG_TYPE::finish_unit (tree t) {
-        cerr << "finish_unit: LANG_TYPE" << t << endl;
+  cerr << "finish_unit: LANG_TYPE " << t ;
+  cerr << " ID "<<TYPE_IDENTIFIER (t) ;
+  cerr << endl;
 };
 

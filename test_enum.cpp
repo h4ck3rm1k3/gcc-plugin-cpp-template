@@ -1,4 +1,4 @@
-typedef enum tree_code
+enum tree_code
 {
   ERROR_MARK,
   IDENTIFIER_NODE,
@@ -388,6 +388,5 @@ typedef enum tree_code
   // ////# 8 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/all-tree.def" 2
   // ////# 138 "/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/tree-core.h" 2
   MAX_TREE_CODES
-} t_tree_type;
+};
 
-//t_tree_type t;

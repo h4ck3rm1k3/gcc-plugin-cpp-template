@@ -50,7 +50,7 @@ static void generic_callback_PLUGIN_FINISH_UNIT(void *a, void * b);
 
 static void generic_callback_PLUGIN_START_UNIT(void *a, void * b)
 {
-  cerr << "start unit"<< a << " : " << b  << endl;
+  //cerr << "start unit"<< a << " : " << b  << endl;
   //generic_callback_PLUGIN_FINISH_UNIT(a,b);
 }
 
@@ -61,7 +61,7 @@ static void generic_callback_PLUGIN_FINISH_UNIT(void *a, void * b)
   tree t;
   FOR_EACH_VEC_ELT ( (*all_translation_units), i, t )
     {
-      cerr << "each unit"<< i << " : " << t  << endl;
+      //cerr << "each unit"<< i << " : " << t  << endl;
       call_type_ret<CallBack,int>(t,
                                   CallBack::finish_unit_callback);
     }    
@@ -72,7 +72,7 @@ static void generic_callback_PLUGIN_FINISH_UNIT(void *a, void * b)
   call_type_ret<CallBack,int>(global_namespace,
                               CallBack::finish_unit_callback);
   
-  cerr << "end unit"<< a << " : " << b  << endl;
+  //cerr << "end unit"<< a << " : " << b  << endl;
 }
 
 static void generic_callback_PLUGIN_FINISH (tree t, void *_){}

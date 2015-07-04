@@ -1,0 +1,12 @@
+array_type 
+complex_type
+const_decl
+enumeral_type
+function_decl
+integer_type
+lang_type 
+namespace_decl
+pointer_type
+real_type
+translation_unit_decl
+type_decl
