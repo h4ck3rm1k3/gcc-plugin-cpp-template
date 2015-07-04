@@ -17,6 +17,11 @@ public:
   static int finish_type_callback (CallBack *self, tree t);
   static int finish_decl_callback (CallBack *self, tree t);
 
+  /*
+    finish a compilation unit
+   */
+  static int finish_unit_callback (CallBack *self, tree t);
+
   /**
    * check node type in the base class always returns true because no type is specified. 
    * this method is designed to be called statically in the subclasses given a type expected and some node.
@@ -27,4 +32,5 @@ public:
      
   virtual void finish_type (tree t);
   virtual void finish_decl (tree t);
+  virtual void finish_unit (tree t);
 };

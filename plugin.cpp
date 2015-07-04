@@ -16,6 +16,12 @@
 #include "introspection.hpp"
 #include "callback.hpp"
 #include "callbacks.hpp"
+#include "tree-pass.h"
+#include "cp/name-lookup.h" 
+
+//#include "symtab.h"
+//#include "cgraph.h"
+
 using namespace std;
 union tree_node;
 typedef union tree_node *tree;
@@ -40,13 +46,32 @@ static void generic_callback_PLUGIN_FINISH_DECL (tree t, void *i)
                                      );
 }
 
+static void generic_callback_PLUGIN_FINISH_UNIT(void *a, void * b);
+
 static void generic_callback_PLUGIN_START_UNIT(void *a, void * b)
 {
   cerr << "start unit"<< a << " : " << b  << endl;
+  //generic_callback_PLUGIN_FINISH_UNIT(a,b);
 }
+
 
 static void generic_callback_PLUGIN_FINISH_UNIT(void *a, void * b)
 {
+  int i;
+  tree t;
+  FOR_EACH_VEC_ELT ( (*all_translation_units), i, t )
+    {
+      cerr << "each unit"<< i << " : " << t  << endl;
+      call_type_ret<CallBack,int>(t,
+                                  CallBack::finish_unit_callback);
+    }    
+  // symtab_node *node;
+  // FOR_EACH_DEFINED_SYMBOL (node)
+  //   
+  //                               );
+  call_type_ret<CallBack,int>(global_namespace,
+                              CallBack::finish_unit_callback);
+  
   cerr << "end unit"<< a << " : " << b  << endl;
 }
 
@@ -56,16 +81,34 @@ static void generic_callback_PLUGIN_ATTRIBUTES () {}
 /*
   handling of new passes
 */
-//static void generic_callback_PLUGIN_NEW_PASS (opt_pass *new_pass, void * b) {
-//  cerr << "NEW PASS DEFINED_" << new_pass  << endl;
-//}
 
+static void generic_callback_PLUGIN_NEW_PASS (opt_pass *new_pass, void * b) {
+  //cerr << "NEW PASS DEFINED_" << new_pass << " name: "<< new_pass->name << endl;
+}
+
+static void generic_callback_PLUGIN_EVENT_FIRST_DYNAMIC (opt_pass *new_pass, void * b) {
+  cerr << "PLUGIN_EVENT_FIRST_DYNAMIC: " << new_pass;
+  cerr << endl;
+  //cerr << " name: "<< new_pass->name << endl;
+}
+
+static void generic_callback_PLUGIN_PASS_EXECUTION (opt_pass *new_pass, void * b) {
+  // cerr << "PLUGIN_EVENT_PASS_EXECUTION: " << new_pass;
+  // cerr << endl;
+  // tree t;
+  // int i;
+  // FOR_EACH_VEC_ELT ( (*all_translation_units), i, t ){
+  //   cerr << "insite each unit"<< i << " : " << t  << endl;
+  //   call_type_ret<CallBack,int>(t,
+  //                               CallBack::finish_unit_callback);
+  // }    
+
+}
 
 #define DEFEVENTEMPTY(X)                                  \
   static void generic_callback_ ##X (void *a, void * b) {  \
       cerr << "PLUGIN_" #X << a << " : " << b  << endl;   \
   }
-
 
   DEFEVENTEMPTY ( PLUGIN_PASS_MANAGER_SETUP );
   DEFEVENTEMPTY ( PLUGIN_PRE_GENERICIZE );
@@ -83,12 +126,12 @@ static void generic_callback_PLUGIN_ATTRIBUTES () {}
   DEFEVENTEMPTY ( PLUGIN_ALL_IPA_PASSES_START);
   DEFEVENTEMPTY ( PLUGIN_ALL_IPA_PASSES_END);
   DEFEVENTEMPTY ( PLUGIN_OVERRIDE_GATE);
-  DEFEVENTEMPTY ( PLUGIN_PASS_EXECUTION);
+//DEFEVENTEMPTY ( PLUGIN_PASS_EXECUTION);
   DEFEVENTEMPTY ( PLUGIN_EARLY_GIMPLE_PASSES_START);
   DEFEVENTEMPTY ( PLUGIN_EARLY_GIMPLE_PASSES_END);
-//DEFEVENTEMPTY ( PLUGIN_NEW_PASS);
+  DEFEVENTEMPTY ( PLUGIN_NEW_PASS);
   DEFEVENTEMPTY ( PLUGIN_INCLUDE_FILE);
-  DEFEVENTEMPTY ( PLUGIN_EVENT_FIRST_DYNAMIC);
+//DEFEVENTEMPTY ( PLUGIN_EVENT_FIRST_DYNAMIC);
 
 /*
   register a simple handler for all plugins,
@@ -112,11 +155,11 @@ void register_special_plugins  (struct plugin_name_args *plugin_info){
   //DEFEVENTSPECIAL(PLUGIN_ALL_IPA_PASSES_START);
   //DEFEVENTSPECIAL(PLUGIN_ALL_IPA_PASSES_START); // close the output files
   //DEFEVENTSPECIAL(PLUGIN_ALL_PASSES_END);
-  //DEFEVENTSPECIAL(PLUGIN_ALL_PASSES_START);
+  DEFEVENTSPECIAL(PLUGIN_ALL_PASSES_START);
   //DEFEVENTSPECIAL(PLUGIN_ATTRIBUTES);
   //DEFEVENTSPECIAL(PLUGIN_EARLY_GIMPLE_PASSES_END);
   //DEFEVENTSPECIAL(PLUGIN_EARLY_GIMPLE_PASSES_START);
-  DEFEVENTSPECIAL(PLUGIN_EVENT_FIRST_DYNAMIC);
+  //DEFEVENTSPECIAL(PLUGIN_EVENT_FIRST_DYNAMIC);
   //DEFEVENTSPECIAL(PLUGIN_FINISH );
   //DEFEVENTSPECIAL(PLUGIN_GGC_END);
   //DEFEVENTSPECIAL(PLUGIN_GGC_MARKING);
@@ -131,11 +174,11 @@ void register_special_plugins  (struct plugin_name_args *plugin_info){
   DEFEVENTSPECIAL(PLUGIN_FINISH_DECL);
   DEFEVENTSPECIAL(PLUGIN_FINISH_TYPE);
   DEFEVENTSPECIAL(PLUGIN_FINISH_UNIT);
-  DEFEVENTSPECIAL(PLUGIN_INCLUDE_FILE);
+  //DEFEVENTSPECIAL(PLUGIN_INCLUDE_FILE);
   //  DEFEVENTSPECIAL(PLUGIN_NEW_PASS);
   DEFEVENTSPECIAL(PLUGIN_PASS_EXECUTION);
   DEFEVENTSPECIAL(PLUGIN_START_UNIT); // open the output files
-  DEFEVENTSPECIAL(PLUGIN_PRE_GENERICIZE );
+  //DEFEVENTSPECIAL(PLUGIN_PRE_GENERICIZE );
 }
 
 int plugin_is_GPL_compatible; //

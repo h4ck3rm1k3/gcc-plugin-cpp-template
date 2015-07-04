@@ -129,10 +129,14 @@ am__uninstall_files_from_dir = { \
 am__installdirs = "$(DESTDIR)$(pkglibdir)" "$(DESTDIR)$(bindir)"
 LTLIBRARIES = $(pkglib_LTLIBRARIES)
 template_plugin_la_DEPENDENCIES =
+am__dirstamp = $(am__leading_dot)dirstamp
 am_template_plugin_la_OBJECTS = __callback.lo callback.lo callbacks.lo \
-	field_decl.lo identifer_node.lo introspection.lo name.lo \
-	plugin.lo record_context.lo record_type.lo label_decl.lo \
-	void_type.lo field.lo type_decl.lo error_mark.lo union_type.lo
+	field.lo introspection.lo name.lo plugin.lo record_context.lo \
+	tree-nodes/error_mark.lo tree-nodes/field_decl.lo \
+	tree-nodes/identifer_node.lo tree-nodes/label_decl.lo \
+	tree-nodes/record_type.lo tree-nodes/translation_unit_decl.lo \
+	tree-nodes/type_decl.lo tree-nodes/union_type.lo \
+	tree-nodes/void_type.lo tree-nodes/namespace_decl.lo
 template_plugin_la_OBJECTS = $(am_template_plugin_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
@@ -365,8 +369,8 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 ACLOCAL_AMFLAGS = -I m4
-GCCPLUGINS_DIR = `gcc -print-file-name=plugin`
-AM_CPPFLAGS = -I $(GCCPLUGINS_DIR)/include -I $(srcdir)/../libgdl $(GMP_INC)
+GCCPLUGINS_DIR = `${CXX} -print-file-name=plugin`
+AM_CPPFLAGS = -I $(GCCPLUGINS_DIR)/include -I $(srcdir)/../libgdl $(GMP_INC) -Itree-nodes
 AM_CFLAGS = -Wall -std=gnu++11
 pkglib_LTLIBRARIES = template_plugin.la
 EXTRA_DIST = 
@@ -374,36 +378,41 @@ template_plugin_la_SOURCES = \
 	__callback.cpp \
 	callback.cpp \
 	callback.hpp \
-	callbacks.hpp \
 	callbacks.cpp \
-	enumeral_type.hpp  \
-	field_decl.cpp \
-	field_decl.hpp \
-	identifer_node.cpp  \
-	identifer_node.hpp \
+	callbacks.hpp \
+	field.cpp \
+	field.hpp \
 	introspection.cpp \
 	introspection.hpp \
-	name.hpp \
 	name.cpp \
+	name.hpp \
 	plugin.cpp \
 	record_context.cpp \
 	record_context.hpp \
-	record_type.cpp \
-	record_type.hpp \
 	switchcall.hpp \
-	label_decl.cpp \
-	void_type.cpp \
-	label_decl.hpp \
-	void_type.hpp \
-	field.hpp \
-	field.cpp \
 	tcwrapper.hpp \
-	type_decl.hpp \
-	type_decl.cpp \
-	error_mark.cpp \
-	error_mark.hpp \
-	union_type.cpp \
-	union_type.hpp
+	tree-nodes/enumeral_type.hpp  \
+	tree-nodes/error_mark.cpp \
+	tree-nodes/error_mark.hpp \
+	tree-nodes/field_decl.cpp \
+	tree-nodes/field_decl.hpp \
+	tree-nodes/identifer_node.cpp  \
+	tree-nodes/identifer_node.hpp \
+	tree-nodes/label_decl.cpp \
+	tree-nodes/label_decl.hpp \
+	tree-nodes/record_type.cpp \
+	tree-nodes/record_type.hpp \
+	tree-nodes/translation_unit_decl.cpp \
+	tree-nodes/translation_unit_decl.hpp \
+	tree-nodes/type_decl.cpp \
+	tree-nodes/type_decl.hpp \
+	tree-nodes/union_type.cpp \
+	tree-nodes/union_type.hpp \
+	tree-nodes/void_type.cpp \
+	tree-nodes/void_type.hpp \
+	tree-nodes/namespace_decl.cpp \
+	tree-nodes/namespace_decl.hpp \
+	# skip
 
 template_plugin_la_LDFLAGS = -module
 template_plugin_la_LIBADD = 
@@ -498,6 +507,32 @@ clean-pkglibLTLIBRARIES:
 	  echo rm -f $${locs}; \
 	  rm -f $${locs}; \
 	}
+tree-nodes/$(am__dirstamp):
+	@$(MKDIR_P) tree-nodes
+	@: > tree-nodes/$(am__dirstamp)
+tree-nodes/$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) tree-nodes/$(DEPDIR)
+	@: > tree-nodes/$(DEPDIR)/$(am__dirstamp)
+tree-nodes/error_mark.lo: tree-nodes/$(am__dirstamp) \
+	tree-nodes/$(DEPDIR)/$(am__dirstamp)
+tree-nodes/field_decl.lo: tree-nodes/$(am__dirstamp) \
+	tree-nodes/$(DEPDIR)/$(am__dirstamp)
+tree-nodes/identifer_node.lo: tree-nodes/$(am__dirstamp) \
+	tree-nodes/$(DEPDIR)/$(am__dirstamp)
+tree-nodes/label_decl.lo: tree-nodes/$(am__dirstamp) \
+	tree-nodes/$(DEPDIR)/$(am__dirstamp)
+tree-nodes/record_type.lo: tree-nodes/$(am__dirstamp) \
+	tree-nodes/$(DEPDIR)/$(am__dirstamp)
+tree-nodes/translation_unit_decl.lo: tree-nodes/$(am__dirstamp) \
+	tree-nodes/$(DEPDIR)/$(am__dirstamp)
+tree-nodes/type_decl.lo: tree-nodes/$(am__dirstamp) \
+	tree-nodes/$(DEPDIR)/$(am__dirstamp)
+tree-nodes/union_type.lo: tree-nodes/$(am__dirstamp) \
+	tree-nodes/$(DEPDIR)/$(am__dirstamp)
+tree-nodes/void_type.lo: tree-nodes/$(am__dirstamp) \
+	tree-nodes/$(DEPDIR)/$(am__dirstamp)
+tree-nodes/namespace_decl.lo: tree-nodes/$(am__dirstamp) \
+	tree-nodes/$(DEPDIR)/$(am__dirstamp)
 
 template_plugin.la: $(template_plugin_la_OBJECTS) $(template_plugin_la_DEPENDENCIES) $(EXTRA_template_plugin_la_DEPENDENCIES) 
 	$(AM_V_CXXLD)$(template_plugin_la_LINK) -rpath $(pkglibdir) $(template_plugin_la_OBJECTS) $(template_plugin_la_LIBADD) $(LIBS)
@@ -557,6 +592,8 @@ testlink$(EXEEXT): $(testlink_OBJECTS) $(testlink_DEPENDENCIES) $(EXTRA_testlink
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
+	-rm -f tree-nodes/*.$(OBJEXT)
+	-rm -f tree-nodes/*.lo
 
 distclean-compile:
 	-rm -f *.tab.c
@@ -564,20 +601,22 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/__callback.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/callback.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/callbacks.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/error_mark.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/field.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/field_decl.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/identifer_node.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/introspection.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/label_decl.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/name.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/plugin.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/record_context.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/record_type.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test_link.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/type_decl.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/union_type.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/void_type.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/error_mark.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/field_decl.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/identifer_node.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/label_decl.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/namespace_decl.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/record_type.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/translation_unit_decl.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/type_decl.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/union_type.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/void_type.Plo@am__quote@
 
 .cpp.o:
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.o$$||'`;\
@@ -608,6 +647,7 @@ mostlyclean-libtool:
 
 clean-libtool:
 	-rm -rf .libs _libs
+	-rm -rf tree-nodes/.libs tree-nodes/_libs
 
 distclean-libtool:
 	-rm -f libtool config.lt
@@ -867,6 +907,8 @@ clean-generic:
 distclean-generic:
 	-test -z "$(CONFIG_CLEAN_FILES)" || rm -f $(CONFIG_CLEAN_FILES)
 	-test . = "$(srcdir)" || test -z "$(CONFIG_CLEAN_VPATH_FILES)" || rm -f $(CONFIG_CLEAN_VPATH_FILES)
+	-rm -f tree-nodes/$(DEPDIR)/$(am__dirstamp)
+	-rm -f tree-nodes/$(am__dirstamp)
 
 maintainer-clean-generic:
 	@echo "This command is intended for maintainers to use"
@@ -878,7 +920,7 @@ clean-am: clean-binPROGRAMS clean-generic clean-libtool \
 
 distclean: distclean-am
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
-	-rm -rf ./$(DEPDIR)
+	-rm -rf ./$(DEPDIR) tree-nodes/$(DEPDIR)
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-hdr distclean-libtool distclean-tags
@@ -926,7 +968,7 @@ installcheck-am:
 maintainer-clean: maintainer-clean-am
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
 	-rm -rf $(top_srcdir)/autom4te.cache
-	-rm -rf ./$(DEPDIR)
+	-rm -rf ./$(DEPDIR) tree-nodes/$(DEPDIR)
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 

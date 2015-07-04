@@ -16,7 +16,15 @@ extern void register_callback (const char *plugin_name,
 
 
 const enum tree_code_class tree_code_type[] = {};
+// void
+// symtab_node::dump_table (FILE *f)
+// {
+// }
+//void * symtab;
+//symbol_table *symtab =0;
 
+vec<tree, va_gc> *all_translation_units;
+tree global_namespace;
 int main() {
   // test
   return 0;

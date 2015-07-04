@@ -48,11 +48,15 @@ template <class T2,class T > void CallBack::call_type(tree f, T fn) {
 }
 */
 void CallBack::finish_type (tree t){
-  cerr << "unhandled pure virtual" << endl;
+  cerr << "finish type :unhandled pure virtual" << endl;
 }
 
 void CallBack::finish_decl (tree t){
-  cerr << "unhandled pure virtual" << endl;
+  cerr << "finish decl : unhandled pure virtual" << endl;
+}
+
+void CallBack::finish_unit (tree t){
+  cerr << "finish unit:unhandled pure virtual" << endl;
 }
 
 int CallBack::finish_type_callback(CallBack* c, tree_node* t)
@@ -69,6 +73,14 @@ int CallBack::finish_decl_callback(CallBack* c, tree_node* t)
   CallBack::check_type(t);
   if(c)
     c->finish_decl(t);
+}
+
+int CallBack::finish_unit_callback(CallBack* c, tree_node* t)
+{
+  std::cerr << "finish unit callback: " << c << " Node:" << t << std::endl;
+  CallBack::check_type(t);
+  if(c)
+    c->finish_unit(t);
 }
 
 void CallBack::check(){

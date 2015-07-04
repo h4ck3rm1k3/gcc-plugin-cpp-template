@@ -1,43 +1,42 @@
 GCC=gcc-4.7
 PLUGIN_SOURCE_FILES= plugin.c 
 TOP := $(dir $(lastword $(MAKEFILE_LIST)))
-GCCPLUGIN_HEADER_DIR=/usr/lib/gcc/x86_64-linux-gnu/4.7/plugin/include
-
+GCCPLUGIN_HEADER_DIR=/usr/lib/gcc/x86_64-linux-gnu/5.1.1/plugin/include
+CXX=g++-5
 CFLAGS+= -g -O0 -save-temps  -I$(GCCPLUGIN_HEADER_DIR)  -fPIC -O2   -Wl,-E  -fstack-protector -ldl -lm -lpthread -lc -lcrypt
 
-plugin.so:  plugin.o plugincpp.o RecordContext.o plugincpp.hpp RecordContext.hpp introspection.o
-	g++ -shared -pthread  plugin.o plugincpp.o RecordContext.o introspection.o -o $@
+plugin.so:  plugin.o plugincpp.o RecordContext.o plugincpp.hpp RecordContext.hpp introspection.o ${CXX} -shared -pthread  plugin.o plugincpp.o RecordContext.o introspection.o -o $@
 
-introspection.o : introspection.cpp introspection.hpp
-	g++ -std=c++0x -save-temps -fPIC -pthread -c -I$(GCCPLUGIN_HEADER_DIR)  $< -o $@
+introspection2.o : introspection.cpp introspection.hpp
+	${CXX} -std=c++0x -save-temps -fPIC -pthread -c -I$(GCCPLUGIN_HEADER_DIR)  $< -o $@
 
 plugincpp.o:  plugincpp.cpp plugincpp.hpp
-	g++ -std=c++0x -save-temps -fPIC -pthread -c -I$(GCCPLUGIN_HEADER_DIR)  $< -o $@
+	${CXX} -std=c++0x -save-temps -fPIC -pthread -c -I$(GCCPLUGIN_HEADER_DIR)  $< -o $@
 
 RecordContext.o:  RecordContext.cpp RecordContext.hpp plugincpp.hpp
-	g++ -std=c++0x -save-temps -fPIC -pthread -c -I$(GCCPLUGIN_HEADER_DIR)  $< -o $@
+	${CXX} -std=c++0x -save-temps -fPIC -pthread -c -I$(GCCPLUGIN_HEADER_DIR)  $< -o $@
 
 plugin.o:  plugin.c
 	$(GCC) $(CFLAGS) -fPIC -shared -pthread  $^ -c -o $@
 
 test : #plugin.so
 	#$(GCC) -fplugin=$(TOP)/plugin.so -I$(GCCPLUGIN_HEADER_DIR)  plugin.c -c -o plugin-bootstrap.o
-	g++ -fplugin=./.libs/template_plugin.so plugin.cpp -I/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/ -c -o plugin-bootstrap.o
+	${CXX} -fplugin=./.libs/template_plugin.so plugin.cpp -I/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/ -c -o plugin-bootstrap.o
 
 test2:
-	g++ -fplugin=./.libs/template_plugin.so plugincpp_test.cpp
+	${CXX} -fplugin=./.libs/template_plugin.so plugincpp_test.cpp
 
 test3:
-	g++ -fplugin=./.libs/template_plugin.so -c test.c
+	${CXX} -fplugin=./.libs/template_plugin.so -c test.c
 
 test4:
-	g++ -fplugin=./.libs/template_plugin.so -c test_tree.cpp
+	${CXX} -fplugin=./.libs/template_plugin.so -c test_tree.cpp
 
 test5:
-	g++ -fplugin=./.libs/template_plugin.so -c test_enum.cpp
+	${CXX} -fplugin=./.libs/template_plugin.so -c test_enum.cpp
 
 testgen:
-	g++ -save-temps -Wall -std=gnu++11 test_cpp_out.cpp
+	${CXX} -save-temps -Wall -std=gnu++11 test_cpp_out.cpp
 
 clean :
 	rm plugin.so
@@ -45,11 +44,11 @@ clean :
 	rm *.i *.ii *.s
 
 static_test :
-	g++  -std=c++0x -I fake fake/tree.c plugincpp.cpp  RecordContext.cpp
+	${CXX}  -std=c++0x -I fake fake/tree.c plugincpp.cpp  RecordContext.cpp
 
 distclean:
-	rm *.i *.ii *.s
-	make distclean;
+	- rm *.i *.ii *.s
+	- make distclean;
 	autoreconf;
 	./configure;
 	make

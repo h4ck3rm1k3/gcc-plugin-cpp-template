@@ -4,7 +4,7 @@
 #include <coretypes.h>
 #include <tree.h>
 #include "field.hpp"
-#include "field_decl.hpp"
+#include "tree-nodes/field_decl.hpp"
 
 
 void Field::process(tree f) {
