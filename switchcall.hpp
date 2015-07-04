@@ -29,7 +29,7 @@ public:
     default:
       enum tree_code tc=t->typed.base.code;
       cerr << get_tree_code_name (tc);
-      return get_tree_code_name (tc);
+      //return get_tree_code_name (tc);
         //return "TODO";
       break;
     }
