@@ -1,3 +1,6 @@
+#include <iostream>
+#include "callbacks.hpp"
+
 void save_callback(enum tree_code tc,CallBack * self)   // save this
 {
   std::cerr << "save callback tc (" << tc << ") ";

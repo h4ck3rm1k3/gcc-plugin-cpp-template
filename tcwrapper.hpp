@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 #include "callback.hpp"
 
 template <enum tree_code tc> class TCWrapper : public CallBack {

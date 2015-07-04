@@ -56,9 +56,9 @@ static void generic_callback_PLUGIN_ATTRIBUTES () {}
 /*
   handling of new passes
 */
-static void generic_callback_PLUGIN_NEW_PASS (opt_pass *new_pass, void * b) {
-  cerr << "NEW PASS DEFINED_" << new_pass  << endl;
-}
+//static void generic_callback_PLUGIN_NEW_PASS (opt_pass *new_pass, void * b) {
+//  cerr << "NEW PASS DEFINED_" << new_pass  << endl;
+//}
 
 
 #define DEFEVENTEMPTY(X)                                  \
@@ -132,7 +132,7 @@ void register_special_plugins  (struct plugin_name_args *plugin_info){
   DEFEVENTSPECIAL(PLUGIN_FINISH_TYPE);
   DEFEVENTSPECIAL(PLUGIN_FINISH_UNIT);
   DEFEVENTSPECIAL(PLUGIN_INCLUDE_FILE);
-  DEFEVENTSPECIAL(PLUGIN_NEW_PASS);
+  //  DEFEVENTSPECIAL(PLUGIN_NEW_PASS);
   DEFEVENTSPECIAL(PLUGIN_PASS_EXECUTION);
   DEFEVENTSPECIAL(PLUGIN_START_UNIT); // open the output files
   DEFEVENTSPECIAL(PLUGIN_PRE_GENERICIZE );

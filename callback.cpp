@@ -70,3 +70,7 @@ int CallBack::finish_decl_callback(CallBack* c, tree_node* t)
   if(c)
     c->finish_decl(t);
 }
+
+void CallBack::check(){
+  std::cerr << "base class" << std::endl;
+}
