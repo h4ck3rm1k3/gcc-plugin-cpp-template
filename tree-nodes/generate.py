@@ -1,3 +1,4 @@
+import os
 for x in """ABS_EXPR
 ADDR_EXPR
 ADDR_SPACE_CONVERT_EXPR
@@ -317,4 +318,41 @@ WIDEN_MULT_PLUS_EXPR
 WIDEN_SUM_EXPR
 WITH_CLEANUP_EXPR
 WITH_SIZE_EXPR""".split("\n"):
-    print x
+    #print x, x.lower()
+    f = x.lower() + ".hpp"
+    if os.path.exists(f):
+        print "\ttree-nodes/" +f, "\\"
+    else:
+        #print f
+        o = open(f,"w")
+        o.write("""
+#include "tcwrapper.hpp"
+class TC_{code} : public TCWrapper<{code}> {{
+    virtual void finish_type (tree t);
+    virtual void finish_decl (tree t);
+    virtual void finish_unit (tree t);
+    }};
+""".format(code=x))
+
+    f2 = x.lower() + ".cpp"
+    if os.path.exists(f2):
+        print "\ttree-nodes/"+f2, "\\"
+    else:
+        o = open(f2,"w")
+        o.write("""
+#include "{filename}"
+        TC_{code} a{code};
+
+void TC_{code}::finish_type (tree t) {{
+        cerr << "finish_type: {code}" << t << end;;
+}};
+
+void TC_{code}::finish_decl (tree t) {{
+        cerr << "finish_decl: {code}" << t << end;;
+}};
+
+void TC_{code}::finish_unit (tree t) {{
+        cerr << "finish_unit: {code}" << t << end;;
+}};
+
+""".format(code=x,filename=f))
