@@ -2,7 +2,7 @@
 class CallBack;
 #include <vector>
 
-#include <iostream>
+//#include <iostream>
 #include <string.h>
 
 #include <gcc-plugin.h>
@@ -43,16 +43,6 @@ template <class TypedCallBack,class Ret, class T > Ret call_type_ret(tree f, T f
 /*
   The call back base class implementation
 */
-inline void save_callback(enum tree_code tc,CallBack * self)   // save this
-{
-  cerr << "save callback tc (" << tc << ") ";
-  cerr << get_tree_code_name (tc);
-  cerr << "self (" << self << ")\n";
-  ///self->check();
+void save_callback(enum tree_code tc,CallBack * self);   // save this
 
-  callbacks[tc]=self;
-}
-
-inline CallBack * lookup_callback(enum tree_code tc){
-  return callbacks[tc];
-}
+CallBack * lookup_callback(enum tree_code tc);

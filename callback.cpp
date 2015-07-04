@@ -6,7 +6,6 @@
 #include <gcc-plugin.h>
 #include <coretypes.h>
 #include <tree.h>
-#include "plugincpp.hpp"
 #include "record_context.hpp"
 #include <string.h>
 #include "introspection.hpp"
@@ -52,10 +51,22 @@ void CallBack::finish_type (tree t){
   cerr << "unhandled pure virtual" << endl;
 }
 
+void CallBack::finish_decl (tree t){
+  cerr << "unhandled pure virtual" << endl;
+}
+
 int CallBack::finish_type_callback(CallBack* c, tree_node* t)
 {
   std::cerr << "finish type callback: " << c << " Node:" << t << std::endl;
   CallBack::check_type(t);
   if(c)
     c->finish_type(t);
+}
+
+int CallBack::finish_decl_callback(CallBack* c, tree_node* t)
+{
+  std::cerr << "finish decl callback: " << c << " Node:" << t << std::endl;
+  CallBack::check_type(t);
+  if(c)
+    c->finish_decl(t);
 }

@@ -3,8 +3,6 @@
 #include <gcc-plugin.h>
 #include <coretypes.h>
 #include <tree.h>
-#include "plugincpp.hpp"
-
 #include "switchcall.hpp"
 #include "name.hpp"
 #include "record_context.hpp"

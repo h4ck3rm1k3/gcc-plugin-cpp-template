@@ -48,4 +48,8 @@ static_test :
 	g++  -std=c++0x -I fake fake/tree.c plugincpp.cpp  RecordContext.cpp
 
 distclean:
-	make distclean; autoreconf; ./configure; make
+	rm *.i *.ii *.s
+	make distclean;
+	autoreconf;
+	./configure;
+	make

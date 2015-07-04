@@ -15,6 +15,7 @@ template_plugin_la_SOURCES = \
 	callback.cpp \
 	callback.hpp \
 	callbacks.hpp \
+	callbacks.cpp \
 	enumeral_type.hpp  \
 	field_decl.cpp \
 	field_decl.hpp \
@@ -25,8 +26,6 @@ template_plugin_la_SOURCES = \
 	name.hpp \
 	name.cpp \
 	plugin.cpp \
-	plugincpp.cpp \
-	plugincpp.hpp \
 	record_context.cpp \
 	record_context.hpp \
 	record_type.cpp \

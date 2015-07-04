@@ -129,11 +129,10 @@ am__uninstall_files_from_dir = { \
 am__installdirs = "$(DESTDIR)$(pkglibdir)" "$(DESTDIR)$(bindir)"
 LTLIBRARIES = $(pkglib_LTLIBRARIES)
 template_plugin_la_DEPENDENCIES =
-am_template_plugin_la_OBJECTS = __callback.lo callback.lo \
+am_template_plugin_la_OBJECTS = __callback.lo callback.lo callbacks.lo \
 	field_decl.lo identifer_node.lo introspection.lo name.lo \
-	plugin.lo plugincpp.lo record_context.lo record_type.lo \
-	label_decl.lo void_type.lo field.lo type_decl.lo error_mark.lo \
-	union_type.lo
+	plugin.lo record_context.lo record_type.lo label_decl.lo \
+	void_type.lo field.lo type_decl.lo error_mark.lo union_type.lo
 template_plugin_la_OBJECTS = $(am_template_plugin_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
@@ -376,6 +375,7 @@ template_plugin_la_SOURCES = \
 	callback.cpp \
 	callback.hpp \
 	callbacks.hpp \
+	callbacks.cpp \
 	enumeral_type.hpp  \
 	field_decl.cpp \
 	field_decl.hpp \
@@ -386,8 +386,6 @@ template_plugin_la_SOURCES = \
 	name.hpp \
 	name.cpp \
 	plugin.cpp \
-	plugincpp.cpp \
-	plugincpp.hpp \
 	record_context.cpp \
 	record_context.hpp \
 	record_type.cpp \
@@ -565,6 +563,7 @@ distclean-compile:
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/__callback.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/callback.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/callbacks.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/error_mark.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/field.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/field_decl.Plo@am__quote@
@@ -573,7 +572,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/label_decl.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/name.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/plugin.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/plugincpp.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/record_context.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/record_type.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test_link.Po@am__quote@

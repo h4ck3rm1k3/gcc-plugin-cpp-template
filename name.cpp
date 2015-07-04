@@ -4,7 +4,6 @@
 #include <coretypes.h>
 #include <tree.h>
 #include "record_context.hpp"
-#include "plugincpp.hpp"
 #include "switchcall.hpp"
 #include "name.hpp"
 

@@ -3,7 +3,6 @@
 #include <gcc-plugin.h>
 #include <coretypes.h>
 #include <tree.h>
-#include "plugincpp.hpp"
 #include "field.hpp"
 #include "field_decl.hpp"
 

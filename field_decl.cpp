@@ -6,7 +6,6 @@
 #include <gcc-plugin.h>
 #include <coretypes.h>
 #include <tree.h>
-#include "plugincpp.hpp"
 #include "switchcall.hpp"
 #include "name.hpp"
 
@@ -39,17 +38,17 @@ const char * TC_FIELD_DECL::finish_type_field(TC_FIELD_DECL* self,tree f)
 
 }
 
-double_int TC_FIELD_DECL::get_offset(TC_FIELD_DECL* self,tree f) {
+long unsigned int TC_FIELD_DECL::get_offset(TC_FIELD_DECL* self,tree f) {
   //std::cerr << "TC_FIELD_DECL::get_offset" << std::endl;
   //check_type(f);
   return self->FIELD_OFFSET_I(f);
 }
 
-double_int TC_FIELD_DECL::get_bit_offset(TC_FIELD_DECL* self,tree f) {
+long unsigned int TC_FIELD_DECL::get_bit_offset(TC_FIELD_DECL* self,tree f) {
   return self->FIELD_BIT_OFFSET_I(f);
 }
 
-double_int TC_FIELD_DECL::get_bit_size(TC_FIELD_DECL* self,tree f) {
+long unsigned int TC_FIELD_DECL::get_bit_size(TC_FIELD_DECL* self,tree f) {
   //  return 1; //TODO:
   return self->SIZE_I(f);
 }

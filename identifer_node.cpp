@@ -7,12 +7,7 @@
 #include <gcc-plugin.h>
 #include <coretypes.h>
 #include <tree.h>
-#include "plugincpp.hpp"
-//#include "field_decl.hpp"
 #include "identifer_node.hpp"
-//#include "record_type.hpp"
-//#include "switchcall.hpp"
-//#include "name.hpp"
 
 class TC_IDENTIFIER_NODE;
 const char * TC_IDENTIFIER_NODE::id_str(tree_node * t){
