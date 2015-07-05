@@ -54,3 +54,14 @@ long unsigned int TC_FIELD_DECL::get_bit_size(TC_FIELD_DECL* self,tree f) {
 }
 
 TC_FIELD_DECL aTC_FIELD_DECL;
+
+
+void TC_FIELD_DECL::finish_type (tree t){
+}
+
+void TC_FIELD_DECL::finish_decl (tree t){
+  std::cerr << "TC_FIELD_DECL::finish_decl" << std::endl;
+}
+
+void TC_FIELD_DECL::finish_unit (tree t){
+}

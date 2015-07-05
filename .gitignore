@@ -32,3 +32,4 @@ a.out
 /tree-nodes/error_mark.lo
 /tree-nodes/.dirstamp
 /tests/test_link.o
+/tests/plugincpp_test_pre.cpp
