@@ -1,2 +1,3 @@
 test :
-	g++ plugincpp_test.cpp
+	g++ -c crash1.cpp	
+	g++ -c plugincpp_test.cpp

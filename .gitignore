@@ -21,15 +21,9 @@
 /master
 /stamp-h1
 /*.la
-/test.c
 /*.o
 /testlink
 a.out
-/test.txt
-/test1.cpp
-/test_enum.cpp.001t.tu
-/test_pass.c
-/tree-nodes/error_mark.lo
+/tree-nodes/*.lo
 /tree-nodes/.dirstamp
-/tests/test_link.o
-/tests/plugincpp_test_pre.cpp
+/tests/*.o

@@ -1,24 +1,38 @@
-template<typename, typename, typename> struct vec;
 struct vl_embed { };
 struct vl_ptr { };
-
+typedef long unsigned int size_t;
 struct va_heap
 {
   typedef vl_ptr default_layout;
-  template<typename T>
-  static void reserve (vec<T, va_heap, vl_embed> *&, unsigned, bool
-         );
-
-  template<typename T>
-  static void release (vec<T, va_heap, vl_embed> *&);
+  //template<typename T> static void reserve (vec<T, va_heap, vl_embed> *&, unsigned, bool         );
+  //template<typename T> static void release (vec<T, va_heap, vl_embed> *&);
 };
+
 
 template<typename T,
          typename A = va_heap,
          typename L = typename A::default_layout>
 struct vec
 {
-  template<typename T, typename A> struct vec<T, A, vl_embed>
+};
+
+struct vec_prefix
+{
+  void register_overhead (size_t, const char *, int, const char *);
+  void release_overhead (void);
+  static unsigned calculate_allocation (vec_prefix *, unsigned, bool);
+  static unsigned calculate_allocation_1 (unsigned, unsigned);
+  template <typename, typename, typename> friend struct vec;
+  friend struct va_gc;
+  friend struct va_gc_atomic;
+  friend struct va_heap;
+  unsigned m_alloc : 31;
+  unsigned m_using_auto_storage : 1;
+  unsigned m_num;
+};
+
+
+template<typename T, typename A> struct vec<T, A, vl_embed>
 {
 public:
   unsigned allocated (void) const { return m_vecpfx.m_alloc; }
@@ -49,17 +63,10 @@ public:
   void embedded_init (unsigned, unsigned = 0, unsigned = 0);
   void quick_grow (unsigned len);
   void quick_grow_cleared (unsigned len);
-
-
   template <typename, typename, typename> friend struct vec;
-
-
   friend struct va_gc;
   friend struct va_gc_atomic;
   friend struct va_heap;
-
-
-
   vec_prefix m_vecpfx;
   T m_vecdata[1];
 };
