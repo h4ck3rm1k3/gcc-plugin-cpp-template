@@ -12,9 +12,20 @@ for l in d.readlines():
         #print l
     x = g.groups()[0]
     #print "Check",x
+
+    print """Return call_type_{code}(tree b) {{ return 0; }}""".format(code=x)
+
+#     print """
+# case TC_{code}::t_code_c:
+#     return ((Context*)this)->call_type_{code}(t);
+#     break;
+# """.format(code=x)
+    
     f = x.lower() + ".hpp"
     if os.path.exists(f):
-        print "\ttree-nodes/" +f, "\\"
+        #print "#include \"tree-nodes/{f}\"".format(f=f)
+        #print "\ttree-nodes/" +f, "\\"
+        pass
     else:
         #print f
         o = open(f,"w")
@@ -29,7 +40,8 @@ class TC_{code} : public TCWrapper<{code}> {{
 
     f2 = x.lower() + ".cpp"
     if os.path.exists(f2):
-        print "\ttree-nodes/"+f2, "\\"
+        #print "\ttree-nodes/"+f2, "\\"
+        pass
     else:
         o = open(f2,"w")
         o.write("""

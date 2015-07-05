@@ -73,8 +73,8 @@ int CallBack::finish_type_callback(CallBack* c, tree_node* t)
 
 int CallBack::finish_decl_callback(CallBack* c, tree_node* t)
 {
-  std::cerr << "finish decl callback: " << c << " Node:" << t << std::endl;
-  CallBack::check_type(t);
+  //std::cerr << "finish decl callback: " << c << " Node:" << t << std::endl;
+  //CallBack::check_type(t);
   if(c)
     c->finish_decl(t);
 }
