@@ -31,3 +31,4 @@ a.out
 /test_pass.c
 /tree-nodes/error_mark.lo
 /tree-nodes/.dirstamp
+/tests/test_link.o

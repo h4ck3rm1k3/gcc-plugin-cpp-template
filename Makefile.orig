@@ -1,4 +1,3 @@
-
 test: runtest test5
 	echo ok
 
@@ -12,41 +11,23 @@ CFLAGS+= -g -O0 -save-temps  -I$(GCCPLUGIN_HEADER_DIR)  -fPIC -O2   -Wl,-E  -fst
 runtest :
 	make
 
-plugin.so:  plugin.o plugincpp.o RecordContext.o plugincpp.hpp RecordContext.hpp introspection.o ${CXX} -shared -pthread  plugin.o plugincpp.o RecordContext.o introspection.o -o $@
-
-introspection2.o : introspection.cpp introspection.hpp
-	${CXX} -std=c++0x -save-temps -fPIC -pthread -c -I$(GCCPLUGIN_HEADER_DIR)  $< -o $@
-
-plugincpp.o:  plugincpp.cpp plugincpp.hpp
-	${CXX} -std=c++0x -save-temps -fPIC -pthread -c -I$(GCCPLUGIN_HEADER_DIR)  $< -o $@
-
-RecordContext.o:  RecordContext.cpp RecordContext.hpp plugincpp.hpp
-	${CXX} -std=c++0x -save-temps -fPIC -pthread -c -I$(GCCPLUGIN_HEADER_DIR)  $< -o $@
-
-plugin.o:  plugin.c
-	$(GCC) $(CFLAGS) -fPIC -shared -pthread  $^ -c -o $@
-
-test1 : #plugin.so
-	#$(GCC) -fplugin=$(TOP)/plugin.so -I$(GCCPLUGIN_HEADER_DIR)  plugin.c -c -o plugin-bootstrap.o
-	${CXX} -fplugin=./.libs/template_plugin.so plugin.cpp -I/usr/lib/gcc/x86_64-linux-gnu/4.9/plugin/include/ -c -o plugin-bootstrap.o
-
 test2:
-	${CXX} -fplugin=./.libs/template_plugin.so plugincpp_test.cpp
+	${CXX} -fplugin=./.libs/template_plugin.so tests/plugincpp_test.cpp
 
 test3:
-	${CXX} -fplugin=./.libs/template_plugin.so -c test.c
+	${CXX} -fplugin=./.libs/template_plugin.so -c tests/test.c
 
 test4:
-	${CXX} -fplugin=./.libs/template_plugin.so -c test_tree.cpp
+	${CXX} -fplugin=./.libs/template_plugin.so -c tests/test_tree.cpp
 
 test5:
-	${CXX} -fplugin=./.libs/template_plugin.so -c test_enum.cpp
+	${CXX} -fplugin=./.libs/template_plugin.so -c tests/test_enum.cpp
 
 test6:
-	${CXX} -fplugin=./.libs/template_plugin.so -c test_enum1.cpp
+	${CXX} -fplugin=./.libs/template_plugin.so -c tests/test_enum1.cpp
 
 testgen:
-	${CXX} -save-temps -Wall -std=gnu++11 test_cpp_out.cpp
+	${CXX} -save-temps -Wall -std=gnu++11 tests/test_cpp_out.cpp
 
 clean :
 	rm plugin.so

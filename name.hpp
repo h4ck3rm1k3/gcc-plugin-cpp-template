@@ -1,4 +1,12 @@
-class NameWrapper : public SwitchCall<const char *>{
+
+class DefaultStr {
+public:
+  operator const char * () {
+    return "EMPTY";
+  }
+};
+
+class NameWrapper : public SwitchCall<const char *,DefaultStr>{
   /*
     Wrapper around the results of a name field for a thing.
     resolves the name string
@@ -7,6 +15,8 @@ class NameWrapper : public SwitchCall<const char *>{
 public:
   NameWrapper(tree name): name(name){}
 
+  const char * default_value(tree b) { return "NONE"; }
+  
   //template <class T> const char * call_type(T,tree b);
   
   const char * call_type_IDENTIFIER_NODE(tree b);

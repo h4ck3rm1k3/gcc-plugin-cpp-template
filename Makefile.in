@@ -265,7 +265,7 @@ template_plugin_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX \
 	$(AM_CXXFLAGS) $(CXXFLAGS) $(template_plugin_la_LDFLAGS) \
 	$(LDFLAGS) -o $@
 PROGRAMS = $(bin_PROGRAMS)
-am_testlink_OBJECTS = test_link.$(OBJEXT)
+am_testlink_OBJECTS = tests/test_link.$(OBJEXT)
 testlink_OBJECTS = $(am_testlink_OBJECTS)
 testlink_DEPENDENCIES = template_plugin.la
 AM_V_P = $(am__v_P_@AM_V@)
@@ -957,7 +957,7 @@ template_plugin_la_SOURCES = \
 
 template_plugin_la_LDFLAGS = -module
 template_plugin_la_LIBADD = 
-testlink_SOURCES = test_link.cpp
+testlink_SOURCES = tests/test_link.cpp
 testlink_LDADD = template_plugin.la
 all: config.h
 	$(MAKE) $(AM_MAKEFLAGS) all-am
@@ -1550,6 +1550,14 @@ clean-binPROGRAMS:
 	list=`for p in $$list; do echo "$$p"; done | sed 's/$(EXEEXT)$$//'`; \
 	echo " rm -f" $$list; \
 	rm -f $$list
+tests/$(am__dirstamp):
+	@$(MKDIR_P) tests
+	@: > tests/$(am__dirstamp)
+tests/$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) tests/$(DEPDIR)
+	@: > tests/$(DEPDIR)/$(am__dirstamp)
+tests/test_link.$(OBJEXT): tests/$(am__dirstamp) \
+	tests/$(DEPDIR)/$(am__dirstamp)
 
 testlink$(EXEEXT): $(testlink_OBJECTS) $(testlink_DEPENDENCIES) $(EXTRA_testlink_DEPENDENCIES) 
 	@rm -f testlink$(EXEEXT)
@@ -1557,6 +1565,7 @@ testlink$(EXEEXT): $(testlink_OBJECTS) $(testlink_DEPENDENCIES) $(EXTRA_testlink
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
+	-rm -f tests/*.$(OBJEXT)
 	-rm -f tree-nodes/*.$(OBJEXT)
 	-rm -f tree-nodes/*.lo
 
@@ -1571,7 +1580,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/name.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/plugin.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/record_context.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test_link.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@tests/$(DEPDIR)/test_link.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/abs_expr.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/addr_expr.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/addr_space_convert_expr.Plo@am__quote@
@@ -2084,6 +2093,8 @@ clean-generic:
 distclean-generic:
 	-test -z "$(CONFIG_CLEAN_FILES)" || rm -f $(CONFIG_CLEAN_FILES)
 	-test . = "$(srcdir)" || test -z "$(CONFIG_CLEAN_VPATH_FILES)" || rm -f $(CONFIG_CLEAN_VPATH_FILES)
+	-rm -f tests/$(DEPDIR)/$(am__dirstamp)
+	-rm -f tests/$(am__dirstamp)
 	-rm -f tree-nodes/$(DEPDIR)/$(am__dirstamp)
 	-rm -f tree-nodes/$(am__dirstamp)
 
@@ -2097,7 +2108,7 @@ clean-am: clean-binPROGRAMS clean-generic clean-libtool \
 
 distclean: distclean-am
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
-	-rm -rf ./$(DEPDIR) tree-nodes/$(DEPDIR)
+	-rm -rf ./$(DEPDIR) tests/$(DEPDIR) tree-nodes/$(DEPDIR)
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-hdr distclean-libtool distclean-tags
@@ -2145,7 +2156,7 @@ installcheck-am:
 maintainer-clean: maintainer-clean-am
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
 	-rm -rf $(top_srcdir)/autom4te.cache
-	-rm -rf ./$(DEPDIR) tree-nodes/$(DEPDIR)
+	-rm -rf ./$(DEPDIR) tests/$(DEPDIR) tree-nodes/$(DEPDIR)
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 

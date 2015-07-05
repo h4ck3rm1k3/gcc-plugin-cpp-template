@@ -2,7 +2,12 @@
 #include "enumeral_type.hpp"
 
 #include "switchcall.hpp"
-class ProcEnum : public SwitchCall<int>{
+class DefaultInt {
+public:
+  operator int() {return -1;}
+};
+
+class ProcEnum : public SwitchCall<int,DefaultInt>{
   tree node;
 public:
   ProcEnum(tree node): node(node){}
