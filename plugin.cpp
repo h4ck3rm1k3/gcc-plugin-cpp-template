@@ -58,21 +58,16 @@ static void generic_callback_PLUGIN_START_UNIT(void *a, void * b)
 
 static void generic_callback_PLUGIN_FINISH_UNIT(void *a, void * b)
 {
-  int i;
-  tree t;
-  FOR_EACH_VEC_ELT ( (*all_translation_units), i, t )
-    {
-      //cerr << "each unit"<< i << " : " << t  << endl;
-      call_type_ret<CallBack,int>(t,
-                                  CallBack::finish_unit_callback);
-    }    
-  // symtab_node *node;
-  // FOR_EACH_DEFINED_SYMBOL (node)
-  //   
-  //                               );
-  call_type_ret<CallBack,int>(global_namespace,
-                              CallBack::finish_unit_callback);
-  
+  // int i;
+  // tree t;
+  // FOR_EACH_VEC_ELT ( (*all_translation_units), i, t )
+  //   {
+  //     //cerr << "each unit"<< i << " : " << t  << endl;
+  //     call_type_ret<CallBack,int>(t,
+  //                                 CallBack::finish_unit_callback);
+  //   }    
+  // call_type_ret<CallBack,int>(global_namespace,
+  //                             CallBack::finish_unit_callback); 
   //cerr << "end unit"<< a << " : " << b  << endl;
 }
 

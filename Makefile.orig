@@ -20,6 +20,12 @@ test21:
 test22:
 	${CXX} -c -fplugin=./.libs/template_plugin.so tests/plugincpp_interface.cpp
 
+test23:
+	${CXX} -c -fplugin=./.libs/template_plugin.so tests/plugincpp_interface_simple.cpp
+
+test7:
+	${CXX} -c -fplugin=./.libs/template_plugin.so tests/test_struct.cpp
+
 test3:
 	${CXX} -fplugin=./.libs/template_plugin.so -c tests/test.c
 

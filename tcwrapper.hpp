@@ -14,8 +14,9 @@ public:
   virtual void check() {
     std::cerr << "wrapper class for type (";
     std::cerr << tc;
-    std::cerr << ") ";
-    //std::cerr << get_tree_code_name (tc);
+    std::cerr << ",";
+    std::cerr << get_tree_code_name (tc);
+    std::cerr << ") ";    
     std::cerr << std::endl;
   }
   static bool check_node(tree f) {

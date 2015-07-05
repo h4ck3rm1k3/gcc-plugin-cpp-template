@@ -26,9 +26,10 @@ void CallBack::check_type(tree f) {
   CallBack * pT=  callbacks[tc];
   
   if (pT){
-    cerr << "check field tc (" << tc << ") ";
-    cerr << get_tree_code_name (tc);
-    cerr << " callback object (" << pT << ") ";
+    cerr << "CallBack::check_type( tc=" << tc << ",";
+    cerr << " name= " << get_tree_code_name (tc) << ",";
+    cerr << " node= " << f;
+    cerr << ")";
     //pT->check();
   }
   else{
@@ -69,7 +70,7 @@ void CallBack::finish_unit (tree t){
 
 int CallBack::finish_type_callback(CallBack* c, tree_node* t)
 {
-  std::cerr << "finish type callback: " << c << " Node:" << t;
+  std::cerr << "finish type callback(Callback:" << c << " Node:" << t << ") ";
   CallBack::check_type(t);
   if(c)
     c->finish_type(t);

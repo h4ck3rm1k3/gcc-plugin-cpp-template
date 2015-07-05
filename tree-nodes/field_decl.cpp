@@ -29,6 +29,7 @@ const char * TC_FIELD_DECL::process_name(tree t) {
   else
     return "No Name2";
 }
+
 const char * TC_FIELD_DECL::finish_type_field(TC_FIELD_DECL* self,tree f)
 {
   //std::cerr << "finish_type_field" << std::endl;
@@ -57,7 +58,20 @@ TC_FIELD_DECL aTC_FIELD_DECL;
 
 
 void TC_FIELD_DECL::finish_type (tree t){
-  std::cerr << "TC_FIELD_DECL::finish_type" << std::endl;
+  std::cerr << "TC_FIELD_DECL::finish_type";
+
+  tree type = TREE_TYPE (t);
+  
+  const char * r= this->process_name(t);
+  std::cerr << " got name: " << r;
+  std::cerr << " got type: ";
+  call_type_ret<CallBack,
+                int>(type,
+                     CallBack::finish_type_callback
+                     );
+  
+  std::cerr << std::endl;
+  
 }
 
 void TC_FIELD_DECL::finish_decl (tree t){

@@ -1,4 +1,4 @@
-
+#pragma once
 class DefaultStr {
 public:
   operator const char * () {
