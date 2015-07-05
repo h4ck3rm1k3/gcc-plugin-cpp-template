@@ -15,7 +15,10 @@ test2:
 	${CXX} -fplugin=./.libs/template_plugin.so tests/plugincpp_test.cpp
 
 test21:
-	${CXX} -fplugin=./.libs/template_plugin.so tests/crash1.cpp
+	${CXX} -c -fplugin=./.libs/template_plugin.so tests/crash1.cpp
+
+test22:
+	${CXX} -c -fplugin=./.libs/template_plugin.so tests/plugincpp_interface.cpp
 
 test3:
 	${CXX} -fplugin=./.libs/template_plugin.so -c tests/test.c

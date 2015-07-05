@@ -38,7 +38,8 @@ const char * RecordContext::field_name(TC_IDENTIFIER_NODE * cb,  tree_node* t){
 
 void RecordContext::field_begin(Field & fld){
 
-  //cerr << "RecordContext::field_begin" << endl;
+  cerr << "RecordContext::field_begin" << endl;
+  return;
     
   if ( fld.bit_field)
     {

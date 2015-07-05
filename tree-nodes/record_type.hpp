@@ -8,6 +8,9 @@ public :
   const char * process_name(tree t);
   void process_fields(RecordContext * c,tree f);
   virtual void finish_type (tree t);
+  virtual void finish_decl (tree t);
+  virtual void finish_unit (tree t);
+
   virtual void check() {
     std::cerr << " record type ("<< get_treecode()<<") " << std::endl;
   }

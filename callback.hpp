@@ -15,6 +15,9 @@ public:
     //std::cerr << "base class" << std::endl;
   
   static int finish_type_callback (CallBack *self, tree t);
+  /*
+    finish a declaration from the compiler callback
+   */
   static int finish_decl_callback (CallBack *self, tree t);
 
   /*

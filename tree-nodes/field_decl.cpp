@@ -57,6 +57,7 @@ TC_FIELD_DECL aTC_FIELD_DECL;
 
 
 void TC_FIELD_DECL::finish_type (tree t){
+  std::cerr << "TC_FIELD_DECL::finish_type" << std::endl;
 }
 
 void TC_FIELD_DECL::finish_decl (tree t){
