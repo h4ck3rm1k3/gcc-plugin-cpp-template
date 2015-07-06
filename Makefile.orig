@@ -32,7 +32,7 @@ test3:
 test4:
 	${CXX} -fplugin=./.libs/template_plugin.so -c tests/test_tree.cpp
 
-test5:
+test_enum:
 	${CXX} -fplugin=./.libs/template_plugin.so -c tests/test_enum.cpp
 
 test6:

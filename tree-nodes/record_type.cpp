@@ -39,13 +39,13 @@ void TC_RECORD_TYPE::process_fields(RecordContext * c,tree f) {
     int x= call_type_ret<CallBack,int>(f,
                                        CallBack::finish_type_callback
                                        );
-    //if (TC_FIELD_DECL::check_node(f)) {
-      //Field fld(f);      
-      //c->field_begin(fld);
-    //}
-    //else {
-    //cerr <<  "Field unknown" << endl;
-    //}
+    if (TC_FIELD_DECL::check_node(f)) {
+      Field fld(f);      
+      c->field_begin(fld);
+    }
+    else {
+      cerr <<  "Field unknown" << endl;
+    }
     f = chain(f);
   }
 }
