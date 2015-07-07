@@ -38,9 +38,8 @@ const char * RecordContext::field_name(TC_IDENTIFIER_NODE * cb,  tree_node* t){
 
 void RecordContext::field_begin(Field & fld){
 
-  cerr << "RecordContext::field_begin" << endl;
-  return;
-    
+  cerr << "RecordContext::field_begin(";
+
   if ( fld.bit_field)
     {
       cout << "\t define_generic_bitfield<" ;
@@ -65,7 +64,8 @@ void RecordContext::field_begin(Field & fld){
        << fld.bit_offset <<","
        << fld.bit_size       
        << ");" 
-       << endl;      
+       << endl;
+  cerr << ")";
 }
 
 void RecordContext::record_end(){

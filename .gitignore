@@ -27,3 +27,6 @@ a.out
 /tree-nodes/*.lo
 /tree-nodes/.dirstamp
 /tests/*.o
+/err.txt
+/log.txt
+/tests/test_struct.cpp.001t.tu

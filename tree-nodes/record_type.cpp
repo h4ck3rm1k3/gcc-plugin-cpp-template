@@ -43,18 +43,22 @@ class RecordTypeField : public SwitchCall<int,DefaultVal>{
     handle the type of a field type
   */
 public:
-  RecordTypeField(tree field) {
+  RecordContext * c;
+  RecordTypeField(RecordContext * c,tree field):c(c) {
     CallBack::check_type(field);
     call<RecordTypeField>(field);
   }
 
   int call_type_TYPE_DECL(tree f) {}
   int call_type_FIELD_DECL(tree f) {
+    std::cerr << "RecordTypeField::call_type_FIELD_DECL(";
     call_type_ret<CallBack,int>(f,
                                 CallBack::finish_type_callback
                                 );
+    Field fld(f);      
+    c->field_begin(fld);
+    std::cerr << ")";
   }
-
 };
 
 void TC_RECORD_TYPE::process_fields(RecordContext * c,tree f) {
@@ -63,18 +67,7 @@ void TC_RECORD_TYPE::process_fields(RecordContext * c,tree f) {
     return;
   while (f) {
     std::cerr << "field(";
-
-    RecordTypeField proc(f);
-    
-    
-    /*if (TC_FIELD_DECL::check_node(f)) {
-      Field fld(f);      
-      c->field_begin(fld);
-    }
-    else {
-      cerr <<  "Field_unknown.";
-      }
-    */
+    RecordTypeField proc(c,f);
     f = chain(f);
     std::cerr << ");";
   }
