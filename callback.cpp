@@ -26,9 +26,9 @@ void CallBack::check_type(tree f) {
   CallBack * pT=  callbacks[tc];
   
   if (pT){
-    cerr << "CallBack::check_type( tc=" << tc << ",";
-    cerr << " name= " << get_tree_code_name (tc) << ",";
-    cerr << " node= " << f;
+    cerr << "CallBack::check_type(tc=" << tc << ",";
+    cerr << " name=" << get_tree_code_name (tc) << ",";
+    cerr << " node=" << f;
     cerr << ")";
     //pT->check();
   }
@@ -59,33 +59,34 @@ void CallBack::finish_unit (tree t){
 
 }
 
+void CallBack::check(){
+  std::cerr << "base class" << std::endl;
+}
+
 int CallBack::finish_type_callback(CallBack* c, tree_node* t)
 {
-  std::cerr << "finish type callback(Callback:" << c << " Node:" << t << ") ";
+  std::cerr << "CallBack::finish_type_callback(";
   CallBack::check_type(t);
-  if(c)
+  if(c) {
+    std::cerr << ",call(finish_type(";
     c->finish_type(t);
-  std::cerr << std::endl;
+    std::cerr << "))";
+  }
+  std::cerr << ")";
 }
 
 int CallBack::finish_decl_callback(CallBack* c, tree_node* t)
 {
-  //std::cerr << "finish decl callback: " << c << " Node:" << t << std::endl;
-  //CallBack::check_type(t);
-  /*if(c)
-    c->finish_decl(t);
-  */
+  std::cerr << "CallBack::finish_decl_callback(CallBack:" << c << ",Node:" << t;
+  CallBack::check_type(t);
+  // if(c) c->finish_decl(t);
+  cerr << ")";
 }
 
 int CallBack::finish_unit_callback(CallBack* c, tree_node* t)
 {
-  //std::cerr << "finish unit callback: " << c << " Node:" << t << std::endl;
-  //CallBack::check_type(t);
-  /*if(c)
-    c->finish_unit(t);
-  */
+  std::cerr << "finish unit callback: " << c << " Node:" << t;
+  CallBack::check_type(t);
+  //if(c) c->finish_unit(t);
 }
 
-void CallBack::check(){
-  std::cerr << "base class" << std::endl;
-}

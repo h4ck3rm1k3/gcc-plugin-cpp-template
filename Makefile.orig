@@ -26,6 +26,9 @@ test23:
 test7:
 	${CXX} -c -fplugin=./.libs/template_plugin.so tests/test_struct.cpp
 
+test71:
+	gcc -c -fplugin=./.libs/template_plugin.so tests/test_struct.cpp
+
 test3:
 	${CXX} -fplugin=./.libs/template_plugin.so -c tests/test.c
 

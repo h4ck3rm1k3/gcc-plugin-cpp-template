@@ -31,13 +31,13 @@ static void generic_callback_PLUGIN_ALL_IPA_PASSES_START(){}
 static void generic_callback_PLUGIN_FINISH_TYPE (tree t, void *i)
 {
   //cpp_callback_PLUGIN_FINISH_TYPE (t, i);
-  cerr  << "generic_callback_PLUGIN_FINISH_TYPE: ";
+  cerr  << "generic_callback_PLUGIN_FINISH_TYPE(";
   int x= call_type_ret<
     CallBack,
     int>(t,
          CallBack::finish_type_callback
          );
-  cerr << endl;
+  cerr << ")" << endl;
 }
 
 static void generic_callback_PLUGIN_FINISH_DECL (tree t, void *i)

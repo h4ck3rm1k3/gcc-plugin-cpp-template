@@ -22,34 +22,66 @@ tree TC_RECORD_TYPE::chain(tree t) {
 
 
 const char * TC_RECORD_TYPE::process_name(tree t) {
-  //std::cerr << "TC_RECORD_TYPE::process_name" << std::endl;
+  std::cerr << "TC_RECORD_TYPE::process_name(";
   //check_type(name(t));
   if (!t)
     return "No Name";
   tree n= name(t);
-
   NameWrapper name(n);
-  return name.resolve();
-
+  const char * pstr= name.resolve();
+  std::cerr << "string="<< pstr << "),";
+  return pstr;
 }
+
+class DefaultVal {
+public:
+  operator int() { return -1;}
+};
+
+class RecordTypeField : public SwitchCall<int,DefaultVal>{
+  /*
+    handle the type of a field type
+  */
+public:
+  RecordTypeField(tree field) {
+    CallBack::check_type(field);
+    call<RecordTypeField>(field);
+  }
+
+  int call_type_TYPE_DECL(tree f) {}
+  int call_type_FIELD_DECL(tree f) {
+    call_type_ret<CallBack,int>(f,
+                                CallBack::finish_type_callback
+                                );
+  }
+
+};
+
 void TC_RECORD_TYPE::process_fields(RecordContext * c,tree f) {
+  std::cerr << "TC_RECORD_TYPE::process_fields(";
   if (!f)
     return;
   while (f) {
-    int x= call_type_ret<CallBack,int>(f,
-                                       CallBack::finish_type_callback
-                                       );
-    if (TC_FIELD_DECL::check_node(f)) {
+    std::cerr << "field(";
+
+    RecordTypeField proc(f);
+    
+    
+    /*if (TC_FIELD_DECL::check_node(f)) {
       Field fld(f);      
       c->field_begin(fld);
     }
     else {
-      cerr <<  "Field unknown" << endl;
-    }
+      cerr <<  "Field_unknown.";
+      }
+    */
     f = chain(f);
+    std::cerr << ");";
   }
+  std::cerr << ")";
 }
-void TC_RECORD_TYPE::finish_type (tree t){
+void TC_RECORD_TYPE::finish_type(tree t){
+  std::cerr << "TC_RECORD_TYPE::finish_type(";
   RecordContext c;
   introspect_struct<tree_base>((tree_base*)t);
   const char *  n=process_name(t);
@@ -58,6 +90,7 @@ void TC_RECORD_TYPE::finish_type (tree t){
   c.record_begin(n);
   process_fields(&c,fields(t));
   c.record_end();
+  std::cerr << ")";
 }
 TC_RECORD_TYPE aTC_RECORD_TYPE;
 /////////////////////////////////////////////////////////////////
