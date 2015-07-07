@@ -38,10 +38,13 @@ public:
   operator int() { return -1;}
 };
 
+
 class RecordTypeField : public SwitchCall<int,DefaultVal>{
   /*
     handle the type of a field type
   */
+
+
 public:
   RecordContext * c;
   RecordTypeField(RecordContext * c,tree field):c(c) {
@@ -52,14 +55,14 @@ public:
   int call_type_TYPE_DECL(tree f) {}
   int call_type_FIELD_DECL(tree f) {
     std::cerr << "RecordTypeField::call_type_FIELD_DECL(";
-    call_type_ret<CallBack,int>(f,
-                                CallBack::finish_type_callback
-                                );
+    call_type_ret<CallBack,int>(f, CallBack::finish_type_callback);
     Field fld(f);      
     c->field_begin(fld);
     std::cerr << ")";
   }
 };
+
+
 
 void TC_RECORD_TYPE::process_fields(RecordContext * c,tree f) {
   std::cerr << "TC_RECORD_TYPE::process_fields(";

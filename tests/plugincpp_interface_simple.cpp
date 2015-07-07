@@ -8,6 +8,30 @@ union tree_node;
 typedef union tree_node *tree;
 struct double_int {};
 
+typedef struct tree_base_union_bits {
+  unsigned lang_flag_0 : 1;
+  unsigned lang_flag_1 : 1;
+  unsigned lang_flag_2 : 1;
+  unsigned lang_flag_3 : 1;
+  unsigned lang_flag_4 : 1;
+  unsigned lang_flag_5 : 1;
+  unsigned lang_flag_6 : 1;
+  unsigned saturating_flag : 1;
+  unsigned unsigned_flag : 1;
+  unsigned packed_flag : 1;
+  unsigned user_align : 1;
+  unsigned nameless_flag : 1;
+  unsigned atomic_flag : 1;
+  unsigned spare0 : 3;
+  unsigned spare1 : 8;
+  unsigned address_space : 8;
+} base_union_bits_t;
+
+typedef union tree_base_union {
+  base_union_bits_t bits;
+  int length;
+  unsigned int version;
+} tree_base_union_t;
 
 struct tree_base {
   enum tree_code code : 16;
@@ -27,30 +51,7 @@ struct tree_base {
   unsigned protected_flag : 1;
   unsigned deprecated_flag : 1;
   unsigned default_def_flag : 1;
-  union tree_base_union {
-    struct tree_base_union_bits {
-      unsigned lang_flag_0 : 1;
-      unsigned lang_flag_1 : 1;
-      unsigned lang_flag_2 : 1;
-      unsigned lang_flag_3 : 1;
-      unsigned lang_flag_4 : 1;
-      unsigned lang_flag_5 : 1;
-      unsigned lang_flag_6 : 1;
-      unsigned saturating_flag : 1;
-      unsigned unsigned_flag : 1;
-      unsigned packed_flag : 1;
-      unsigned user_align : 1;
-      unsigned nameless_flag : 1;
-      unsigned atomic_flag : 1;
-      unsigned spare0 : 3;
-      unsigned spare1 : 8;
-      unsigned address_space : 8;
-    } bits;
-    
-    int length;
-    unsigned int version;
-  } u;
-  
+  tree_base_union_t u;  
 };
 
 struct tree_typed {

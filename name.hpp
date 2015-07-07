@@ -24,7 +24,13 @@ public:
   const char * call_type_RECORD_TYPE(tree b);
 
   const char * resolve() {
-    return call<NameWrapper>(name);
+    if (name) {
+        return call<NameWrapper>(name);
+    }
+    else
+      {
+        return "<NULL>";
+      }
   }
 
 };

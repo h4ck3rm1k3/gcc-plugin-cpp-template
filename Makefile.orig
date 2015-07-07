@@ -44,6 +44,9 @@ test6:
 testgen:
 	${CXX} -save-temps -Wall -std=gnu++11 tests/test_cpp_out.cpp
 
+testgen2:
+	${CXX} -save-temps -Wall -std=gnu++11 tests/test_cpp_out_v2.cpp
+
 clean :
 	rm plugin.so
 	rm *.o
