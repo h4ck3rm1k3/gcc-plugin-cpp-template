@@ -23,6 +23,9 @@ test22:
 test23:
 	${CXX} -c -fplugin=./.libs/template_plugin.so tests/plugincpp_interface_simple.cpp
 
+testarray:
+	${CXX} -c -std=gnu++11 -fplugin=./.libs/template_plugin.so tests/test_array.cpp
+
 test7:
 	${CXX} -c -fplugin=./.libs/template_plugin.so tests/test_struct.cpp
 

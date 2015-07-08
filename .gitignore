@@ -30,3 +30,7 @@ a.out
 /err.txt
 /log.txt
 /tests/test_struct.cpp.001t.tu
+/test_array.cpp
+/report.txt
+/tests/plugincpp_interface_simple.cpp.001t.tu
+/tree-nodes/err.txt
