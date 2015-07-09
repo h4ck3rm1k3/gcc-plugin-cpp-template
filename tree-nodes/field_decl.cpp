@@ -63,6 +63,24 @@ class DefaultVal { public:  operator int() { return -1;}};
 
 class FieldTypeSwitchCall : public SwitchCall<int,DefaultVal>{
 public:
+  int indent;
+  const char * name;
+  
+  FieldTypeSwitchCall(tree field_type, const char * name="field_type", int indent = 0):
+    indent(indent),
+    name(name)
+  {
+    std::cerr << endl;
+    for (int i =0; i <= indent; i++) {
+      std::cerr << "  "; //<< i << ":"<< indent << endl;
+    }
+    std::cerr << "SWITCH:" <<name << ":";
+    
+    CallBack::check_type(field_type);
+    std::cerr <<  NameWrapper(TYPE_NAME(field_type)).resolve();
+    call<FieldTypeSwitchCall>(field_type);
+  }
+
   const char * process_name(tree t) {
     tree name = TYPE_NAME(t);
     if (name) {
@@ -72,53 +90,43 @@ public:
     }
   }
 
-  FieldTypeSwitchCall(tree field_type) {
-    std::cerr << "Fieldtype:" << endl;
-    CallBack::check_type(field_type);
-    std::cerr <<  NameWrapper(TYPE_NAME(field_type)).resolve();
-    call<FieldTypeSwitchCall>(field_type);
-  }
-    
   int call_type_POINTER_TYPE(tree f) {
-    std::cerr << "FieldTypeSwitchCall::call_type_POINTER_TYPE";
-    FieldTypeSwitchCall a(TREE_TYPE(f));    
+    std::cerr << "TS:POINTERT";
+    FieldTypeSwitchCall a(TREE_TYPE(f),"Pointer",indent + 1);    
   }
   
   int call_type_RECORD_TYPE(tree f) {
-    std::cerr << "FieldTypeSwitchCall::call_type_RECORD_TYPE(";
+    std::cerr << "TS:RECORD_TYPE(";
     const char * r= process_name(f);
     std::cerr << "name(" << r << "))";  
   }
 
   int call_type_UNION_TYPE(tree f) {
-    std::cerr << "FieldTypeSwitchCall::call_type_UNION_TYPE(";
+    std::cerr << "TS:UNION_TYPE(";
     const char * r= process_name(f);
     std::cerr << "name(" << r << "))";  
   }
   
   int call_type_INTEGER_TYPE(tree f) {
-    std::cerr << "FieldTypeSwitchCall::call_type_INTEGER_TYPE(";
+    std::cerr << "TS:INTEGER_TYPE(";
     const char * r= process_name(f);
     std::cerr << "name(" << r << "))";  
   }
   
   int call_type_ARRAY_TYPE(tree f) {
 
-    std::cerr << "FieldTypeSwitchCall::call_type_ARRAY_TYPE(";
+    std::cerr << "TS:ARRAY_TYPE(";
     tree dom = TYPE_DOMAIN (f);
-    std::cerr << "DOM=" << dom << ";";
+    std::cerr << "DOM(";
+    //std::cerr << "DOM=" << dom << ";";
     CallBack::check_type(dom);
-    std::cerr << "DOM_MIN=" <<TREE_INT_CST_LOW(TYPE_MIN_VALUE (dom)) << ";";
-    std::cerr << "DOM_MAX=" <<TREE_INT_CST_LOW(TYPE_MAX_VALUE (dom)) << ";";
+    std::cerr << "DOM_MIN=" <<TREE_INT_CST_LOW(TYPE_MIN_VALUE (dom)) << ",";
+    std::cerr << "DOM_MAX=" <<TREE_INT_CST_LOW(TYPE_MAX_VALUE (dom)) << ")";
 
-    tree type = TREE_TYPE (f);
-    std::cerr << "TYPE=" << type << ";";
-    CallBack::check_type(type);
-    FieldTypeSwitchCall evaltype(type);
-
-    tree typev = TYPE_MAIN_VARIANT (f);
-    std::cerr << "TYPEV=" << typev << ";";
-    CallBack::check_type(typev);
+    
+    //tree typev = TYPE_MAIN_VARIANT (f);
+    //std::cerr << "TYPEV=" << typev << ";";
+    //CallBack::check_type(typev);
     //FieldTypeSwitchCall evaltypev(typev);
 
     tree maxval = TYPE_ARRAY_MAX_SIZE (f);
@@ -132,80 +140,85 @@ public:
     std::cerr << "string_flag=" << string_flag << ";";
     std::cerr << "TYPE_SIZE_UNIT=" << TREE_INT_CST_LOW(TYPE_SIZE_UNIT(f))<<";";
 
-    
     std::cerr << "nonaliased=" << TYPE_NONALIASED_COMPONENT(f);
+        
+    tree type = TREE_TYPE (f);
+    std::cerr << "TYPE(";
+    CallBack::check_type(type);
+    FieldTypeSwitchCall evaltype(type,"array_type",indent +1);
+    std::cerr << ")";
+   
       
     std::cerr << ")";
   }
   
   //---------
   int call_type_REAL_TYPE(tree f) {
-    std::cerr << "FieldTypeSwitchCall::call_type_REAL_TYPE";
+    std::cerr << "TS:REALT";
   }
   
   int call_type_REFERENCE_TYPE(tree f) {
-    std::cerr << "FieldTypeSwitchCall::call_type_REFERENCE_TYPE";
+    std::cerr << "TS:REFERENCET";
   }
   
   int call_type_QUAL_UNION_TYPE(tree f) {
-    std::cerr << "FieldTypeSwitchCall::call_type_QUAL_UNION_TYPE";
+    std::cerr << "TS:QUAL_UNIONT";
   } 
   int call_type_ERROR_MARK(tree f) {
-      std::cerr << "FieldTypeSwitchCall::call_type_ERROR_MARK";
+      std::cerr << "TS:ERROR_MARK";
     }
     int call_type_IDENTIFIER_NODE(tree f) {
-      std::cerr << "FieldTypeSwitchCall::call_type_IDENTIFIER_NODE";
+      std::cerr << "TS:IDENTIFIER_NODE";
     }
     int call_type_TREE_LIST(tree f) {
-      std::cerr << "FieldTypeSwitchCall::call_type_TREE_LIST";
+      std::cerr << "TS:TREE_LIST";
     }
     int call_type_TREE_VEC(tree f) {
-      std::cerr << "FieldTypeSwitchCall::call_type_TREE_VEC";
+      std::cerr << "TS:TREE_VEC";
     }
     int call_type_BLOCK(tree f) {
-      std::cerr << "FieldTypeSwitchCall::call_type_BLOCK";
+      std::cerr << "TS:BLOCK";
     }
     int call_type_OFFSET_TYPE(tree f) {
-      std::cerr << "FieldTypeSwitchCall::call_type_OFFSET_TYPE";
+      std::cerr << "TS:OFFSETT";
     }
     int call_type_ENUMERAL_TYPE(tree f) {
-      std::cerr << "FieldTypeSwitchCall::call_type_ENUMERAL_TYPE";
+      std::cerr << "TS:ENUMERALT";
     }
     int call_type_BOOLEAN_TYPE(tree f) {
-      std::cerr << "FieldTypeSwitchCall::call_type_BOOLEAN_TYPE";
+      std::cerr << "TS:BOOLEANT";
     }
     int call_type_NULLPTR_TYPE(tree f) {
-      std::cerr << "FieldTypeSwitchCall::call_type_NULLPTR_TYPE";
+      std::cerr << "TS:NULLPTRT";
     }
   
   int call_type_FIXED_POINT_TYPE(tree f) {
-    std::cerr << "FieldTypeSwitchCall::call_type_FIXED_POINT_TYPE";
+    std::cerr << "TS:FIXED_POINTT";
     }
   
   int call_type_COMPLEX_TYPE(tree f) {
-    std::cerr << "FieldTypeSwitchCall::call_type_COMPLEX_TYPE";
+    std::cerr << "TS:COMPLEXT";
   }
 
   int call_type_VECTOR_TYPE(tree f) {
-    std::cerr << "FieldTypeSwitchCall::call_type_VECTOR_TYPE";
+    std::cerr << "TS:VECTORT";
   }
 
  int call_type_VOID_TYPE(tree f) {
-    std::cerr << "FieldTypeSwitchCall::call_type_VOID_TYPE";
+    std::cerr << "TS:VOIDT";
   }
  int call_type_POINTER_BOUNDS_TYPE(tree f) {
-    std::cerr << "FieldTypeSwitchCall::call_type_POINTER_BOUNDS_TYPE";
+    std::cerr << "TS:POINTER_BOUNDST";
   }
  int call_type_FUNCTION_TYPE(tree f) {
-    std::cerr << "FieldTypeSwitchCall::call_type_FUNCTION_TYPE";
+    std::cerr << "TS:FUNCTIONT";
   }
  int call_type_METHOD_TYPE(tree f) {
-    std::cerr << "FieldTypeSwitchCall::call_type_METHOD_TYPE";
+    std::cerr << "TS:METHODT";
   }
  int call_type_LANG_TYPE(tree f) {
-    std::cerr << "FieldTypeSwitchCall::call_type_LANG_TYPE";
+    std::cerr << "TS:LANGT";
   }
-
   
 };
 
@@ -217,7 +230,7 @@ void TC_FIELD_DECL::finish_type (tree t){
   std::cerr << "name(" << r << "),";  
   std::cerr << "type(";
 
-  FieldTypeSwitchCall doswitch(type);
+  FieldTypeSwitchCall doswitch(type,"Field",1);
   //call_type_ret<CallBack, int>(type, CallBack::finish_type_callback        );
   std::cerr << "))";
   

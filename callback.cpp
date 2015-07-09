@@ -26,11 +26,7 @@ void CallBack::check_type(tree f) {
   CallBack * pT=  callbacks[tc];
   
   if (pT){
-    cerr << "CallBack::check_type(tc=" << tc << ",";
-    cerr << " name=" << get_tree_code_name (tc) << ",";
-    cerr << " node=" << f;
-    cerr << ")";
-    //pT->check();
+    cerr << "ct(\"" << get_tree_code_name (tc) << "\")";
   }
   else{
     cerr << "no callback defined for tc (" << tc << ") ";
