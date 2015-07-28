@@ -1,3 +1,4 @@
+#pragma once
 #include "tcwrapper.hpp"
 /*
  * Field Decl wrapper class 
@@ -16,7 +17,7 @@ public :
 
   bool C_BIT_FIELD(tree t);
   tree SIZE (tree t) { return DECL_SIZE(t);}
-  long unsigned int SIZE_I (tree t) { return TREE_INT_CST_LOW(SIZE(t));}
+  long unsigned int SIZE_I (tree t);
   int ALIGN (tree t) { return DECL_ALIGN(t);}
   //
 
@@ -25,8 +26,8 @@ public :
   tree FIELD_OFFSET(tree t) { return DECL_FIELD_OFFSET(t);}
   tree FIELD_BIT_OFFSET(tree t) { return DECL_FIELD_BIT_OFFSET(t);}
 
-  long unsigned int FIELD_OFFSET_I(tree t) { return TREE_INT_CST_LOW(FIELD_OFFSET(t));}
-  long unsigned int FIELD_BIT_OFFSET_I(tree t) { return TREE_INT_CST_LOW(FIELD_BIT_OFFSET(t));}
+  long unsigned int FIELD_OFFSET_I(tree t);
+  long unsigned int FIELD_BIT_OFFSET_I(tree t);
 
   tree BIT_FIELD_TYPE(tree t)  { return DECL_BIT_FIELD_TYPE(t);}
   int OFFSET_ALIGN(tree t)  { return DECL_OFFSET_ALIGN(t);}

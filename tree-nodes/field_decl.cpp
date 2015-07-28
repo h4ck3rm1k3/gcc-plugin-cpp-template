@@ -8,7 +8,7 @@
 #include <tree.h>
 #include "switchcall.hpp"
 #include "name.hpp"
-//#include "cp/cp-tree.h"
+#include "field_decl.hpp"
 
 tree TC_FIELD_DECL::name(tree t) {
   return DECL_NAME(t);
@@ -241,4 +241,33 @@ void TC_FIELD_DECL::finish_decl (tree t){
 }
 
 void TC_FIELD_DECL::finish_unit (tree t){
+}
+
+long unsigned int TC_FIELD_DECL::FIELD_OFFSET_I(tree t) {
+  tree f = FIELD_OFFSET(t);
+  if (f) {
+    return TREE_INT_CST_LOW(f);
+  }
+  return 0;
+}
+  
+long unsigned int TC_FIELD_DECL::FIELD_BIT_OFFSET_I(tree t)
+{
+  tree f = FIELD_BIT_OFFSET(t);
+  if (f) {
+    return TREE_INT_CST_LOW(f);
+  }
+  return 0;
+}
+
+long unsigned int TC_FIELD_DECL::SIZE_I (tree t) {
+  tree s = SIZE(t);
+  if (s) {
+    return TREE_INT_CST_LOW(s);
+  }
+  else
+    {
+      return 0;
+    }
+
 }

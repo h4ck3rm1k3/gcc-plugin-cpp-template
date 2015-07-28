@@ -14,6 +14,9 @@ runtest :
 test2:
 	${CXX} -fplugin=./.libs/template_plugin.so tests/plugincpp_test.cpp
 
+test2c1:
+	${CXX} -fplugin=./.libs/template_plugin.so tests/plugincpp_test_template.cpp
+
 test21:
 	${CXX} -c -fplugin=./.libs/template_plugin.so tests/crash1.cpp
 
