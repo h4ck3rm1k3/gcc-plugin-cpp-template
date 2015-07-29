@@ -2,9 +2,9 @@ ACLOCAL_AMFLAGS = -I m4
 
 GCCPLUGINS_DIR = `${CXX} -print-file-name=plugin`
 
-AM_CPPFLAGS = -I $(GCCPLUGINS_DIR)/include -I $(srcdir)/../libgdl $(GMP_INC) -Itree-nodes
+AM_CPPFLAGS = -I $(GCCPLUGINS_DIR)/include -I $(srcdir)/../libgdl $(GMP_INC) -Itree-nodes -g3
 
-AM_CFLAGS = -Wall -std=gnu++11
+AM_CFLAGS = -Wall -std=gnu++11 -g3
 
 pkglib_LTLIBRARIES = template_plugin.la
 
@@ -471,7 +471,7 @@ template_plugin_la_SOURCES = \
 	tree-nodes/cilk_spawn_stmt.cpp \
 	tree-nodes/cilk_sync_stmt.hpp \
 	tree-nodes/cilk_sync_stmt.cpp \
-	# skip
+	# last line is empty
 
 template_plugin_la_LDFLAGS = -module
 

@@ -120,9 +120,15 @@ public:
     std::cerr << "DOM(";
     //std::cerr << "DOM=" << dom << ";";
     CallBack::check_type(dom);
-    std::cerr << "DOM_MIN=" <<TREE_INT_CST_LOW(TYPE_MIN_VALUE (dom)) << ",";
-    std::cerr << "DOM_MAX=" <<TREE_INT_CST_LOW(TYPE_MAX_VALUE (dom)) << ")";
-
+    tree m = TYPE_MIN_VALUE (dom);
+    if (m) {
+      std::cerr << "DOM_MIN=" <<TREE_INT_CST_LOW(m) << ",";
+    }
+    
+    tree m2 = TYPE_MIN_VALUE (dom);
+    if (m2) {
+      std::cerr << "DOM_MAX=" <<TREE_INT_CST_LOW(m2) << ")";
+    }
     
     //tree typev = TYPE_MAIN_VARIANT (f);
     //std::cerr << "TYPEV=" << typev << ";";
@@ -133,12 +139,20 @@ public:
     std::cerr << "MAXVAL=" << maxval << ";";
     CallBack::check_type(maxval);
 
-    unsigned HOST_WIDE_INT alen = TREE_INT_CST_LOW(array_type_nelts (f));
-    std::cerr << "ALEN=" << alen << ";";
+    tree l = array_type_nelts (f);
+    if (l) {
+      unsigned HOST_WIDE_INT alen = TREE_INT_CST_LOW(l);
+      std::cerr << "ALEN=" << alen << ";";
+    }
 
     bool string_flag = TYPE_STRING_FLAG(f);
     std::cerr << "string_flag=" << string_flag << ";";
-    std::cerr << "TYPE_SIZE_UNIT=" << TREE_INT_CST_LOW(TYPE_SIZE_UNIT(f))<<";";
+    tree u = TYPE_SIZE_UNIT(f);
+    if (u) {
+      std::cerr << "TYPE_SIZE_UNIT=" << TREE_INT_CST_LOW(u)<<";";
+    } else {
+      std::cerr << "TYPE_SIZE_UNIT=<NULL>;";
+    }
 
     std::cerr << "nonaliased=" << TYPE_NONALIASED_COMPONENT(f);
         
@@ -264,10 +278,8 @@ long unsigned int TC_FIELD_DECL::SIZE_I (tree t) {
   tree s = SIZE(t);
   if (s) {
     return TREE_INT_CST_LOW(s);
+  } else {
+    return 0;
   }
-  else
-    {
-      return 0;
-    }
 
 }
