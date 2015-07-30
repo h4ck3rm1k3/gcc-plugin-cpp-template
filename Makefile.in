@@ -130,131 +130,14 @@ am__installdirs = "$(DESTDIR)$(pkglibdir)" "$(DESTDIR)$(bindir)"
 LTLIBRARIES = $(pkglib_LTLIBRARIES)
 template_plugin_la_DEPENDENCIES =
 am__dirstamp = $(am__leading_dot)dirstamp
-am_template_plugin_la_OBJECTS = __callback.lo callback.lo callbacks.lo \
-	field.lo introspection.lo name.lo plugin.lo record_context.lo \
-	tree-nodes/error_mark.lo tree-nodes/identifier_node.lo \
-	tree-nodes/tree_list.lo tree-nodes/tree_vec.lo \
-	tree-nodes/block.lo tree-nodes/offset_type.lo \
-	tree-nodes/enumeral_type.lo tree-nodes/boolean_type.lo \
-	tree-nodes/integer_type.lo tree-nodes/real_type.lo \
-	tree-nodes/pointer_type.lo tree-nodes/reference_type.lo \
-	tree-nodes/nullptr_type.lo tree-nodes/fixed_point_type.lo \
+am_template_plugin_la_OBJECTS = librdfinterface.lo __callback.lo \
+	callback.lo callbacks.lo field.lo introspection.lo name.lo \
+	plugin.lo record_context.lo tree-nodes/integer_type.lo \
 	tree-nodes/complex_type.lo tree-nodes/vector_type.lo \
 	tree-nodes/array_type.lo tree-nodes/record_type.lo \
-	tree-nodes/union_type.lo tree-nodes/qual_union_type.lo \
-	tree-nodes/void_type.lo tree-nodes/pointer_bounds_type.lo \
-	tree-nodes/function_type.lo tree-nodes/method_type.lo \
-	tree-nodes/lang_type.lo tree-nodes/void_cst.lo \
-	tree-nodes/integer_cst.lo tree-nodes/real_cst.lo \
-	tree-nodes/fixed_cst.lo tree-nodes/complex_cst.lo \
-	tree-nodes/vector_cst.lo tree-nodes/string_cst.lo \
-	tree-nodes/function_decl.lo tree-nodes/label_decl.lo \
-	tree-nodes/field_decl.lo tree-nodes/var_decl.lo \
-	tree-nodes/const_decl.lo tree-nodes/parm_decl.lo \
-	tree-nodes/type_decl.lo tree-nodes/result_decl.lo \
-	tree-nodes/debug_expr_decl.lo tree-nodes/namespace_decl.lo \
-	tree-nodes/imported_decl.lo tree-nodes/namelist_decl.lo \
-	tree-nodes/translation_unit_decl.lo \
-	tree-nodes/component_ref.lo tree-nodes/bit_field_ref.lo \
-	tree-nodes/array_ref.lo tree-nodes/array_range_ref.lo \
-	tree-nodes/realpart_expr.lo tree-nodes/imagpart_expr.lo \
-	tree-nodes/view_convert_expr.lo tree-nodes/indirect_ref.lo \
-	tree-nodes/obj_type_ref.lo tree-nodes/constructor.lo \
-	tree-nodes/compound_expr.lo tree-nodes/modify_expr.lo \
-	tree-nodes/init_expr.lo tree-nodes/target_expr.lo \
-	tree-nodes/cond_expr.lo tree-nodes/vec_cond_expr.lo \
-	tree-nodes/vec_perm_expr.lo tree-nodes/bind_expr.lo \
-	tree-nodes/call_expr.lo tree-nodes/with_cleanup_expr.lo \
-	tree-nodes/cleanup_point_expr.lo \
-	tree-nodes/placeholder_expr.lo tree-nodes/plus_expr.lo \
-	tree-nodes/minus_expr.lo tree-nodes/mult_expr.lo \
-	tree-nodes/pointer_plus_expr.lo \
-	tree-nodes/mult_highpart_expr.lo tree-nodes/trunc_div_expr.lo \
-	tree-nodes/ceil_div_expr.lo tree-nodes/floor_div_expr.lo \
-	tree-nodes/round_div_expr.lo tree-nodes/trunc_mod_expr.lo \
-	tree-nodes/ceil_mod_expr.lo tree-nodes/floor_mod_expr.lo \
-	tree-nodes/round_mod_expr.lo tree-nodes/rdiv_expr.lo \
-	tree-nodes/exact_div_expr.lo tree-nodes/fix_trunc_expr.lo \
-	tree-nodes/float_expr.lo tree-nodes/negate_expr.lo \
-	tree-nodes/min_expr.lo tree-nodes/max_expr.lo \
-	tree-nodes/abs_expr.lo tree-nodes/lshift_expr.lo \
-	tree-nodes/rshift_expr.lo tree-nodes/lrotate_expr.lo \
-	tree-nodes/rrotate_expr.lo tree-nodes/bit_ior_expr.lo \
-	tree-nodes/bit_xor_expr.lo tree-nodes/bit_and_expr.lo \
-	tree-nodes/bit_not_expr.lo tree-nodes/truth_andif_expr.lo \
-	tree-nodes/truth_orif_expr.lo tree-nodes/truth_and_expr.lo \
-	tree-nodes/truth_or_expr.lo tree-nodes/truth_xor_expr.lo \
-	tree-nodes/truth_not_expr.lo tree-nodes/lt_expr.lo \
-	tree-nodes/le_expr.lo tree-nodes/gt_expr.lo \
-	tree-nodes/ge_expr.lo tree-nodes/eq_expr.lo \
-	tree-nodes/ne_expr.lo tree-nodes/unordered_expr.lo \
-	tree-nodes/ordered_expr.lo tree-nodes/unlt_expr.lo \
-	tree-nodes/unle_expr.lo tree-nodes/ungt_expr.lo \
-	tree-nodes/unge_expr.lo tree-nodes/uneq_expr.lo \
-	tree-nodes/ltgt_expr.lo tree-nodes/range_expr.lo \
-	tree-nodes/paren_expr.lo tree-nodes/convert_expr.lo \
-	tree-nodes/addr_space_convert_expr.lo \
-	tree-nodes/fixed_convert_expr.lo tree-nodes/nop_expr.lo \
-	tree-nodes/non_lvalue_expr.lo \
-	tree-nodes/compound_literal_expr.lo tree-nodes/save_expr.lo \
-	tree-nodes/addr_expr.lo tree-nodes/fdesc_expr.lo \
-	tree-nodes/complex_expr.lo tree-nodes/conj_expr.lo \
-	tree-nodes/predecrement_expr.lo \
-	tree-nodes/preincrement_expr.lo \
-	tree-nodes/postdecrement_expr.lo \
-	tree-nodes/postincrement_expr.lo tree-nodes/va_arg_expr.lo \
-	tree-nodes/try_catch_expr.lo tree-nodes/try_finally_expr.lo \
-	tree-nodes/decl_expr.lo tree-nodes/label_expr.lo \
-	tree-nodes/goto_expr.lo tree-nodes/return_expr.lo \
-	tree-nodes/exit_expr.lo tree-nodes/loop_expr.lo \
-	tree-nodes/switch_expr.lo tree-nodes/case_label_expr.lo \
-	tree-nodes/asm_expr.lo tree-nodes/ssa_name.lo \
-	tree-nodes/catch_expr.lo tree-nodes/eh_filter_expr.lo \
-	tree-nodes/scev_known.lo tree-nodes/scev_not_known.lo \
-	tree-nodes/polynomial_chrec.lo tree-nodes/statement_list.lo \
-	tree-nodes/assert_expr.lo tree-nodes/tree_binfo.lo \
-	tree-nodes/with_size_expr.lo tree-nodes/realign_load_expr.lo \
-	tree-nodes/target_mem_ref.lo tree-nodes/mem_ref.lo \
-	tree-nodes/oacc_parallel.lo tree-nodes/oacc_kernels.lo \
-	tree-nodes/oacc_data.lo tree-nodes/oacc_host_data.lo \
-	tree-nodes/omp_parallel.lo tree-nodes/omp_task.lo \
-	tree-nodes/omp_for.lo tree-nodes/omp_simd.lo \
-	tree-nodes/cilk_simd.lo tree-nodes/cilk_for.lo \
-	tree-nodes/omp_distribute.lo tree-nodes/oacc_loop.lo \
-	tree-nodes/omp_teams.lo tree-nodes/omp_target_data.lo \
-	tree-nodes/omp_target.lo tree-nodes/omp_sections.lo \
-	tree-nodes/omp_single.lo tree-nodes/omp_section.lo \
-	tree-nodes/omp_master.lo tree-nodes/omp_taskgroup.lo \
-	tree-nodes/omp_ordered.lo tree-nodes/omp_critical.lo \
-	tree-nodes/oacc_cache.lo tree-nodes/oacc_declare.lo \
-	tree-nodes/oacc_enter_data.lo tree-nodes/oacc_exit_data.lo \
-	tree-nodes/oacc_update.lo tree-nodes/omp_target_update.lo \
-	tree-nodes/omp_atomic.lo tree-nodes/omp_atomic_read.lo \
-	tree-nodes/omp_atomic_capture_old.lo \
-	tree-nodes/omp_atomic_capture_new.lo tree-nodes/omp_clause.lo \
-	tree-nodes/transaction_expr.lo tree-nodes/reduc_max_expr.lo \
-	tree-nodes/reduc_min_expr.lo tree-nodes/reduc_plus_expr.lo \
-	tree-nodes/dot_prod_expr.lo tree-nodes/widen_sum_expr.lo \
-	tree-nodes/sad_expr.lo tree-nodes/widen_mult_expr.lo \
-	tree-nodes/widen_mult_plus_expr.lo \
-	tree-nodes/widen_mult_minus_expr.lo \
-	tree-nodes/widen_lshift_expr.lo tree-nodes/fma_expr.lo \
-	tree-nodes/vec_widen_mult_hi_expr.lo \
-	tree-nodes/vec_widen_mult_lo_expr.lo \
-	tree-nodes/vec_widen_mult_even_expr.lo \
-	tree-nodes/vec_widen_mult_odd_expr.lo \
-	tree-nodes/vec_unpack_hi_expr.lo \
-	tree-nodes/vec_unpack_lo_expr.lo \
-	tree-nodes/vec_unpack_float_hi_expr.lo \
-	tree-nodes/vec_unpack_float_lo_expr.lo \
-	tree-nodes/vec_pack_trunc_expr.lo \
-	tree-nodes/vec_pack_sat_expr.lo \
-	tree-nodes/vec_pack_fix_trunc_expr.lo \
-	tree-nodes/vec_widen_lshift_hi_expr.lo \
-	tree-nodes/vec_widen_lshift_lo_expr.lo \
-	tree-nodes/predict_expr.lo tree-nodes/optimization_node.lo \
-	tree-nodes/target_option_node.lo tree-nodes/annotate_expr.lo \
-	tree-nodes/cilk_spawn_stmt.lo tree-nodes/cilk_sync_stmt.lo
+	tree-nodes/union_type.lo tree-nodes/identifier_node.lo \
+	tree-nodes/field_decl.lo tree-nodes/error_mark.lo \
+	tree-nodes/pointer_type.lo tree-nodes/reference_type.lo
 template_plugin_la_OBJECTS = $(am_template_plugin_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
@@ -488,11 +371,13 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 ACLOCAL_AMFLAGS = -I m4
 GCCPLUGINS_DIR = `${CXX} -print-file-name=plugin`
-AM_CPPFLAGS = -I $(GCCPLUGINS_DIR)/include -I $(srcdir)/../libgdl $(GMP_INC) -Itree-nodes -g3
-AM_CFLAGS = -Wall -std=gnu++11 -g3
+INCDIR = -I /usr/include/raptor2 -I /usr/include/rasqal
+AM_CPPFLAGS = -I $(GCCPLUGINS_DIR)/include $(INCDIR) -I $(srcdir)/../libgdl $(GMP_INC) -Itree-nodes -g3 
+AM_CFLAGS = -Wall -std=gnu++11 -g3 $(INCDIR)
 pkglib_LTLIBRARIES = template_plugin.la
 EXTRA_DIST = 
 template_plugin_la_SOURCES = \
+	librdfinterface.cpp \
 	__callback.cpp \
 	callback.cpp \
 	callback.hpp \
@@ -509,34 +394,8 @@ template_plugin_la_SOURCES = \
 	record_context.hpp \
 	switchcall.hpp \
 	tcwrapper.hpp \
-	tree-nodes/error_mark.hpp \
-	tree-nodes/error_mark.cpp \
-	tree-nodes/identifier_node.hpp \
-	tree-nodes/identifier_node.cpp \
-	tree-nodes/tree_list.hpp \
-	tree-nodes/tree_list.cpp \
-	tree-nodes/tree_vec.hpp \
-	tree-nodes/tree_vec.cpp \
-	tree-nodes/block.hpp \
-	tree-nodes/block.cpp \
-	tree-nodes/offset_type.hpp \
-	tree-nodes/offset_type.cpp \
-	tree-nodes/enumeral_type.hpp \
-	tree-nodes/enumeral_type.cpp \
-	tree-nodes/boolean_type.hpp \
-	tree-nodes/boolean_type.cpp \
 	tree-nodes/integer_type.hpp \
 	tree-nodes/integer_type.cpp \
-	tree-nodes/real_type.hpp \
-	tree-nodes/real_type.cpp \
-	tree-nodes/pointer_type.hpp \
-	tree-nodes/pointer_type.cpp \
-	tree-nodes/reference_type.hpp \
-	tree-nodes/reference_type.cpp \
-	tree-nodes/nullptr_type.hpp \
-	tree-nodes/nullptr_type.cpp \
-	tree-nodes/fixed_point_type.hpp \
-	tree-nodes/fixed_point_type.cpp \
 	tree-nodes/complex_type.hpp \
 	tree-nodes/complex_type.cpp \
 	tree-nodes/vector_type.hpp \
@@ -547,416 +406,445 @@ template_plugin_la_SOURCES = \
 	tree-nodes/record_type.cpp \
 	tree-nodes/union_type.hpp \
 	tree-nodes/union_type.cpp \
-	tree-nodes/qual_union_type.hpp \
-	tree-nodes/qual_union_type.cpp \
-	tree-nodes/void_type.hpp \
-	tree-nodes/void_type.cpp \
-	tree-nodes/pointer_bounds_type.hpp \
-	tree-nodes/pointer_bounds_type.cpp \
-	tree-nodes/function_type.hpp \
-	tree-nodes/function_type.cpp \
-	tree-nodes/method_type.hpp \
-	tree-nodes/method_type.cpp \
-	tree-nodes/lang_type.hpp \
-	tree-nodes/lang_type.cpp \
-	tree-nodes/void_cst.hpp \
-	tree-nodes/void_cst.cpp \
-	tree-nodes/integer_cst.hpp \
-	tree-nodes/integer_cst.cpp \
-	tree-nodes/real_cst.hpp \
-	tree-nodes/real_cst.cpp \
-	tree-nodes/fixed_cst.hpp \
-	tree-nodes/fixed_cst.cpp \
-	tree-nodes/complex_cst.hpp \
-	tree-nodes/complex_cst.cpp \
-	tree-nodes/vector_cst.hpp \
-	tree-nodes/vector_cst.cpp \
-	tree-nodes/string_cst.hpp \
-	tree-nodes/string_cst.cpp \
-	tree-nodes/function_decl.hpp \
-	tree-nodes/function_decl.cpp \
-	tree-nodes/label_decl.hpp \
-	tree-nodes/label_decl.cpp \
+	tree-nodes/identifier_node.hpp \
+	tree-nodes/identifier_node.cpp \
 	tree-nodes/field_decl.hpp \
 	tree-nodes/field_decl.cpp \
-	tree-nodes/var_decl.hpp \
-	tree-nodes/var_decl.cpp \
-	tree-nodes/const_decl.hpp \
-	tree-nodes/const_decl.cpp \
-	tree-nodes/parm_decl.hpp \
-	tree-nodes/parm_decl.cpp \
-	tree-nodes/type_decl.hpp \
-	tree-nodes/type_decl.cpp \
-	tree-nodes/result_decl.hpp \
-	tree-nodes/result_decl.cpp \
-	tree-nodes/debug_expr_decl.hpp \
-	tree-nodes/debug_expr_decl.cpp \
-	tree-nodes/namespace_decl.hpp \
-	tree-nodes/namespace_decl.cpp \
-	tree-nodes/imported_decl.hpp \
-	tree-nodes/imported_decl.cpp \
-	tree-nodes/namelist_decl.hpp \
-	tree-nodes/namelist_decl.cpp \
-	tree-nodes/translation_unit_decl.hpp \
-	tree-nodes/translation_unit_decl.cpp \
-	tree-nodes/component_ref.hpp \
-	tree-nodes/component_ref.cpp \
-	tree-nodes/bit_field_ref.hpp \
-	tree-nodes/bit_field_ref.cpp \
-	tree-nodes/array_ref.hpp \
-	tree-nodes/array_ref.cpp \
-	tree-nodes/array_range_ref.hpp \
-	tree-nodes/array_range_ref.cpp \
-	tree-nodes/realpart_expr.hpp \
-	tree-nodes/realpart_expr.cpp \
-	tree-nodes/imagpart_expr.hpp \
-	tree-nodes/imagpart_expr.cpp \
-	tree-nodes/view_convert_expr.hpp \
-	tree-nodes/view_convert_expr.cpp \
-	tree-nodes/indirect_ref.hpp \
-	tree-nodes/indirect_ref.cpp \
-	tree-nodes/obj_type_ref.hpp \
-	tree-nodes/obj_type_ref.cpp \
-	tree-nodes/constructor.hpp \
-	tree-nodes/constructor.cpp \
-	tree-nodes/compound_expr.hpp \
-	tree-nodes/compound_expr.cpp \
-	tree-nodes/modify_expr.hpp \
-	tree-nodes/modify_expr.cpp \
-	tree-nodes/init_expr.hpp \
-	tree-nodes/init_expr.cpp \
-	tree-nodes/target_expr.hpp \
-	tree-nodes/target_expr.cpp \
-	tree-nodes/cond_expr.hpp \
-	tree-nodes/cond_expr.cpp \
-	tree-nodes/vec_cond_expr.hpp \
-	tree-nodes/vec_cond_expr.cpp \
-	tree-nodes/vec_perm_expr.hpp \
-	tree-nodes/vec_perm_expr.cpp \
-	tree-nodes/bind_expr.hpp \
-	tree-nodes/bind_expr.cpp \
-	tree-nodes/call_expr.hpp \
-	tree-nodes/call_expr.cpp \
-	tree-nodes/with_cleanup_expr.hpp \
-	tree-nodes/with_cleanup_expr.cpp \
-	tree-nodes/cleanup_point_expr.hpp \
-	tree-nodes/cleanup_point_expr.cpp \
-	tree-nodes/placeholder_expr.hpp \
-	tree-nodes/placeholder_expr.cpp \
-	tree-nodes/plus_expr.hpp \
-	tree-nodes/plus_expr.cpp \
-	tree-nodes/minus_expr.hpp \
-	tree-nodes/minus_expr.cpp \
-	tree-nodes/mult_expr.hpp \
-	tree-nodes/mult_expr.cpp \
-	tree-nodes/pointer_plus_expr.hpp \
-	tree-nodes/pointer_plus_expr.cpp \
-	tree-nodes/mult_highpart_expr.hpp \
-	tree-nodes/mult_highpart_expr.cpp \
-	tree-nodes/trunc_div_expr.hpp \
-	tree-nodes/trunc_div_expr.cpp \
-	tree-nodes/ceil_div_expr.hpp \
-	tree-nodes/ceil_div_expr.cpp \
-	tree-nodes/floor_div_expr.hpp \
-	tree-nodes/floor_div_expr.cpp \
-	tree-nodes/round_div_expr.hpp \
-	tree-nodes/round_div_expr.cpp \
-	tree-nodes/trunc_mod_expr.hpp \
-	tree-nodes/trunc_mod_expr.cpp \
-	tree-nodes/ceil_mod_expr.hpp \
-	tree-nodes/ceil_mod_expr.cpp \
-	tree-nodes/floor_mod_expr.hpp \
-	tree-nodes/floor_mod_expr.cpp \
-	tree-nodes/round_mod_expr.hpp \
-	tree-nodes/round_mod_expr.cpp \
-	tree-nodes/rdiv_expr.hpp \
-	tree-nodes/rdiv_expr.cpp \
-	tree-nodes/exact_div_expr.hpp \
-	tree-nodes/exact_div_expr.cpp \
-	tree-nodes/fix_trunc_expr.hpp \
-	tree-nodes/fix_trunc_expr.cpp \
-	tree-nodes/float_expr.hpp \
-	tree-nodes/float_expr.cpp \
-	tree-nodes/negate_expr.hpp \
-	tree-nodes/negate_expr.cpp \
-	tree-nodes/min_expr.hpp \
-	tree-nodes/min_expr.cpp \
-	tree-nodes/max_expr.hpp \
-	tree-nodes/max_expr.cpp \
-	tree-nodes/abs_expr.hpp \
-	tree-nodes/abs_expr.cpp \
-	tree-nodes/lshift_expr.hpp \
-	tree-nodes/lshift_expr.cpp \
-	tree-nodes/rshift_expr.hpp \
-	tree-nodes/rshift_expr.cpp \
-	tree-nodes/lrotate_expr.hpp \
-	tree-nodes/lrotate_expr.cpp \
-	tree-nodes/rrotate_expr.hpp \
-	tree-nodes/rrotate_expr.cpp \
-	tree-nodes/bit_ior_expr.hpp \
-	tree-nodes/bit_ior_expr.cpp \
-	tree-nodes/bit_xor_expr.hpp \
-	tree-nodes/bit_xor_expr.cpp \
-	tree-nodes/bit_and_expr.hpp \
-	tree-nodes/bit_and_expr.cpp \
-	tree-nodes/bit_not_expr.hpp \
-	tree-nodes/bit_not_expr.cpp \
-	tree-nodes/truth_andif_expr.hpp \
-	tree-nodes/truth_andif_expr.cpp \
-	tree-nodes/truth_orif_expr.hpp \
-	tree-nodes/truth_orif_expr.cpp \
-	tree-nodes/truth_and_expr.hpp \
-	tree-nodes/truth_and_expr.cpp \
-	tree-nodes/truth_or_expr.hpp \
-	tree-nodes/truth_or_expr.cpp \
-	tree-nodes/truth_xor_expr.hpp \
-	tree-nodes/truth_xor_expr.cpp \
-	tree-nodes/truth_not_expr.hpp \
-	tree-nodes/truth_not_expr.cpp \
-	tree-nodes/lt_expr.hpp \
-	tree-nodes/lt_expr.cpp \
-	tree-nodes/le_expr.hpp \
-	tree-nodes/le_expr.cpp \
-	tree-nodes/gt_expr.hpp \
-	tree-nodes/gt_expr.cpp \
-	tree-nodes/ge_expr.hpp \
-	tree-nodes/ge_expr.cpp \
-	tree-nodes/eq_expr.hpp \
-	tree-nodes/eq_expr.cpp \
-	tree-nodes/ne_expr.hpp \
-	tree-nodes/ne_expr.cpp \
-	tree-nodes/unordered_expr.hpp \
-	tree-nodes/unordered_expr.cpp \
-	tree-nodes/ordered_expr.hpp \
-	tree-nodes/ordered_expr.cpp \
-	tree-nodes/unlt_expr.hpp \
-	tree-nodes/unlt_expr.cpp \
-	tree-nodes/unle_expr.hpp \
-	tree-nodes/unle_expr.cpp \
-	tree-nodes/ungt_expr.hpp \
-	tree-nodes/ungt_expr.cpp \
-	tree-nodes/unge_expr.hpp \
-	tree-nodes/unge_expr.cpp \
-	tree-nodes/uneq_expr.hpp \
-	tree-nodes/uneq_expr.cpp \
-	tree-nodes/ltgt_expr.hpp \
-	tree-nodes/ltgt_expr.cpp \
-	tree-nodes/range_expr.hpp \
-	tree-nodes/range_expr.cpp \
-	tree-nodes/paren_expr.hpp \
-	tree-nodes/paren_expr.cpp \
-	tree-nodes/convert_expr.hpp \
-	tree-nodes/convert_expr.cpp \
-	tree-nodes/addr_space_convert_expr.hpp \
-	tree-nodes/addr_space_convert_expr.cpp \
-	tree-nodes/fixed_convert_expr.hpp \
-	tree-nodes/fixed_convert_expr.cpp \
-	tree-nodes/nop_expr.hpp \
-	tree-nodes/nop_expr.cpp \
-	tree-nodes/non_lvalue_expr.hpp \
-	tree-nodes/non_lvalue_expr.cpp \
-	tree-nodes/compound_literal_expr.hpp \
-	tree-nodes/compound_literal_expr.cpp \
-	tree-nodes/save_expr.hpp \
-	tree-nodes/save_expr.cpp \
-	tree-nodes/addr_expr.hpp \
-	tree-nodes/addr_expr.cpp \
-	tree-nodes/fdesc_expr.hpp \
-	tree-nodes/fdesc_expr.cpp \
-	tree-nodes/complex_expr.hpp \
-	tree-nodes/complex_expr.cpp \
-	tree-nodes/conj_expr.hpp \
-	tree-nodes/conj_expr.cpp \
-	tree-nodes/predecrement_expr.hpp \
-	tree-nodes/predecrement_expr.cpp \
-	tree-nodes/preincrement_expr.hpp \
-	tree-nodes/preincrement_expr.cpp \
-	tree-nodes/postdecrement_expr.hpp \
-	tree-nodes/postdecrement_expr.cpp \
-	tree-nodes/postincrement_expr.hpp \
-	tree-nodes/postincrement_expr.cpp \
-	tree-nodes/va_arg_expr.hpp \
-	tree-nodes/va_arg_expr.cpp \
-	tree-nodes/try_catch_expr.hpp \
-	tree-nodes/try_catch_expr.cpp \
-	tree-nodes/try_finally_expr.hpp \
-	tree-nodes/try_finally_expr.cpp \
-	tree-nodes/decl_expr.hpp \
-	tree-nodes/decl_expr.cpp \
-	tree-nodes/label_expr.hpp \
-	tree-nodes/label_expr.cpp \
-	tree-nodes/goto_expr.hpp \
-	tree-nodes/goto_expr.cpp \
-	tree-nodes/return_expr.hpp \
-	tree-nodes/return_expr.cpp \
-	tree-nodes/exit_expr.hpp \
-	tree-nodes/exit_expr.cpp \
-	tree-nodes/loop_expr.hpp \
-	tree-nodes/loop_expr.cpp \
-	tree-nodes/switch_expr.hpp \
-	tree-nodes/switch_expr.cpp \
-	tree-nodes/case_label_expr.hpp \
-	tree-nodes/case_label_expr.cpp \
-	tree-nodes/asm_expr.hpp \
-	tree-nodes/asm_expr.cpp \
-	tree-nodes/ssa_name.hpp \
-	tree-nodes/ssa_name.cpp \
-	tree-nodes/catch_expr.hpp \
-	tree-nodes/catch_expr.cpp \
-	tree-nodes/eh_filter_expr.hpp \
-	tree-nodes/eh_filter_expr.cpp \
-	tree-nodes/scev_known.hpp \
-	tree-nodes/scev_known.cpp \
-	tree-nodes/scev_not_known.hpp \
-	tree-nodes/scev_not_known.cpp \
-	tree-nodes/polynomial_chrec.hpp \
-	tree-nodes/polynomial_chrec.cpp \
-	tree-nodes/statement_list.hpp \
-	tree-nodes/statement_list.cpp \
-	tree-nodes/assert_expr.hpp \
-	tree-nodes/assert_expr.cpp \
-	tree-nodes/tree_binfo.hpp \
-	tree-nodes/tree_binfo.cpp \
-	tree-nodes/with_size_expr.hpp \
-	tree-nodes/with_size_expr.cpp \
-	tree-nodes/realign_load_expr.hpp \
-	tree-nodes/realign_load_expr.cpp \
-	tree-nodes/target_mem_ref.hpp \
-	tree-nodes/target_mem_ref.cpp \
-	tree-nodes/mem_ref.hpp \
-	tree-nodes/mem_ref.cpp \
-	tree-nodes/oacc_parallel.hpp \
-	tree-nodes/oacc_parallel.cpp \
-	tree-nodes/oacc_kernels.hpp \
-	tree-nodes/oacc_kernels.cpp \
-	tree-nodes/oacc_data.hpp \
-	tree-nodes/oacc_data.cpp \
-	tree-nodes/oacc_host_data.hpp \
-	tree-nodes/oacc_host_data.cpp \
-	tree-nodes/omp_parallel.hpp \
-	tree-nodes/omp_parallel.cpp \
-	tree-nodes/omp_task.hpp \
-	tree-nodes/omp_task.cpp \
-	tree-nodes/omp_for.hpp \
-	tree-nodes/omp_for.cpp \
-	tree-nodes/omp_simd.hpp \
-	tree-nodes/omp_simd.cpp \
-	tree-nodes/cilk_simd.hpp \
-	tree-nodes/cilk_simd.cpp \
-	tree-nodes/cilk_for.hpp \
-	tree-nodes/cilk_for.cpp \
-	tree-nodes/omp_distribute.hpp \
-	tree-nodes/omp_distribute.cpp \
-	tree-nodes/oacc_loop.hpp \
-	tree-nodes/oacc_loop.cpp \
-	tree-nodes/omp_teams.hpp \
-	tree-nodes/omp_teams.cpp \
-	tree-nodes/omp_target_data.hpp \
-	tree-nodes/omp_target_data.cpp \
-	tree-nodes/omp_target.hpp \
-	tree-nodes/omp_target.cpp \
-	tree-nodes/omp_sections.hpp \
-	tree-nodes/omp_sections.cpp \
-	tree-nodes/omp_single.hpp \
-	tree-nodes/omp_single.cpp \
-	tree-nodes/omp_section.hpp \
-	tree-nodes/omp_section.cpp \
-	tree-nodes/omp_master.hpp \
-	tree-nodes/omp_master.cpp \
-	tree-nodes/omp_taskgroup.hpp \
-	tree-nodes/omp_taskgroup.cpp \
-	tree-nodes/omp_ordered.hpp \
-	tree-nodes/omp_ordered.cpp \
-	tree-nodes/omp_critical.hpp \
-	tree-nodes/omp_critical.cpp \
-	tree-nodes/oacc_cache.hpp \
-	tree-nodes/oacc_cache.cpp \
-	tree-nodes/oacc_declare.hpp \
-	tree-nodes/oacc_declare.cpp \
-	tree-nodes/oacc_enter_data.hpp \
-	tree-nodes/oacc_enter_data.cpp \
-	tree-nodes/oacc_exit_data.hpp \
-	tree-nodes/oacc_exit_data.cpp \
-	tree-nodes/oacc_update.hpp \
-	tree-nodes/oacc_update.cpp \
-	tree-nodes/omp_target_update.hpp \
-	tree-nodes/omp_target_update.cpp \
-	tree-nodes/omp_atomic.hpp \
-	tree-nodes/omp_atomic.cpp \
-	tree-nodes/omp_atomic_read.hpp \
-	tree-nodes/omp_atomic_read.cpp \
-	tree-nodes/omp_atomic_capture_old.hpp \
-	tree-nodes/omp_atomic_capture_old.cpp \
-	tree-nodes/omp_atomic_capture_new.hpp \
-	tree-nodes/omp_atomic_capture_new.cpp \
-	tree-nodes/omp_clause.hpp \
-	tree-nodes/omp_clause.cpp \
-	tree-nodes/transaction_expr.hpp \
-	tree-nodes/transaction_expr.cpp \
-	tree-nodes/reduc_max_expr.hpp \
-	tree-nodes/reduc_max_expr.cpp \
-	tree-nodes/reduc_min_expr.hpp \
-	tree-nodes/reduc_min_expr.cpp \
-	tree-nodes/reduc_plus_expr.hpp \
-	tree-nodes/reduc_plus_expr.cpp \
-	tree-nodes/dot_prod_expr.hpp \
-	tree-nodes/dot_prod_expr.cpp \
-	tree-nodes/widen_sum_expr.hpp \
-	tree-nodes/widen_sum_expr.cpp \
-	tree-nodes/sad_expr.hpp \
-	tree-nodes/sad_expr.cpp \
-	tree-nodes/widen_mult_expr.hpp \
-	tree-nodes/widen_mult_expr.cpp \
-	tree-nodes/widen_mult_plus_expr.hpp \
-	tree-nodes/widen_mult_plus_expr.cpp \
-	tree-nodes/widen_mult_minus_expr.hpp \
-	tree-nodes/widen_mult_minus_expr.cpp \
-	tree-nodes/widen_lshift_expr.hpp \
-	tree-nodes/widen_lshift_expr.cpp \
-	tree-nodes/fma_expr.hpp \
-	tree-nodes/fma_expr.cpp \
-	tree-nodes/vec_widen_mult_hi_expr.hpp \
-	tree-nodes/vec_widen_mult_hi_expr.cpp \
-	tree-nodes/vec_widen_mult_lo_expr.hpp \
-	tree-nodes/vec_widen_mult_lo_expr.cpp \
-	tree-nodes/vec_widen_mult_even_expr.hpp \
-	tree-nodes/vec_widen_mult_even_expr.cpp \
-	tree-nodes/vec_widen_mult_odd_expr.hpp \
-	tree-nodes/vec_widen_mult_odd_expr.cpp \
-	tree-nodes/vec_unpack_hi_expr.hpp \
-	tree-nodes/vec_unpack_hi_expr.cpp \
-	tree-nodes/vec_unpack_lo_expr.hpp \
-	tree-nodes/vec_unpack_lo_expr.cpp \
-	tree-nodes/vec_unpack_float_hi_expr.hpp \
-	tree-nodes/vec_unpack_float_hi_expr.cpp \
-	tree-nodes/vec_unpack_float_lo_expr.hpp \
-	tree-nodes/vec_unpack_float_lo_expr.cpp \
-	tree-nodes/vec_pack_trunc_expr.hpp \
-	tree-nodes/vec_pack_trunc_expr.cpp \
-	tree-nodes/vec_pack_sat_expr.hpp \
-	tree-nodes/vec_pack_sat_expr.cpp \
-	tree-nodes/vec_pack_fix_trunc_expr.hpp \
-	tree-nodes/vec_pack_fix_trunc_expr.cpp \
-	tree-nodes/vec_widen_lshift_hi_expr.hpp \
-	tree-nodes/vec_widen_lshift_hi_expr.cpp \
-	tree-nodes/vec_widen_lshift_lo_expr.hpp \
-	tree-nodes/vec_widen_lshift_lo_expr.cpp \
-	tree-nodes/predict_expr.hpp \
-	tree-nodes/predict_expr.cpp \
-	tree-nodes/optimization_node.hpp \
-	tree-nodes/optimization_node.cpp \
-	tree-nodes/target_option_node.hpp \
-	tree-nodes/target_option_node.cpp \
-	tree-nodes/annotate_expr.hpp \
-	tree-nodes/annotate_expr.cpp \
-	tree-nodes/cilk_spawn_stmt.hpp \
-	tree-nodes/cilk_spawn_stmt.cpp \
-	tree-nodes/cilk_sync_stmt.hpp \
-	tree-nodes/cilk_sync_stmt.cpp \
-	# last line is empty
+	tree-nodes/error_mark.hpp \
+	tree-nodes/error_mark.cpp \
+	tree-nodes/pointer_type.hpp \
+	tree-nodes/pointer_type.cpp \
+	tree-nodes/reference_type.hpp \
+	tree-nodes/reference_type.cpp \
+	owl/struct.hpp \
+	#
 
+
+#	 tree-nodes/tree_list.hpp \
+#	 tree-nodes/tree_list.cpp \
+#	 tree-nodes/tree_vec.hpp \
+#	 tree-nodes/tree_vec.cpp \
+#	 tree-nodes/block.hpp \
+#	 tree-nodes/block.cpp \
+#	 tree-nodes/offset_type.hpp \
+#	 tree-nodes/offset_type.cpp \
+#	 tree-nodes/enumeral_type.hpp \
+#	 tree-nodes/enumeral_type.cpp \
+#	 tree-nodes/boolean_type.hpp \
+#	 tree-nodes/boolean_type.cpp \
+#	 tree-nodes/real_type.hpp \
+#	 tree-nodes/real_type.cpp \
+#	 tree-nodes/nullptr_type.hpp \
+#	 tree-nodes/nullptr_type.cpp \
+#	 tree-nodes/fixed_point_type.hpp \
+#	 tree-nodes/fixed_point_type.cpp \
+#	 tree-nodes/qual_union_type.hpp \
+#	 tree-nodes/qual_union_type.cpp \
+#	 tree-nodes/void_type.hpp \
+#	 tree-nodes/void_type.cpp \
+#	 tree-nodes/pointer_bounds_type.hpp \
+#	 tree-nodes/pointer_bounds_type.cpp \
+#	 tree-nodes/function_type.hpp \
+#	 tree-nodes/function_type.cpp \
+#	 tree-nodes/method_type.hpp \
+#	 tree-nodes/method_type.cpp \
+#	 tree-nodes/lang_type.hpp \
+#	 tree-nodes/lang_type.cpp \
+#	 tree-nodes/void_cst.hpp \
+#	 tree-nodes/void_cst.cpp \
+#	 tree-nodes/integer_cst.hpp \
+#	 tree-nodes/integer_cst.cpp \
+#	 tree-nodes/real_cst.hpp \
+#	 tree-nodes/real_cst.cpp \
+#	 tree-nodes/fixed_cst.hpp \
+#	 tree-nodes/fixed_cst.cpp \
+#	 tree-nodes/complex_cst.hpp \
+#	 tree-nodes/complex_cst.cpp \
+#	 tree-nodes/vector_cst.hpp \
+#	 tree-nodes/vector_cst.cpp \
+#	 tree-nodes/string_cst.hpp \
+#	 tree-nodes/string_cst.cpp \
+#	 tree-nodes/function_decl.hpp \
+#	 tree-nodes/function_decl.cpp \
+#	 tree-nodes/label_decl.hpp \
+#	 tree-nodes/label_decl.cpp \
+#	 tree-nodes/var_decl.hpp \
+#	 tree-nodes/var_decl.cpp \
+#	 tree-nodes/const_decl.hpp \
+#	 tree-nodes/const_decl.cpp \
+#	 tree-nodes/parm_decl.hpp \
+#	 tree-nodes/parm_decl.cpp \
+#	 tree-nodes/type_decl.hpp \
+#	 tree-nodes/type_decl.cpp \
+#	 tree-nodes/result_decl.hpp \
+#	 tree-nodes/result_decl.cpp \
+#	 tree-nodes/debug_expr_decl.hpp \
+#	 tree-nodes/debug_expr_decl.cpp \
+#	 tree-nodes/namespace_decl.hpp \
+#	 tree-nodes/namespace_decl.cpp \
+#	 tree-nodes/imported_decl.hpp \
+#	 tree-nodes/imported_decl.cpp \
+#	 tree-nodes/namelist_decl.hpp \
+#	 tree-nodes/namelist_decl.cpp \
+#	 tree-nodes/translation_unit_decl.hpp \
+#	 tree-nodes/translation_unit_decl.cpp \
+#	 tree-nodes/component_ref.hpp \
+#	 tree-nodes/component_ref.cpp \
+#	 tree-nodes/bit_field_ref.hpp \
+#	 tree-nodes/bit_field_ref.cpp \
+#	 tree-nodes/array_ref.hpp \
+#	 tree-nodes/array_ref.cpp \
+#	 tree-nodes/array_range_ref.hpp \
+#	 tree-nodes/array_range_ref.cpp \
+#	 tree-nodes/realpart_expr.hpp \
+#	 tree-nodes/realpart_expr.cpp \
+#	 tree-nodes/imagpart_expr.hpp \
+#	 tree-nodes/imagpart_expr.cpp \
+#	 tree-nodes/view_convert_expr.hpp \
+#	 tree-nodes/view_convert_expr.cpp \
+#	 tree-nodes/indirect_ref.hpp \
+#	 tree-nodes/indirect_ref.cpp \
+#	 tree-nodes/obj_type_ref.hpp \
+#	 tree-nodes/obj_type_ref.cpp \
+#	 tree-nodes/constructor.hpp \
+#	 tree-nodes/constructor.cpp \
+#	 tree-nodes/compound_expr.hpp \
+#	 tree-nodes/compound_expr.cpp \
+#	 tree-nodes/modify_expr.hpp \
+#	 tree-nodes/modify_expr.cpp \
+#	 tree-nodes/init_expr.hpp \
+#	 tree-nodes/init_expr.cpp \
+#	 tree-nodes/target_expr.hpp \
+#	 tree-nodes/target_expr.cpp \
+#	 tree-nodes/cond_expr.hpp \
+#	 tree-nodes/cond_expr.cpp \
+#	 tree-nodes/vec_cond_expr.hpp \
+#	 tree-nodes/vec_cond_expr.cpp \
+#	 tree-nodes/vec_perm_expr.hpp \
+#	 tree-nodes/vec_perm_expr.cpp \
+#	 tree-nodes/bind_expr.hpp \
+#	 tree-nodes/bind_expr.cpp \
+#	 tree-nodes/call_expr.hpp \
+#	 tree-nodes/call_expr.cpp \
+#	 tree-nodes/with_cleanup_expr.hpp \
+#	 tree-nodes/with_cleanup_expr.cpp \
+#	 tree-nodes/cleanup_point_expr.hpp \
+#	 tree-nodes/cleanup_point_expr.cpp \
+#	 tree-nodes/placeholder_expr.hpp \
+#	 tree-nodes/placeholder_expr.cpp \
+#	 tree-nodes/plus_expr.hpp \
+#	 tree-nodes/plus_expr.cpp \
+#	 tree-nodes/minus_expr.hpp \
+#	 tree-nodes/minus_expr.cpp \
+#	 tree-nodes/mult_expr.hpp \
+#	 tree-nodes/mult_expr.cpp \
+#	 tree-nodes/pointer_plus_expr.hpp \
+#	 tree-nodes/pointer_plus_expr.cpp \
+#	 tree-nodes/mult_highpart_expr.hpp \
+#	 tree-nodes/mult_highpart_expr.cpp \
+#	 tree-nodes/trunc_div_expr.hpp \
+#	 tree-nodes/trunc_div_expr.cpp \
+#	 tree-nodes/ceil_div_expr.hpp \
+#	 tree-nodes/ceil_div_expr.cpp \
+#	 tree-nodes/floor_div_expr.hpp \
+#	 tree-nodes/floor_div_expr.cpp \
+#	 tree-nodes/round_div_expr.hpp \
+#	 tree-nodes/round_div_expr.cpp \
+#	 tree-nodes/trunc_mod_expr.hpp \
+#	 tree-nodes/trunc_mod_expr.cpp \
+#	 tree-nodes/ceil_mod_expr.hpp \
+#	 tree-nodes/ceil_mod_expr.cpp \
+#	 tree-nodes/floor_mod_expr.hpp \
+#	 tree-nodes/floor_mod_expr.cpp \
+#	 tree-nodes/round_mod_expr.hpp \
+#	 tree-nodes/round_mod_expr.cpp \
+#	 tree-nodes/rdiv_expr.hpp \
+#	 tree-nodes/rdiv_expr.cpp \
+#	 tree-nodes/exact_div_expr.hpp \
+#	 tree-nodes/exact_div_expr.cpp \
+#	 tree-nodes/fix_trunc_expr.hpp \
+#	 tree-nodes/fix_trunc_expr.cpp \
+#	 tree-nodes/float_expr.hpp \
+#	 tree-nodes/float_expr.cpp \
+#	 tree-nodes/negate_expr.hpp \
+#	 tree-nodes/negate_expr.cpp \
+#	 tree-nodes/min_expr.hpp \
+#	 tree-nodes/min_expr.cpp \
+#	 tree-nodes/max_expr.hpp \
+#	 tree-nodes/max_expr.cpp \
+#	 tree-nodes/abs_expr.hpp \
+#	 tree-nodes/abs_expr.cpp \
+#	 tree-nodes/lshift_expr.hpp \
+#	 tree-nodes/lshift_expr.cpp \
+#	 tree-nodes/rshift_expr.hpp \
+#	 tree-nodes/rshift_expr.cpp \
+#	 tree-nodes/lrotate_expr.hpp \
+#	 tree-nodes/lrotate_expr.cpp \
+#	 tree-nodes/rrotate_expr.hpp \
+#	 tree-nodes/rrotate_expr.cpp \
+#	 tree-nodes/bit_ior_expr.hpp \
+#	 tree-nodes/bit_ior_expr.cpp \
+#	 tree-nodes/bit_xor_expr.hpp \
+#	 tree-nodes/bit_xor_expr.cpp \
+#	 tree-nodes/bit_and_expr.hpp \
+#	 tree-nodes/bit_and_expr.cpp \
+#	 tree-nodes/bit_not_expr.hpp \
+#	 tree-nodes/bit_not_expr.cpp \
+#	 tree-nodes/truth_andif_expr.hpp \
+#	 tree-nodes/truth_andif_expr.cpp \
+#	 tree-nodes/truth_orif_expr.hpp \
+#	 tree-nodes/truth_orif_expr.cpp \
+#	 tree-nodes/truth_and_expr.hpp \
+#	 tree-nodes/truth_and_expr.cpp \
+#	 tree-nodes/truth_or_expr.hpp \
+#	 tree-nodes/truth_or_expr.cpp \
+#	 tree-nodes/truth_xor_expr.hpp \
+#	 tree-nodes/truth_xor_expr.cpp \
+#	 tree-nodes/truth_not_expr.hpp \
+#	 tree-nodes/truth_not_expr.cpp \
+#	 tree-nodes/lt_expr.hpp \
+#	 tree-nodes/lt_expr.cpp \
+#	 tree-nodes/le_expr.hpp \
+#	 tree-nodes/le_expr.cpp \
+#	 tree-nodes/gt_expr.hpp \
+#	 tree-nodes/gt_expr.cpp \
+#	 tree-nodes/ge_expr.hpp \
+#	 tree-nodes/ge_expr.cpp \
+#	 tree-nodes/eq_expr.hpp \
+#	 tree-nodes/eq_expr.cpp \
+#	 tree-nodes/ne_expr.hpp \
+#	 tree-nodes/ne_expr.cpp \
+#	 tree-nodes/unordered_expr.hpp \
+#	 tree-nodes/unordered_expr.cpp \
+#	 tree-nodes/ordered_expr.hpp \
+#	 tree-nodes/ordered_expr.cpp \
+#	 tree-nodes/unlt_expr.hpp \
+#	 tree-nodes/unlt_expr.cpp \
+#	 tree-nodes/unle_expr.hpp \
+#	 tree-nodes/unle_expr.cpp \
+#	 tree-nodes/ungt_expr.hpp \
+#	 tree-nodes/ungt_expr.cpp \
+#	 tree-nodes/unge_expr.hpp \
+#	 tree-nodes/unge_expr.cpp \
+#	 tree-nodes/uneq_expr.hpp \
+#	 tree-nodes/uneq_expr.cpp \
+#	 tree-nodes/ltgt_expr.hpp \
+#	 tree-nodes/ltgt_expr.cpp \
+#	 tree-nodes/range_expr.hpp \
+#	 tree-nodes/range_expr.cpp \
+#	 tree-nodes/paren_expr.hpp \
+#	 tree-nodes/paren_expr.cpp \
+#	 tree-nodes/convert_expr.hpp \
+#	 tree-nodes/convert_expr.cpp \
+#	 tree-nodes/addr_space_convert_expr.hpp \
+#	 tree-nodes/addr_space_convert_expr.cpp \
+#	 tree-nodes/fixed_convert_expr.hpp \
+#	 tree-nodes/fixed_convert_expr.cpp \
+#	 tree-nodes/nop_expr.hpp \
+#	 tree-nodes/nop_expr.cpp \
+#	 tree-nodes/non_lvalue_expr.hpp \
+#	 tree-nodes/non_lvalue_expr.cpp \
+#	 tree-nodes/compound_literal_expr.hpp \
+#	 tree-nodes/compound_literal_expr.cpp \
+#	 tree-nodes/save_expr.hpp \
+#	 tree-nodes/save_expr.cpp \
+#	 tree-nodes/addr_expr.hpp \
+#	 tree-nodes/addr_expr.cpp \
+#	 tree-nodes/fdesc_expr.hpp \
+#	 tree-nodes/fdesc_expr.cpp \
+#	 tree-nodes/complex_expr.hpp \
+#	 tree-nodes/complex_expr.cpp \
+#	 tree-nodes/conj_expr.hpp \
+#	 tree-nodes/conj_expr.cpp \
+#	 tree-nodes/predecrement_expr.hpp \
+#	 tree-nodes/predecrement_expr.cpp \
+#	 tree-nodes/preincrement_expr.hpp \
+#	 tree-nodes/preincrement_expr.cpp \
+#	 tree-nodes/postdecrement_expr.hpp \
+#	 tree-nodes/postdecrement_expr.cpp \
+#	 tree-nodes/postincrement_expr.hpp \
+#	 tree-nodes/postincrement_expr.cpp \
+#	 tree-nodes/va_arg_expr.hpp \
+#	 tree-nodes/va_arg_expr.cpp \
+#	 tree-nodes/try_catch_expr.hpp \
+#	 tree-nodes/try_catch_expr.cpp \
+#	 tree-nodes/try_finally_expr.hpp \
+#	 tree-nodes/try_finally_expr.cpp \
+#	 tree-nodes/decl_expr.hpp \
+#	 tree-nodes/decl_expr.cpp \
+#	 tree-nodes/label_expr.hpp \
+#	 tree-nodes/label_expr.cpp \
+#	 tree-nodes/goto_expr.hpp \
+#	 tree-nodes/goto_expr.cpp \
+#	 tree-nodes/return_expr.hpp \
+#	 tree-nodes/return_expr.cpp \
+#	 tree-nodes/exit_expr.hpp \
+#	 tree-nodes/exit_expr.cpp \
+#	 tree-nodes/loop_expr.hpp \
+#	 tree-nodes/loop_expr.cpp \
+#	 tree-nodes/switch_expr.hpp \
+#	 tree-nodes/switch_expr.cpp \
+#	 tree-nodes/case_label_expr.hpp \
+#	 tree-nodes/case_label_expr.cpp \
+#	 tree-nodes/asm_expr.hpp \
+#	 tree-nodes/asm_expr.cpp \
+#	 tree-nodes/ssa_name.hpp \
+#	 tree-nodes/ssa_name.cpp \
+#	 tree-nodes/catch_expr.hpp \
+#	 tree-nodes/catch_expr.cpp \
+#	 tree-nodes/eh_filter_expr.hpp \
+#	 tree-nodes/eh_filter_expr.cpp \
+#	 tree-nodes/scev_known.hpp \
+#	 tree-nodes/scev_known.cpp \
+#	 tree-nodes/scev_not_known.hpp \
+#	 tree-nodes/scev_not_known.cpp \
+#	 tree-nodes/polynomial_chrec.hpp \
+#	 tree-nodes/polynomial_chrec.cpp \
+#	 tree-nodes/statement_list.hpp \
+#	 tree-nodes/statement_list.cpp \
+#	 tree-nodes/assert_expr.hpp \
+#	 tree-nodes/assert_expr.cpp \
+#	 tree-nodes/tree_binfo.hpp \
+#	 tree-nodes/tree_binfo.cpp \
+#	 tree-nodes/with_size_expr.hpp \
+#	 tree-nodes/with_size_expr.cpp \
+#	 tree-nodes/realign_load_expr.hpp \
+#	 tree-nodes/realign_load_expr.cpp \
+#	 tree-nodes/target_mem_ref.hpp \
+#	 tree-nodes/target_mem_ref.cpp \
+#	 tree-nodes/mem_ref.hpp \
+#	 tree-nodes/mem_ref.cpp \
+#	 tree-nodes/oacc_parallel.hpp \
+#	 tree-nodes/oacc_parallel.cpp \
+#	 tree-nodes/oacc_kernels.hpp \
+#	 tree-nodes/oacc_kernels.cpp \
+#	 tree-nodes/oacc_data.hpp \
+#	 tree-nodes/oacc_data.cpp \
+#	 tree-nodes/oacc_host_data.hpp \
+#	 tree-nodes/oacc_host_data.cpp \
+#	 tree-nodes/omp_parallel.hpp \
+#	 tree-nodes/omp_parallel.cpp \
+#	 tree-nodes/omp_task.hpp \
+#	 tree-nodes/omp_task.cpp \
+#	 tree-nodes/omp_for.hpp \
+#	 tree-nodes/omp_for.cpp \
+#	 tree-nodes/omp_simd.hpp \
+#	 tree-nodes/omp_simd.cpp \
+#	 tree-nodes/cilk_simd.hpp \
+#	 tree-nodes/cilk_simd.cpp \
+#	 tree-nodes/cilk_for.hpp \
+#	 tree-nodes/cilk_for.cpp \
+#	 tree-nodes/omp_distribute.hpp \
+#	 tree-nodes/omp_distribute.cpp \
+#	 tree-nodes/oacc_loop.hpp \
+#	 tree-nodes/oacc_loop.cpp \
+#	 tree-nodes/omp_teams.hpp \
+#	 tree-nodes/omp_teams.cpp \
+#	 tree-nodes/omp_target_data.hpp \
+#	 tree-nodes/omp_target_data.cpp \
+#	 tree-nodes/omp_target.hpp \
+#	 tree-nodes/omp_target.cpp \
+#	 tree-nodes/omp_sections.hpp \
+#	 tree-nodes/omp_sections.cpp \
+#	 tree-nodes/omp_single.hpp \
+#	 tree-nodes/omp_single.cpp \
+#	 tree-nodes/omp_section.hpp \
+#	 tree-nodes/omp_section.cpp \
+#	 tree-nodes/omp_master.hpp \
+#	 tree-nodes/omp_master.cpp \
+#	 tree-nodes/omp_taskgroup.hpp \
+#	 tree-nodes/omp_taskgroup.cpp \
+#	 tree-nodes/omp_ordered.hpp \
+#	 tree-nodes/omp_ordered.cpp \
+#	 tree-nodes/omp_critical.hpp \
+#	 tree-nodes/omp_critical.cpp \
+#	 tree-nodes/oacc_cache.hpp \
+#	 tree-nodes/oacc_cache.cpp \
+#	 tree-nodes/oacc_declare.hpp \
+#	 tree-nodes/oacc_declare.cpp \
+#	 tree-nodes/oacc_enter_data.hpp \
+#	 tree-nodes/oacc_enter_data.cpp \
+#	 tree-nodes/oacc_exit_data.hpp \
+#	 tree-nodes/oacc_exit_data.cpp \
+#	 tree-nodes/oacc_update.hpp \
+#	 tree-nodes/oacc_update.cpp \
+#	 tree-nodes/omp_target_update.hpp \
+#	 tree-nodes/omp_target_update.cpp \
+#	 tree-nodes/omp_atomic.hpp \
+#	 tree-nodes/omp_atomic.cpp \
+#	 tree-nodes/omp_atomic_read.hpp \
+#	 tree-nodes/omp_atomic_read.cpp \
+#	 tree-nodes/omp_atomic_capture_old.hpp \
+#	 tree-nodes/omp_atomic_capture_old.cpp \
+#	 tree-nodes/omp_atomic_capture_new.hpp \
+#	 tree-nodes/omp_atomic_capture_new.cpp \
+#	 tree-nodes/omp_clause.hpp \
+#	 tree-nodes/omp_clause.cpp \
+#	 tree-nodes/transaction_expr.hpp \
+#	 tree-nodes/transaction_expr.cpp \
+#	 tree-nodes/reduc_max_expr.hpp \
+#	 tree-nodes/reduc_max_expr.cpp \
+#	 tree-nodes/reduc_min_expr.hpp \
+#	 tree-nodes/reduc_min_expr.cpp \
+#	 tree-nodes/reduc_plus_expr.hpp \
+#	 tree-nodes/reduc_plus_expr.cpp \
+#	 tree-nodes/dot_prod_expr.hpp \
+#	 tree-nodes/dot_prod_expr.cpp \
+#	 tree-nodes/widen_sum_expr.hpp \
+#	 tree-nodes/widen_sum_expr.cpp \
+#	 tree-nodes/sad_expr.hpp \
+#	 tree-nodes/sad_expr.cpp \
+#	 tree-nodes/widen_mult_expr.hpp \
+#	 tree-nodes/widen_mult_expr.cpp \
+#	 tree-nodes/widen_mult_plus_expr.hpp \
+#	 tree-nodes/widen_mult_plus_expr.cpp \
+#	 tree-nodes/widen_mult_minus_expr.hpp \
+#	 tree-nodes/widen_mult_minus_expr.cpp \
+#	 tree-nodes/widen_lshift_expr.hpp \
+#	 tree-nodes/widen_lshift_expr.cpp \
+#	 tree-nodes/fma_expr.hpp \
+#	 tree-nodes/fma_expr.cpp \
+#	 tree-nodes/vec_widen_mult_hi_expr.hpp \
+#	 tree-nodes/vec_widen_mult_hi_expr.cpp \
+#	 tree-nodes/vec_widen_mult_lo_expr.hpp \
+#	 tree-nodes/vec_widen_mult_lo_expr.cpp \
+#	 tree-nodes/vec_widen_mult_even_expr.hpp \
+#	 tree-nodes/vec_widen_mult_even_expr.cpp \
+#	 tree-nodes/vec_widen_mult_odd_expr.hpp \
+#	 tree-nodes/vec_widen_mult_odd_expr.cpp \
+#	 tree-nodes/vec_unpack_hi_expr.hpp \
+#	 tree-nodes/vec_unpack_hi_expr.cpp \
+#	 tree-nodes/vec_unpack_lo_expr.hpp \
+#	 tree-nodes/vec_unpack_lo_expr.cpp \
+#	 tree-nodes/vec_unpack_float_hi_expr.hpp \
+#	 tree-nodes/vec_unpack_float_hi_expr.cpp \
+#	 tree-nodes/vec_unpack_float_lo_expr.hpp \
+#	 tree-nodes/vec_unpack_float_lo_expr.cpp \
+#	 tree-nodes/vec_pack_trunc_expr.hpp \
+#	 tree-nodes/vec_pack_trunc_expr.cpp \
+#	 tree-nodes/vec_pack_sat_expr.hpp \
+#	 tree-nodes/vec_pack_sat_expr.cpp \
+#	 tree-nodes/vec_pack_fix_trunc_expr.hpp \
+#	 tree-nodes/vec_pack_fix_trunc_expr.cpp \
+#	 tree-nodes/vec_widen_lshift_hi_expr.hpp \
+#	 tree-nodes/vec_widen_lshift_hi_expr.cpp \
+#	 tree-nodes/vec_widen_lshift_lo_expr.hpp \
+#	 tree-nodes/vec_widen_lshift_lo_expr.cpp \
+#	 tree-nodes/predict_expr.hpp \
+#	 tree-nodes/predict_expr.cpp \
+#	 tree-nodes/optimization_node.hpp \
+#	 tree-nodes/optimization_node.cpp \
+#	 tree-nodes/target_option_node.hpp \
+#	 tree-nodes/target_option_node.cpp \
+#	 tree-nodes/annotate_expr.hpp \
+#	 tree-nodes/annotate_expr.cpp \
+#	 tree-nodes/cilk_spawn_stmt.hpp \
+#	 tree-nodes/cilk_spawn_stmt.cpp \
+#	 tree-nodes/cilk_sync_stmt.hpp \
+#	 tree-nodes/cilk_sync_stmt.cpp \
+#	 last line is empty
 template_plugin_la_LDFLAGS = -module
-template_plugin_la_LIBADD = 
+template_plugin_la_LIBADD = -lrdf -lxml2 -lexpat -lcrypt
 testlink_SOURCES = tests/test_link.cpp
 testlink_LDADD = template_plugin.la
 all: config.h
@@ -1054,33 +942,7 @@ tree-nodes/$(am__dirstamp):
 tree-nodes/$(DEPDIR)/$(am__dirstamp):
 	@$(MKDIR_P) tree-nodes/$(DEPDIR)
 	@: > tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/error_mark.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/identifier_node.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/tree_list.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/tree_vec.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/block.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/offset_type.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/enumeral_type.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/boolean_type.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
 tree-nodes/integer_type.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/real_type.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/pointer_type.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/reference_type.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/nullptr_type.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/fixed_point_type.lo: tree-nodes/$(am__dirstamp) \
 	tree-nodes/$(DEPDIR)/$(am__dirstamp)
 tree-nodes/complex_type.lo: tree-nodes/$(am__dirstamp) \
 	tree-nodes/$(DEPDIR)/$(am__dirstamp)
@@ -1092,411 +954,15 @@ tree-nodes/record_type.lo: tree-nodes/$(am__dirstamp) \
 	tree-nodes/$(DEPDIR)/$(am__dirstamp)
 tree-nodes/union_type.lo: tree-nodes/$(am__dirstamp) \
 	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/qual_union_type.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/void_type.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/pointer_bounds_type.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/function_type.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/method_type.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/lang_type.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/void_cst.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/integer_cst.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/real_cst.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/fixed_cst.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/complex_cst.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/vector_cst.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/string_cst.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/function_decl.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/label_decl.lo: tree-nodes/$(am__dirstamp) \
+tree-nodes/identifier_node.lo: tree-nodes/$(am__dirstamp) \
 	tree-nodes/$(DEPDIR)/$(am__dirstamp)
 tree-nodes/field_decl.lo: tree-nodes/$(am__dirstamp) \
 	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/var_decl.lo: tree-nodes/$(am__dirstamp) \
+tree-nodes/error_mark.lo: tree-nodes/$(am__dirstamp) \
 	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/const_decl.lo: tree-nodes/$(am__dirstamp) \
+tree-nodes/pointer_type.lo: tree-nodes/$(am__dirstamp) \
 	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/parm_decl.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/type_decl.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/result_decl.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/debug_expr_decl.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/namespace_decl.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/imported_decl.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/namelist_decl.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/translation_unit_decl.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/component_ref.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/bit_field_ref.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/array_ref.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/array_range_ref.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/realpart_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/imagpart_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/view_convert_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/indirect_ref.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/obj_type_ref.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/constructor.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/compound_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/modify_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/init_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/target_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/cond_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/vec_cond_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/vec_perm_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/bind_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/call_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/with_cleanup_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/cleanup_point_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/placeholder_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/plus_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/minus_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/mult_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/pointer_plus_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/mult_highpart_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/trunc_div_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/ceil_div_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/floor_div_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/round_div_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/trunc_mod_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/ceil_mod_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/floor_mod_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/round_mod_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/rdiv_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/exact_div_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/fix_trunc_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/float_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/negate_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/min_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/max_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/abs_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/lshift_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/rshift_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/lrotate_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/rrotate_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/bit_ior_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/bit_xor_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/bit_and_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/bit_not_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/truth_andif_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/truth_orif_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/truth_and_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/truth_or_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/truth_xor_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/truth_not_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/lt_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/le_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/gt_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/ge_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/eq_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/ne_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/unordered_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/ordered_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/unlt_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/unle_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/ungt_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/unge_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/uneq_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/ltgt_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/range_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/paren_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/convert_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/addr_space_convert_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/fixed_convert_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/nop_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/non_lvalue_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/compound_literal_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/save_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/addr_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/fdesc_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/complex_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/conj_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/predecrement_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/preincrement_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/postdecrement_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/postincrement_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/va_arg_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/try_catch_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/try_finally_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/decl_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/label_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/goto_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/return_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/exit_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/loop_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/switch_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/case_label_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/asm_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/ssa_name.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/catch_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/eh_filter_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/scev_known.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/scev_not_known.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/polynomial_chrec.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/statement_list.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/assert_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/tree_binfo.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/with_size_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/realign_load_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/target_mem_ref.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/mem_ref.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/oacc_parallel.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/oacc_kernels.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/oacc_data.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/oacc_host_data.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/omp_parallel.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/omp_task.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/omp_for.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/omp_simd.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/cilk_simd.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/cilk_for.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/omp_distribute.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/oacc_loop.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/omp_teams.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/omp_target_data.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/omp_target.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/omp_sections.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/omp_single.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/omp_section.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/omp_master.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/omp_taskgroup.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/omp_ordered.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/omp_critical.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/oacc_cache.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/oacc_declare.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/oacc_enter_data.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/oacc_exit_data.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/oacc_update.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/omp_target_update.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/omp_atomic.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/omp_atomic_read.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/omp_atomic_capture_old.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/omp_atomic_capture_new.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/omp_clause.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/transaction_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/reduc_max_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/reduc_min_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/reduc_plus_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/dot_prod_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/widen_sum_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/sad_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/widen_mult_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/widen_mult_plus_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/widen_mult_minus_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/widen_lshift_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/fma_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/vec_widen_mult_hi_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/vec_widen_mult_lo_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/vec_widen_mult_even_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/vec_widen_mult_odd_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/vec_unpack_hi_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/vec_unpack_lo_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/vec_unpack_float_hi_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/vec_unpack_float_lo_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/vec_pack_trunc_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/vec_pack_sat_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/vec_pack_fix_trunc_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/vec_widen_lshift_hi_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/vec_widen_lshift_lo_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/predict_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/optimization_node.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/target_option_node.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/annotate_expr.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/cilk_spawn_stmt.lo: tree-nodes/$(am__dirstamp) \
-	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-tree-nodes/cilk_sync_stmt.lo: tree-nodes/$(am__dirstamp) \
+tree-nodes/reference_type.lo: tree-nodes/$(am__dirstamp) \
 	tree-nodes/$(DEPDIR)/$(am__dirstamp)
 
 template_plugin.la: $(template_plugin_la_OBJECTS) $(template_plugin_la_DEPENDENCIES) $(EXTRA_template_plugin_la_DEPENDENCIES) 
@@ -1577,232 +1043,22 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/callbacks.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/field.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/introspection.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/librdfinterface.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/name.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/plugin.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/record_context.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/$(DEPDIR)/test_link.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/abs_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/addr_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/addr_space_convert_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/annotate_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/array_range_ref.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/array_ref.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/array_type.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/asm_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/assert_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/bind_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/bit_and_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/bit_field_ref.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/bit_ior_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/bit_not_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/bit_xor_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/block.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/boolean_type.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/call_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/case_label_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/catch_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/ceil_div_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/ceil_mod_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/cilk_for.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/cilk_simd.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/cilk_spawn_stmt.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/cilk_sync_stmt.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/cleanup_point_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/complex_cst.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/complex_expr.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/complex_type.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/component_ref.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/compound_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/compound_literal_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/cond_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/conj_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/const_decl.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/constructor.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/convert_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/debug_expr_decl.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/decl_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/dot_prod_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/eh_filter_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/enumeral_type.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/eq_expr.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/error_mark.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/exact_div_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/exit_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/fdesc_expr.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/field_decl.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/fix_trunc_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/fixed_convert_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/fixed_cst.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/fixed_point_type.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/float_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/floor_div_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/floor_mod_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/fma_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/function_decl.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/function_type.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/ge_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/goto_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/gt_expr.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/identifier_node.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/imagpart_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/imported_decl.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/indirect_ref.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/init_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/integer_cst.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/integer_type.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/label_decl.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/label_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/lang_type.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/le_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/loop_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/lrotate_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/lshift_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/lt_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/ltgt_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/max_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/mem_ref.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/method_type.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/min_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/minus_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/modify_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/mult_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/mult_highpart_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/namelist_decl.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/namespace_decl.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/ne_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/negate_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/non_lvalue_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/nop_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/nullptr_type.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/oacc_cache.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/oacc_data.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/oacc_declare.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/oacc_enter_data.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/oacc_exit_data.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/oacc_host_data.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/oacc_kernels.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/oacc_loop.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/oacc_parallel.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/oacc_update.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/obj_type_ref.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/offset_type.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/omp_atomic.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/omp_atomic_capture_new.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/omp_atomic_capture_old.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/omp_atomic_read.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/omp_clause.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/omp_critical.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/omp_distribute.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/omp_for.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/omp_master.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/omp_ordered.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/omp_parallel.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/omp_section.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/omp_sections.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/omp_simd.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/omp_single.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/omp_target.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/omp_target_data.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/omp_target_update.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/omp_task.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/omp_taskgroup.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/omp_teams.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/optimization_node.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/ordered_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/paren_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/parm_decl.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/placeholder_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/plus_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/pointer_bounds_type.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/pointer_plus_expr.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/pointer_type.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/polynomial_chrec.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/postdecrement_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/postincrement_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/predecrement_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/predict_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/preincrement_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/qual_union_type.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/range_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/rdiv_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/real_cst.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/real_type.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/realign_load_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/realpart_expr.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/record_type.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/reduc_max_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/reduc_min_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/reduc_plus_expr.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/reference_type.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/result_decl.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/return_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/round_div_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/round_mod_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/rrotate_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/rshift_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/sad_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/save_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/scev_known.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/scev_not_known.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/ssa_name.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/statement_list.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/string_cst.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/switch_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/target_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/target_mem_ref.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/target_option_node.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/transaction_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/translation_unit_decl.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/tree_binfo.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/tree_list.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/tree_vec.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/trunc_div_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/trunc_mod_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/truth_and_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/truth_andif_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/truth_not_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/truth_or_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/truth_orif_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/truth_xor_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/try_catch_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/try_finally_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/type_decl.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/uneq_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/unge_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/ungt_expr.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/union_type.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/unle_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/unlt_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/unordered_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/va_arg_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/var_decl.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/vec_cond_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/vec_pack_fix_trunc_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/vec_pack_sat_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/vec_pack_trunc_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/vec_perm_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/vec_unpack_float_hi_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/vec_unpack_float_lo_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/vec_unpack_hi_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/vec_unpack_lo_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/vec_widen_lshift_hi_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/vec_widen_lshift_lo_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/vec_widen_mult_even_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/vec_widen_mult_hi_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/vec_widen_mult_lo_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/vec_widen_mult_odd_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/vector_cst.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/vector_type.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/view_convert_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/void_cst.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/void_type.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/widen_lshift_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/widen_mult_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/widen_mult_minus_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/widen_mult_plus_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/widen_sum_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/with_cleanup_expr.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/with_size_expr.Plo@am__quote@
 
 .cpp.o:
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.o$$||'`;\

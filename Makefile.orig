@@ -16,7 +16,8 @@ all : test21 test22 test23 test2 test2c1 test3 test4 test6 test71 test7 test_enu
 runtest :
 	make
 
-
+test_simple_int:
+	${CXX} -fplugin=./.libs/template_plugin.so tests/test_simple_int.cpp
 
 test2:
 	${CXX} -fplugin=./.libs/template_plugin.so tests/plugincpp_test.cpp

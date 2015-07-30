@@ -34,3 +34,5 @@ a.out
 /report.txt
 /tests/plugincpp_interface_simple.cpp.001t.tu
 /tree-nodes/err.txt
+/owl/struct.hpp.gch
+/trace.txt
