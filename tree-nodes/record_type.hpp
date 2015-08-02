@@ -1,4 +1,4 @@
-class RecordContext;
+
 class TC_RECORD_TYPE: public  TCWrapper<RECORD_TYPE>
 {
 public :
@@ -6,7 +6,7 @@ public :
   tree name(tree t);
   tree chain(tree t);
   const char * process_name(tree t);
-  void process_fields(RecordContext * c,tree f);
+  template<class T> void process_fields(T * c,tree f);
   virtual void finish_type (tree t);
   virtual void finish_decl (tree t);
   virtual void finish_unit (tree t);

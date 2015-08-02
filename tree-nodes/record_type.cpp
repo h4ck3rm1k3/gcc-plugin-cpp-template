@@ -8,6 +8,8 @@
 #include "record_context.hpp"
 #include "introspection.hpp"
 
+#include "owl/struct.hpp"
+
 /////////////////////////////////////////////////////////////////
 
 tree TC_RECORD_TYPE::fields(tree t) {
@@ -39,54 +41,55 @@ public:
 };
 
 
-class RecordTypeField : public SwitchCall<int,DefaultVal>{
+template <class T> class RecordTypeField : public SwitchCall<int,DefaultVal>{
   /*
     handle the type of a field type
   */
 
-
 public:
-  RecordContext * c;
-  RecordTypeField(RecordContext * c,tree field):c(c) {
+  T * c;
+  RecordTypeField(T * c,tree field):c(c) {
     CallBack::check_type(field);
     call<RecordTypeField>(field);
   }
 
-  int call_type_TYPE_DECL(tree f) {}
+  int call_type_TYPE_DECL(tree f) { return -1; }
   int call_type_FIELD_DECL(tree f) {
-    std::cerr << "RecordTypeField::call_type_FIELD_DECL(";
+    //std::cerr << "RecordTypeField::call_type_FIELD_DECL(";
     call_type_ret<CallBack,int>(f, CallBack::finish_type_callback);
     Field fld(f);      
     c->field_begin(fld);
-    std::cerr << ")";
+    //std::cerr << ")";
+    return 0;
   }
 };
 
+template <class T> void TC_RECORD_TYPE::process_fields(T * c,tree f) {
 
+}
 
-void TC_RECORD_TYPE::process_fields(RecordContext * c,tree f) {
-  std::cerr << "TC_RECORD_TYPE::process_fields(";
+void TC_RECORD_TYPE::finish_type(tree t){
+  std::cerr << "TC_RECORD_TYPE::finish_type(";
+
+  introspect_struct<tree_base>((tree_base*)t);
+  const char *  n=process_name(t);
+  gcc::Struct c(n);
+  //if (strcmp(n,"") == 0)
+  //  return;
+  //c.record_begin(n);
+  //process_fields(&c,);
+  tree f = fields(t);
   if (!f)
     return;
   while (f) {
-    std::cerr << "field(";
-    RecordTypeField proc(c,f);
+    //    std::cerr << "field(";
+    RecordTypeField<gcc::Struct> proc(&c,f);
     f = chain(f);
-    std::cerr << ");";
+    //std::cerr << ");";
   }
-  std::cerr << ")";
-}
-void TC_RECORD_TYPE::finish_type(tree t){
-  std::cerr << "TC_RECORD_TYPE::finish_type(";
-  RecordContext c;
-  introspect_struct<tree_base>((tree_base*)t);
-  const char *  n=process_name(t);
-  if (strcmp(n,"") == 0)
-    return;
-  c.record_begin(n);
-  process_fields(&c,fields(t));
-  c.record_end();
-  std::cerr << ")";
+  //std::cerr << ")";
+  //c.record_end();
+  //std::cerr << ")";
 }
 TC_RECORD_TYPE aTC_RECORD_TYPE;
 /////////////////////////////////////////////////////////////////

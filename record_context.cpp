@@ -10,7 +10,7 @@ using namespace std;
 
 void RecordContext::record_begin(const char * pname){
   class_name=pname;
-  cout << "void define_class_CLS_" << classcount++ << "_";
+  classcount++;
 
   if (pname) {
     cout << pname ;

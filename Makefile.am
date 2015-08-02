@@ -7,6 +7,7 @@ INCDIR=-I /usr/include/raptor2 -I /usr/include/rasqal
 AM_CPPFLAGS = -I $(GCCPLUGINS_DIR)/include $(INCDIR) -I $(srcdir)/../libgdl $(GMP_INC) -Itree-nodes -g3 
 
 AM_CFLAGS = -Wall -std=gnu++11 -g3 $(INCDIR)
+AM_CXXFLAGS = -Wall -std=gnu++11 -g3 $(INCDIR)
 
 pkglib_LTLIBRARIES = template_plugin.la
 

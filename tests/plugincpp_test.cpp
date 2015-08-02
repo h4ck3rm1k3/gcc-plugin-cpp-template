@@ -17374,7 +17374,6 @@ extern bool is_inexpensive_builtin (tree);
 
 union tree_node;
 typedef union tree_node *tree;
-class RecordContext;
 extern "C" void cpp_callbackPLUGIN_FINISH_TYPE (tree t, void *i);
 extern "C" void cpp_callbackPLUGIN_START_UNIT ();
 using namespace std;
