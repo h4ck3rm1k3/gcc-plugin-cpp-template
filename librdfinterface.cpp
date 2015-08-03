@@ -81,8 +81,8 @@ public:
 
   void serialize(const char * filename) {
     librdf_serializer* serializer;
-    serializer = librdf_new_serializer(pworld,"rdfxml", NULL, NULL);
-    Uri base_uri("http://intros5r.com/base.rdf");   
+    serializer = librdf_new_serializer(pworld,"turtle", NULL, NULL);
+    Uri base_uri("http://intros5r.com/base.ttl");   
     FILE * output_file = fopen(filename, "w");
     librdf_serializer_serialize_model_to_file_handle(serializer, output_file, base_uri.get_uri(), pmodel);
     fclose(output_file);
@@ -106,13 +106,13 @@ void rdf_context::start_unit(const char * amainfilename){
 
 void rdf_context::finish_unit(){
   if (mainfilename) {
-    std::cerr << "Finish" << mainfilename << std::endl;
+    //std::cerr << "Finish" << mainfilename << std::endl;
     std::string filename(mainfilename);
     filename += ".rdf"; 
     pimp->serialize(filename.c_str());
   }
   else {
-    std::cerr << "no file name!" << std::endl;
+    //std::cerr << "no file name!" << std::endl;
   }
 
 }

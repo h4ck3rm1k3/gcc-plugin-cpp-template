@@ -27,18 +27,18 @@ public:
   static rdf_context * p_rdf_context;
 
   rdf_world() {
-    cerr << "create world" << p_rdf_context << endl;
+    //cerr << "create world" << p_rdf_context << endl;
     // p_rdf_context = new  rdf_context();
   }
   
   ~rdf_world() {
-    cerr << "destroy world" << p_rdf_context << endl;
+    //cerr << "destroy world" << p_rdf_context << endl;
     delete p_rdf_context;
     p_rdf_context = 0;
   }
 
   static rdf_context & get_context() {
-    cerr << "get context" << p_rdf_context << endl;
+    //cerr << "get context" << p_rdf_context << endl;
     if (!p_rdf_context) {
         p_rdf_context = new  rdf_context(); 
       }

@@ -10,6 +10,9 @@ namespace rdfs {
     operator const char * () const  {
       return value;
     }
+    static constexpr const char * url = "label";
+    static Uri uri;
   };
-
 };
+
+Uri rdfs::label::uri = Uri(prefix,url);
