@@ -137,7 +137,8 @@ am_template_plugin_la_OBJECTS = librdfinterface.lo __callback.lo \
 	tree-nodes/array_type.lo tree-nodes/record_type.lo \
 	tree-nodes/union_type.lo tree-nodes/identifier_node.lo \
 	tree-nodes/field_decl.lo tree-nodes/error_mark.lo \
-	tree-nodes/pointer_type.lo tree-nodes/reference_type.lo
+	tree-nodes/pointer_type.lo tree-nodes/reference_type.lo \
+	owl/url.lo owl/statement.lo
 template_plugin_la_OBJECTS = $(am_template_plugin_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
@@ -418,6 +419,8 @@ template_plugin_la_SOURCES = \
 	tree-nodes/reference_type.hpp \
 	tree-nodes/reference_type.cpp \
 	owl/struct.hpp \
+	owl/url.cpp \
+	owl/statement.cpp \
 	#
 
 
@@ -965,6 +968,14 @@ tree-nodes/pointer_type.lo: tree-nodes/$(am__dirstamp) \
 	tree-nodes/$(DEPDIR)/$(am__dirstamp)
 tree-nodes/reference_type.lo: tree-nodes/$(am__dirstamp) \
 	tree-nodes/$(DEPDIR)/$(am__dirstamp)
+owl/$(am__dirstamp):
+	@$(MKDIR_P) owl
+	@: > owl/$(am__dirstamp)
+owl/$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) owl/$(DEPDIR)
+	@: > owl/$(DEPDIR)/$(am__dirstamp)
+owl/url.lo: owl/$(am__dirstamp) owl/$(DEPDIR)/$(am__dirstamp)
+owl/statement.lo: owl/$(am__dirstamp) owl/$(DEPDIR)/$(am__dirstamp)
 
 template_plugin.la: $(template_plugin_la_OBJECTS) $(template_plugin_la_DEPENDENCIES) $(EXTRA_template_plugin_la_DEPENDENCIES) 
 	$(AM_V_CXXLD)$(template_plugin_la_LINK) -rpath $(pkglibdir) $(template_plugin_la_OBJECTS) $(template_plugin_la_LIBADD) $(LIBS)
@@ -1032,6 +1043,8 @@ testlink$(EXEEXT): $(testlink_OBJECTS) $(testlink_DEPENDENCIES) $(EXTRA_testlink
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
+	-rm -f owl/*.$(OBJEXT)
+	-rm -f owl/*.lo
 	-rm -f tests/*.$(OBJEXT)
 	-rm -f tree-nodes/*.$(OBJEXT)
 	-rm -f tree-nodes/*.lo
@@ -1048,6 +1061,8 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/name.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/plugin.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/record_context.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@owl/$(DEPDIR)/statement.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@owl/$(DEPDIR)/url.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tests/$(DEPDIR)/test_link.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/array_type.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/complex_type.Plo@am__quote@
@@ -1090,6 +1105,7 @@ mostlyclean-libtool:
 
 clean-libtool:
 	-rm -rf .libs _libs
+	-rm -rf owl/.libs owl/_libs
 	-rm -rf tree-nodes/.libs tree-nodes/_libs
 
 distclean-libtool:
@@ -1350,6 +1366,8 @@ clean-generic:
 distclean-generic:
 	-test -z "$(CONFIG_CLEAN_FILES)" || rm -f $(CONFIG_CLEAN_FILES)
 	-test . = "$(srcdir)" || test -z "$(CONFIG_CLEAN_VPATH_FILES)" || rm -f $(CONFIG_CLEAN_VPATH_FILES)
+	-rm -f owl/$(DEPDIR)/$(am__dirstamp)
+	-rm -f owl/$(am__dirstamp)
 	-rm -f tests/$(DEPDIR)/$(am__dirstamp)
 	-rm -f tests/$(am__dirstamp)
 	-rm -f tree-nodes/$(DEPDIR)/$(am__dirstamp)
@@ -1365,7 +1383,7 @@ clean-am: clean-binPROGRAMS clean-generic clean-libtool \
 
 distclean: distclean-am
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
-	-rm -rf ./$(DEPDIR) tests/$(DEPDIR) tree-nodes/$(DEPDIR)
+	-rm -rf ./$(DEPDIR) owl/$(DEPDIR) tests/$(DEPDIR) tree-nodes/$(DEPDIR)
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-hdr distclean-libtool distclean-tags
@@ -1413,7 +1431,7 @@ installcheck-am:
 maintainer-clean: maintainer-clean-am
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
 	-rm -rf $(top_srcdir)/autom4te.cache
-	-rm -rf ./$(DEPDIR) tests/$(DEPDIR) tree-nodes/$(DEPDIR)
+	-rm -rf ./$(DEPDIR) owl/$(DEPDIR) tests/$(DEPDIR) tree-nodes/$(DEPDIR)
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 

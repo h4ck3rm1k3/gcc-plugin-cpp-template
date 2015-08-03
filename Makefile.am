@@ -54,6 +54,8 @@ template_plugin_la_SOURCES = \
 	tree-nodes/reference_type.hpp \
 	tree-nodes/reference_type.cpp \
 	owl/struct.hpp \
+	owl/url.cpp \
+	owl/statement.cpp \
 	#
 
 #	 tree-nodes/tree_list.hpp \

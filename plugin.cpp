@@ -17,7 +17,8 @@
 #include "callback.hpp"
 #include "callbacks.hpp"
 #include "tree-pass.h"
-#include "cp/name-lookup.h" 
+#include "cp/name-lookup.h"
+#include "librdfinterface.hpp"
 
 //#include "symtab.h"
 //#include "cgraph.h"
@@ -32,7 +33,7 @@ static void generic_callback_PLUGIN_FINISH_TYPE (tree t, void *i)
 {
   //cpp_callback_PLUGIN_FINISH_TYPE (t, i);
   cerr  << "generic_callback_PLUGIN_FINISH_TYPE(";
-  int x= call_type_ret<
+  call_type_ret<
     CallBack,
     int>(t,
          CallBack::finish_type_callback
@@ -51,9 +52,12 @@ static void generic_callback_PLUGIN_FINISH_DECL (tree t, void *i)
 
 static void generic_callback_PLUGIN_FINISH_UNIT(void *a, void * b);
 
+
+
 static void generic_callback_PLUGIN_START_UNIT(void *a, void * b)
 {
-  //cerr << "start unit"<< a << " : " << b  << endl;
+  cerr << "start unit"<< a << " : " << b  << " main_input_filename:" << main_input_filename << endl;
+  rdf_world::get_context().start_unit(main_input_filename);
   //generic_callback_PLUGIN_FINISH_UNIT(a,b);
 }
 
@@ -71,6 +75,8 @@ static void generic_callback_PLUGIN_FINISH_UNIT(void *a, void * b)
   // call_type_ret<CallBack,int>(global_namespace,
   //                             CallBack::finish_unit_callback); 
   //cerr << "end unit"<< a << " : " << b  << endl;
+  //cerr << "end unit" << endl;
+  rdf_world::get_context().finish_unit();
 }
 
 static void generic_callback_PLUGIN_FINISH (tree t, void *_){}

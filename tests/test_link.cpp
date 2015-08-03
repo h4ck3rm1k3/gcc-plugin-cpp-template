@@ -26,6 +26,8 @@ const enum tree_code_class tree_code_type[] = {};
 tree array_type_nelts(tree_node const*) {return 0;}
 long int int_size_in_bytes(tree_node const*) { return 0;}
 
+struct gcc_options global_options;
+
 vec<tree, va_gc> *all_translation_units;
 tree global_namespace;
 int main() {

@@ -6,10 +6,16 @@
 #include "prop_cppstd.hpp"
 #include "dc.hpp"
 #include "rdfs.hpp"
+#include "owl.hpp"
 #include <vector>
+#include <iostream>
+#include <strstream>
+#include "librdfinterface.hpp"
+#include "statement.hpp"
+
 namespace gcc {
 class Struct {
-  static constexpr const Wikipedia wikipedia = "https://en.wikipedia.org/wiki/Struct_%28C_programming_language%29";
+
   static constexpr const CStandard standard = "http://c0x.coding-guidelines.com/6.7.2.1.html";
   static constexpr const dc::description description= "A C language structure";
 
@@ -53,7 +59,20 @@ class Struct {
   //std::vector<Field> fields;
 public :
   Struct (const char * name) :
-    name(name) {}
+    name(name) {
+
+    std::ostrstream ss;
+    ss << "http://intros5r.com/struct/";
+    ss << this;    
+    std::string node_instance = ss.str();
+
+    Uri node_uri(node_instance.c_str());
+    Statement s(node_uri,rdf::type::uri,owl::NamedIndividual::uri);
+  
+    //ardf_context.
+      // <http://webprotege.stanford.edu/RBhxcnBQl9lLJtsZM0XEPGH> rdf:type owl:NamedIndividual ;
+      //                                                          rdfs:label "field1" .
+  }
 
   template<class T> void field_begin(T fld) {
     Field f(fld);

@@ -61,3 +61,12 @@ files.
   CATEGORY_INTERFACE_TYPE
   CATEGORY_IMPLEMENTATION_TYPE
   PROTOCOL_INTERFACE_TYPE
+
+## DEBUG
+
+debug in gdb like this :
+    
+    gdb --args /usr/bin/g++-5 -fplugin=./.libs/template_plugin.so tests/plugincpp_test_template.cpp
+    
+and then in gdb :
+    set follow-fork-mode child
