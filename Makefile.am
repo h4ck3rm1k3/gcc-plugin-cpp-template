@@ -14,7 +14,7 @@ pkglib_LTLIBRARIES = template_plugin.la
 EXTRA_DIST = 
 
 template_plugin_la_SOURCES = \
-	librdfinterface.cpp \
+	owl/librdfinterface.cpp \
 	__callback.cpp \
 	callback.cpp \
 	callback.hpp \
@@ -54,6 +54,10 @@ template_plugin_la_SOURCES = \
 	tree-nodes/reference_type.hpp \
 	tree-nodes/reference_type.cpp \
 	owl/struct.hpp \
+	owl/rdfs.cpp \
+	owl/rdf.cpp \
+	owl/owl.cpp \
+	owl/struct.cpp \
 	owl/url.cpp \
 	owl/statement.cpp \
 	#

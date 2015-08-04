@@ -12,4 +12,4 @@ namespace rdf {
   };
 };
 
-Uri rdf::type::uri = Uri(prefix,url);
+

@@ -18,7 +18,7 @@
 #include "callbacks.hpp"
 #include "tree-pass.h"
 #include "cp/name-lookup.h"
-#include "librdfinterface.hpp"
+#include "owl/librdfinterface.hpp"
 
 //#include "symtab.h"
 //#include "cgraph.h"

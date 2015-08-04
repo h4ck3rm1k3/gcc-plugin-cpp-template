@@ -8,7 +8,8 @@
 
 #include "librdfinterface.hpp"
 #include "owl/url.hpp"
-//class Uri;
+#include "owl/struct.hpp"
+
 
 class rdf_context_imp {
   std::string stream_name; /* a buffer containing the current filename name*/
@@ -24,17 +25,8 @@ class rdf_context_imp {
   librdf_storage *pstorage; /* the db file, the storage */
   librdf_model* pmodel;     /* the model in that world, TODO : add one per function body*/
   librdf_serializer* pserializer; /* this is how we write xml/rdf */
-
-  // /* for all gcc interaction */
-  // librdf_uri*  pgcc_node_types;     /* the url of the gcc node types */
-  // librdf_uri*  pgcc_node_fields;    /* the url of the gcc node fiedls*/
-
-
   Uri * base_uri;// introspector
   
-  //  /* for all current object */
-  // librdf_uri*  pcurrent_uri; /* the uri of the current file */
-
 public:
   
   rdf_context_imp():
@@ -54,13 +46,7 @@ public:
                                 */
                                 );    
     pmodel=librdf_new_model(pworld, pstorage, NULL);
-    //base_uri = new Uri("http://intros5r.com/base.rdf");   
-  // // the basis for gcc specfic types
-  // //http://purl.oclc.org/NET/introspector/2002/11/24/gcc/
-  //pgcc_node_types = librdf_new_uri(pworld,reinterpret_cast<unsigned char const*>("node_types:"));
-  //pgcc_node_fields = librdf_new_uri(pworld,reinterpret_cast<unsigned char const*>("node_fields:"));
-  // this will change to be something more useful !
-  //pcurrent_uri = librdf_new_uri(pworld,reinterpret_cast<unsigned char const*>("#"));
+
   }
 
   ~rdf_context_imp() {
@@ -68,7 +54,6 @@ public:
     librdf_storage_close(pstorage);
     librdf_free_storage(pstorage);
     librdf_free_world(pworld);
-    //delete base_uri;
   }
 
   librdf_world  * get_world() {
@@ -82,7 +67,7 @@ public:
   void serialize(const char * filename) {
     librdf_serializer* serializer;
     serializer = librdf_new_serializer(pworld,"turtle", NULL, NULL);
-    Uri base_uri("http://intros5r.com/base.ttl");   
+    Uri base_uri(gcc::prefix);   
     FILE * output_file = fopen(filename, "w");
     librdf_serializer_serialize_model_to_file_handle(serializer, output_file, base_uri.get_uri(), pmodel);
     fclose(output_file);
@@ -108,7 +93,7 @@ void rdf_context::finish_unit(){
   if (mainfilename) {
     //std::cerr << "Finish" << mainfilename << std::endl;
     std::string filename(mainfilename);
-    filename += ".rdf"; 
+    filename += ".ttl"; 
     pimp->serialize(filename.c_str());
   }
   else {
@@ -117,11 +102,9 @@ void rdf_context::finish_unit(){
 
 }
 
-rdf_context::~rdf_context()  {
-  
+rdf_context::~rdf_context()  { 
   delete pimp;
 };
-
 
 librdf_world  * rdf_context::get_world() {
   return pimp->get_world();
@@ -131,9 +114,5 @@ librdf_model  * rdf_context::get_model() {
   return pimp->get_model();
 }
 
-
-//rdf_context rdf_world::ardf_context;
-
 rdf_context * rdf_world::p_rdf_context=0;
 
-//rdf_world ardf_world;

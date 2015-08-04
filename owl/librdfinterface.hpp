@@ -1,4 +1,4 @@
-
+#pragma once
 /*
  * rdf context object to be created when the plugin starts a unit.
  */
@@ -47,11 +47,11 @@ public:
 
   // out of
   static librdf_world  * get_world() {
-    cerr << "get world/ context" << p_rdf_context << endl;
+    //    cerr << "get world/ context" << p_rdf_context << endl;
     if (!p_rdf_context) {
         p_rdf_context = new rdf_context(); 
       }
-    cerr << "get world/ going to reutrn" << p_rdf_context << endl;
+    ///cerr << "get world/ going to return" << p_rdf_context << endl;
     return p_rdf_context->get_world();
   }
   

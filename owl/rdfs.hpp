@@ -1,4 +1,5 @@
 #pragma once
+#include "url.hpp"
 namespace rdfs {
   static constexpr const char * prefix = "http://www.w3.org/2000/01/rdf-schema#";
       
@@ -15,4 +16,3 @@ namespace rdfs {
   };
 };
 
-Uri rdfs::label::uri = Uri(prefix,url);

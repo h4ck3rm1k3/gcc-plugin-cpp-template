@@ -36,3 +36,5 @@ a.out
 /tree-nodes/err.txt
 /owl/struct.hpp.gch
 /trace.txt
+/tests/plugincpp_test.cpp.rdf
+/tests/plugincpp_test.cpp.ttl
