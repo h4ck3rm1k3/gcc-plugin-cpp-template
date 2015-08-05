@@ -21,11 +21,24 @@ namespace gcc {
     T val;
   public:
     SimpleProperty(T v): val(v) {}
+
+    const char * get_name() const {
+      return N;
+    }
+    T get_val() {
+      return val;
+    }
+    Uri&  get_url() {
+      return url;
+    }
+    static constexpr const char * name = N;
+    static Uri url;
   };
 
   class Struct : public owl::NamedIndividual {
 
   public:
+    Uri node_uri;
     static constexpr const CStandard standard = \
       "http://c0x.coding-guidelines.com/6.7.2.1.html";
 
@@ -39,7 +52,7 @@ namespace gcc {
       static Uri uri; // the pointer from the field to the structure
     };
 
-    class Field : public owl::NamedIndividual {
+    class FieldDecl : public owl::NamedIndividual {
     public:
       static constexpr const char bit_field_str[]= "bit_field";
       SimpleProperty<bool,bit_field_str> bit_field;
@@ -49,43 +62,15 @@ namespace gcc {
       SimpleProperty<bool,bit_size_str> bit_size;
       static constexpr const char offset_str[]= "offset_str";
       SimpleProperty<int,offset_str>  offset;
-      template <class T> Field (T fld, owl::NamedIndividual * parent) :
-        owl::NamedIndividual(fld.name),
-        bit_field(fld.bit_field),
-        offset(fld.offset),
-        bit_offset(fld.bit_offset),
-        bit_size(fld.bit_size)
-      {
-        char buf[1024];
-        sprintf(buf,
-                "http://intros5r.com/struct/%s/field/%s",
-                parent->name,
-                name);
-        std::string node_instance(buf);
-        cerr << "URL:"<< node_instance << endl;
-        node_uri = node_instance.c_str();
-        Statement s1(node_uri,rdf::type::uri,owl::NamedIndividual::uri);
-        Statement s2(node_uri,rdfs::label::uri,name);
-        Statement s3(node_uri,Struct::FieldProperty::uri,parent->node_uri);
-    }
-    };
-    Uri node_uri;
-  public :
-    Struct (const char * name) :
-      owl::NamedIndividual(name)
-    {
-      char buf[1024];
-      sprintf(buf,"http://intros5r.com/struct/%s",name);
-      std::string node_instance(buf);
-      cerr << "URL:"<< node_instance << endl;
-      node_uri = node_instance.c_str();
-      Statement s1(node_uri,rdf::type::uri,owl::NamedIndividual::uri);
-      Statement s2(node_uri,rdfs::label::uri,name);
-    }
 
-    template<class T> void field_begin(T fld) {
-      Field f(fld,this);
-    }
+      template <class T> FieldDecl (T fld, Struct * parent);
+    };
+
+
+  public :
+    Struct (const char * name);
+    template <class T> void field_begin(T fld);
+
 };
 
 };

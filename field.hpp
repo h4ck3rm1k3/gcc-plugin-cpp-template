@@ -1,3 +1,4 @@
+#pragma once 
 class Field {
 public:
   const char * name;

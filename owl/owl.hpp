@@ -17,6 +17,6 @@ namespace owl {
     // instance properties
     rdfs::label name;
 
-    Uri node_uri;
+    //Uri node_uri;
   };
 };

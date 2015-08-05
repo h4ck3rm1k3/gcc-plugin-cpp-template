@@ -53,6 +53,8 @@ template_plugin_la_SOURCES = \
 	tree-nodes/pointer_type.cpp \
 	tree-nodes/reference_type.hpp \
 	tree-nodes/reference_type.cpp \
+	tree-nodes/type_decl.hpp \
+	tree-nodes/type_decl.cpp \
 	owl/struct.hpp \
 	owl/rdfs.cpp \
 	owl/rdf.cpp \
@@ -116,8 +118,6 @@ template_plugin_la_SOURCES = \
 #	 tree-nodes/const_decl.cpp \
 #	 tree-nodes/parm_decl.hpp \
 #	 tree-nodes/parm_decl.cpp \
-#	 tree-nodes/type_decl.hpp \
-#	 tree-nodes/type_decl.cpp \
 #	 tree-nodes/result_decl.hpp \
 #	 tree-nodes/result_decl.cpp \
 #	 tree-nodes/debug_expr_decl.hpp \

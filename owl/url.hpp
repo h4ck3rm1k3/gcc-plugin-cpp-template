@@ -1,4 +1,6 @@
-#pragma once 
+#pragma once
+#include <librdf.h>
+
 struct raptor_uri_s;
 typedef struct raptor_uri_s librdf_uri;
 
@@ -11,4 +13,5 @@ public:
   ~Uri();
   librdf_uri* get_uri();
   Uri & operator = (const char * url);
+  const char * c_str() { return (const char *)librdf_uri_to_string (uri); }
 };

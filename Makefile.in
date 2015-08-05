@@ -138,8 +138,8 @@ am_template_plugin_la_OBJECTS = owl/librdfinterface.lo __callback.lo \
 	tree-nodes/union_type.lo tree-nodes/identifier_node.lo \
 	tree-nodes/field_decl.lo tree-nodes/error_mark.lo \
 	tree-nodes/pointer_type.lo tree-nodes/reference_type.lo \
-	owl/rdfs.lo owl/rdf.lo owl/owl.lo owl/struct.lo owl/url.lo \
-	owl/statement.lo
+	tree-nodes/type_decl.lo owl/rdfs.lo owl/rdf.lo owl/owl.lo \
+	owl/struct.lo owl/url.lo owl/statement.lo
 template_plugin_la_OBJECTS = $(am_template_plugin_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
@@ -419,6 +419,8 @@ template_plugin_la_SOURCES = \
 	tree-nodes/pointer_type.cpp \
 	tree-nodes/reference_type.hpp \
 	tree-nodes/reference_type.cpp \
+	tree-nodes/type_decl.hpp \
+	tree-nodes/type_decl.cpp \
 	owl/struct.hpp \
 	owl/rdfs.cpp \
 	owl/rdf.cpp \
@@ -483,8 +485,6 @@ template_plugin_la_SOURCES = \
 #	 tree-nodes/const_decl.cpp \
 #	 tree-nodes/parm_decl.hpp \
 #	 tree-nodes/parm_decl.cpp \
-#	 tree-nodes/type_decl.hpp \
-#	 tree-nodes/type_decl.cpp \
 #	 tree-nodes/result_decl.hpp \
 #	 tree-nodes/result_decl.cpp \
 #	 tree-nodes/debug_expr_decl.hpp \
@@ -981,6 +981,8 @@ tree-nodes/pointer_type.lo: tree-nodes/$(am__dirstamp) \
 	tree-nodes/$(DEPDIR)/$(am__dirstamp)
 tree-nodes/reference_type.lo: tree-nodes/$(am__dirstamp) \
 	tree-nodes/$(DEPDIR)/$(am__dirstamp)
+tree-nodes/type_decl.lo: tree-nodes/$(am__dirstamp) \
+	tree-nodes/$(DEPDIR)/$(am__dirstamp)
 owl/rdfs.lo: owl/$(am__dirstamp) owl/$(DEPDIR)/$(am__dirstamp)
 owl/rdf.lo: owl/$(am__dirstamp) owl/$(DEPDIR)/$(am__dirstamp)
 owl/owl.lo: owl/$(am__dirstamp) owl/$(DEPDIR)/$(am__dirstamp)
@@ -1088,6 +1090,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/pointer_type.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/record_type.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/reference_type.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/type_decl.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/union_type.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@tree-nodes/$(DEPDIR)/vector_type.Plo@am__quote@
 
