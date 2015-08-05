@@ -33,12 +33,14 @@ template <class T> Struct::FieldDecl::FieldDecl (T fld, gcc::Struct * parent) :
     cerr << "Field Node:" << node_uri.c_str() << endl;
     Statement s3(node_uri,Struct::FieldProperty::uri,parent->node_uri);
 
-    Statement s4(node_uri,bit_field.get_url(),bit_field.get_val());
-
     //(fld.bit_field),
+    Statement s_bit_field(node_uri,bit_field.get_url(),bit_field.get_val());
     //offset(fld.offset),
+    Statement s_offset(node_uri,offset.get_url(),offset.get_val());
     //bit_offset(fld.bit_offset),
+    Statement s_bitoffset(node_uri,bit_offset.get_url(),bit_offset.get_val());
     //bit_size(fld.bit_size)
+    Statement s_bitsize(node_uri,bit_size.get_url(),bit_size.get_val());
   }
 }
 
@@ -62,6 +64,12 @@ Struct::Struct (const char * name) :
     FieldDecl f(fld,this);
   }
 
+  /*
+    initialize the urls of the template fields
+  */
   template <> Uri SimpleProperty<bool, Struct::FieldDecl::bit_field_str>::url = Uri(prefix,"bit_field_property");
+  template <> Uri SimpleProperty<int, Struct::FieldDecl::bit_offset_str>::url = Uri(prefix,"bit_offset_property");
+  template <> Uri SimpleProperty<int, Struct::FieldDecl::bit_size_str>::url = Uri(prefix,"bit_size_property");
+  template <> Uri SimpleProperty<int, Struct::FieldDecl::offset_str>::url = Uri(prefix,"offset_property");
 }
 

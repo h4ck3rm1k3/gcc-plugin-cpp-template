@@ -59,7 +59,7 @@ namespace gcc {
       static constexpr const char bit_offset_str[]= "bit_offset";
       SimpleProperty<int,bit_offset_str>  bit_offset;
       static constexpr const char bit_size_str[]= "bit_size";
-      SimpleProperty<bool,bit_size_str> bit_size;
+      SimpleProperty<int,bit_size_str> bit_size;
       static constexpr const char offset_str[]= "offset_str";
       SimpleProperty<int,offset_str>  offset;
 

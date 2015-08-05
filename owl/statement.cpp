@@ -38,10 +38,20 @@ Statement::Statement(Uri & sub,Uri & pred,bool obj){
   librdf_statement_set_predicate(st, node_create_from_uri(pred.get_uri()));
   if (obj) {
     librdf_statement_set_object(st, node_create_from_string("True"));
-  }else
-    {
-      librdf_statement_set_object(st, node_create_from_string("False"));
-    }
+  }else{
+    librdf_statement_set_object(st, node_create_from_string("False"));
+  }
+  librdf_model_add_statement(rdf_world::get_model(), st);
+}
+
+Statement::Statement(Uri & sub,Uri & pred,int obj){
+  librdf_statement *st;
+  st = librdf_new_statement(rdf_world::get_world());
+  cerr << "statement3:" << sub.c_str()<< " " << pred.c_str() << " " << obj << endl;
+  librdf_statement_set_subject(st, node_create_from_uri(sub.get_uri()));
+  librdf_statement_set_predicate(st, node_create_from_uri(pred.get_uri()));
+  librdf_statement_set_object(st, node_create_from_string(std::to_string(obj).c_str()));
+
   librdf_model_add_statement(rdf_world::get_model(), st);
 }
 
@@ -49,7 +59,7 @@ Statement::Statement(Uri & sub,Uri & pred,const char * obj){
   //uri=librdf_new_uri(rdf_world::get_world(), (const unsigned char*)url);
   librdf_statement *st;
   st = librdf_new_statement(rdf_world::get_world());
-  cerr << "statement2:" << sub.c_str()<< " " << pred.c_str() << " " << obj << endl;
+  cerr << "statement4:" << sub.c_str()<< " " << pred.c_str() << " " << obj << endl;
   librdf_statement_set_subject(st, node_create_from_uri(sub.get_uri()));
   librdf_statement_set_predicate(st, node_create_from_uri(pred.get_uri()));
   librdf_statement_set_object(st, node_create_from_string(obj));
