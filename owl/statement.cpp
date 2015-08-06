@@ -29,6 +29,7 @@ Statement::Statement(Uri & sub,Uri & pred,Uri & obj){
   librdf_model_add_statement(rdf_world::get_model(), st);
 }
 
+
 Statement::Statement(Uri & sub,Uri & pred,bool obj){
   //uri=librdf_new_uri(rdf_world::get_world(), (const unsigned char*)url);
   librdf_statement *st;

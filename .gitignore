@@ -38,3 +38,6 @@ a.out
 /trace.txt
 /tests/plugincpp_test.cpp.rdf
 /tests/plugincpp_test.cpp.ttl
+/tests/catalog-v001.xml
+/tests/plugincpp_test.ttl
+/tests/test_simple_int.cpp.ttl

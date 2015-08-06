@@ -3,15 +3,16 @@
 #include <gcc-plugin.h>
 #include <coretypes.h>
 #include <tree.h>
+#include "rdf.hpp"
 #include "record_context.hpp"
 #include "field.hpp"// from parent dir
 
 namespace gcc {
   
-Uri Struct::FieldProperty::uri = Uri(gcc::prefix,gcc::Struct::FieldProperty::field);
+Uri Struct::FieldProperty::uri = Uri(prefix,Struct::FieldProperty::field);
 
-template <class T> Struct::FieldDecl::FieldDecl (T fld, gcc::Struct * parent) :
-  owl::NamedIndividual(fld.name),
+template <class T> Struct::FieldDecl::FieldDecl (T fld, Struct * parent) :
+  name(fld.name),
   bit_field(fld.bit_field),
   offset(fld.offset),
   bit_offset(fld.bit_offset),
@@ -21,12 +22,14 @@ template <class T> Struct::FieldDecl::FieldDecl (T fld, gcc::Struct * parent) :
   if (fld.name) {
     std::cerr << "StructField NAME:"<< fld.name << endl;
     Uri node_uri(std::string(
-                           std::string("http://intros5r.com/struct/") +
-                           std::string(parent->name) +
-                           std::string("/field/") +
-                           std::string(name)).c_str());
+                             std::string(doc_url) +
+                             std::string("struct/") +
+                             std::string(parent->name) +
+                             std::string("/field/") +
+                             std::string(name)).c_str());
     std::cerr << "StructField URI:"<< node_uri.c_str() << endl;
-    Statement s1(node_uri,rdf::type::uri,owl::NamedIndividual::uri);
+    Uri li = LocalUrl(Struct::FieldDecl::uri).uri();    
+    Statement s1(node_uri,rdf::type::uri, li);
     Statement s2(node_uri,rdfs::label::uri,name);
     cerr << "Parent URL:" << parent->node_uri.c_str() << endl;
     cerr << "Field URL:" << Struct::FieldProperty::uri.c_str() << endl;
@@ -46,15 +49,18 @@ template <class T> Struct::FieldDecl::FieldDecl (T fld, gcc::Struct * parent) :
 
 
 Struct::Struct (const char * name) :
-  owl::NamedIndividual(name)
+  name(name)
 {
   if (name) {
     std::cerr << "Struct NAME:"<< name << endl;
-    std::string node_instance = std::string(std::string("http://intros5r.com/struct/") +
+    std::string node_instance = std::string(std::string(doc_url) +
+                                            std::string("struct/") +
                                             std::string(name));
     std::cerr << "URL:"<< node_instance << endl;
     node_uri=node_instance.c_str();
-    Statement s1(node_uri,rdf::type::uri,owl::NamedIndividual::uri);
+    LocalUrl l(Struct::uri);
+    Uri lu(l.c_str());
+    Statement s1(node_uri,rdf::type::uri,lu);
     Statement s2(node_uri,rdfs::label::uri,name);
   }
 }

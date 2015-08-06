@@ -19,4 +19,20 @@ namespace owl {
 
     //Uri node_uri;
   };
+
+  class Class {
+  public:
+    static constexpr const char * url = "Class";
+  };
+
+  class ObjectProperty {
+  public:
+    static constexpr const char * url = "ObjectProperty";
+  };
+
+  class topObjectProperty : public ObjectProperty{
+    
+  };
+
+    
 };

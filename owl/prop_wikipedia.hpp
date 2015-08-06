@@ -1,4 +1,4 @@
-#include "property.hpp"
+#include "owl.hpp"
 #include "rdfs.hpp"
 
 class Wikipedia : public owl::topObjectProperty {
