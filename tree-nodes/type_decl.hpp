@@ -1,5 +1,6 @@
 #include "tcwrapper.hpp"
-class TC_TYPE_DECL  : public TCWrapper<TYPE_DECL>{
+class TC_TYPE_DECL:public TCWrapper < TYPE_DECL >
+{
 public:
 
   virtual void finish_type (tree t);

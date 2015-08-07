@@ -1,2 +1,3 @@
 #include "owl.hpp"
-Uri owl::NamedIndividual::uri = Uri(prefix,url);
+Uri
+  owl::NamedIndividual::uri = Uri (prefix, url);

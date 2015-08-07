@@ -41,3 +41,6 @@ a.out
 /tests/catalog-v001.xml
 /tests/plugincpp_test.ttl
 /tests/test_simple_int.cpp.ttl
+/owl/example.ttl
+/owl/main.o
+/owl/struct.o

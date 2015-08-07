@@ -3,36 +3,42 @@
 #include "url.hpp"
 #include "rdfs.hpp"
 
-namespace owl {
-  static constexpr const char * prefix = "http://www.w3.org/2002/07/owl#";
- 
-  class NamedIndividual {
-    static constexpr const char * url = "NamedIndividual";
+namespace owl
+{
+  static constexpr const char *prefix = "http://www.w3.org/2002/07/owl#";
+
+  class NamedIndividual
+  {
+    static constexpr const char *url = "NamedIndividual";
   public:
     static Uri uri;
 
-    NamedIndividual(const char * name)
-      :name(name) {}
-            
+      NamedIndividual (const char *name):name (name)
+    {
+    }
+
     // instance properties
     rdfs::label name;
 
     //Uri node_uri;
   };
 
-  class Class {
+  class Class
+  {
   public:
-    static constexpr const char * url = "Class";
+    static constexpr const char *url = "Class";
   };
 
-  class ObjectProperty {
+  class ObjectProperty
+  {
   public:
-    static constexpr const char * url = "ObjectProperty";
+    static constexpr const char *url = "ObjectProperty";
   };
 
-  class topObjectProperty : public ObjectProperty{
-    
+  class topObjectProperty:public ObjectProperty
+  {
+
   };
 
-    
+
 };

@@ -4,4 +4,4 @@
 
 #include <vector>
 class CallBack;
-std::vector<CallBack*> callbacks(MAX_TREE_CODES);
+std::vector < CallBack * >callbacks (MAX_TREE_CODES);
