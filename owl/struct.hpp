@@ -1,9 +1,6 @@
 /*
   rdf wrapper for gcc record_types and field_decls
-  Local Variables:
-  mode: c++
-  c-file-style: "gnu"
-  End:
+
 */
 
 #include "prop_wikipedia.hpp"
@@ -19,9 +16,10 @@
 
 namespace gcc
 {
-  static constexpr const char *prefix =
+  static constexpr const ConstUri prefix =
     "http://intros5r.com/2015/08/gcc-plugin.rdf#";
-  static constexpr const char *doc_url =
+  
+  static constexpr const ConstUri doc_url =
     "http://intros5r.com/2015/08/example.rdf#";
 
   class LocalUrl
@@ -33,12 +31,12 @@ namespace gcc
     }
     const char *c_str () const
     {
-      return std::string (std::string (prefix) + std::string (url)).c_str ();
+      return std::string (std::string (prefix.c_str()) + std::string (url)).c_str ();
     }
     Uri uri () const
     {
       return Uri (std::
-		  string (std::string (prefix) + std::string (url)).c_str ());
+		  string (std::string (prefix.c_str()) + std::string (url)).c_str ());
     }
   };
 
@@ -62,8 +60,8 @@ namespace gcc
     {
       return url;
     }
-    static constexpr const char *name = N;
-    static Uri url;
+    static constexpr const ConstUri2 name = ConstUri2(prefix,N);
+
   };
 
   class Struct:public owl::Class
@@ -78,8 +76,10 @@ namespace gcc
     static constexpr const dc::description description =
       "A C language structure";
 
-    static constexpr const char *uri = "record_type";	// the type of the item
-
+    static constexpr ConstUri2 url = ConstUri2(prefix,"record_type");
+    
+    static constexpr const owl::Class::Declaration declaration = owl::Class::Declaration(Struct::uri);
+    
     class FieldProperty:public owl::ObjectProperty
     {
       // struct_of_field_property

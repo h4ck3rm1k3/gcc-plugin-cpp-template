@@ -2,6 +2,8 @@
 #include <string>
 #include "url.hpp"
 #include "rdfs.hpp"
+#include "rdf.hpp"
+#include "statement.hpp"
 
 namespace owl
 {
@@ -13,7 +15,7 @@ namespace owl
   public:
     static Uri uri;
 
-      NamedIndividual (const char *name):name (name)
+    NamedIndividual (const char *name):name (name)
     {
     }
 
@@ -27,6 +29,25 @@ namespace owl
   {
   public:
     static constexpr const char *url = "Class";
+    static constexpr const ConstUri uri = ConstUri(url);
+    
+    // create ontology
+    class Declaration
+    {
+      ConstStatement s1;
+    public:
+      //constexpr Declaration(const char * obj)        :s1(ConstStatement(uri, rdf::type::uri, obj))      {      }
+      
+      //constexpr Declaration(Uri & obj)        :s1(ConstStatement(uri, rdf::type::uri, obj))      {      }
+
+      constexpr Declaration(const ConstUri & obj)
+        :s1(ConstStatement(uri, rdf::type::url, obj))
+      {
+      }
+
+      
+    };
+    
   };
 
   class ObjectProperty

@@ -10,7 +10,7 @@
 namespace gcc
 {
 
-  Uri Struct::FieldProperty::uri = Uri (prefix, Struct::FieldProperty::field);
+  //ConstUri2 Struct::FieldProperty::uri = Uri (prefix, Struct::FieldProperty::field);
 
     template < class T > Struct::FieldDecl::FieldDecl (T fld,
 						       Struct *
@@ -30,8 +30,8 @@ namespace gcc
 				   std::string (name)).c_str ());
 	  std::cerr << "StructField URI:" << node_uri.c_str () << endl;
 	Uri li = LocalUrl (Struct::FieldDecl::uri).uri ();
-	Statement s1 (node_uri, rdf::type::uri, li);
-	Statement s2 (node_uri, rdfs::label::uri, name);
+	Statement s1 (node_uri, rdf::type::url, li);
+	Statement s2 (node_uri, rdfs::label::url, name);
 	  cerr << "Parent URL:" << parent->node_uri.c_str () << endl;
 	  cerr << "Field URL:" << Struct::FieldProperty::uri.c_str () << endl;
 	  cerr << "Field Node:" << node_uri.c_str () << endl;
@@ -62,10 +62,10 @@ namespace gcc
 						 std::string (name));
 	std::cerr << "URL:" << node_instance << endl;
 	node_uri = node_instance.c_str ();
-	LocalUrl l (Struct::uri);
-	Uri lu (l.c_str ());
-	Statement s1 (node_uri, rdf::type::uri, lu);
-	Statement s2 (node_uri, rdfs::label::uri, name);
+	Statement s1 (node_uri, rdf::type::url, url);
+	Statement s2 (node_uri,
+                      rdfs::label::url,
+                      name);
       }
   }
 
@@ -82,15 +82,17 @@ namespace gcc
   /*
      initialize the urls of the template fields
    */
-  template <> Uri SimpleProperty < bool,
-    Struct::FieldDecl::bit_field_str >::url =
-    Uri (prefix, "bit_field_property");
-  template <> Uri SimpleProperty < int,
-    Struct::FieldDecl::bit_offset_str >::url =
-    Uri (prefix, "bit_offset_property");
-  template <> Uri SimpleProperty < int,
-    Struct::FieldDecl::bit_size_str >::url =
-    Uri (prefix, "bit_size_property");
-  template <> Uri SimpleProperty < int, Struct::FieldDecl::offset_str >::url =
-    Uri (prefix, "offset_property");
+  // template <> Uri SimpleProperty < bool,
+  //   Struct::FieldDecl::bit_field_str >::url =
+  //   Uri (prefix, "bit_field_property");
+  // template <> Uri SimpleProperty < int,
+  //   Struct::FieldDecl::bit_offset_str >::url =
+  //   Uri (prefix, "bit_offset_property");
+  // template <> Uri SimpleProperty < int,
+  //   Struct::FieldDecl::bit_size_str >::url =
+  //   Uri (prefix, "bit_size_property");
+  // template <> Uri SimpleProperty < int, Struct::FieldDecl::offset_str >::url =
+  //   Uri (prefix, "offset_property");
+
+
 }

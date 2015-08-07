@@ -47,8 +47,7 @@ Uri::~Uri ()
     }
 }
 
-librdf_uri *
-Uri::get_uri ()
+librdf_uri * Uri::get_uri () const
 {
   return uri;
 }
@@ -59,6 +58,12 @@ Uri & Uri::operator = (const char *url)
     {
       librdf_free_uri (uri);
     }
-  uri = librdf_new_uri (rdf_world::get_world (), (const unsigned char *) url);
+  uri = librdf_new_uri (rdf_world::get_world (), (const unsigned char*)url);
   return *this;
+}
+
+librdf_uri * ConstUri2::get_uri () const
+{
+  return librdf_new_uri (rdf_world::get_world (),
+                        (const unsigned char*)std::string(std::string(prefix) + std::string(path)).c_str());
 }
