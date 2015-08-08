@@ -10,8 +10,6 @@
 namespace gcc
 {
 
-  //ConstUri2 Struct::FieldProperty::uri = Uri (prefix, Struct::FieldProperty::field);
-
     template < class T > Struct::FieldDecl::FieldDecl (T fld,
 						       Struct *
 						       parent):name (fld.
@@ -62,7 +60,7 @@ namespace gcc
                                                    std::string (name));
           std::cerr << "URL:" << node_instance << endl;
           node_uri = node_instance.c_str ();
-          Statement s1 (node_uri, rdf::type::url, Struct::gcc_url);
+          Statement s1 (node_uri, rdf::type::url, Struct::url);
           Statement s2 (node_uri,
                         rdfs::label::url,
                         name);
@@ -74,21 +72,6 @@ namespace gcc
       FieldDecl f (fld, this);
     }
 
-  
-  /*
-     initialize the urls of the template fields
-   */
-  // template <> Uri SimpleProperty < bool,
-  //   Struct::FieldDecl::bit_field_str >::url =
-  //   Uri (prefix, "bit_field_property");
-  // template <> Uri SimpleProperty < int,
-  //   Struct::FieldDecl::bit_offset_str >::url =
-  //   Uri (prefix, "bit_offset_property");
-  // template <> Uri SimpleProperty < int,
-  //   Struct::FieldDecl::bit_size_str >::url =
-  //   Uri (prefix, "bit_size_property");
-  // template <> Uri SimpleProperty < int, Struct::FieldDecl::offset_str >::url =
-  //   Uri (prefix, "offset_property");
-
-  constexpr ConstUri2 gcc::Struct::gcc_url;
+  constexpr ConstUri2 gcc::Struct::url;
+  owl::Class::Declaration<Struct> gcc::Struct::declaration;
 }

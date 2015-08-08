@@ -77,10 +77,11 @@ namespace gcc
       "A C language structure";
 
     //static constexpr ConstUri2 url = ConstUri2(prefix,"record_type");
-    static constexpr ConstUri2 gcc_url = {prefix,"record_type"};
+    static constexpr ConstUri2 url = {prefix,"record_type"};
     
-    //static constexpr const owl::Class::Declaration declaration = { Struct::uri };
+    static owl::Class::Declaration<Struct> declaration;
     
+        
     class FieldProperty:public owl::ObjectProperty
     {
       // struct_of_field_property

@@ -28,20 +28,20 @@ namespace owl
   class Class
   {
   public:
-    static constexpr const ConstUri2 class_uri = { prefix, "Class" };
+    static constexpr const ConstUri2 uri = { prefix, "Class" };
     
     // create ontology
-    class Declaration
+    template <class T> class Declaration
     {
-      ConstStatement s1;
+
     public:
       //constexpr Declaration(const char * obj)        :s1(ConstStatement(uri, rdf::type::uri, obj))      {      }
       
       //constexpr Declaration(Uri & obj)        :s1(ConstStatement(uri, rdf::type::uri, obj))      {      }
 
-      constexpr Declaration(const ConstUri2 & obj)
-        :s1(ConstStatement(class_uri, rdf::type::url, obj))
+      Declaration()
       {
+        Statement s1(T::url, rdf::type::url, uri);
       }
 
       
