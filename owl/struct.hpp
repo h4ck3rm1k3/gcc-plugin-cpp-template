@@ -16,10 +16,10 @@
 
 namespace gcc
 {
-  static constexpr const ConstUri prefix =
+  constexpr const ConstUri prefix =
     "http://intros5r.com/2015/08/gcc-plugin.rdf#";
   
-  static constexpr const ConstUri doc_url =
+  constexpr const ConstUri doc_url =
     "http://intros5r.com/2015/08/example.rdf#";
 
   class LocalUrl
@@ -76,16 +76,17 @@ namespace gcc
     static constexpr const dc::description description =
       "A C language structure";
 
-    static constexpr ConstUri2 url = ConstUri2(prefix,"record_type");
+    //static constexpr ConstUri2 url = ConstUri2(prefix,"record_type");
+    static constexpr ConstUri2 gcc_url = {prefix,"record_type"};
     
-    static constexpr const owl::Class::Declaration declaration = owl::Class::Declaration(Struct::uri);
+    //static constexpr const owl::Class::Declaration declaration = { Struct::uri };
     
     class FieldProperty:public owl::ObjectProperty
     {
       // struct_of_field_property
     public:
-      static constexpr const char *field = "field_struct_property";
-      static Uri uri;		// the pointer from the field to the structure
+      static constexpr const ConstUri2 uri = {prefix, "field_struct_property"};
+
     };
 
     class FieldDecl:public owl::Class
@@ -106,9 +107,31 @@ namespace gcc
     };
 
 
-  public:  Struct (const char *name);
+  public:  
+
+    /*
+      if I add this to the c file then I get a linker error
+     */
+    Struct (const char *name):name (name)
+    {
+      if (name)
+        {
+          std::cerr << "Struct NAME:" << name << endl;
+          std::string node_instance = std::string (std::string (doc_url) +
+                                                   std::string ("struct/") +
+                                                   std::string (name));
+          std::cerr << "URL:" << node_instance << endl;
+          node_uri = node_instance.c_str ();
+          Statement s1 (node_uri, rdf::type::url, Struct::gcc_url);
+          Statement s2 (node_uri,
+                        rdfs::label::url,
+                        name);
+        }
+    }
+
       template < class T > void field_begin (T fld);
 
   };
+
 
 };

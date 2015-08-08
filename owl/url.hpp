@@ -27,7 +27,7 @@ public:
   //constexpr ConstUri () : uri(0) {}
   constexpr ConstUri (const char *url) :uri(url) {}
   //~ConstUri () {}
-  librdf_uri *get_uri ();
+  librdf_uri *get_uri () const;
   constexpr const char *c_str () const { return uri; } ;
   constexpr operator const char *  () const { return uri; } ;
 };

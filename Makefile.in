@@ -79,7 +79,7 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-bin_PROGRAMS = testlink$(EXEEXT)
+bin_PROGRAMS = testlink$(EXEEXT) testowl$(EXEEXT)
 subdir = .
 DIST_COMMON = INSTALL NEWS README AUTHORS ChangeLog \
 	$(srcdir)/Makefile.in $(srcdir)/Makefile.am \
@@ -128,31 +128,37 @@ am__uninstall_files_from_dir = { \
   }
 am__installdirs = "$(DESTDIR)$(pkglibdir)" "$(DESTDIR)$(bindir)"
 LTLIBRARIES = $(pkglib_LTLIBRARIES)
-template_plugin_la_DEPENDENCIES =
+libowl_la_LIBADD =
 am__dirstamp = $(am__leading_dot)dirstamp
-am_template_plugin_la_OBJECTS = owl/librdfinterface.lo __callback.lo \
-	callback.lo callbacks.lo field.lo introspection.lo name.lo \
-	plugin.lo record_context.lo tree-nodes/integer_type.lo \
+am_libowl_la_OBJECTS = owl/librdfinterface.lo owl/rdfs.lo owl/rdf.lo \
+	owl/owl.lo owl/struct.lo owl/url.lo owl/statement.lo
+libowl_la_OBJECTS = $(am_libowl_la_OBJECTS)
+AM_V_lt = $(am__v_lt_@AM_V@)
+am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
+am__v_lt_0 = --silent
+am__v_lt_1 = 
+libtemplate_plugin_la_DEPENDENCIES = libowl.la
+am_libtemplate_plugin_la_OBJECTS = __callback.lo callback.lo \
+	callbacks.lo field.lo introspection.lo name.lo plugin.lo \
+	record_context.lo tree-nodes/integer_type.lo \
 	tree-nodes/complex_type.lo tree-nodes/vector_type.lo \
 	tree-nodes/array_type.lo tree-nodes/record_type.lo \
 	tree-nodes/union_type.lo tree-nodes/identifier_node.lo \
 	tree-nodes/field_decl.lo tree-nodes/error_mark.lo \
 	tree-nodes/pointer_type.lo tree-nodes/reference_type.lo \
-	tree-nodes/type_decl.lo owl/rdfs.lo owl/rdf.lo owl/owl.lo \
-	owl/struct.lo owl/url.lo owl/statement.lo
-template_plugin_la_OBJECTS = $(am_template_plugin_la_OBJECTS)
-AM_V_lt = $(am__v_lt_@AM_V@)
-am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
-am__v_lt_0 = --silent
-am__v_lt_1 = 
-template_plugin_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX \
+	tree-nodes/type_decl.lo
+libtemplate_plugin_la_OBJECTS = $(am_libtemplate_plugin_la_OBJECTS)
+libtemplate_plugin_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX \
 	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CXXLD) \
-	$(AM_CXXFLAGS) $(CXXFLAGS) $(template_plugin_la_LDFLAGS) \
+	$(AM_CXXFLAGS) $(CXXFLAGS) $(libtemplate_plugin_la_LDFLAGS) \
 	$(LDFLAGS) -o $@
 PROGRAMS = $(bin_PROGRAMS)
 am_testlink_OBJECTS = tests/test_link.$(OBJEXT)
 testlink_OBJECTS = $(am_testlink_OBJECTS)
-testlink_DEPENDENCIES = template_plugin.la
+testlink_DEPENDENCIES = template_plugin.la libowl.la
+am_testowl_OBJECTS = owl/main.$(OBJEXT)
+testowl_OBJECTS = $(am_testowl_OBJECTS)
+testowl_DEPENDENCIES = libowl.la
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -205,8 +211,10 @@ AM_V_CCLD = $(am__v_CCLD_@AM_V@)
 am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
-SOURCES = $(template_plugin_la_SOURCES) $(testlink_SOURCES)
-DIST_SOURCES = $(template_plugin_la_SOURCES) $(testlink_SOURCES)
+SOURCES = $(libowl_la_SOURCES) $(libtemplate_plugin_la_SOURCES) \
+	$(testlink_SOURCES) $(testowl_SOURCES)
+DIST_SOURCES = $(libowl_la_SOURCES) $(libtemplate_plugin_la_SOURCES) \
+	$(testlink_SOURCES) $(testowl_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -375,12 +383,20 @@ ACLOCAL_AMFLAGS = -I m4
 GCCPLUGINS_DIR = `${CXX} -print-file-name=plugin`
 INCDIR = -I /usr/include/raptor2 -I /usr/include/rasqal
 AM_CPPFLAGS = -I $(GCCPLUGINS_DIR)/include $(INCDIR) -I $(srcdir)/../libgdl $(GMP_INC) -Itree-nodes -g3 
-AM_CFLAGS = -Wall -std=gnu++11 -g3 $(INCDIR)
-AM_CXXFLAGS = -Wall -std=gnu++11 -g3 $(INCDIR)
-pkglib_LTLIBRARIES = template_plugin.la
-EXTRA_DIST = 
-template_plugin_la_SOURCES = \
+AM_CFLAGS = -Wall -std=gnu++14 -g3 $(INCDIR)
+AM_CXXFLAGS = -Wall -std=gnu++14 -g3 $(INCDIR)
+pkglib_LTLIBRARIES = libtemplate_plugin.la libowl.la
+libowl_la_SOURCES = \
 	owl/librdfinterface.cpp \
+	owl/struct.hpp \
+	owl/rdfs.cpp \
+	owl/rdf.cpp \
+	owl/owl.cpp \
+	owl/struct.cpp \
+	owl/url.cpp \
+	owl/statement.cpp
+
+libtemplate_plugin_la_SOURCES = \
 	__callback.cpp \
 	callback.cpp \
 	callback.hpp \
@@ -420,15 +436,7 @@ template_plugin_la_SOURCES = \
 	tree-nodes/reference_type.hpp \
 	tree-nodes/reference_type.cpp \
 	tree-nodes/type_decl.hpp \
-	tree-nodes/type_decl.cpp \
-	owl/struct.hpp \
-	owl/rdfs.cpp \
-	owl/rdf.cpp \
-	owl/owl.cpp \
-	owl/struct.cpp \
-	owl/url.cpp \
-	owl/statement.cpp \
-	#
+	tree-nodes/type_decl.cpp 
 
 
 #	 tree-nodes/tree_list.hpp \
@@ -852,10 +860,12 @@ template_plugin_la_SOURCES = \
 #	 tree-nodes/cilk_sync_stmt.hpp \
 #	 tree-nodes/cilk_sync_stmt.cpp \
 #	 last line is empty
-template_plugin_la_LDFLAGS = -module
-template_plugin_la_LIBADD = -lrdf -lxml2 -lexpat -lcrypt
+libtemplate_plugin_la_LDFLAGS = -module
+libtemplate_plugin_la_LIBADD = -lrdf -lxml2 -lexpat -lcrypt libowl.la
 testlink_SOURCES = tests/test_link.cpp
-testlink_LDADD = template_plugin.la
+testlink_LDADD = template_plugin.la libowl.la
+testowl_SOURCES = owl/main.cpp
+testowl_LDADD = -lrdf -lxml2 -lexpat -lcrypt libowl.la
 all: config.h
 	$(MAKE) $(AM_MAKEFLAGS) all-am
 
@@ -953,6 +963,15 @@ owl/$(DEPDIR)/$(am__dirstamp):
 	@: > owl/$(DEPDIR)/$(am__dirstamp)
 owl/librdfinterface.lo: owl/$(am__dirstamp) \
 	owl/$(DEPDIR)/$(am__dirstamp)
+owl/rdfs.lo: owl/$(am__dirstamp) owl/$(DEPDIR)/$(am__dirstamp)
+owl/rdf.lo: owl/$(am__dirstamp) owl/$(DEPDIR)/$(am__dirstamp)
+owl/owl.lo: owl/$(am__dirstamp) owl/$(DEPDIR)/$(am__dirstamp)
+owl/struct.lo: owl/$(am__dirstamp) owl/$(DEPDIR)/$(am__dirstamp)
+owl/url.lo: owl/$(am__dirstamp) owl/$(DEPDIR)/$(am__dirstamp)
+owl/statement.lo: owl/$(am__dirstamp) owl/$(DEPDIR)/$(am__dirstamp)
+
+libowl.la: $(libowl_la_OBJECTS) $(libowl_la_DEPENDENCIES) $(EXTRA_libowl_la_DEPENDENCIES) 
+	$(AM_V_CXXLD)$(CXXLINK) -rpath $(pkglibdir) $(libowl_la_OBJECTS) $(libowl_la_LIBADD) $(LIBS)
 tree-nodes/$(am__dirstamp):
 	@$(MKDIR_P) tree-nodes
 	@: > tree-nodes/$(am__dirstamp)
@@ -983,15 +1002,9 @@ tree-nodes/reference_type.lo: tree-nodes/$(am__dirstamp) \
 	tree-nodes/$(DEPDIR)/$(am__dirstamp)
 tree-nodes/type_decl.lo: tree-nodes/$(am__dirstamp) \
 	tree-nodes/$(DEPDIR)/$(am__dirstamp)
-owl/rdfs.lo: owl/$(am__dirstamp) owl/$(DEPDIR)/$(am__dirstamp)
-owl/rdf.lo: owl/$(am__dirstamp) owl/$(DEPDIR)/$(am__dirstamp)
-owl/owl.lo: owl/$(am__dirstamp) owl/$(DEPDIR)/$(am__dirstamp)
-owl/struct.lo: owl/$(am__dirstamp) owl/$(DEPDIR)/$(am__dirstamp)
-owl/url.lo: owl/$(am__dirstamp) owl/$(DEPDIR)/$(am__dirstamp)
-owl/statement.lo: owl/$(am__dirstamp) owl/$(DEPDIR)/$(am__dirstamp)
 
-template_plugin.la: $(template_plugin_la_OBJECTS) $(template_plugin_la_DEPENDENCIES) $(EXTRA_template_plugin_la_DEPENDENCIES) 
-	$(AM_V_CXXLD)$(template_plugin_la_LINK) -rpath $(pkglibdir) $(template_plugin_la_OBJECTS) $(template_plugin_la_LIBADD) $(LIBS)
+libtemplate_plugin.la: $(libtemplate_plugin_la_OBJECTS) $(libtemplate_plugin_la_DEPENDENCIES) $(EXTRA_libtemplate_plugin_la_DEPENDENCIES) 
+	$(AM_V_CXXLD)$(libtemplate_plugin_la_LINK) -rpath $(pkglibdir) $(libtemplate_plugin_la_OBJECTS) $(libtemplate_plugin_la_LIBADD) $(LIBS)
 install-binPROGRAMS: $(bin_PROGRAMS)
 	@$(NORMAL_INSTALL)
 	@list='$(bin_PROGRAMS)'; test -n "$(bindir)" || list=; \
@@ -1053,6 +1066,11 @@ tests/test_link.$(OBJEXT): tests/$(am__dirstamp) \
 testlink$(EXEEXT): $(testlink_OBJECTS) $(testlink_DEPENDENCIES) $(EXTRA_testlink_DEPENDENCIES) 
 	@rm -f testlink$(EXEEXT)
 	$(AM_V_CXXLD)$(CXXLINK) $(testlink_OBJECTS) $(testlink_LDADD) $(LIBS)
+owl/main.$(OBJEXT): owl/$(am__dirstamp) owl/$(DEPDIR)/$(am__dirstamp)
+
+testowl$(EXEEXT): $(testowl_OBJECTS) $(testowl_DEPENDENCIES) $(EXTRA_testowl_DEPENDENCIES) 
+	@rm -f testowl$(EXEEXT)
+	$(AM_V_CXXLD)$(CXXLINK) $(testowl_OBJECTS) $(testowl_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -1074,6 +1092,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/plugin.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/record_context.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@owl/$(DEPDIR)/librdfinterface.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@owl/$(DEPDIR)/main.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@owl/$(DEPDIR)/owl.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@owl/$(DEPDIR)/rdf.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@owl/$(DEPDIR)/rdfs.Plo@am__quote@

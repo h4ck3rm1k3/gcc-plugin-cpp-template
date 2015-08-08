@@ -28,8 +28,7 @@ namespace owl
   class Class
   {
   public:
-    static constexpr const char *url = "Class";
-    static constexpr const ConstUri uri = ConstUri(url);
+    static constexpr const ConstUri2 class_uri = { prefix, "Class" };
     
     // create ontology
     class Declaration
@@ -40,8 +39,8 @@ namespace owl
       
       //constexpr Declaration(Uri & obj)        :s1(ConstStatement(uri, rdf::type::uri, obj))      {      }
 
-      constexpr Declaration(const ConstUri & obj)
-        :s1(ConstStatement(uri, rdf::type::url, obj))
+      constexpr Declaration(const ConstUri2 & obj)
+        :s1(ConstStatement(class_uri, rdf::type::url, obj))
       {
       }
 

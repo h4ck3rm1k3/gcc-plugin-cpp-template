@@ -67,3 +67,9 @@ librdf_uri * ConstUri2::get_uri () const
   return librdf_new_uri (rdf_world::get_world (),
                         (const unsigned char*)std::string(std::string(prefix) + std::string(path)).c_str());
 }
+
+librdf_uri * ConstUri::get_uri () const
+{
+  return librdf_new_uri (rdf_world::get_world (),
+                        (const unsigned char*)std::string(uri).c_str());
+}

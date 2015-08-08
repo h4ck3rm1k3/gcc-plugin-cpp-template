@@ -32,9 +32,6 @@ namespace gcc
 	Uri li = LocalUrl (Struct::FieldDecl::uri).uri ();
 	Statement s1 (node_uri, rdf::type::url, li);
 	Statement s2 (node_uri, rdfs::label::url, name);
-	  cerr << "Parent URL:" << parent->node_uri.c_str () << endl;
-	  cerr << "Field URL:" << Struct::FieldProperty::uri.c_str () << endl;
-	  cerr << "Field Node:" << node_uri.c_str () << endl;
 	Statement s3 (node_uri, Struct::FieldProperty::uri, parent->node_uri);
 
 	//(fld.bit_field),
@@ -52,22 +49,6 @@ namespace gcc
   }
 
 
-  Struct::Struct (const char *name):name (name)
-  {
-    if (name)
-      {
-	std::cerr << "Struct NAME:" << name << endl;
-	std::string node_instance = std::string (std::string (doc_url) +
-						 std::string ("struct/") +
-						 std::string (name));
-	std::cerr << "URL:" << node_instance << endl;
-	node_uri = node_instance.c_str ();
-	Statement s1 (node_uri, rdf::type::url, url);
-	Statement s2 (node_uri,
-                      rdfs::label::url,
-                      name);
-      }
-  }
 
   //template <> void Struct::field_begin(Field fld)
   //template <> void Struct::field_begin(Field fld) {
