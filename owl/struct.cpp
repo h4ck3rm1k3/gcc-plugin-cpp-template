@@ -73,5 +73,13 @@ namespace gcc
     }
 
   constexpr ConstUri2 gcc::Struct::url;
+
+  constexpr ConstUri2 gcc::Struct::standard;
+  constexpr ConstUri2 gcc::CStandard::uri;
   owl::Class::Declaration<Struct> gcc::Struct::declaration;
+
+  static const Statement s1( gcc::Struct::uri,
+                                       gcc::CStandard::uri,
+                                       gcc::Struct::standard);
+  
 }

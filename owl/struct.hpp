@@ -22,6 +22,14 @@ namespace gcc
   constexpr const ConstUri doc_url =
     "http://intros5r.com/2015/08/example.rdf#";
 
+  class CStandard
+    : public owl::topObjectProperty
+  {
+  public:
+    static constexpr const ConstUri2 uri = ConstUri2(prefix,"cppstd");
+  };
+
+  
   class LocalUrl
   {
     const char *url;
@@ -71,7 +79,7 @@ namespace gcc
     Uri node_uri;
     rdfs::label name;
     static constexpr const
-      CStandard standard = "http://c0x.coding-guidelines.com/6.7.2.1.html";
+    ConstUri2 standard = ConstUri2("http://c0x.coding-guidelines.com/","6.7.2.1.html");
 
     static constexpr const dc::description description =
       "A C language structure";
@@ -79,8 +87,7 @@ namespace gcc
     //static constexpr ConstUri2 url = ConstUri2(prefix,"record_type");
     static constexpr ConstUri2 url = {prefix,"record_type"};
     
-    static owl::Class::Declaration<Struct> declaration;
-    
+    static owl::Class::Declaration<Struct> declaration;   
         
     class FieldProperty:public owl::ObjectProperty
     {
@@ -103,23 +110,10 @@ namespace gcc
         SimpleProperty < int, bit_size_str > bit_size;
       static constexpr const char offset_str[] = "offset_str";
         SimpleProperty < int, offset_str > offset;
-
         template < class T > FieldDecl (T fld, Struct * parent);
     };
-
-
-  public:  
-
-    /*
-      if I add this to the c file then I get a linker error
-     */
+  public:
     Struct (const char *name);
     template < class T > void field_begin (T fld);
-    
-    
   };
-
-
-  
-
 };
