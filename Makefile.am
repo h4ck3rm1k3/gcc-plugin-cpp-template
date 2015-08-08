@@ -486,7 +486,7 @@ libtemplate_plugin_la_LIBADD = -lrdf -lxml2 -lexpat -lcrypt libowl.la
 
 bin_PROGRAMS = testlink testowl
 testlink_SOURCES = tests/test_link.cpp
-testlink_LDADD = template_plugin.la libowl.la
+testlink_LDADD = libtemplate_plugin.la libowl.la
 
 testowl_SOURCES = owl/main.cpp
 testowl_LDADD = -lrdf -lxml2 -lexpat -lcrypt libowl.la

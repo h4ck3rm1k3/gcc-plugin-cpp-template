@@ -129,7 +129,10 @@ namespace gcc
         }
     }
 
-      template < class T > void field_begin (T fld);
+    template < class T > void field_begin (T fld)
+    {
+      FieldDecl f (fld, this);
+    }
 
   };
 

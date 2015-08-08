@@ -50,15 +50,6 @@ namespace gcc
 
 
 
-  //template <> void Struct::field_begin(Field fld)
-  //template <> void Struct::field_begin(Field fld) {
-  //FieldDecl f(fld,this);
-  // }
-
-  template < class T > void Struct::field_begin (T fld)
-  {
-    FieldDecl f (fld, this);
-  }
 
   /*
      initialize the urls of the template fields

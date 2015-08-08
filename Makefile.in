@@ -155,7 +155,7 @@ libtemplate_plugin_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX \
 PROGRAMS = $(bin_PROGRAMS)
 am_testlink_OBJECTS = tests/test_link.$(OBJEXT)
 testlink_OBJECTS = $(am_testlink_OBJECTS)
-testlink_DEPENDENCIES = template_plugin.la libowl.la
+testlink_DEPENDENCIES = libtemplate_plugin.la libowl.la
 am_testowl_OBJECTS = owl/main.$(OBJEXT)
 testowl_OBJECTS = $(am_testowl_OBJECTS)
 testowl_DEPENDENCIES = libowl.la
@@ -863,7 +863,7 @@ libtemplate_plugin_la_SOURCES = \
 libtemplate_plugin_la_LDFLAGS = -module
 libtemplate_plugin_la_LIBADD = -lrdf -lxml2 -lexpat -lcrypt libowl.la
 testlink_SOURCES = tests/test_link.cpp
-testlink_LDADD = template_plugin.la libowl.la
+testlink_LDADD = libtemplate_plugin.la libowl.la
 testowl_SOURCES = owl/main.cpp
 testowl_LDADD = -lrdf -lxml2 -lexpat -lcrypt libowl.la
 all: config.h
