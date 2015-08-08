@@ -11,4 +11,6 @@ namespace rdf
   public:
     static constexpr const ConstUri2 url = {prefix, "type"};
   };
+
+
 };

@@ -112,29 +112,13 @@ namespace gcc
     /*
       if I add this to the c file then I get a linker error
      */
-    Struct (const char *name):name (name)
-    {
-      if (name)
-        {
-          std::cerr << "Struct NAME:" << name << endl;
-          std::string node_instance = std::string (std::string (doc_url) +
-                                                   std::string ("struct/") +
-                                                   std::string (name));
-          std::cerr << "URL:" << node_instance << endl;
-          node_uri = node_instance.c_str ();
-          Statement s1 (node_uri, rdf::type::url, Struct::gcc_url);
-          Statement s2 (node_uri,
-                        rdfs::label::url,
-                        name);
-        }
-    }
-
-    template < class T > void field_begin (T fld)
-    {
-      FieldDecl f (fld, this);
-    }
-
+    Struct (const char *name);
+    template < class T > void field_begin (T fld);
+    
+    
   };
 
+
+  
 
 };
