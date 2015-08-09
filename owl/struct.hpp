@@ -13,38 +13,28 @@
 #include <strstream>
 #include "librdfinterface.hpp"
 #include "statement.hpp"
+#include "gcc.hpp"
 
 namespace gcc
 {
-  constexpr const ConstUri prefix =
-    "http://intros5r.com/2015/08/gcc-plugin.rdf#";
   
-  constexpr const ConstUri doc_url =
-    "http://intros5r.com/2015/08/example.rdf#";
-
-  class CStandard
-    : public owl::topObjectProperty
+  class LocalUri
   {
+    const char * _uri;
   public:
-    static constexpr const ConstUri2 uri = ConstUri2(prefix,"cppstd");
-  };
-
-  
-  class LocalUrl
-  {
-    const char *url;
-  public:
-      constexpr LocalUrl (const char *url):url (url)
+    constexpr LocalUri (const char *uri):_uri (uri)
     {
     }
+    
     const char *c_str () const
     {
-      return std::string (std::string (prefix.c_str()) + std::string (url)).c_str ();
+      return std::string (std::string (prefix.c_str()) + std::string (_uri)).c_str ();
     }
+    
     Uri uri () const
     {
       return Uri (std::
-		  string (std::string (prefix.c_str()) + std::string (url)).c_str ());
+		  string (std::string (prefix.c_str()) + std::string (_uri)).c_str ());
     }
   };
 
@@ -64,10 +54,7 @@ namespace gcc
     {
       return val;
     }
-    Uri & get_url ()
-    {
-      return url;
-    }
+    //    const Uri & get_uri ()    {      return uri;    }
     static constexpr const ConstUri2 name = ConstUri2(prefix,N);
 
   };
@@ -75,26 +62,34 @@ namespace gcc
   class Struct:public owl::Class
   {
 
-  public:
+  public: // static owl ontology section
+
+    static constexpr ConstUri2 uri = ConstUri2(prefix,"record_type");
+    
+    static constexpr const TConstStatement1 standard =
+      TConstStatement1(uri,
+                       gcc::CStandard::uri,
+                       "http://c0x.coding-guidelines.com/6.7.2.1.html");
+    
+    static constexpr const TConstStatement1 description =
+      TConstStatement1(uri,
+                       dc::description::uri,
+                       "A C language structure");
+
+
+    static Declaration<Struct,owl::Class> declaration;   
+
+  public: // dynamic property section
     Uri node_uri;
     rdfs::label name;
-    static constexpr const
-    ConstUri2 standard = ConstUri2("http://c0x.coding-guidelines.com/","6.7.2.1.html");
 
-    static constexpr const dc::description description =
-      "A C language structure";
-
-    //static constexpr ConstUri2 url = ConstUri2(prefix,"record_type");
-    static constexpr ConstUri2 url = {prefix,"record_type"};
-    
-    static owl::Class::Declaration<Struct> declaration;   
+  public: //
         
     class FieldProperty:public owl::ObjectProperty
     {
       // struct_of_field_property
     public:
-      static constexpr const ConstUri2 uri = {prefix, "field_struct_property"};
-
+      static constexpr const ConstUri2 uri = ConstUri2(prefix, "field_struct_property");
     };
 
     class FieldDecl:public owl::Class
@@ -110,7 +105,43 @@ namespace gcc
         SimpleProperty < int, bit_size_str > bit_size;
       static constexpr const char offset_str[] = "offset_str";
         SimpleProperty < int, offset_str > offset;
-        template < class T > FieldDecl (T fld, Struct * parent);
+
+      //template < class T > FieldDecl (T fld, Struct * parent);
+      template < class T > FieldDecl (T fld,
+                                      Struct *
+                                      parent):name (fld.
+                                                    name),
+                                              bit_field (fld.bit_field), offset (fld.offset),
+                                              bit_offset (fld.bit_offset), bit_size (fld.bit_size)
+      {
+        
+        if (fld.name)
+          {
+            std::cerr << "StructField NAME:" << fld.name << endl;
+            Uri node_uri (std::string (std::string (doc_uri) +
+                                       std::string ("struct/") +
+                                       std::string (parent->name) +
+                                       std::string ("/field/") +
+                                       std::string (name)).c_str ());
+            std::cerr << "StructField URI:" << node_uri.c_str () << endl;
+            Uri li = LocalUri (Struct::FieldDecl::uri).uri ();
+            Statement s1 (node_uri, rdf::type::uri, li);
+            Statement s2 (node_uri, rdfs::label::uri, name);
+            Statement s3 (node_uri, Struct::FieldProperty::uri, parent->node_uri);
+            
+            //(fld.bit_field),
+            Statement s_bit_field (node_uri, bit_field.name,
+                                   bit_field.get_val ());
+            //offset(fld.offset),
+            Statement s_offset (node_uri, offset.name, offset.get_val ());
+            //bit_offset(fld.bit_offset),
+            Statement s_bitoffset (node_uri, bit_offset.name,
+                                   bit_offset.get_val ());
+            //bit_size(fld.bit_size)
+            Statement s_bitsize (node_uri, bit_size.name,
+                                 bit_size.get_val ());
+          }
+      }
     };
   public:
     Struct (const char *name);

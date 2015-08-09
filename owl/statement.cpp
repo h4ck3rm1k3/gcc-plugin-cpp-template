@@ -100,14 +100,28 @@ Statement::Statement (const Uri & sub, const ConstUri2 & pred, const ConstUri2 &
   librdf_model_add_statement (rdf_world::get_model (), st);
 }
 
-// Statement::Statement (const Uri & sub, const ConstUri2 & pred, const ConstUri & obj)
-// {
-//   //uri=librdf_new_uri(rdf_world::get_world(), (const unsigned char*)url);
-//   librdf_statement *st;
-//   st = librdf_new_statement (rdf_world::get_world ());
-//   //  cerr << "statement4:" << sub.c_str () << " " << pred.    c_str () << " " << obj << endl;
-//   librdf_statement_set_subject (st, node_create_from_uri (sub.get_uri ()));
-//   librdf_statement_set_predicate (st, node_create_from_uri (pred.get_uri ()));
-//   librdf_statement_set_object (st, node_create_from_uri (obj.get_uri ()));
-//   librdf_model_add_statement (rdf_world::get_model (), st);
-// }
+Statement::Statement (const Uri & sub, const ConstUri2 & pred, const Uri & obj)
+{
+  librdf_statement *st;
+  st = librdf_new_statement (rdf_world::get_world ());
+  librdf_statement_set_subject (st, node_create_from_uri (sub.get_uri ()));
+  librdf_statement_set_predicate (st, node_create_from_uri (pred.get_uri ()));
+  librdf_statement_set_object (st, node_create_from_uri (obj.get_uri ()));
+  librdf_model_add_statement (rdf_world::get_model (), st);
+}
+
+
+template <> Statement::Statement (TConstStatement1 & a) 
+  {
+    librdf_statement *st;
+    st = librdf_new_statement (rdf_world::get_world ());
+    //  cerr << "statement4:" << sub.c_str () << " " << pred.    c_str () << " " << obj << endl;
+    librdf_statement_set_subject (st, node_create_from_uri (a.s.get_uri ()));
+    librdf_statement_set_predicate (st, node_create_from_uri (a.p.get_uri ()));
+    //librdf_statement_set_object (st, node_create_from_uri (a.o.get_uri ()));
+    librdf_statement_set_object (st,node_create_from_string (a.o));
+      
+    librdf_model_add_statement (rdf_world::get_model (), st);
+  }
+  
+

@@ -9,7 +9,7 @@ namespace rdf
   class type
   {
   public:
-    static constexpr const ConstUri2 url = {prefix, "type"};
+    static constexpr const ConstUri2 uri = ConstUri2(prefix, "type");
   };
 
 

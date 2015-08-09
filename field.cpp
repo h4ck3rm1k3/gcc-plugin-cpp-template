@@ -5,7 +5,7 @@
 #include <tree.h>
 #include "field.hpp"
 #include "tree-nodes/field_decl.hpp"
-
+#include "owl/struct.hpp"
 
 void
 Field::process (tree f)
@@ -29,3 +29,15 @@ Field::process (tree f)
   bit_field =
     call_type_ret < TC_FIELD_DECL, bool > (f, TC_FIELD_DECL::get_bit_field);
 }
+
+
+namespace gcc 
+{
+  
+template <> void Struct::field_begin (Field fld)
+{
+  FieldDecl f (fld, this);
+}
+
+}
+

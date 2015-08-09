@@ -131,7 +131,7 @@ LTLIBRARIES = $(pkglib_LTLIBRARIES)
 libowl_la_LIBADD =
 am__dirstamp = $(am__leading_dot)dirstamp
 am_libowl_la_OBJECTS = owl/librdfinterface.lo owl/rdfs.lo owl/rdf.lo \
-	owl/owl.lo owl/struct.lo owl/url.lo owl/statement.lo
+	owl/owl.lo owl/dc.lo owl/struct.lo owl/url.lo owl/statement.lo
 libowl_la_OBJECTS = $(am_libowl_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
@@ -392,6 +392,7 @@ libowl_la_SOURCES = \
 	owl/rdfs.cpp \
 	owl/rdf.cpp \
 	owl/owl.cpp \
+	owl/dc.cpp \
 	owl/struct.cpp \
 	owl/url.cpp \
 	owl/statement.cpp
@@ -966,6 +967,7 @@ owl/librdfinterface.lo: owl/$(am__dirstamp) \
 owl/rdfs.lo: owl/$(am__dirstamp) owl/$(DEPDIR)/$(am__dirstamp)
 owl/rdf.lo: owl/$(am__dirstamp) owl/$(DEPDIR)/$(am__dirstamp)
 owl/owl.lo: owl/$(am__dirstamp) owl/$(DEPDIR)/$(am__dirstamp)
+owl/dc.lo: owl/$(am__dirstamp) owl/$(DEPDIR)/$(am__dirstamp)
 owl/struct.lo: owl/$(am__dirstamp) owl/$(DEPDIR)/$(am__dirstamp)
 owl/url.lo: owl/$(am__dirstamp) owl/$(DEPDIR)/$(am__dirstamp)
 owl/statement.lo: owl/$(am__dirstamp) owl/$(DEPDIR)/$(am__dirstamp)
@@ -1091,6 +1093,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/name.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/plugin.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/record_context.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@owl/$(DEPDIR)/dc.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@owl/$(DEPDIR)/librdfinterface.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@owl/$(DEPDIR)/main.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@owl/$(DEPDIR)/owl.Plo@am__quote@

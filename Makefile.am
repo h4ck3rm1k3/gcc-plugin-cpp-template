@@ -13,6 +13,7 @@ libowl_la_SOURCES = \
 	owl/rdfs.cpp \
 	owl/rdf.cpp \
 	owl/owl.cpp \
+	owl/dc.cpp \
 	owl/struct.cpp \
 	owl/url.cpp \
 	owl/statement.cpp

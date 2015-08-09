@@ -7,7 +7,9 @@ namespace rdfs
 
   class subPropertyOf
   {
+      static constexpr const ConstUri2 uri = ConstUri2(prefix,"subPropertyOf");
   };
+  
   class label
   {
     const char *value;
@@ -19,7 +21,8 @@ namespace rdfs
     {
       return value;
     }
-    static constexpr const char *url = "label";
-    static Uri uri;
+    
+    static constexpr const ConstUri2 uri = ConstUri2(prefix,"label");
+
   };
 };
