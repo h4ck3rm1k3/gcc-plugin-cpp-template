@@ -17,43 +17,43 @@ runtest :
 	make
 
 test_simple_int:
-	${CXX} -fplugin=./.libs/template_plugin.so tests/test_simple_int.cpp
+	${CXX} -fplugin=./.libs/libtemplate_plugin.so tests/test_simple_int.cpp
 
 test2:
-	${CXX} -fplugin=./.libs/template_plugin.so tests/plugincpp_test.cpp
+	${CXX} -fplugin=./.libs/libtemplate_plugin.so tests/plugincpp_test.cpp
 
 test2c1:
-	${CXX} -fplugin=./.libs/template_plugin.so tests/plugincpp_test_template.cpp
+	${CXX} -fplugin=./.libs/libtemplate_plugin.so tests/plugincpp_test_template.cpp
 
 test21:
-	${CXX} -c -fplugin=./.libs/template_plugin.so tests/crash1.cpp
+	${CXX} -c -fplugin=./.libs/libtemplate_plugin.so tests/crash1.cpp
 
 test22:
-	${CXX} -c -fplugin=./.libs/template_plugin.so tests/plugincpp_interface.cpp
+	${CXX} -c -fplugin=./.libs/libtemplate_plugin.so tests/plugincpp_interface.cpp
 
 test23:
-	${CXX} -c -fplugin=./.libs/template_plugin.so tests/plugincpp_interface_simple.cpp
+	${CXX} -c -fplugin=./.libs/libtemplate_plugin.so tests/plugincpp_interface_simple.cpp
 
 testarray:
-	${CXX} -c -std=gnu++11 -fplugin=./.libs/template_plugin.so tests/test_array.cpp
+	${CXX} -c -std=gnu++11 -fplugin=./.libs/libtemplate_plugin.so tests/test_array.cpp
 
 test7:
-	${CXX} -c -fplugin=./.libs/template_plugin.so tests/test_struct.cpp
+	${CXX} -c -fplugin=./.libs/libtemplate_plugin.so tests/test_struct.cpp
 
 test71:
-	gcc -c -fplugin=./.libs/template_plugin.so tests/test_struct.cpp
+	gcc -c -fplugin=./.libs/libtemplate_plugin.so tests/test_struct.cpp
 
 test3:
-	${CXX} -fplugin=./.libs/template_plugin.so -c tests/test.c
+	${CXX} -fplugin=./.libs/libtemplate_plugin.so -c tests/test.c
 
 test4:
-	${CXX} -fplugin=./.libs/template_plugin.so -c tests/test_tree.cpp
+	${CXX} -fplugin=./.libs/libtemplate_plugin.so -c tests/test_tree.cpp
 
 test_enum:
-	${CXX} -fplugin=./.libs/template_plugin.so -c tests/test_enum.cpp
+	${CXX} -fplugin=./.libs/libtemplate_plugin.so -c tests/test_enum.cpp
 
 test6:
-	${CXX} -fplugin=./.libs/template_plugin.so -c tests/test_enum1.cpp
+	${CXX} -fplugin=./.libs/libtemplate_plugin.so -c tests/test_enum1.cpp
 
 testgen:
 	${CXX} -save-temps -Wall -std=gnu++11 tests/test_cpp_out.cpp

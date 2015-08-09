@@ -1,22 +1,25 @@
 #pragma once
 #include "url.hpp"
 #include "rdf.hpp"
+#include "rdfs.hpp"
+#include "librdfinterface.hpp"
+
+librdf_node * node_create_from_uri (librdf_uri * uri);
+librdf_node * node_create_from_string (const char *s);
 
 class Statement
 {
 public:
-  Statement (const Uri & sub, const Uri & pred, const Uri & obj);
-  Statement (const Uri & sub, const Uri & pred, const char *obj);
-  Statement (const Uri & sub, const Uri & pred, bool obj);
-  Statement (const Uri & sub, const Uri & pred, int obj);
-  Statement (const Uri & sub, const ConstUri2 & pred, const ConstUri2 &obj);
-  Statement (const Uri & sub, const ConstUri2 & pred, const Uri &obj);
-  Statement (const ConstUri2&s,
-             const ConstUri2&p,
-             const ConstUri2&o);
-
+  template<class S, class P, class O> Statement (const S & sub, const P & pred, const O & obj){
+    librdf_statement *st;
+    st = librdf_new_statement (rdf_world::get_world ());
+    //cerr << "statement(sub:" << sub << " pred:" << pred << " obj:" << obj << endl;
+    librdf_statement_set_subject (st, sub.get_node ());
+    librdf_statement_set_predicate (st, pred.get_node ());
+    librdf_statement_set_object (st, obj.get_node ());
+    librdf_model_add_statement (rdf_world::get_model (), st);
+  }
   template <class T> Statement (T &);
-  //  Statement (const Uri & sub, const ConstUri2 & pred, const ConstUri &obj);
 };
 
 
@@ -25,8 +28,6 @@ class ConstStatement{
   const ConstUri2& p;
   const ConstUri2& o;
 public:
-  //constexpr ConstStatement(const ConstUri&, Uri&, const char*&) {}
-  //constexpr ConstStatement(const ConstUri&, const ConstUri&, const ConstUri&) {}
   constexpr ConstStatement(const ConstUri2&s,
                            const ConstUri2&p,
                            const ConstUri2&o):s(s),p(p),o(o)

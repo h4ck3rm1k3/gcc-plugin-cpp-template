@@ -24,5 +24,12 @@ namespace rdfs
     
     static constexpr const ConstUri2 uri = ConstUri2(prefix,"label");
 
+    librdf_node * get_node() const {
+      librdf_node *node;
+      node = librdf_new_node_from_literal (rdf_world::get_world (),
+                                           (const unsigned char *) value, 0, 0);
+      return node;
+    }
+
   };
 };

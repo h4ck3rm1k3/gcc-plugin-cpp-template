@@ -17,41 +17,25 @@
 
 namespace gcc
 {
-  
-  class LocalUri
-  {
-    const char * _uri;
-  public:
-    constexpr LocalUri (const char *uri):_uri (uri)
-    {
-    }
-    
-    const char *c_str () const
-    {
-      return std::string (std::string (prefix.c_str()) + std::string (_uri)).c_str ();
-    }
-    
-    Uri uri () const
-    {
-      return Uri (std::
-		  string (std::string (prefix.c_str()) + std::string (_uri)).c_str ());
-    }
-  };
+
 
   template < class T> class SimpleProperty:
     public owl::ObjectProperty
   {
+  protected:
     T val;
   public:
-      SimpleProperty (T v):val (v)
+    SimpleProperty (T v):val (v)
     {
-    }    T get_val ()
+    }
+
+    T get_val ()
     {
       return val;
     }
     //static constexpr const ConstUri2 uri = ConstUri2(prefix,N);
     //static Declaration<SimpleProperty<T,N>,owl::ObjectProperty> declaration;
-    
+
   };
 
   class Struct:public owl::Class
@@ -60,32 +44,33 @@ namespace gcc
   public: // static owl ontology section
 
     static constexpr ConstUri2 uri = ConstUri2(prefix,"record_type");
-    
+
     static constexpr const TConstStatement1 standard =
       TConstStatement1(uri,
                        gcc::CStandard::uri,
                        "http://c0x.coding-guidelines.com/6.7.2.1.html");
-    
+
     static constexpr const TConstStatement1 description =
       TConstStatement1(uri,
                        dc::description::uri,
                        "A C language structure");
 
 
-    static Declaration<Struct,owl::Class> declaration;   
+    static Declaration<Struct,owl::Class> declaration;
 
   public: // dynamic property section
     Uri node_uri;
     rdfs::label name;
 
   public: //
-        
+
     class FieldProperty:public owl::ObjectProperty
     {
       // struct_of_field_property
     public:
+
       static constexpr const ConstUri2 uri = ConstUri2(prefix, "field_struct_property");
-      static Declaration<FieldProperty,owl::ObjectProperty> declaration;        
+      static Declaration<FieldProperty,owl::ObjectProperty> declaration;
     };
 
     class FieldDecl:public owl::Class
@@ -99,41 +84,90 @@ namespace gcc
       class BitField : public SimpleProperty < bool>
       {
       public:
+        BitField(bool v):
+          SimpleProperty< bool > (v)
+        {
+        }
+
         static constexpr const ConstUri2 uri = ConstUri2(prefix, "bit_field");	// The type of the item
-        static Declaration<BitField,owl::ObjectProperty> declaration;        
+        static Declaration<BitField,owl::ObjectProperty> declaration;
+
+        librdf_node * get_node() const
+        {
+          if (val)
+            {
+              return node_create_from_string ("True");
+            }
+          else
+            {
+              return node_create_from_string ("False");
+            }
+        }
+
+
       } bit_field;
 
       class BitOffset : public SimpleProperty < int>
       {
       public:
+        BitOffset(int v):
+          SimpleProperty< int > (v)
+        {
+        }
+
+        librdf_node * get_node() const
+        {
+          return node_create_from_string (std::to_string(val).c_str());
+        }
+
+
         static constexpr const ConstUri2 uri = ConstUri2(prefix, "bit_offset");	// The type of the item
-        static Declaration<BitOffset,owl::ObjectProperty> declaration;        
+        static Declaration<BitOffset,owl::ObjectProperty> declaration;
       } bit_offset;
 
-      class BitSize : public SimpleProperty < int>
+      class BitSize : public SimpleProperty < int >
       {
       public:
+        BitSize(int v):
+          SimpleProperty< int > (v)
+        {
+        }
         static constexpr const ConstUri2 uri = ConstUri2(prefix, "bit_size");	// The type of the item
-        static Declaration<BitSize,owl::ObjectProperty> declaration;        
+        static Declaration<BitSize,owl::ObjectProperty> declaration;
+        librdf_node * get_node() const
+        {
+          return node_create_from_string (std::to_string(val).c_str());
+        }
+
       } bit_size;
 
-      class Offset : public SimpleProperty < int>
+      class Offset : public SimpleProperty < int >
       {
       public:
+        Offset(int v):
+          SimpleProperty< int > (v)
+        {
+        }
         static constexpr const ConstUri2 uri = ConstUri2(prefix, "offset");	// The type of the item
-        static Declaration<Offset,owl::ObjectProperty> declaration;        
+        static Declaration<Offset,owl::ObjectProperty> declaration;
+        librdf_node * get_node() const
+        {
+          return node_create_from_string (std::to_string(val).c_str());
+        }
       } offset;
-      
+
       static Declaration<FieldDecl,owl::Class> declaration;
-      
+
       template < class T > FieldDecl (T fld,
                                       Struct *
                                       parent):name (fld.
                                                     name),
-                                              bit_field (fld.bit_field), offset (fld.offset),
-                                              bit_offset (fld.bit_offset), bit_size (fld.bit_size)
+                                              bit_field (fld.bit_field),
+                                              offset (fld.offset),
+                                              bit_offset (fld.bit_offset),
+                                              bit_size (fld.bit_size)
       {
-        
+
         if (fld.name)
           {
             std::cerr << "StructField NAME:" << fld.name << endl;
@@ -143,14 +177,13 @@ namespace gcc
                                        std::string ("/field/") +
                                        std::string (name)).c_str ());
             std::cerr << "StructField URI:" << node_uri.c_str () << endl;
-            Uri li = LocalUri (Struct::FieldDecl::uri).uri ();
-            Statement s1 (node_uri, rdf::type::uri, li);
+            Statement s1 (node_uri, rdf::type::uri, Struct::FieldDecl::uri);
             Statement s2 (node_uri, rdfs::label::uri, name);
-            Statement s3 (node_uri, Struct::FieldProperty::uri, parent->node_uri);           
-            Statement s_bit_field (node_uri, bit_field.uri, bit_field.get_val ());
-            Statement s_offset (node_uri, offset.uri, offset.get_val ());
-            Statement s_bitoffset (node_uri, bit_offset.uri,bit_offset.get_val ());
-            Statement s_bitsize (node_uri, bit_size.uri,bit_size.get_val ());
+            Statement s3 (node_uri, Struct::FieldProperty::uri, parent->node_uri);
+            Statement s_bit_field (node_uri, BitField::uri, bit_field);
+            Statement s_offset (node_uri, Offset::uri, offset);
+            Statement s_bitoffset (node_uri, BitOffset::uri,bit_offset);
+            Statement s_bitsize (node_uri, BitSize::uri,bit_size);
           }
       }
     };

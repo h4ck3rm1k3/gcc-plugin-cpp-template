@@ -12,7 +12,7 @@ namespace gcc
 
 
 
-  Struct::Struct (const char *name):name (name)
+  Struct::Struct (const char * aname):name (aname)
     {
       if (name)
         {
