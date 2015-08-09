@@ -38,25 +38,20 @@ namespace gcc
     }
   };
 
-  template < class T, const char *N > class SimpleProperty:owl::ObjectProperty
+  template < class T> class SimpleProperty:
+    public owl::ObjectProperty
   {
     T val;
   public:
       SimpleProperty (T v):val (v)
     {
-    }
-
-    const char *get_name () const
-    {
-      return N;
-    }
-    T get_val ()
+    }    T get_val ()
     {
       return val;
     }
-    //    const Uri & get_uri ()    {      return uri;    }
-    static constexpr const ConstUri2 name = ConstUri2(prefix,N);
-
+    //static constexpr const ConstUri2 uri = ConstUri2(prefix,N);
+    //static Declaration<SimpleProperty<T,N>,owl::ObjectProperty> declaration;
+    
   };
 
   class Struct:public owl::Class
@@ -96,17 +91,40 @@ namespace gcc
     {
     public:
       rdfs::label name;
-      static constexpr const char *uri = "field_decl";	// The type of the item
-      static constexpr const char bit_field_str[] = "bit_field";
-        SimpleProperty < bool, bit_field_str > bit_field;
-      static constexpr const char bit_offset_str[] = "bit_offset";
-        SimpleProperty < int, bit_offset_str > bit_offset;
-      static constexpr const char bit_size_str[] = "bit_size";
-        SimpleProperty < int, bit_size_str > bit_size;
-      static constexpr const char offset_str[] = "offset_str";
-        SimpleProperty < int, offset_str > offset;
 
-      //template < class T > FieldDecl (T fld, Struct * parent);
+
+      static constexpr const ConstUri2 uri = ConstUri2(prefix, "field_decl");	// The type of the item
+
+      class BitField : public SimpleProperty < bool>
+      {
+      public:
+        static constexpr const ConstUri2 uri = ConstUri2(prefix, "bit_field");	// The type of the item
+        static Declaration<BitField,owl::ObjectProperty> declaration;        
+      } bit_field;
+
+      class BitOffset : public SimpleProperty < int>
+      {
+      public:
+        static constexpr const ConstUri2 uri = ConstUri2(prefix, "bit_offset");	// The type of the item
+        static Declaration<BitOffset,owl::ObjectProperty> declaration;        
+      } bit_offset;
+
+      class BitSize : public SimpleProperty < int>
+      {
+      public:
+        static constexpr const ConstUri2 uri = ConstUri2(prefix, "bit_size");	// The type of the item
+        static Declaration<BitSize,owl::ObjectProperty> declaration;        
+      } bit_size;
+
+      class Offset : public SimpleProperty < int>
+      {
+      public:
+        static constexpr const ConstUri2 uri = ConstUri2(prefix, "offset");	// The type of the item
+        static Declaration<Offset,owl::ObjectProperty> declaration;        
+      } offset;
+      
+      static Declaration<FieldDecl,owl::Class> declaration;
+      
       template < class T > FieldDecl (T fld,
                                       Struct *
                                       parent):name (fld.
@@ -130,15 +148,15 @@ namespace gcc
             Statement s3 (node_uri, Struct::FieldProperty::uri, parent->node_uri);
             
             //(fld.bit_field),
-            Statement s_bit_field (node_uri, bit_field.name,
+            Statement s_bit_field (node_uri, bit_field.uri,
                                    bit_field.get_val ());
             //offset(fld.offset),
-            Statement s_offset (node_uri, offset.name, offset.get_val ());
+            Statement s_offset (node_uri, offset.uri, offset.get_val ());
             //bit_offset(fld.bit_offset),
-            Statement s_bitoffset (node_uri, bit_offset.name,
+            Statement s_bitoffset (node_uri, bit_offset.uri,
                                    bit_offset.get_val ());
             //bit_size(fld.bit_size)
-            Statement s_bitsize (node_uri, bit_size.name,
+            Statement s_bitsize (node_uri, bit_size.uri,
                                  bit_size.get_val ());
           }
       }
