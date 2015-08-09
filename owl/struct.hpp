@@ -1,9 +1,6 @@
 /*
   rdf wrapper for gcc record_types and field_decls
-  Local Variables:
-  mode: c++
-  c-file-style: "gnu"
-  End:
+
 */
 
 #include "prop_wikipedia.hpp"
@@ -16,99 +13,182 @@
 #include <strstream>
 #include "librdfinterface.hpp"
 #include "statement.hpp"
+#include "gcc.hpp"
 
 namespace gcc
 {
-  static constexpr const char *prefix =
-    "http://intros5r.com/2015/08/gcc-plugin.rdf#";
-  static constexpr const char *doc_url =
-    "http://intros5r.com/2015/08/example.rdf#";
 
-  class LocalUrl
-  {
-    const char *url;
-  public:
-      constexpr LocalUrl (const char *url):url (url)
-    {
-    }
-    const char *c_str () const
-    {
-      return std::string (std::string (prefix) + std::string (url)).c_str ();
-    }
-    Uri uri () const
-    {
-      return Uri (std::
-		  string (std::string (prefix) + std::string (url)).c_str ());
-    }
-  };
 
-  template < class T, const char *N > class SimpleProperty:owl::ObjectProperty
+  template < class T> class SimpleProperty:
+    public owl::ObjectProperty
   {
+  protected:
     T val;
   public:
-      SimpleProperty (T v):val (v)
+    SimpleProperty (T v):val (v)
     {
     }
 
-    const char *get_name () const
-    {
-      return N;
-    }
     T get_val ()
     {
       return val;
     }
-    Uri & get_url ()
-    {
-      return url;
-    }
-    static constexpr const char *name = N;
-    static Uri url;
+    //static constexpr const ConstUri2 uri = ConstUri2(prefix,N);
+    //static Declaration<SimpleProperty<T,N>,owl::ObjectProperty> declaration;
+
   };
 
   class Struct:public owl::Class
   {
 
-  public:
+  public: // static owl ontology section
+
+    static constexpr ConstUri2 uri = ConstUri2(prefix,"record_type");
+
+    static constexpr const TConstStatement1 standard =
+      TConstStatement1(uri,
+                       gcc::CStandard::uri,
+                       "http://c0x.coding-guidelines.com/6.7.2.1.html");
+
+    static constexpr const TConstStatement1 description =
+      TConstStatement1(uri,
+                       dc::description::uri,
+                       "A C language structure");
+
+
+    static Declaration<Struct,owl::Class> declaration;
+
+  public: // dynamic property section
     Uri node_uri;
     rdfs::label name;
-    static constexpr const
-      CStandard standard = "http://c0x.coding-guidelines.com/6.7.2.1.html";
 
-    static constexpr const dc::description description =
-      "A C language structure";
-
-    static constexpr const char *uri = "record_type";	// the type of the item
+  public: //
 
     class FieldProperty:public owl::ObjectProperty
     {
       // struct_of_field_property
     public:
-      static constexpr const char *field = "field_struct_property";
-      static Uri uri;		// the pointer from the field to the structure
+
+      static constexpr const ConstUri2 uri = ConstUri2(prefix, "field_struct_property");
+      static Declaration<FieldProperty,owl::ObjectProperty> declaration;
     };
 
     class FieldDecl:public owl::Class
     {
     public:
       rdfs::label name;
-      static constexpr const char *uri = "field_decl";	// The type of the item
-      static constexpr const char bit_field_str[] = "bit_field";
-        SimpleProperty < bool, bit_field_str > bit_field;
-      static constexpr const char bit_offset_str[] = "bit_offset";
-        SimpleProperty < int, bit_offset_str > bit_offset;
-      static constexpr const char bit_size_str[] = "bit_size";
-        SimpleProperty < int, bit_size_str > bit_size;
-      static constexpr const char offset_str[] = "offset_str";
-        SimpleProperty < int, offset_str > offset;
 
-        template < class T > FieldDecl (T fld, Struct * parent);
+
+      static constexpr const ConstUri2 uri = ConstUri2(prefix, "field_decl");	// The type of the item
+
+      class BitField : public SimpleProperty < bool>
+      {
+      public:
+        BitField(bool v):
+          SimpleProperty< bool > (v)
+        {
+        }
+
+        static constexpr const ConstUri2 uri = ConstUri2(prefix, "bit_field");	// The type of the item
+        static Declaration<BitField,owl::ObjectProperty> declaration;
+
+        librdf_node * get_node() const
+        {
+          if (val)
+            {
+              return node_create_from_string ("True");
+            }
+          else
+            {
+              return node_create_from_string ("False");
+            }
+        }
+
+
+      } bit_field;
+
+      class BitOffset : public SimpleProperty < int>
+      {
+      public:
+        BitOffset(int v):
+          SimpleProperty< int > (v)
+        {
+        }
+
+        librdf_node * get_node() const
+        {
+          return node_create_from_string (std::to_string(val).c_str());
+        }
+
+
+        static constexpr const ConstUri2 uri = ConstUri2(prefix, "bit_offset");	// The type of the item
+        static Declaration<BitOffset,owl::ObjectProperty> declaration;
+      } bit_offset;
+
+      class BitSize : public SimpleProperty < int >
+      {
+      public:
+        BitSize(int v):
+          SimpleProperty< int > (v)
+        {
+        }
+        static constexpr const ConstUri2 uri = ConstUri2(prefix, "bit_size");	// The type of the item
+        static Declaration<BitSize,owl::ObjectProperty> declaration;
+        librdf_node * get_node() const
+        {
+          return node_create_from_string (std::to_string(val).c_str());
+        }
+
+      } bit_size;
+
+      class Offset : public SimpleProperty < int >
+      {
+      public:
+        Offset(int v):
+          SimpleProperty< int > (v)
+        {
+        }
+        static constexpr const ConstUri2 uri = ConstUri2(prefix, "offset");	// The type of the item
+        static Declaration<Offset,owl::ObjectProperty> declaration;
+        librdf_node * get_node() const
+        {
+          return node_create_from_string (std::to_string(val).c_str());
+        }
+      } offset;
+
+      static Declaration<FieldDecl,owl::Class> declaration;
+
+      template < class T > FieldDecl (T fld,
+                                      Struct *
+                                      parent):name (fld.
+                                                    name),
+                                              bit_field (fld.bit_field),
+                                              offset (fld.offset),
+                                              bit_offset (fld.bit_offset),
+                                              bit_size (fld.bit_size)
+      {
+
+        if (fld.name)
+          {
+            std::cerr << "StructField NAME:" << fld.name << endl;
+            Uri node_uri (std::string (std::string (doc_uri) +
+                                       std::string ("struct/") +
+                                       std::string (parent->name) +
+                                       std::string ("/field/") +
+                                       std::string (name)).c_str ());
+            std::cerr << "StructField URI:" << node_uri.c_str () << endl;
+            Statement s1 (node_uri, rdf::type::uri, Struct::FieldDecl::uri);
+            Statement s2 (node_uri, rdfs::label::uri, name);
+            Statement s3 (node_uri, Struct::FieldProperty::uri, parent->node_uri);
+            Statement s_bit_field (node_uri, BitField::uri, bit_field);
+            Statement s_offset (node_uri, Offset::uri, offset);
+            Statement s_bitoffset (node_uri, BitOffset::uri,bit_offset);
+            Statement s_bitsize (node_uri, BitSize::uri,bit_size);
+          }
+      }
     };
-
-
-  public:  Struct (const char *name);
-      template < class T > void field_begin (T fld);
-
+  public:
+    Struct (const char *name);
+    template < class T > void field_begin (T fld);
   };
-
 };

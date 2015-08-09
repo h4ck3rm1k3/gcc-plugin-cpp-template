@@ -1,3 +1,2 @@
 #include "rdfs.hpp"
-Uri
-  rdfs::label::uri = Uri (prefix, url);
+constexpr const ConstUri2 rdfs::label::uri;

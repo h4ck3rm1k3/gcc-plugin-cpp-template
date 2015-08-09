@@ -1,20 +1,15 @@
 #include "owl.hpp"
 #include "rdfs.hpp"
+#include "gcc.hpp"
 
+namespace gcc 
+{
+  
 class Wikipedia:public
-  owl::topObjectProperty
+  owl::ObjectProperty
 {
 public:
-  static constexpr const
-    rdfs::label
-    label = "wikipedia";
-  // static constexpr const rdfs::subPropertyOf subproperty();
-
-  const char *
-    url;
-  constexpr
-  Wikipedia (const char *v):
-  url (v)
-  {
-  }
+  static constexpr const ConstUri2 uri = ConstUri2(prefix,"wikipedia");
 };
+
+}

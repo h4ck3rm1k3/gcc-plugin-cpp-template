@@ -1,20 +1,24 @@
 ACLOCAL_AMFLAGS = -I m4
-
 GCCPLUGINS_DIR = `${CXX} -print-file-name=plugin`
-
 INCDIR=-I /usr/include/raptor2 -I /usr/include/rasqal
-
 AM_CPPFLAGS = -I $(GCCPLUGINS_DIR)/include $(INCDIR) -I $(srcdir)/../libgdl $(GMP_INC) -Itree-nodes -g3 
+AM_CFLAGS = -Wall -std=gnu++14 -g3 $(INCDIR)
+AM_CXXFLAGS = -Wall -std=gnu++14 -g3 $(INCDIR)
 
-AM_CFLAGS = -Wall -std=gnu++11 -g3 $(INCDIR)
-AM_CXXFLAGS = -Wall -std=gnu++11 -g3 $(INCDIR)
+pkglib_LTLIBRARIES = libtemplate_plugin.la libowl.la
 
-pkglib_LTLIBRARIES = template_plugin.la
-
-EXTRA_DIST = 
-
-template_plugin_la_SOURCES = \
+libowl_la_SOURCES = \
 	owl/librdfinterface.cpp \
+	owl/struct.hpp \
+	owl/rdfs.cpp \
+	owl/rdf.cpp \
+	owl/owl.cpp \
+	owl/dc.cpp \
+	owl/struct.cpp \
+	owl/url.cpp \
+	owl/statement.cpp
+
+libtemplate_plugin_la_SOURCES = \
 	__callback.cpp \
 	callback.cpp \
 	callback.hpp \
@@ -54,15 +58,7 @@ template_plugin_la_SOURCES = \
 	tree-nodes/reference_type.hpp \
 	tree-nodes/reference_type.cpp \
 	tree-nodes/type_decl.hpp \
-	tree-nodes/type_decl.cpp \
-	owl/struct.hpp \
-	owl/rdfs.cpp \
-	owl/rdf.cpp \
-	owl/owl.cpp \
-	owl/struct.cpp \
-	owl/url.cpp \
-	owl/statement.cpp \
-	#
+	tree-nodes/type_decl.cpp 
 
 #	 tree-nodes/tree_list.hpp \
 #	 tree-nodes/tree_list.cpp \
@@ -486,10 +482,13 @@ template_plugin_la_SOURCES = \
 #	 tree-nodes/cilk_sync_stmt.cpp \
 #	 last line is empty
 
-template_plugin_la_LDFLAGS = -module
+libtemplate_plugin_la_LDFLAGS = -module
+libtemplate_plugin_la_LIBADD = -lrdf -lxml2 -lexpat -lcrypt libowl.la
 
-template_plugin_la_LIBADD = -lrdf -lxml2 -lexpat -lcrypt
-
-bin_PROGRAMS = testlink
+bin_PROGRAMS = testlink testowl
 testlink_SOURCES = tests/test_link.cpp
-testlink_LDADD = template_plugin.la
+testlink_LDADD = libtemplate_plugin.la libowl.la
+
+testowl_SOURCES = owl/main.cpp
+testowl_LDADD = -lrdf -lxml2 -lexpat -lcrypt libowl.la
+

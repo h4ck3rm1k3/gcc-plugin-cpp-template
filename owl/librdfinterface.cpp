@@ -68,7 +68,7 @@ public:
   {
     librdf_serializer *serializer;
     serializer = librdf_new_serializer (pworld, "turtle", NULL, NULL);
-    Uri base_uri (gcc::prefix);
+    Uri base_uri (gcc::prefix.c_str());
     FILE *output_file = fopen (filename, "w");
     librdf_serializer_serialize_model_to_file_handle (serializer, output_file,
 						      base_uri.get_uri (),

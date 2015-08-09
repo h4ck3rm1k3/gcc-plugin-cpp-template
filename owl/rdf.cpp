@@ -1,4 +1,3 @@
 #include "rdf.hpp"
 
-Uri
-  rdf::type::uri = Uri (prefix, url);
+constexpr ConstUri2 rdf::type::uri;

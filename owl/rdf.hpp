@@ -3,14 +3,14 @@
 
 namespace rdf
 {
-  static constexpr const char *prefix =
+  static constexpr const ConstUri prefix =
     "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
+
   class type
   {
   public:
-    static constexpr const char *url = "type";
-
-    static Uri uri;
-
+    static constexpr const ConstUri2 uri = ConstUri2(prefix, "type");
   };
+
+
 };
