@@ -42,8 +42,6 @@ namespace gcc
   constexpr ConstUri2 gcc::Struct::FieldDecl::BitOffset::uri;
   constexpr ConstUri2 gcc::Struct::FieldDecl::Offset::uri;
   
-
-  //constexpr ConstUri2 gcc::Struct::standard;
   constexpr ConstUri2 gcc::CStandard::uri;
 
   constexpr TConstStatement1 gcc::Struct::standard;
@@ -52,19 +50,11 @@ namespace gcc
   
   Declaration<Struct,owl::Class> Struct::declaration(standard,description);
   Declaration<Struct::FieldDecl,owl::Class> Struct::FieldDecl::declaration;
+  Declaration<Struct::FieldProperty,owl::ObjectProperty> Struct::FieldProperty::declaration;
   Declaration<Struct::FieldDecl::BitField,owl::ObjectProperty> Struct::FieldDecl::BitField::declaration;
   Declaration<Struct::FieldDecl::BitSize,owl::ObjectProperty> Struct::FieldDecl::BitSize::declaration;
   Declaration<Struct::FieldDecl::BitOffset,owl::ObjectProperty> Struct::FieldDecl::BitOffset::declaration;
   Declaration<Struct::FieldDecl::Offset,owl::ObjectProperty> Struct::FieldDecl::Offset::declaration;
-  
-
-  /*
-
-    bit_field,
-    bit_offset,
-    bit_size,
-    offset
-*/
   
 
 }

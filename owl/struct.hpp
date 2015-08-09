@@ -85,6 +85,7 @@ namespace gcc
       // struct_of_field_property
     public:
       static constexpr const ConstUri2 uri = ConstUri2(prefix, "field_struct_property");
+      static Declaration<FieldProperty,owl::ObjectProperty> declaration;        
     };
 
     class FieldDecl:public owl::Class
@@ -145,19 +146,11 @@ namespace gcc
             Uri li = LocalUri (Struct::FieldDecl::uri).uri ();
             Statement s1 (node_uri, rdf::type::uri, li);
             Statement s2 (node_uri, rdfs::label::uri, name);
-            Statement s3 (node_uri, Struct::FieldProperty::uri, parent->node_uri);
-            
-            //(fld.bit_field),
-            Statement s_bit_field (node_uri, bit_field.uri,
-                                   bit_field.get_val ());
-            //offset(fld.offset),
+            Statement s3 (node_uri, Struct::FieldProperty::uri, parent->node_uri);           
+            Statement s_bit_field (node_uri, bit_field.uri, bit_field.get_val ());
             Statement s_offset (node_uri, offset.uri, offset.get_val ());
-            //bit_offset(fld.bit_offset),
-            Statement s_bitoffset (node_uri, bit_offset.uri,
-                                   bit_offset.get_val ());
-            //bit_size(fld.bit_size)
-            Statement s_bitsize (node_uri, bit_size.uri,
-                                 bit_size.get_val ());
+            Statement s_bitoffset (node_uri, bit_offset.uri,bit_offset.get_val ());
+            Statement s_bitsize (node_uri, bit_size.uri,bit_size.get_val ());
           }
       }
     };
