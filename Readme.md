@@ -70,3 +70,21 @@ debug in gdb like this :
     
 and then in gdb :
     set follow-fork-mode child
+
+# Core files
+
+# core files are created at the end of the compilation.
+they can be used like this 
+
+    gdb /usr/lib/gcc/x86_64-linux-gnu/5/cc1plus -c core.finish_unit.0.testplugin
+
+## Global data access
+   http://gcc-python-plugin.readthedocs.io/en/latest/basics.html#global-data-access
+
+### gcc.get_variables()
+
+### all_translation_units
+
+all_translation_units is a global
+
+p *(tree_node*)all_translation_units[0].m_vecdata

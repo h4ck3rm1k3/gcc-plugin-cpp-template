@@ -16,6 +16,12 @@ all : test21 test22 test23 test2 test2c1 test3 test4 test6 test71 test7 test_enu
 runtest :
 	make
 
+test_bootstrap: runtest
+	${CXX} -g3 -O0 -dH -ggdb -save-temps  -I/usr/lib/gcc/x86_64-linux-gnu/5/plugin/include -I /usr/include/raptor2 -I /usr/include/rasqal -I ../google-coredumper/src -fplugin=./.libs/libtemplate_plugin.so plugin.cpp
+
+test_empty: runtest
+	LD_LIBRARY_PATH=/usr/local/lib strace -f -o strace.txt -e open,stat,lstat,fstat,socket,socketpair,execve,vfork,recvfrom,access,mmap,close ${CXX} -g3 -O0 -dH -ggdb -save-temps  -I/usr/lib/gcc/x86_64-linux-gnu/5/plugin/include -I /usr/include/raptor2 -I /usr/include/rasqal -I ../google-coredumper/src -fplugin=./.libs/libtemplate_plugin.so test.c
+
 test_simple_int:
 	${CXX} -fplugin=./.libs/libtemplate_plugin.so tests/test_simple_int.cpp
 

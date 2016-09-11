@@ -1,9 +1,9 @@
 ACLOCAL_AMFLAGS = -I m4
 GCCPLUGINS_DIR = `${CXX} -print-file-name=plugin`
 INCDIR=-I /usr/include/raptor2 -I /usr/include/rasqal
-AM_CPPFLAGS = -I $(GCCPLUGINS_DIR)/include $(INCDIR) -I $(srcdir)/../libgdl $(GMP_INC) -Itree-nodes -g3 
+AM_CPPFLAGS = -I $(GCCPLUGINS_DIR)/include $(INCDIR) -I $(srcdir)/../libgdl $(GMP_INC) -Itree-nodes -g3  -I ../google-coredumper/src
 AM_CFLAGS = -Wall -std=gnu++14 -g3 $(INCDIR)
-AM_CXXFLAGS = -Wall -std=gnu++14 -g3 $(INCDIR)
+AM_CXXFLAGS = -Wall -std=gnu++14 -g3 $(INCDIR) -I ../google-coredumper/src
 
 pkglib_LTLIBRARIES = libtemplate_plugin.la libowl.la
 
@@ -482,12 +482,14 @@ libtemplate_plugin_la_SOURCES = \
 #	 tree-nodes/cilk_sync_stmt.cpp \
 #	 last line is empty
 
-libtemplate_plugin_la_LDFLAGS = -module
-libtemplate_plugin_la_LIBADD = -lrdf -lxml2 -lexpat -lcrypt libowl.la
-
+libtemplate_plugin_la_LDFLAGS = -module -L../google-coredumper 
+libtemplate_plugin_la_LIBADD = -lrdf -lxml2 -lexpat -lcrypt libowl.la -lcoredumper  -lcriu
 bin_PROGRAMS = testlink testowl
+
+
 testlink_SOURCES = tests/test_link.cpp
-testlink_LDADD = libtemplate_plugin.la libowl.la
+testlink_LDFLAGS =  -L../google-coredumper
+testlink_LDADD = libtemplate_plugin.la libowl.la -lcoredumper -lcriu
 
 testowl_SOURCES = owl/main.cpp
 testowl_LDADD = -lrdf -lxml2 -lexpat -lcrypt libowl.la

@@ -19,6 +19,98 @@
 #include "tree-pass.h"
 #include "cp/name-lookup.h"
 #include "owl/librdfinterface.hpp"
+#include <google/coredumper.h>
+
+#include <execinfo.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+#include <signal.h>
+#include <criu/criu.h>
+
+static void error_msg(int code){
+	switch (code) {
+	case -EBADE:
+	  cerr << "RPC has returned fail" << endl;
+		break;
+	case -ECONNREFUSED:
+	  cerr << "Unable to connect to CRIU" << endl;
+		break;
+	case -ECOMM:
+	  cerr << "Unable to send/recv msg to/from CRIU" << endl;
+		break;
+	case -EINVAL:
+	  cerr << "CRIU doesn't support this type of request."
+	    "You should probably update CRIU" << endl;
+		break;
+	case -EBADMSG:
+	  cerr << "Unexpected response from CRIU." << endl;
+		break;
+	default:
+	  cerr << "Unknown error type code." << endl;
+	}
+}
+
+//static int ccount = 0;
+static void write_core(const char * tag) {
+  //char fname [256];
+  //sprintf(fname,"core.%s.%d",tag,ccount++);
+  //printf("going to write core %s\n",fname);
+  //WriteCoreDump(fname); 
+  //raise (SIGABRT);
+  cout << "Dump start\n";
+  criu_init_opts();
+
+  /*
+    start the daemon in the bg like this in the same dir
+    /usr/sbin/criu service -v4
+  */
+  //const char socket = "./criu_service.socket";
+  char  socket [300];
+  //strcpy(socket, "/var/run/criu_service.socket");
+  strcpy(socket,  "/usr/local/sbin/criu");
+  criu_set_service_address(socket);
+  criu_set_shell_job(true);
+  criu_set_leave_running(true);
+  //cribu_set_service_binary("/usr/local/sbin/criu");
+  //criu_set_pid(pid);
+  //criu_set_log_file("dump.log");
+  criu_set_log_level(4);
+  int fd = open("./criu/", O_DIRECTORY);
+  criu_set_images_dir_fd(fd);
+
+  //criu_set_service_comm(CRIU_COMM_SK);
+ 
+  int ret = criu_check();
+  if (ret < 0) {
+    cout << "err" << ret;
+    cout << "check failed\n";
+    error_msg(ret);
+  }
+  else {
+    cout << "check succeeded\n";
+
+  }
+
+    
+   ret = criu_dump();
+   //sleep(4);
+  if (ret < 0) {
+    //what_err_ret_mean(ret);
+    //kill(pid, SIGKILL);
+    cout << "err" << ret;
+    cout << "Dump failed\n";
+    error_msg(ret);
+  }
+  else {
+    cout << "Dump succeeded\n";
+
+  }
+  
+
+
+	
+}
 
 //#include "symtab.h"
 //#include "cgraph.h"
@@ -27,10 +119,10 @@ using namespace std;
 union tree_node;
 typedef union tree_node *tree;
 
-static void
-generic_callback_PLUGIN_ALL_IPA_PASSES_START ()
-{
-}
+// static void
+// generic_callback_PLUGIN_ALL_IPA_PASSES_START ()
+// {
+// }
 
 static void
 generic_callback_PLUGIN_FINISH_TYPE (tree t, void *i)
@@ -64,66 +156,110 @@ generic_callback_PLUGIN_START_UNIT (void *a, void *b)
   //generic_callback_PLUGIN_FINISH_UNIT(a,b);
 }
 
+/* Obtain a backtrace and print it to stdout. 
+   https://www.gnu.org/software/libc/manual/html_node/Backtraces.html
+ */
+void
+print_trace (void)
+{
+  void *array[10];
+  size_t size;
+  char **strings;
+  size_t i;
+
+  size = backtrace (array, 20);
+  strings = backtrace_symbols (array, size);
+
+  cerr << "Obtained %zd stack frames." << size << "\n";
+
+  for (i = 0; i < size; i++){
+    cerr << strings[i] << endl;
+  }
+
+  free (strings);
+}
 
 static void
 generic_callback_PLUGIN_FINISH_UNIT (void *a, void *b)
 {
-  // int i;
-  // tree t;
-  // FOR_EACH_VEC_ELT ( (*all_translation_units), i, t )
-  //   {
-  //     //cerr << "each unit"<< i << " : " << t  << endl;
-  //     call_type_ret<CallBack,int>(t,
-  //                                 CallBack::finish_unit_callback);
-  //   }    
+  cerr << "finish unit"<< a << " : " << b << endl;
+   int i;
+   tree t;
+   FOR_EACH_VEC_ELT ( (*all_translation_units), i, t )
+     {
+       cerr << "each unit"<< i << " : " << t  << endl;
+       //     call_type_ret<CallBack,int>(t,
+       //                                 CallBack::finish_unit_callback);
+     }    
   // call_type_ret<CallBack,int>(global_namespace,
   //                             CallBack::finish_unit_callback); 
   //cerr << "end unit"<< a << " : " << b  << endl;
   //cerr << "end unit" << endl;
+
+ 
+
+  
   rdf_world::get_context ().finish_unit ();
+
+  print_trace ();
+  write_core("finish_unit");    
 }
 
-static void
-generic_callback_PLUGIN_FINISH (tree t, void *_)
-{
-}
+ // static void
+ // generic_callback_PLUGIN_FINISH (tree t, void *_)
+ // {
+ //   cerr << "finished_plugin"  << endl;
+ // }
+
+// static void
+// generic_callback_PLUGIN_ATTRIBUTES ()
+// {
+// }
+
+// /*
+//   handling of new passes
+// */
+
+ static void
+ generic_callback_PLUGIN_NEW_PASS (opt_pass * new_pass, void *b)
+ {
+   cerr << "NEW PASS DEFINED_" << new_pass << " name: "<< new_pass->name << endl;
+ }
+
+// static void
+// generic_callback_PLUGIN_EVENT_FIRST_DYNAMIC (opt_pass * new_pass, void *b)
+// {
+//   cerr << "PLUGIN_EVENT_FIRST_DYNAMIC: " << new_pass;
+//   cerr << endl;
+//   //cerr << " name: "<< new_pass->name << endl;
+// }
 
 static void
-generic_callback_PLUGIN_ATTRIBUTES ()
+generic_callback_PLUGIN_ALL_PASSES_START (opt_pass * new_pass, void *b)
 {
-}
-
-/*
-  handling of new passes
-*/
-
-static void
-generic_callback_PLUGIN_NEW_PASS (opt_pass * new_pass, void *b)
-{
-  //cerr << "NEW PASS DEFINED_" << new_pass << " name: "<< new_pass->name << endl;
-}
-
-static void
-generic_callback_PLUGIN_EVENT_FIRST_DYNAMIC (opt_pass * new_pass, void *b)
-{
-  cerr << "PLUGIN_EVENT_FIRST_DYNAMIC: " << new_pass;
+  cerr << "PLUGIN_ALL_PASSES_START: " << new_pass;
   cerr << endl;
-  //cerr << " name: "<< new_pass->name << endl;
 }
 
+//static int callcount = 0;
 static void
 generic_callback_PLUGIN_PASS_EXECUTION (opt_pass * new_pass, void *b)
 {
-  // cerr << "PLUGIN_EVENT_PASS_EXECUTION: " << new_pass;
-  // cerr << endl;
+
+  cerr << "PLUGIN_EVENT_PASS_EXECUTION: " << new_pass->name;
+  cerr << "\tNumber: " << new_pass->static_pass_number;
+  cerr << "\tType: " << new_pass->type;
+  cerr << endl;
   // tree t;
   // int i;
   // FOR_EACH_VEC_ELT ( (*all_translation_units), i, t ){
   //   cerr << "insite each unit"<< i << " : " << t  << endl;
   //   call_type_ret<CallBack,int>(t,
   //                               CallBack::finish_unit_callback);
-  // }    
-
+  // }
+  // if (callcount++ == 0) {
+  //   write_core("first_pass");
+  // }
 }
 
 #define DEFEVENTEMPTY(X)                                  \
@@ -131,34 +267,35 @@ generic_callback_PLUGIN_PASS_EXECUTION (opt_pass * new_pass, void *b)
       cerr << "PLUGIN_" #X << a << " : " << b  << endl;   \
   }
 
-DEFEVENTEMPTY (PLUGIN_PASS_MANAGER_SETUP);
-DEFEVENTEMPTY (PLUGIN_PRE_GENERICIZE);
+//DEFEVENTEMPTY (PLUGIN_PASS_MANAGER_SETUP);
+//DEFEVENTEMPTY (PLUGIN_PRE_GENERICIZE);
 DEFEVENTEMPTY (PLUGIN_FINISH);
-DEFEVENTEMPTY (PLUGIN_INFO);
-DEFEVENTEMPTY (PLUGIN_GGC_START);
-DEFEVENTEMPTY (PLUGIN_GGC_MARKING);
-DEFEVENTEMPTY (PLUGIN_GGC_END);
-DEFEVENTEMPTY (PLUGIN_REGISTER_GGC_ROOTS);
-DEFEVENTEMPTY (PLUGIN_REGISTER_GGC_CACHES);
-DEFEVENTEMPTY (PLUGIN_ATTRIBUTES);
-DEFEVENTEMPTY (PLUGIN_PRAGMAS);
-DEFEVENTEMPTY (PLUGIN_ALL_PASSES_START);
+//DEFEVENTEMPTY (PLUGIN_INFO);
+//DEFEVENTEMPTY (PLUGIN_GGC_START);
+//DEFEVENTEMPTY (PLUGIN_GGC_MARKING);
+//DEFEVENTEMPTY (PLUGIN_GGC_END);
+//DEFEVENTEMPTY (PLUGIN_REGISTER_GGC_ROOTS);
+//DEFEVENTEMPTY (PLUGIN_REGISTER_GGC_CACHES);
+//DEFEVENTEMPTY (PLUGIN_ATTRIBUTES);
+//DEFEVENTEMPTY (PLUGIN_PRAGMAS);
+//DEFEVENTEMPTY (PLUGIN_ALL_PASSES_START);
 DEFEVENTEMPTY (PLUGIN_ALL_PASSES_END);
-DEFEVENTEMPTY (PLUGIN_ALL_IPA_PASSES_START);
-DEFEVENTEMPTY (PLUGIN_ALL_IPA_PASSES_END);
-DEFEVENTEMPTY (PLUGIN_OVERRIDE_GATE);
-//DEFEVENTEMPTY ( PLUGIN_PASS_EXECUTION);
-DEFEVENTEMPTY (PLUGIN_EARLY_GIMPLE_PASSES_START);
-DEFEVENTEMPTY (PLUGIN_EARLY_GIMPLE_PASSES_END);
-DEFEVENTEMPTY (PLUGIN_NEW_PASS);
-DEFEVENTEMPTY (PLUGIN_INCLUDE_FILE);
-//DEFEVENTEMPTY ( PLUGIN_EVENT_FIRST_DYNAMIC);
+//DEFEVENTEMPTY (PLUGIN_ALL_IPA_PASSES_START);
+//DEFEVENTEMPTY (PLUGIN_ALL_IPA_PASSES_END);
+//DEFEVENTEMPTY (PLUGIN_OVERRIDE_GATE);
+
+//DEFEVENTEMPTY (PLUGIN_EARLY_GIMPLE_PASSES_START);
+//DEFEVENTEMPTY (PLUGIN_EARLY_GIMPLE_PASSES_END);
+//DEFEVENTEMPTY (PLUGIN_NEW_PASS);
+//DEFEVENTEMPTY (PLUGIN_INCLUDE_FILE);
+DEFEVENTEMPTY ( PLUGIN_EVENT_FIRST_DYNAMIC);
 
 /*
   register a simple handler for all plugins,
   the commented out ones just crash
 */
 #define DEFEVENTSPECIAL(X)                                              \
+  cerr << "going to register callback" << X << endl;			\
   register_callback (                                                   \
                      plugin_info->base_name,                            \
                      X,                                                 \
@@ -177,13 +314,14 @@ register_special_plugins (struct plugin_name_args *plugin_info)
   //DEFEVENTSPECIAL(PLUGIN_ALL_IPA_PASSES_END);
   //DEFEVENTSPECIAL(PLUGIN_ALL_IPA_PASSES_START);
   //DEFEVENTSPECIAL(PLUGIN_ALL_IPA_PASSES_START); // close the output files
-  //DEFEVENTSPECIAL(PLUGIN_ALL_PASSES_END);
+  DEFEVENTSPECIAL(PLUGIN_ALL_PASSES_END);
   DEFEVENTSPECIAL (PLUGIN_ALL_PASSES_START);
+  
   //DEFEVENTSPECIAL(PLUGIN_ATTRIBUTES);
   //DEFEVENTSPECIAL(PLUGIN_EARLY_GIMPLE_PASSES_END);
   //DEFEVENTSPECIAL(PLUGIN_EARLY_GIMPLE_PASSES_START);
   //DEFEVENTSPECIAL(PLUGIN_EVENT_FIRST_DYNAMIC);
-  //DEFEVENTSPECIAL(PLUGIN_FINISH );
+  DEFEVENTSPECIAL(PLUGIN_FINISH );
   //DEFEVENTSPECIAL(PLUGIN_GGC_END);
   //DEFEVENTSPECIAL(PLUGIN_GGC_MARKING);
   //DEFEVENTSPECIAL(PLUGIN_GGC_START);
@@ -197,8 +335,8 @@ register_special_plugins (struct plugin_name_args *plugin_info)
   DEFEVENTSPECIAL (PLUGIN_FINISH_DECL);
   DEFEVENTSPECIAL (PLUGIN_FINISH_TYPE);
   DEFEVENTSPECIAL (PLUGIN_FINISH_UNIT);
-  //DEFEVENTSPECIAL(PLUGIN_INCLUDE_FILE);
-  //  DEFEVENTSPECIAL(PLUGIN_NEW_PASS);
+  //  DEFEVENTSPECIAL(PLUGIN_INCLUDE_FILE);
+  //DEFEVENTSPECIAL(PLUGIN_NEW_PASS);
   DEFEVENTSPECIAL (PLUGIN_PASS_EXECUTION);
   DEFEVENTSPECIAL (PLUGIN_START_UNIT);	// open the output files
   //DEFEVENTSPECIAL(PLUGIN_PRE_GENERICIZE );
