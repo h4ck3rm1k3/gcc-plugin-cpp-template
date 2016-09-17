@@ -205,8 +205,9 @@ generic_callback_PLUGIN_FINISH_UNIT (void *a, void *b)
   rdf_world::get_context ().finish_unit ();
 
   print_trace ();
-  //write_core("finish_unit");
+
   dump_memory_main();
+  write_core("finish_unit");
 }
 
  // static void

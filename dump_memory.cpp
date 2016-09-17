@@ -396,11 +396,22 @@ int dump_memory(long from, long to, int count, const char * pfilename){
   /// write to a file ------------------------- 
   char filename[255];
   sprintf(filename,"test_program_segment_%d_%s.out",count,pfilename);
-  FILE * f2 = fopen(filename,"wb");
+  for(int c=0; c < strlen(filename); c++) {
+    if (filename[c]=='/') {
+      filename[c]= '_'; // remove slashes
+    }
+  }
+
+
   void * psegment = (void*)(from);
   long size = to - from;
-  fwrite (psegment , sizeof(void*), size  , f2);
-  fclose(f2);
+
+  if (size ) {
+    printf ("going to write to file %s with size %ld\n", filename, size);
+    FILE * f2 = fopen(filename,"wb");
+    fwrite (psegment , sizeof(void*), size  , f2);
+    fclose(f2);
+  }
   /// end of write to a file ------------------------- 
   return 0;
   /* int bcount = 0;   */
@@ -638,7 +649,14 @@ class Maps {
 	      printf("going to dump %s\n",filename);
 	      dump_memory(start, end, count, filename );
 	    } else {
-	      printf("skipping %s\n",filename);
+	      //if (count != 0){
+	      //		printf("skipping %s\n",filename);
+	      //	      }else
+	      {
+		printf("going to dump %s\n",filename);
+		dump_memory(start, end, count, filename );
+		
+	      }
 	    }
 	  }		  
 	  else {
@@ -1099,12 +1117,12 @@ void elf(Elf64_Ehdr * e){
 	
     void * x = (pstart + e->e_ehsize) + (i * sizeof(Elf64_Phdr));
     //&phdr, sizeof(phdr));
-    printf("\n---------------------------\n\tprogram header %d\t%x\n",i,x);
+    printf("\n---------------------------\n\tprogram header %d\t%lx\n",i,(unsigned int *)x);
     printf("opened filename %s\n",filename);
 
     // if (!sigsetjmp(jumpbuf, 1 )){
       
-       Elf64_Phdr * phdr = (Elf64_Phdr *)x;
+    Elf64_Phdr * phdr = (Elf64_Phdr *)x;
     //   	if (cur_a_type != 0) {
     // 	  printf("Segfault\n");
     // 	  break;
