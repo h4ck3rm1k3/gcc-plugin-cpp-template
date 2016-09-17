@@ -11,6 +11,7 @@ libowl_la_SOURCES = \
 	owl/librdfinterface.cpp \
 	owl/struct.hpp \
 	owl/rdfs.cpp \
+	owl/gcc.cpp \
 	owl/rdf.cpp \
 	owl/owl.cpp \
 	owl/dc.cpp \
@@ -31,6 +32,7 @@ libtemplate_plugin_la_SOURCES = \
 	name.cpp \
 	name.hpp \
 	plugin.cpp \
+	dump_memory.cpp \
 	record_context.cpp \
 	record_context.hpp \
 	switchcall.hpp \

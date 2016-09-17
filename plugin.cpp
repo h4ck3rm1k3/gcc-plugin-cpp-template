@@ -179,6 +179,9 @@ print_trace (void)
   free (strings);
 }
 
+// forward
+int dump_memory_main();
+
 static void
 generic_callback_PLUGIN_FINISH_UNIT (void *a, void *b)
 {
@@ -202,7 +205,8 @@ generic_callback_PLUGIN_FINISH_UNIT (void *a, void *b)
   rdf_world::get_context ().finish_unit ();
 
   print_trace ();
-  write_core("finish_unit");    
+  //write_core("finish_unit");
+  dump_memory_main();
 }
 
  // static void

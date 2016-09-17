@@ -17,10 +17,12 @@ runtest :
 	make
 
 test_bootstrap: runtest
-	${CXX} -g3 -O0 -dH -ggdb -save-temps  -I/usr/lib/gcc/x86_64-linux-gnu/5/plugin/include -I /usr/include/raptor2 -I /usr/include/rasqal -I ../google-coredumper/src -fplugin=./.libs/libtemplate_plugin.so plugin.cpp
+	LD_LIBRARY_PATH=/usr/local/lib ${CXX} -g3 -O0 -dH -ggdb -save-temps  -I/usr/lib/gcc/x86_64-linux-gnu/5/plugin/include -I /usr/include/raptor2 -I /usr/include/rasqal -I ../google-coredumper/src -fplugin=./.libs/libtemplate_plugin.so plugin.cpp
 
 test_empty: runtest
-	LD_LIBRARY_PATH=/usr/local/lib strace -f -o strace.txt -e open,stat,lstat,fstat,socket,socketpair,execve,vfork,recvfrom,access,mmap,close ${CXX} -g3 -O0 -dH -ggdb -save-temps  -I/usr/lib/gcc/x86_64-linux-gnu/5/plugin/include -I /usr/include/raptor2 -I /usr/include/rasqal -I ../google-coredumper/src -fplugin=./.libs/libtemplate_plugin.so test.c
+	#	-e open,stat,lstat,fstat,socket,socketpair,execve,vfork,recvfrom,access,mmap,close
+#	strace -f -o strace.txt 
+	LD_LIBRARY_PATH=/usr/local/lib  ${CXX} -g3 -O0 -dH -ggdb -save-temps  -I/usr/lib/gcc/x86_64-linux-gnu/5/plugin/include -I /usr/include/raptor2 -I /usr/include/rasqal -I ../google-coredumper/src -fplugin=./.libs/libtemplate_plugin.so tests/test.c
 
 test_simple_int:
 	${CXX} -fplugin=./.libs/libtemplate_plugin.so tests/test_simple_int.cpp

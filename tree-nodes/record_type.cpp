@@ -98,7 +98,7 @@ TC_RECORD_TYPE::finish_type (tree t)
 
   introspect_struct < tree_base > ((tree_base *) t);
   const char *n = process_name (t);
-  gcc::Struct c (n);
+  gcc::Struct c (n,t);
   //if (strcmp(n,"") == 0)
   //  return;
   //c.record_begin(n);

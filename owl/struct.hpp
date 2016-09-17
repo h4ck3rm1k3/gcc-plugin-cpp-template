@@ -38,6 +38,8 @@ namespace gcc
 
   };
 
+  
+  //template <class TREE>
   class Struct:public owl::Class
   {
 
@@ -61,6 +63,7 @@ namespace gcc
   public: // dynamic property section
     Uri node_uri;
     rdfs::label name;
+    tree tree_node; // pointer to the treenode that created this
 
   public: //
 
@@ -188,7 +191,7 @@ namespace gcc
       }
     };
   public:
-    Struct (const char *name);
+    Struct (const char *name, tree t);
     template < class T > void field_begin (T fld);
   };
 };

@@ -34,10 +34,10 @@ Field::process (tree f)
 namespace gcc 
 {
   
-template <> void Struct::field_begin (Field fld)
-{
-  FieldDecl f (fld, this);
-}
-
+  template<> void Struct::field_begin (Field fld)
+  {
+    FieldDecl f (fld, this);
+  }
+  
 }
 

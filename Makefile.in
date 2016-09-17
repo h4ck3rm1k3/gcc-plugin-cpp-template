@@ -137,8 +137,9 @@ am__installdirs = "$(DESTDIR)$(pkglibdir)" "$(DESTDIR)$(bindir)"
 LTLIBRARIES = $(pkglib_LTLIBRARIES)
 libowl_la_LIBADD =
 am__dirstamp = $(am__leading_dot)dirstamp
-am_libowl_la_OBJECTS = owl/librdfinterface.lo owl/rdfs.lo owl/rdf.lo \
-	owl/owl.lo owl/dc.lo owl/struct.lo owl/url.lo owl/statement.lo
+am_libowl_la_OBJECTS = owl/librdfinterface.lo owl/rdfs.lo owl/gcc.lo \
+	owl/rdf.lo owl/owl.lo owl/dc.lo owl/struct.lo owl/url.lo \
+	owl/statement.lo
 libowl_la_OBJECTS = $(am_libowl_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
@@ -147,7 +148,7 @@ am__v_lt_1 =
 libtemplate_plugin_la_DEPENDENCIES = libowl.la
 am_libtemplate_plugin_la_OBJECTS = __callback.lo callback.lo \
 	callbacks.lo field.lo introspection.lo name.lo plugin.lo \
-	record_context.lo tree-nodes/integer_type.lo \
+	dump_memory.lo record_context.lo tree-nodes/integer_type.lo \
 	tree-nodes/complex_type.lo tree-nodes/vector_type.lo \
 	tree-nodes/array_type.lo tree-nodes/record_type.lo \
 	tree-nodes/union_type.lo tree-nodes/identifier_node.lo \
@@ -405,6 +406,7 @@ libowl_la_SOURCES = \
 	owl/librdfinterface.cpp \
 	owl/struct.hpp \
 	owl/rdfs.cpp \
+	owl/gcc.cpp \
 	owl/rdf.cpp \
 	owl/owl.cpp \
 	owl/dc.cpp \
@@ -425,6 +427,7 @@ libtemplate_plugin_la_SOURCES = \
 	name.cpp \
 	name.hpp \
 	plugin.cpp \
+	dump_memory.cpp \
 	record_context.cpp \
 	record_context.hpp \
 	switchcall.hpp \
@@ -876,7 +879,7 @@ libtemplate_plugin_la_SOURCES = \
 #	 tree-nodes/cilk_sync_stmt.hpp \
 #	 tree-nodes/cilk_sync_stmt.cpp \
 #	 last line is empty
-libtemplate_plugin_la_LDFLAGS = -module -L../google-coredumper
+libtemplate_plugin_la_LDFLAGS = -module -L../google-coredumper 
 libtemplate_plugin_la_LIBADD = -lrdf -lxml2 -lexpat -lcrypt libowl.la -lcoredumper  -lcriu
 testlink_SOURCES = tests/test_link.cpp
 testlink_LDFLAGS = -L../google-coredumper
@@ -980,6 +983,7 @@ owl/$(DEPDIR)/$(am__dirstamp):
 owl/librdfinterface.lo: owl/$(am__dirstamp) \
 	owl/$(DEPDIR)/$(am__dirstamp)
 owl/rdfs.lo: owl/$(am__dirstamp) owl/$(DEPDIR)/$(am__dirstamp)
+owl/gcc.lo: owl/$(am__dirstamp) owl/$(DEPDIR)/$(am__dirstamp)
 owl/rdf.lo: owl/$(am__dirstamp) owl/$(DEPDIR)/$(am__dirstamp)
 owl/owl.lo: owl/$(am__dirstamp) owl/$(DEPDIR)/$(am__dirstamp)
 owl/dc.lo: owl/$(am__dirstamp) owl/$(DEPDIR)/$(am__dirstamp)
@@ -1103,12 +1107,14 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/__callback.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/callback.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/callbacks.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dump_memory.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/field.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/introspection.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/name.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/plugin.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/record_context.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@owl/$(DEPDIR)/dc.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@owl/$(DEPDIR)/gcc.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@owl/$(DEPDIR)/librdfinterface.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@owl/$(DEPDIR)/main.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@owl/$(DEPDIR)/owl.Plo@am__quote@
