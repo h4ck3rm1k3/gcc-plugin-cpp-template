@@ -371,15 +371,6 @@ struct region {
 /* 	return vma->vm_end - vma->vm_start; */
 /* } */
 
-int default_dump() {
-  struct rusage usage;   
-  int x =  getrusage(RUSAGE_SELF, &usage);
-  printf("rss %d\n",usage.ru_maxrss);        /* maximum resident set size */
-
-
-  //long max_address = start + (usage.ru_maxrss * 1024 * 10000);
-
-}
 
 int dump_memory(long from, long to, int count, const char * pfilename){
   // sa.sa_handler = handler;
@@ -389,14 +380,14 @@ int dump_memory(long from, long to, int count, const char * pfilename){
   //   err(1, "Cannot save old sigaction");
   // if( sigaction(SIGSEGV, &sa, NULL) == -1) 
   //   err(1, "Cannot do the new sigaction");
-  int page_size = getpagesize(); /* Get the page size on our machine */
-  long step  = 512;
+  //int page_size = getpagesize(); /* Get the page size on our machine */
+  //  long step  = 512;
 
 
   /// write to a file ------------------------- 
   char filename[255];
   sprintf(filename,"test_program_segment_%d_%s.out",count,pfilename);
-  for(int c=0; c < strlen(filename); c++) {
+  for(unsigned int c=0; c < strlen(filename); c++) {
     if (filename[c]=='/') {
       filename[c]= '_'; // remove slashes
     }
@@ -409,7 +400,9 @@ int dump_memory(long from, long to, int count, const char * pfilename){
   if (size ) {
     printf ("going to write to file %s with size %ld\n", filename, size);
     FILE * f2 = fopen(filename,"wb");
-    fwrite (psegment , sizeof(void*), size  , f2);
+    printf("opened filename %s\n",filename);
+    int ret = fwrite (psegment , sizeof(void*), size  , f2);
+    printf ("got ret code %d\n", ret);
     fclose(f2);
   }
   /// end of write to a file ------------------------- 
@@ -495,31 +488,41 @@ class Maps {
       printf("\n------------------------------------------------\nline:'%s'\n",from);
       printf("\n------------------------------------------------\n");
 	       
-      unsigned long start, end;
+      long unsigned long start, end;
       char flags[4], *pathname;
-      unsigned long offset;
+      long unsigned long offset;
       int major, minor;
-      long inode;
+      long unsigned long inode;
 
       int nameoff;
       char filename[255];
       memset(filename, 0, sizeof(filename)); /* zero-out remaining space */
       // Parse each line of /proc/<pid>/maps file.
-      if (sscanf(from, "%llx-%llx %4s %llx %x:%x %llx %n %s",
-		 &start, &end, flags,
-		 &offset, &major, &minor, &inode, &nameoff, filename) > 6) {
+      if (sscanf(from,//1
+		 "%llx-%llx %4s %llx %x:%x %llx %n %s",//2
+		 &start,//3
+		 &end,//4
+		 flags,//5
+		 &offset,//6
+		 &major,//7
+		 &minor,//8
+		 &inode,//9
+		 &nameoff,//10
+		 filename) > 6) {
 
 	printf("\trange:%llx-%llx\n",      start, end);
 	long size = end - start;
 
-  
+	struct region reg;
 	// the shoff in the dump is : 684664
   
 	total_size += size;
-	printf("\tcount:%lld\n", count++);
-	printf("\tsize:%llx %lld\n", size, size);
-	printf("\ttotal size:%llx %lld\n",total_size,total_size);	
-	printf("\tcalculated end position:%llx %lld\n",start_of_image + total_size,start_of_image + total_size);
+	printf("\tcount:%d\n", count++);
+	printf("\tsize:%lx %ld\n", size, size);
+	printf("\ttotal size:%lx %ld\n",total_size,total_size);	
+	printf("\tcalculated end position:%lx %ld\n",
+	       start_of_image + total_size,
+	       start_of_image + total_size);
 	printf("\tflags:%4s\n",flags);
 	printf("\toff:%llx\n",   offset);
 	printf("\tmaj/min:%x/%x\n",      major, minor);
@@ -527,7 +530,7 @@ class Maps {
 	//printf("\tnameoff:%ld\n",	       nameoff);	
 	printf("\tfilename:%s\n",filename);
 	
-	struct region reg;
+	
 	// Setup protection permissions
 	int perms = PROT_NONE;
 	printf("flags %c %c %c %c\n",
@@ -579,7 +582,7 @@ class Maps {
 	  // Device and number
 	  reg.dev = minor | (major << 8);
 	  reg.inode = inode;
-	  const char * vsyscall =0;
+	  //const char * vsyscall =0;  
 	  // Save pathname
 	  if (nameoff == 0 || (size_t) nameoff > strlen(from)) {
 	    nameoff = strlen(from);
@@ -592,7 +595,7 @@ class Maps {
 	    offset = 0;
 	    reg.type = REGION_VDSO;
 	  } else if (strncmp(pathname, "[vsyscall]", 10) == 0) {
-	    vsyscall = (char *)start;
+	    //vsyscall = (char *)start;
 	    reg.type = REGION_VSYSCALL;
 	  } else if (pathname[0] == '\0') {
 	    reg.type = REGION_BSS;
@@ -667,13 +670,13 @@ class Maps {
 	//} //
 	
       } // if scan
-      printf("while from:%x %x>%x \n", from, to, buf);
+      printf("while from:%ld %ld\n", (unsigned long )from, (unsigned long)to);
     } while (to > buf);
     
     return 0;
   }
   
-  int read_maps (){
+  void read_maps (){
     
     // from https://github.com/giuse88/mvh/blob/development/toys/read_maps.c
     //struct maps maps;
@@ -686,18 +689,6 @@ class Maps {
   
   }
 };
-
-int get_current_mm_map_count(){
-  // read from proc ... tidi
-  return 0;
-}
-
-
-Elf64_Half elf_core_extra_phdrs(void)
-{
-  //return GATE_EHDR->e_phnum;
-  //e->e_phnum
-}
 
 
 struct memelfnote
@@ -785,84 +776,17 @@ enum segment_types {
   PT_GNU_EH_FRAME=         0x6474e550
 };
 
-/* unsigned long vsyscall_ehdr; */
-/* unsigned long vsyscall_end; */
-/* void scan_elf_aux( char **envp) */
-/* { */
-/* 	long page_size = 0; */
-/* 	elf_auxv_t * auxv; */
-
-/* 	while ( *envp++ != NULL) ; */
-
-/* 	for ( auxv = (elf_auxv_t *)envp; auxv->a_type != AT_NULL; auxv++) { */
-/* 		switch ( auxv->a_type ) { */
-/* 			case AT_SYSINFO: */
-/* 				__kernel_vsyscall = auxv->a_un.a_val; */
-/* 				/\* See if the page is under TASK_SIZE *\/ */
-/* 				if (__kernel_vsyscall < (unsigned long) envp) */
-/* 					__kernel_vsyscall = 0; */
-/* 				break; */
-/* 			case AT_SYSINFO_EHDR: */
-/* 				vsyscall_ehdr = auxv->a_un.a_val; */
-/* 				/\* See if the page is under TASK_SIZE *\/ */
-/* 				if (vsyscall_ehdr < (unsigned long) envp) */
-/* 					vsyscall_ehdr = 0; */
-/* 				break; */
-/* 			case AT_HWCAP: */
-/* 				elf_aux_hwcap = auxv->a_un.a_val; */
-/* 				break; */
-/* 			case AT_PLATFORM: */
-/*                                 /\* elf.h removed the pointer elements from */
-/*                                  * a_un, so we have to use a_val, which is */
-/*                                  * all that's left. */
-/*                                  *\/ */
-/* 				elf_aux_platform = */
-/* 					(char *) (long) auxv->a_un.a_val; */
-/* 				break; */
-/* 			case AT_PAGESZ: */
-/* 				page_size = auxv->a_un.a_val; */
-/* 				break; */
-/* 		} */
-/* 	} */
-/* 	if ( ! __kernel_vsyscall || ! vsyscall_ehdr || */
-/* 	     ! elf_aux_hwcap || ! elf_aux_platform || */
-/* 	     ! page_size || (vsyscall_ehdr % page_size) ) { */
-/* 		__kernel_vsyscall = 0; */
-/* 		vsyscall_ehdr = 0; */
-/* 		elf_aux_hwcap = 0; */
-/* 		elf_aux_platform = "i586"; */
-/* 	} */
-/* 	else { */
-/* 		vsyscall_end = vsyscall_ehdr + page_size; */
-/* 	} */
-/* } */
-
 
 #define elf_phdr        elf32_phdr
-size_t elf_core_extra_data_size(void)
-{
-  /* if ( vsyscall_ehdr ) { */
-  /*   const Elf64_Ehdr *const ehdrp = */
-  /*     ( Elf64_Ehdr *)vsyscall_ehdr; */
-  /*   const struct elf64_phdr *const phdrp = */
-  /*     (const struct elf64_phdr *) (vsyscall_ehdr + ehdrp->e_phoff); */
-  /*   int i; */
-    
-  /*   for (i = 0; i < ehdrp->e_phnum; ++i) */
-  /*     if (phdrp[i].p_type == PT_LOAD) */
-  /* 	return (size_t) phdrp[i].p_filesz; */
-  /* } */
-  return 0;
-}
 
 long recalc_shoff(Elf64_Ehdr * elf) {
   /* Write notes phdr entry */
   long offset = 0;
   offset += sizeof(*elf);				/* Elf header */
-  int segs;
+  int segs=0;
 
   
-  segs = get_current_mm_map_count();
+  //segs = get_current_mm_map_count();
   
   segs +=   elf->e_phnum;
   struct elf_note_info info = { };
@@ -883,12 +807,12 @@ long recalc_shoff(Elf64_Ehdr * elf) {
     //fill_elf_note_phdr(phdr4note, sz, offset);
     offset += sz;
   }
-  loff_t dataoff  = offset = roundup(offset, ELF_EXEC_PAGESIZE);
+  //loff_t dataoff  = offset = roundup(offset, ELF_EXEC_PAGESIZE);
 
   //elf_addr_t *vma_filesz =  kmalloc_array(segs - 1, sizeof(*vma_filesz), GFP_KERNEL);
   //	if (!vma_filesz)
   //		goto end_coredump;
-  size_t vma_data_size = 0;
+  //size_t vma_data_size = 0;
 
   //Section Header Table File Offset: 684664 (0x00000000000a7278)
   
@@ -896,7 +820,7 @@ long recalc_shoff(Elf64_Ehdr * elf) {
   // call the vma lis
 
   offset += map.total_size;
-  offset += elf_core_extra_data_size();
+  offset += 0;
   
   //elf->e_shoff = offset;
 	
@@ -932,7 +856,7 @@ typedef struct elf64_shdr {
 } Elf64_Shdr;
 
 void elf(Elf64_Ehdr * e){
-  const int  _ELFMAG0 =	0x7f;
+  //const int  _ELFMAG0 =	0x7f;
 
   /* ELF Header: */
 /*   Magic:   7f 45 4c 46 02 01 01 00 00 00 00 00 00 00 00 00  */
@@ -1013,52 +937,52 @@ void elf(Elf64_Ehdr * e){
   /*   Type:                              EXEC (Executable file) */
   // 1, 2, 3, 4 specify whether the object is relocatable, executable, shared, or core, respectively.
   
-  printf("machine %x\n",e->e_machine);
+  printf("machine %lx\n",(unsigned long)e->e_machine);
   /*   Machine:                           Advanced Micro Devices X86-64 */
 
   
-  printf("entry %x\n",e->e_entry);
+  printf("entry %lx\n",(unsigned long)e->e_entry);
   /*     virtual address :  system first transfers control. starting the process.  */
   /*   Entry point address:               0x4006f0 */
   
-  printf("phoff %x\n",e->e_phoff);
+  printf("phoff %lx\n",(unsigned long)e->e_phoff);
   /*     program header table's file offset in bytes or zero.  */
   /*   Start of program headers:          64 (bytes into file) */
 
 
-  printf("shoff %8.8lx Section header table file offset\n",e->e_shoff);
+  printf("shoff %8.8lx Section header table file offset\n",(unsigned long)e->e_shoff);
   /*     This member holds the section header table's file offset in bytes. If the file has no section header table, this member holds zero.  */
   /*   Start of section headers:          13328 (bytes into file) */
   // Points to the start of the section header table.
   
-  printf("flags %x\n",e->e_flags);
+  printf("flags %lx\n",(unsigned long)e->e_flags);
 /*     This member holds processor-specific flags associated with the file. Flag names take the form EF_machine_flag.  */
 /*   Flags:                             0x0 */
 //  Interpretation of this field depends on the target architecture.
   
-  printf("elf header size : ehsize 0x%x\n",e->e_ehsize);
+  printf("elf header size : ehsize 0x%lx\n",(unsigned long)e->e_ehsize);
   /*     This member holds the ELF header's size in bytes.  */
   /*   Size of this header:               64 (bytes)  (0x40)*/
   //  Points to the start of the program header table. It usually follows the file header immediately, making the offset 0x34 or 0x40 for 32- and 64-bit ELF executables, respectively
   // Contains the size of this header, normally 64 bytes for 64-bit and 52 for 32-bit format.
 										
-  printf("phentsize %x\n",e->e_phentsize);
+  printf("phentsize %lx\n",(unsigned long)e->e_phentsize);
   /*     This member holds the size in bytes of one entry in the file's program header table; all entries are the same size.  */
   /*   Size of program headers:           56 (bytes) */
   //  Contains the size of a program header table entry.
     
-  printf("phnum %x\n",e->e_phnum);
+  printf("phnum %lx\n",(unsigned long)e->e_phnum);
   /*     This member holds the number of entries in the program header table. Thus the product of e_phentsize and e_phnum gives the table's size in bytes. If a file has no program header table, e_phnum holds the value zero.  */
   /*   Number of program headers:         9 */
   // Contains the number of entries in the program header table.
 
     
-  printf("shentsize %x\n",e->e_shentsize);
+  printf("shentsize %lx\n",(unsigned long)e->e_shentsize);
   /*     This member holds a section header's size in bytes. A section header is one entry in the section header table; all entries are the same size.  */
   /*   Size of section headers:           64 (bytes) */
   // Contains the size of a section header table entry.
   
-  printf("shnum %x\n",e->e_shnum);
+  printf("shnum %lx\n",(unsigned long)e->e_shnum);
   /*     This member holds the number of entries in the section header table. Thus the product of e_shentsize and e_shnum gives the section header table's size in bytes. If a file has no section header table, e_shnum holds the value zero.  */
   /*   Number of section headers:         35 */
   // Contains the number of entries in the section header table.
@@ -1069,28 +993,26 @@ void elf(Elf64_Ehdr * e){
   // Contains index of the section header table entry that contains the section names.
 
   unsigned long * pstart = (unsigned long *)e;
-  printf("starting ELF    : %x\n",pstart);
+  printf("starting ELF    : %lx\n",(unsigned long)pstart);
 
   //  void * pstart2 = pstart + e->e_ehsize;
 
   long shoff = recalc_shoff(e); // patch up the shoff, like the kernel does on coredump
   
   unsigned long * pstart_sh = pstart + shoff;
-  printf("new shoff  : 0x%x %d\n",shoff, shoff);
-  printf("starting shoff  : 0x%x\n",pstart_sh);
+  printf("new shoff  : 0x%lx %ld\n",
+	 (unsigned long)shoff,
+	 (unsigned long)shoff);
+  printf("starting shoff  : 0x%lx\n",(unsigned long)pstart_sh);
 
   /* Elf64_Shdr * pelf64_shdr =  (Elf64_Shdr *)pstart_sh; */
-  /* for (int i = 0; i < e->e_shnum; i++) { */
-    
+  /* for (int i = 0; i < e->e_shnum; i++) { */    
   /*   printf("offset           : 0x%x\n",pelf64_shdr[i].sh_offset); */
-  /*   //printf("pos           : 0x%d\n",pstart_sh); */
-    
+  /*   //printf("pos           : 0x%d\n",pstart_sh); */   
   /*   //pstart_sh += e->e_shentsize; // 	Contains the size of a section header table entry. */
   /*     //printf("name %x\n",pelf64_shdr->sh_name); */
   /*     //printf("type %x\n",pelf64_shdr->sh_type); */
-  /*   //printf("addr %x\n",pelf64_shdr->sh_addr); */
-
-      
+  /*   //printf("addr %x\n",pelf64_shdr->sh_addr); */      
   /*     /\* Elf64_Word sh_type; *\/ */
   /*     /\* Elf64_Xword sh_flags; *\/ */
   /*     /\* Elf64_Addr sh_addr; *\/ */
@@ -1100,25 +1022,15 @@ void elf(Elf64_Ehdr * e){
   /*     /\* Elf64_Word sh_info; *\/ */
   /*     /\* Elf64_Xword sh_addralign; *\/ */
   /*     /\* Elf64_Xword sh_entsize; *\/ */
-
-    
   /*   //e_shnum 	Contains the number of entries in the section header table. */
   /* } */
 
-  
-  for (int i = 0; i < e->e_phnum; i++) {
-
-    
-    char filename[255];
-    sprintf(filename,"test_program_header_%d.out",i);
-
-
-    FILE * f2 = fopen(filename,"wb");
-	
+  for (int i = 0; i < e->e_phnum; i++) {  	
     void * x = (pstart + e->e_ehsize) + (i * sizeof(Elf64_Phdr));
-    //&phdr, sizeof(phdr));
-    printf("\n---------------------------\n\tprogram header %d\t%lx\n",i,(unsigned int *)x);
-    printf("opened filename %s\n",filename);
+    printf("\n---------------------------\n\tprogram header %d\t%lx\n",
+	   i,
+	   (unsigned long)x);
+
 
     // if (!sigsetjmp(jumpbuf, 1 )){
       
@@ -1149,40 +1061,53 @@ void elf(Elf64_Ehdr * e){
 	//      case CHK( PT_GNU_STACK	)
 	};
       
-      printf("\toffset 0x%x\n",phdr->p_offset);
+      printf("\toffset 0x%lx\n",(unsigned long)phdr->p_offset);
       //     Offset of the header in the file image.
       
-      printf("\tvaddr 0x%x\n",phdr->p_vaddr);
+      printf("\tvaddr 0x%lx\n",(unsigned long)phdr->p_vaddr);
       //Virtual address of the segment in memory.
 	
-      printf("\tpaddr 0x%x\n",phdr->p_paddr);
+      printf("\tpaddr 0x%lx\n",(unsigned long)phdr->p_paddr);
       // On systems where physical address is relevant, reserved for segment's physical address.
 
-      printf("\tfilesz 0x%x\n",phdr->p_filesz);
-      printf("\tfilesz dec:%d\n",phdr->p_filesz);
+      printf("\tfilesz 0x%lx\n",(unsigned long)phdr->p_filesz);
+      printf("\tfilesz dec:%llx\n",phdr->p_filesz);
       //size in bytes of the segment in the file image. May be 0.
 	
-      printf("\tmemsz 0x%x\n",phdr->p_memsz);
+      printf("\tmemsz 0x%lx\n",(unsigned long)phdr->p_memsz);
       //Size in bytes of the segment in memory. May be 0.
 
       printf("\tflags 0x%x\n",phdr->p_flags);
       //p_flags 	Segment-dependent flags.
 
       //0 and 1 specify no alignment. Otherwise should be a positive, integral power of 2, with p_vaddr equating p_offset modulus p_align.
-      printf("\talign 0x%x\n",phdr->p_align);
+      printf("\talign 0x%lx\n",(unsigned long)phdr->p_align);
 
       // where does the segment start
       void * psegment = (void*)(phdr->p_vaddr);
 
       if (psegment) {
-	printf("\tgoing to write 0x%x with size 0x%x to file\n",psegment,phdr->p_memsz);      
-	fwrite (psegment , sizeof(void*),  phdr->p_memsz , f2);
+	    char filename[255];
+	    if (phdr->p_memsz > 0 ) {
+	      sprintf(filename,"test_program_header_%d.out",i);
+	      FILE * f2 = fopen(filename,"wb");
+	      printf ("got file %lx\n",(unsigned long) f2);
+	      printf("\tgoing to write 0x%lx with size 0x%lx to file\n",
+		     (unsigned long)psegment,
+		     (unsigned long)phdr->p_memsz);      
+	      int ret = fwrite (psegment , sizeof(void*),  phdr->p_memsz , f2);
+	      printf ("got ret code %d\n", ret);
+	      fclose(f2);
+	    }
+	    else {
+	      printf ("header %d is null sized\n", i);
+	    }
       }
       else {
 	printf("\tNULL Block\n");
       }
 	  
-      fclose(f2);
+
 	
     }
   //}// exception handling
@@ -1212,12 +1137,12 @@ void regs()
   void * ebp1 = ebp;
   
   printf("registers\n");
-  printf("ebp: 0x%x\n", ebp);
-  printf("ebx: 0x%x\n", ebx);
+  printf("ebp: 0x%lx\n", (unsigned long)ebp);
+  printf("ebx: 0x%lx\n", (unsigned long)ebx);
   //  printf("rip: 0x%x\n", rip);
 
   register void *rax __asm__ ("rax");
-  printf("rax: 0x%x\n", rax);
+  printf("rax: 0x%lx\n", (unsigned long)rax);
 /*   rax  */
 /* rbx    */
 /* rcx    */
@@ -1243,9 +1168,9 @@ void regs()
 /* fs */
 /* gs */
 
-  printf("ebp1: 0x%x\n", ebp1);
-  printf("esp: 0x%x\n", esp);
-  printf("start of refs buff 0x%x\n",buffer);
+  printf("ebp1: 0x%lx\n", (unsigned long)ebp1);
+  printf("esp: 0x%lx\n", (unsigned long)esp);
+  printf("start of refs buff 0x%lx\n",(unsigned long)buffer);
 
   /* int size = 10; */
   /* // from https://github.com/ccppjava/random-codes/blob/d71d43c75f3963d6d1fe2c76cb4a8d6f302548a8/c/fn_stack/stack_dump.c */
@@ -1277,16 +1202,16 @@ int dump_memory_main(){
   int page_size = getpagesize(); /* Get the page size on our machine */
   printf("page size: %d\n", page_size);
   struct rusage usage;   
-  int x =  getrusage(RUSAGE_SELF, &usage);
-  printf("rss %d\n",usage.ru_maxrss);        /* maximum resident set size */
+  getrusage(RUSAGE_SELF, &usage);
+  printf("rss %ld\n",usage.ru_maxrss);        /* maximum resident set size */
 
-  printf("start of static 0x%x\n",buffer1);
-  printf("start of main buff 0x%x\n",buffer);
+  printf("start of static 0x%lx\n",(unsigned long)buffer1);
+  printf("start of main buff 0x%lx\n",(unsigned long)buffer);
 
   register void *ebp __asm__ ("ebp");
   register void *esp __asm__ ("esp");
-  printf("main ebp: 0x%x\n", ebp);
-  printf("main esp: 0x%x\n", esp);
+  printf("main ebp: 0x%lx\n", (unsigned long)ebp);
+  printf("main esp: 0x%lx\n", (unsigned long)esp);
 
   
   FILE * f = fopen("test.out","wb");

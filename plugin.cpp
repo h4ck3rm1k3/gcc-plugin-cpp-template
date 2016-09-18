@@ -97,7 +97,7 @@ static void write_core(const char * tag) {
    //sleep(4);
   if (ret < 0) {
     //what_err_ret_mean(ret);
-    //kill(pid, SIGKILL);
+
     cout << "err" << ret;
     cout << "Dump failed\n";
     error_msg(ret);
@@ -107,7 +107,6 @@ static void write_core(const char * tag) {
 
   }
   
-
 
 	
 }
@@ -207,7 +206,12 @@ generic_callback_PLUGIN_FINISH_UNIT (void *a, void *b)
   print_trace ();
 
   dump_memory_main();
-  write_core("finish_unit");
+  //cout << "going to call criu\n";
+  //write_core("finish_unit");
+
+  cout << "going to kill the process now\n";
+  kill(getpid(), SIGQUIT); // now just kill the process and produce a normal core
+
 }
 
  // static void

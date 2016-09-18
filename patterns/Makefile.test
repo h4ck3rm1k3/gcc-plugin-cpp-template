@@ -1,0 +1,9 @@
+t2:
+	g++ process.cpp
+	./a.out ./bin/core
+	# ./a.out	 ./bin/test_program_segment_1__usr_lib_gcc_x86_64-linux-gnu_5_cc1plus.out
+	./a.out	 ./bin/test_program_segment_6_.out
+
+t:
+	g++ -g test.cpp  dump_memory.cpp
+	./a.out
