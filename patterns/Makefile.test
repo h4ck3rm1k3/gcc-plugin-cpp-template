@@ -1,3 +1,8 @@
+t3:
+	g++ pointers.cpp
+	./a.out ../bin/core
+	#	./a.out	 ../bin/test_program_segment_6_.out
+
 t2:
 	g++ process.cpp
 	./a.out ./bin/core
