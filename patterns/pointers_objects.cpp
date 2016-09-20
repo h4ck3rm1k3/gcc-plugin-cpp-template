@@ -86,6 +86,8 @@ int main(int argc, char ** argv){
 
 	  cerr << "code" << b->code << endl;
 
+	  cerr << get_tree_code_name ((enum tree_code) b->code) << endl;
+    
 	  cerr   << "obj:"  ;
 	    for (int j=0; j < sizeof(union tree_node);
 		 j++) {
@@ -99,12 +101,34 @@ int main(int argc, char ** argv){
 	    cerr << hex<< (unsigned int)obj[j];
 	  };
 	  cerr << endl;
-	  
-	}
-	  
-      }
 
-  }
+
+	  cerr   << "pointers:"  ;
+	  int j =0;
+	  unsigned long* pobj = (unsigned long*)&obj[0];
+	  unsigned long* pend = (unsigned long*)&obj[0]+sizeof(union tree_node);
+	  
+	  while (pobj < pend) {
+	    j++;
+	    unsigned long v = *pobj;
+	    if(
+	       (v > from)
+	       && 
+	       (v < to)
+	       )
+	      {
+		cerr
+		  << "Pos 0x"  << hex << j << "\t"
+		  << " 0x"<< hex << v
+		  << endl;
+	      }
+	    // pointers   
+	    pobj++;	  	  
+	  } // while
+	}// if valid tree code
+
+      } // shome
+  }// for 
 
   delete filebuf;
 }
