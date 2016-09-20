@@ -1,138 +1,143 @@
-class va_gc {};
-template <class T, class Y> class vec {
-};
 
 union tree_node;
 typedef union tree_node *tree;
+
+class va_gc {};
+template <class T, class Y> class vec {
+public:
+  static int embedded_size(int ) {}
+  int length () const {return 0;}
+};
+
 enum tree_code {
-ERROR_MARK,
-IDENTIFIER_NODE,
-TREE_LIST,
-TREE_VEC,
-BLOCK,
-// 126 "/usr/lib/gcc/x86_64-linux-gnu/5/plugin/include/tree.def"
-OFFSET_TYPE,
-// 139 "/usr/lib/gcc/x86_64-linux-gnu/5/plugin/include/tree.def"
-ENUMERAL_TYPE,
-BOOLEAN_TYPE,
-// 153 "/usr/lib/gcc/x86_64-linux-gnu/5/plugin/include/tree.def"
-INTEGER_TYPE,
-REAL_TYPE,
-// 166 "/usr/lib/gcc/x86_64-linux-gnu/5/plugin/include/tree.def"
-POINTER_TYPE,REFERENCE_TYPE,
-NULLPTR_TYPE,
-FIXED_POINT_TYPE,
-// 187 "/usr/lib/gcc/x86_64-linux-gnu/5/plugin/include/tree.def"
-COMPLEX_TYPE,
-VECTOR_TYPE,
-// 208 "/usr/lib/gcc/x86_64-linux-gnu/5/plugin/include/tree.def"
-ARRAY_TYPE,
-// 218 "/usr/lib/gcc/x86_64-linux-gnu/5/plugin/include/tree.def"
-RECORD_TYPE,UNION_TYPE,QUAL_UNION_TYPE,
-VOID_TYPE,
-POINTER_BOUNDS_TYPE,FUNCTION_TYPE,
-METHOD_TYPE,LANG_TYPE,VOID_CST,
-// 289 "/usr/lib/gcc/x86_64-linux-gnu/5/plugin/include/tree.def"
-INTEGER_CST,
-REAL_CST,
-FIXED_CST,COMPLEX_CST,
-VECTOR_CST,
-STRING_CST,
-// 365 "/usr/lib/gcc/x86_64-linux-gnu/5/plugin/include/tree.def"
-FUNCTION_DECL,
-LABEL_DECL,
-FIELD_DECL,
-VAR_DECL,
-CONST_DECL,
-PARM_DECL,
-TYPE_DECL,
-RESULT_DECL,DEBUG_EXPR_DECL,NAMESPACE_DECL,
-// 395 "/usr/lib/gcc/x86_64-linux-gnu/5/plugin/include/tree.def"
-IMPORTED_DECL,
-// 405 "/usr/lib/gcc/x86_64-linux-gnu/5/plugin/include/tree.def"
-NAMELIST_DECL,TRANSLATION_UNIT_DECL,
-// 422 "/usr/lib/gcc/x86_64-linux-gnu/5/plugin/include/tree.def"
-COMPONENT_REF,
-// 432 "/usr/lib/gcc/x86_64-linux-gnu/5/plugin/include/tree.def"
-BIT_FIELD_REF,
-ARRAY_REF,
-ARRAY_RANGE_REF,REALPART_EXPR,
-IMAGPART_EXPR,
-// 461 "/usr/lib/gcc/x86_64-linux-gnu/5/plugin/include/tree.def"
-VIEW_CONVERT_EXPR,
-INDIRECT_REF,
-// 473 "/usr/lib/gcc/x86_64-linux-gnu/5/plugin/include/tree.def"
-OBJ_TYPE_REF,
-// 492 "/usr/lib/gcc/x86_64-linux-gnu/5/plugin/include/tree.def"
-CONSTRUCTOR,
-// 502 "/usr/lib/gcc/x86_64-linux-gnu/5/plugin/include/tree.def"
-COMPOUND_EXPR,
-MODIFY_EXPR,
-INIT_EXPR,TARGET_EXPR,
-// 532 "/usr/lib/gcc/x86_64-linux-gnu/5/plugin/include/tree.def"
-COND_EXPR,
-// 544 "/usr/lib/gcc/x86_64-linux-gnu/5/plugin/include/tree.def"
-VEC_COND_EXPR,
-// 558 "/usr/lib/gcc/x86_64-linux-gnu/5/plugin/include/tree.def"
-VEC_PERM_EXPR,
-// 581 "/usr/lib/gcc/x86_64-linux-gnu/5/plugin/include/tree.def"
-BIND_EXPR,CALL_EXPR,
-WITH_CLEANUP_EXPR,
-// 613 "/usr/lib/gcc/x86_64-linux-gnu/5/plugin/include/tree.def"
-CLEANUP_POINT_EXPR,
-// 665 "/usr/lib/gcc/x86_64-linux-gnu/5/plugin/include/tree.def"
-PLACEHOLDER_EXPR,
-PLUS_EXPR,
-MINUS_EXPR,
-MULT_EXPR,POINTER_PLUS_EXPR,MULT_HIGHPART_EXPR,
-TRUNC_DIV_EXPR,
-CEIL_DIV_EXPR,
-FLOOR_DIV_EXPR,
-ROUND_DIV_EXPR,
-TRUNC_MOD_EXPR,
-CEIL_MOD_EXPR,
-FLOOR_MOD_EXPR,
-ROUND_MOD_EXPR,
-RDIV_EXPR,EXACT_DIV_EXPR,
-FIX_TRUNC_EXPR,
-FLOAT_EXPR,
-NEGATE_EXPR,
-MIN_EXPR,
-MAX_EXPR,ABS_EXPR,
-// 739 "/usr/lib/gcc/x86_64-linux-gnu/5/plugin/include/tree.def"
-LSHIFT_EXPR,
-RSHIFT_EXPR,
-LROTATE_EXPR,
-RROTATE_EXPR,
-BIT_IOR_EXPR,
-BIT_XOR_EXPR,
-BIT_AND_EXPR,
-BIT_NOT_EXPR,
-// 759 "/usr/lib/gcc/x86_64-linux-gnu/5/plugin/include/tree.def"
-TRUTH_ANDIF_EXPR,
-TRUTH_ORIF_EXPR,
-TRUTH_AND_EXPR,
-TRUTH_OR_EXPR,
-TRUTH_XOR_EXPR,
-TRUTH_NOT_EXPR,
-// 775 "/usr/lib/gcc/x86_64-linux-gnu/5/plugin/include/tree.def"
-LT_EXPR,
-LE_EXPR,
-GT_EXPR,
-GE_EXPR,
-EQ_EXPR,
-NE_EXPR,
-UNORDERED_EXPR,
-ORDERED_EXPR,
-UNLT_EXPR,
-UNLE_EXPR,
-UNGT_EXPR,
-UNGE_EXPR,
-UNEQ_EXPR,
-LTGT_EXPR,RANGE_EXPR,PAREN_EXPR,
-CONVERT_EXPR,ADDR_SPACE_CONVERT_EXPR,
-FIXED_CONVERT_EXPR,
-NOP_EXPR,
+  ERROR_MARK,
+  IDENTIFIER_NODE,
+  TREE_LIST,
+  TREE_VEC,
+  BLOCK,
+  // 126 "/usr/lib/gcc/x86_64-linux-gnu/5/plugin/include/tree.def"
+  OFFSET_TYPE,
+  // 139 "/usr/lib/gcc/x86_64-linux-gnu/5/plugin/include/tree.def"
+  ENUMERAL_TYPE,
+  BOOLEAN_TYPE,
+  // 153 "/usr/lib/gcc/x86_64-linux-gnu/5/plugin/include/tree.def"
+  INTEGER_TYPE,
+  REAL_TYPE,
+  // 166 "/usr/lib/gcc/x86_64-linux-gnu/5/plugin/include/tree.def"
+  POINTER_TYPE,REFERENCE_TYPE,
+  NULLPTR_TYPE,
+  FIXED_POINT_TYPE,
+  // 187 "/usr/lib/gcc/x86_64-linux-gnu/5/plugin/include/tree.def"
+  COMPLEX_TYPE,
+  VECTOR_TYPE,
+  // 208 "/usr/lib/gcc/x86_64-linux-gnu/5/plugin/include/tree.def"
+  ARRAY_TYPE,
+  // 218 "/usr/lib/gcc/x86_64-linux-gnu/5/plugin/include/tree.def"
+  RECORD_TYPE,UNION_TYPE,QUAL_UNION_TYPE,
+  VOID_TYPE,
+  POINTER_BOUNDS_TYPE,FUNCTION_TYPE,
+  METHOD_TYPE,LANG_TYPE,VOID_CST,
+  // 289 "/usr/lib/gcc/x86_64-linux-gnu/5/plugin/include/tree.def"
+  INTEGER_CST,
+  REAL_CST,
+  FIXED_CST,COMPLEX_CST,
+  VECTOR_CST,
+  STRING_CST,
+  // 365 "/usr/lib/gcc/x86_64-linux-gnu/5/plugin/include/tree.def"
+  FUNCTION_DECL,
+  LABEL_DECL,
+  FIELD_DECL,
+  VAR_DECL,
+  CONST_DECL,
+  PARM_DECL,
+  TYPE_DECL,
+  RESULT_DECL,DEBUG_EXPR_DECL,NAMESPACE_DECL,
+  // 395 "/usr/lib/gcc/x86_64-linux-gnu/5/plugin/include/tree.def"
+  IMPORTED_DECL,
+  // 405 "/usr/lib/gcc/x86_64-linux-gnu/5/plugin/include/tree.def"
+  NAMELIST_DECL,TRANSLATION_UNIT_DECL,
+  // 422 "/usr/lib/gcc/x86_64-linux-gnu/5/plugin/include/tree.def"
+  COMPONENT_REF,
+  // 432 "/usr/lib/gcc/x86_64-linux-gnu/5/plugin/include/tree.def"
+  BIT_FIELD_REF,
+  ARRAY_REF,
+  ARRAY_RANGE_REF,REALPART_EXPR,
+  IMAGPART_EXPR,
+  // 461 "/usr/lib/gcc/x86_64-linux-gnu/5/plugin/include/tree.def"
+  VIEW_CONVERT_EXPR,
+  INDIRECT_REF,
+  // 473 "/usr/lib/gcc/x86_64-linux-gnu/5/plugin/include/tree.def"
+  OBJ_TYPE_REF,
+  // 492 "/usr/lib/gcc/x86_64-linux-gnu/5/plugin/include/tree.def"
+  CONSTRUCTOR,
+  // 502 "/usr/lib/gcc/x86_64-linux-gnu/5/plugin/include/tree.def"
+  COMPOUND_EXPR,
+  MODIFY_EXPR,
+  INIT_EXPR,TARGET_EXPR,
+  // 532 "/usr/lib/gcc/x86_64-linux-gnu/5/plugin/include/tree.def"
+  COND_EXPR,
+  // 544 "/usr/lib/gcc/x86_64-linux-gnu/5/plugin/include/tree.def"
+  VEC_COND_EXPR,
+  // 558 "/usr/lib/gcc/x86_64-linux-gnu/5/plugin/include/tree.def"
+  VEC_PERM_EXPR,
+  // 581 "/usr/lib/gcc/x86_64-linux-gnu/5/plugin/include/tree.def"
+  BIND_EXPR,CALL_EXPR,
+  WITH_CLEANUP_EXPR,
+  // 613 "/usr/lib/gcc/x86_64-linux-gnu/5/plugin/include/tree.def"
+  CLEANUP_POINT_EXPR,
+  // 665 "/usr/lib/gcc/x86_64-linux-gnu/5/plugin/include/tree.def"
+  PLACEHOLDER_EXPR,
+  PLUS_EXPR,
+  MINUS_EXPR,
+  MULT_EXPR,POINTER_PLUS_EXPR,MULT_HIGHPART_EXPR,
+  TRUNC_DIV_EXPR,
+  CEIL_DIV_EXPR,
+  FLOOR_DIV_EXPR,
+  ROUND_DIV_EXPR,
+  TRUNC_MOD_EXPR,
+  CEIL_MOD_EXPR,
+  FLOOR_MOD_EXPR,
+  ROUND_MOD_EXPR,
+  RDIV_EXPR,EXACT_DIV_EXPR,
+  FIX_TRUNC_EXPR,
+  FLOAT_EXPR,
+  NEGATE_EXPR,
+  MIN_EXPR,
+  MAX_EXPR,ABS_EXPR,
+  // 739 "/usr/lib/gcc/x86_64-linux-gnu/5/plugin/include/tree.def"
+  LSHIFT_EXPR,
+  RSHIFT_EXPR,
+  LROTATE_EXPR,
+  RROTATE_EXPR,
+  BIT_IOR_EXPR,
+  BIT_XOR_EXPR,
+  BIT_AND_EXPR,
+  BIT_NOT_EXPR,
+  // 759 "/usr/lib/gcc/x86_64-linux-gnu/5/plugin/include/tree.def"
+  TRUTH_ANDIF_EXPR,
+  TRUTH_ORIF_EXPR,
+  TRUTH_AND_EXPR,
+  TRUTH_OR_EXPR,
+  TRUTH_XOR_EXPR,
+  TRUTH_NOT_EXPR,
+  // 775 "/usr/lib/gcc/x86_64-linux-gnu/5/plugin/include/tree.def"
+  LT_EXPR,
+  LE_EXPR,
+  GT_EXPR,
+  GE_EXPR,
+  EQ_EXPR,
+  NE_EXPR,
+  UNORDERED_EXPR,
+  ORDERED_EXPR,
+  UNLT_EXPR,
+  UNLE_EXPR,
+  UNGT_EXPR,
+  UNGE_EXPR,
+  UNEQ_EXPR,
+  LTGT_EXPR,RANGE_EXPR,PAREN_EXPR,
+  CONVERT_EXPR,ADDR_SPACE_CONVERT_EXPR,
+  FIXED_CONVERT_EXPR,
+  NOP_EXPR,
 NON_LVALUE_EXPR,
 COMPOUND_LITERAL_EXPR,
 SAVE_EXPR,ADDR_EXPR,FDESC_EXPR,COMPLEX_EXPR,
@@ -3158,3 +3163,59 @@ enum tree_code_class {
 
     extern const char *get_tree_code_name (enum tree_code);
 
+      //   struct tree_binfo {
+      // struct tree_common common;
+      
+      // tree offset;
+      // tree vtable;
+      // tree virtuals;
+      // tree vptr_field;
+      // vec<tree, va_gc> *base_accesses;
+      // 	  tree inheritance;
+	  
+      // 	  tree vtt_subvtt;
+      // 	  tree vtt_vptr;
+	  
+      // 	  vec<tree, va_gc> base_binfos;
+      // 	      };
+	  
+
+#define TREE_CODE_CLASS_STRING(CLASS)	  tree_code_class_strings[(int) (CLASS)]
+    
+#define TREE_CODE_CLASS(CODE)	tree_code_type[(int) (CODE)]
+    
+
+#define TREE_CODE_LENGTH(CODE)	tree_code_length[(int) (CODE)]
+
+typedef const union tree_node *const_tree;
+#define TREE_CODE(NODE) ((enum tree_code) (NODE)->base.code)
+#define TREE_CHECK(T,CODE) (T)
+#define INTEGER_CST_CHECK(t) TREE_CHECK (t, INTEGER_CST)
+#define TREE_INT_CST_EXT_NUNITS(NODE) (INTEGER_CST_CHECK (NODE)->base.u.int_length.extended)
+#define HOST_WIDE_INT long
+    
+#define BINFO_N_BASE_BINFOS(NODE) (BINFO_BASE_BINFOS (NODE)->length ())
+#define TREE_VEC_LENGTH(NODE) (TREE_VEC_CHECK (NODE)->base.u.length)
+#define TYPE_VECTOR_SUBPARTS(VECTOR_TYPE) (((unsigned HOST_WIDE_INT) 1) << VECTOR_TYPE_CHECK (VECTOR_TYPE)->type_common.precision)
+#define BINFO_BASE_BINFOS(NODE) (&TREE_BINFO_CHECK (NODE)->binfo.base_binfos)
+#define TREE_VEC_CHECK(t) TREE_CHECK (t, TREE_VEC)
+#define TREE_BINFO_CHECK(t) TREE_CHECK (t, TREE_BINFO)
+#define TREE_TYPE(NODE) ((NODE)->typed.type)
+#define VECTOR_TYPE_CHECK(t) TREE_CHECK (t, VECTOR_TYPE)
+#define TREE_STRING_LENGTH(NODE) (STRING_CST_CHECK (NODE)->string.length)
+
+extern unsigned const char omp_clause_num_ops[];
+
+
+
+#define OMP_CLAUSE_CODE(NODE) (OMP_CLAUSE_CHECK (NODE))->omp_clause.code
+#define STRING_CST_CHECK(t) TREE_CHECK (t, STRING_CST)
+#define VL_EXP_OPERAND_LENGTH(NODE) ((int)TREE_INT_CST_LOW (VL_EXP_CHECK (NODE)->exp.operands[0]))
+#define OMP_CLAUSE_CHECK(t) TREE_CHECK (t, OMP_CLAUSE)
+#define TREE_CLASS_CHECK(T,CODE) (T)
+#define TREE_INT_CST_LOW(NODE) ((unsigned HOST_WIDE_INT) TREE_INT_CST_ELT (NODE, 0))
+#define VL_EXP_CHECK(T) TREE_CLASS_CHECK (T, tcc_vl_exp)
+#define TREE_INT_CST_ELT(NODE,I) TREE_INT_CST_ELT_CHECK (NODE, I)
+#define TREE_INT_CST_ELT_CHECK(T,I) ((T)->int_cst.val[I])
+
+extern size_t tree_size (const_tree);

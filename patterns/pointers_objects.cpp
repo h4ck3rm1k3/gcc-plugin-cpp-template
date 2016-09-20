@@ -87,16 +87,19 @@ int main(int argc, char ** argv){
 	  cerr << "code" << b->code << endl;
 
 	  cerr << get_tree_code_name ((enum tree_code) b->code) << endl;
-    
+
+	  size_t  size = tree_size ((const_tree)obj);
+	  cerr   << "tree size:"  << size << endl;
+	  
 	  cerr   << "obj:"  ;
-	    for (int j=0; j < sizeof(union tree_node);
+	    for (int j=0; j < size;
 		 j++) {
 	      cerr << hex<< obj[j];
 	    };
 	    cerr << endl;
 
 	  cerr   << "obj int:"  ;
-	  for (int j=0; j < sizeof(union tree_node);
+	  for (int j=0; j < size;
 	       j++) {
 	    cerr << hex<< (unsigned int)obj[j];
 	  };
@@ -106,7 +109,7 @@ int main(int argc, char ** argv){
 	  cerr   << "pointers:"  ;
 	  int j =0;
 	  unsigned long* pobj = (unsigned long*)&obj[0];
-	  unsigned long* pend = (unsigned long*)&obj[0]+sizeof(union tree_node);
+	  unsigned long* pend = (unsigned long*)&obj[0]+size;
 	  
 	  while (pobj < pend) {
 	    j++;
