@@ -7,6 +7,12 @@ int main(int argc, char ** argv){
   cerr << "hello" << endl;
 
   cerr << "Reading:"<< argv[1] << endl;
+  unsigned long  from;
+  sscanf(argv[2], "%lx", &from);
+
+  unsigned long  to;
+  sscanf(argv[3], "%lx", &to);
+  
   fstream f(
 	    argv[1],
 	    //"bin/core",
@@ -24,13 +30,15 @@ int main(int argc, char ** argv){
     f.read(buf,sizeof(buf));
     
     //0x7fdea3f81970:	0x90	0xf6	0x7b	0xa5	0xde	0x7f	0x00	0x00
-    int pos = f.tellg();  // pos is 0
+    unsigned long pos = f.tellg();  // pos is 0
+    pos += from;
+    
     bufv =  *(unsigned long*)(buf);
 
     if(
-       (bufv > 0x7fdea5656000)
-       &&
-       (bufv < 0x7fdea5856000)
+       (bufv > from)
+       && 
+       (bufv < to)
        )
       {
 	

@@ -88,3 +88,11 @@ they can be used like this
 all_translation_units is a global
 
 p *(tree_node*)all_translation_units[0].m_vecdata
+
+
+
+# reading core file
+
+Reading the core file from the compiler can be done with the gdb symbols from the perspective of the plugin.
+
+    gdb /home/mdupont/experiments/lcore/gcc-plugin-cpp-template/.libs/libtemplate_plugin.so.0.0.0 -c core

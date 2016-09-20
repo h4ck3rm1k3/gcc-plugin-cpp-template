@@ -1,7 +1,12 @@
+t4:
+	g++ pointers_objects.cpp tree_nodes.cpp
+	./a.out	 ../bin/test_program_segment_6_.out 7fdea1029000 7fdea55aa000  2> report.txt
+
+
 t3:
 	g++ pointers.cpp
-	./a.out ../bin/core
-	#	./a.out	 ../bin/test_program_segment_6_.out
+	#	./a.out ../bin/core > pointers.txt 2>&1
+		./a.out	 ../bin/test_program_segment_6_.out 7fdea1029000 7fdea55aa000 2> ../bin/test_program_segment_6_.out.pointers.txt 
 
 t2:
 	g++ process.cpp
