@@ -200,7 +200,8 @@ tree_code_size (enum tree_code code)
     case tcc_exceptional:  /* something random, like an identifier.  */
       switch (code)
 	{
-	  //TODO: case IDENTIFIER_NODE:	return lang_hooks.identifier_size;
+	 case IDENTIFIER_NODE:	return C_SIZEOF_STRUCT_LANG_IDENTIFIER;
+	   
 	case TREE_LIST:		return sizeof (struct tree_list);
 
 	case ERROR_MARK:

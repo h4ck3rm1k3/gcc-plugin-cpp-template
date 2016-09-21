@@ -3219,3 +3219,80 @@ extern unsigned const char omp_clause_num_ops[];
 #define TREE_INT_CST_ELT_CHECK(T,I) ((T)->int_cst.val[I])
 
 extern size_t tree_size (const_tree);
+enum cpp_builtin_type
+{
+  BT_SPECLINE = 0,		/* `__LINE__' */
+  BT_DATE,			/* `__DATE__' */
+  BT_FILE,			/* `__FILE__' */
+  BT_BASE_FILE,			/* `__BASE_FILE__' */
+  BT_INCLUDE_LEVEL,		/* `__INCLUDE_LEVEL__' */
+  BT_TIME,			/* `__TIME__' */
+  BT_STDC,			/* `__STDC__' */
+  BT_PRAGMA,			/* `_Pragma' operator */
+  BT_TIMESTAMP,			/* `__TIMESTAMP__' */
+  BT_COUNTER,			/* `__COUNTER__' */
+  BT_HAS_ATTRIBUTE,		/* `__has_attribute__(x)' */
+  BT_FIRST_USER,		/* User defined builtin macros.  */
+  BT_LAST_USER = BT_FIRST_USER + 31
+};
+    
+enum cpp_ttype { CPP_COLON, CPP_SEMICOLON, CPP_CLOSE_BRACE, CPP_COMMA };
+struct cpp_token {
+  //__extension__
+  enum cpp_ttype type : 8;
+}; //cpp_comment_table;
+    
+struct cpp_macro {
+  union cpp_macro_u
+  {
+    cpp_token * tokens;
+  } exp;
+  unsigned int count;
+};
+    
+union _cpp_hashnode_value {
+  cpp_macro * macro;
+  struct answer * answers;
+  enum cpp_builtin_type builtin;
+  unsigned short arg_index;
+};
+enum node_type
+{
+  NT_VOID = 0,	   /* No definition yet.  */
+  NT_MACRO,	   /* A macro of some form.  */
+  NT_ASSERTION	   /* Predicate for #assert.  */
+};
+
+    
+    struct cpp_hashnode {
+  struct ht_identifier ident;
+  unsigned int is_directive : 1;
+  unsigned int directive_index : 7;
+
+
+  unsigned char rid_code;
+  enum node_type type : 6;
+  unsigned int flags : 10;
+
+  union _cpp_hashnode_value value;
+};
+
+    
+    struct cpp_hashnode;
+    struct line_map_macro {
+      struct cpp_hashnode *
+      macro;
+      unsigned int n_tokens;
+      source_location * macro_locations;
+      source_location expansion;
+    };
+
+    struct c_common_identifier {
+      struct tree_common common;
+      struct cpp_hashnode node;
+    };
+
+    /* struct lang_identifier is private to c-decl.c, but langhooks.c needs to
+       know how big it is.  This is sanity-checked in c-decl.c.  */
+#define C_SIZEOF_STRUCT_LANG_IDENTIFIER				\
+    (sizeof (struct c_common_identifier) + 3 * sizeof (void *))
