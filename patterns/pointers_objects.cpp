@@ -1,6 +1,7 @@
 #include <fstream>
 #include <iostream>
 #include "iso_tree_node.hpp"
+#include <iomanip>
 
 using namespace std;
 
@@ -94,23 +95,26 @@ int main(int argc, char ** argv){
 	  cerr   << "obj:"  ;
 	    for (int j=0; j < size;
 		 j++) {
-	      cerr << hex<< obj[j];
+	      cerr << setw(2)<< obj[j];
 	    };
 	    cerr << endl;
 
 	  cerr   << "obj int:"  ;
 	  for (int j=0; j < size;
 	       j++) {
-	    cerr << hex<< (unsigned int)obj[j];
+	    //cerr << " O:" << setw(2) << oct<< (unsigned)obj[j];
+	    cerr << " " << setw(2) << hex<< (unsigned)obj[j];
+	    //cerr << " D:" << setw(2) << dec<< (unsigned)obj[j];
 	  };
 	  cerr << endl;
 
 
 	  cerr   << "pointers:"  ;
 	  int j =0;
-	  unsigned long* pobj = (unsigned long*)&obj[0];
-	  unsigned long* pend = (unsigned long*)&obj[0]+size;
-	  
+	  unsigned long* pobj = (unsigned long*)obj;
+	  unsigned long* pend = (unsigned long*)(obj+size);
+
+	  cerr << "end "  << hex << pend << endl;
 	  while (pobj < pend) {
 	    j++;
 	    unsigned long v = *pobj;
@@ -121,7 +125,8 @@ int main(int argc, char ** argv){
 	       )
 	      {
 		cerr
-		  << "Pos 0x"  << hex << j << "\t"
+		  << "item "   << j << "\t"
+		  << "Pos 0x"  << hex << pobj << "\t"
 		  << " 0x"<< hex << v
 		  << endl;
 	      }
