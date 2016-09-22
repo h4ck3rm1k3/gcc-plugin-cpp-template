@@ -3210,13 +3210,37 @@ extern unsigned const char omp_clause_num_ops[];
 
 #define OMP_CLAUSE_CODE(NODE) (OMP_CLAUSE_CHECK (NODE))->omp_clause.code
 #define STRING_CST_CHECK(t) TREE_CHECK (t, STRING_CST)
-#define VL_EXP_OPERAND_LENGTH(NODE) ((int)TREE_INT_CST_LOW (VL_EXP_CHECK (NODE)->exp.operands[0]))
+//#define _VL_EXP_OPERAND_LENGTH(NODE) ((int)TREE_INT_CST_LOW (VL_EXP_CHECK (NODE)->exp.operands[0]))
+
+//#define TREE_INT_CST_LOW(NODE) ((unsigned HOST_WIDE_INT) TREE_INT_CST_ELT (NODE, 0))
+//#define TREE_INT_CST_ELT(NODE,I) TREE_INT_CST_ELT_CHECK (NODE, I)
+//#define
+
+inline unsigned HOST_WIDE_INT TREE_INT_CST_ELT(tree T, int I){
+  return ((T)->int_cst.val[I]);
+}
+
+
+inline int TREE_INT_CST_LOW(tree NODE) {
+  return((unsigned HOST_WIDE_INT) TREE_INT_CST_ELT (NODE, 0));
+}
+
+inline int VL_EXP_OPERAND_LENGTH(tree NODE)
+{
+  return ((int)TREE_INT_CST_LOW (NODE->exp.operands[0]));
+  //   //return _VL_EXP_OPERAND_LENGTH(tree);
+}
+
+inline int VL_EXP_OPERAND_LENGTH(const_tree NODE)
+{
+  return ((int)TREE_INT_CST_LOW (NODE->exp.operands[0]));
+  //   //return _VL_EXP_OPERAND_LENGTH(tree);
+}
+
 #define OMP_CLAUSE_CHECK(t) TREE_CHECK (t, OMP_CLAUSE)
 #define TREE_CLASS_CHECK(T,CODE) (T)
-#define TREE_INT_CST_LOW(NODE) ((unsigned HOST_WIDE_INT) TREE_INT_CST_ELT (NODE, 0))
+
 #define VL_EXP_CHECK(T) TREE_CLASS_CHECK (T, tcc_vl_exp)
-#define TREE_INT_CST_ELT(NODE,I) TREE_INT_CST_ELT_CHECK (NODE, I)
-#define TREE_INT_CST_ELT_CHECK(T,I) ((T)->int_cst.val[I])
 
 extern size_t tree_size (const_tree);
 enum cpp_builtin_type

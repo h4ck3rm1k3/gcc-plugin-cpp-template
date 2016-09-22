@@ -1,6 +1,6 @@
 
 
-t5.bin: single_objects.cpp tree_nodes.cpp read.cpp
+t5.bin: single_objects.cpp tree_nodes.cpp read.cpp iso_tree_node.hpp
 	g++ -g single_objects.cpp tree_nodes.cpp read.cpp -o t5.bin
 
 t5: t5.bin
