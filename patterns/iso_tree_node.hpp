@@ -3296,3 +3296,241 @@ enum node_type
        know how big it is.  This is sanity-checked in c-decl.c.  */
 #define C_SIZEOF_STRUCT_LANG_IDENTIFIER				\
     (sizeof (struct c_common_identifier) + 3 * sizeof (void *))
+struct ptrmem_cst {
+  struct tree_common common;
+  tree member;
+};
+
+struct tree_baselink {
+  struct tree_common common;
+  tree binfo;
+  tree functions;
+  tree access_binfo;
+};
+
+struct template_parm_index {
+  struct tree_common common;
+  int index;
+  int level;
+  int orig_level;
+  tree decl;
+};
+
+struct tree_default_arg {
+  struct tree_common common;
+  struct cp_token_cache *tokens;
+  vec<tree, va_gc> *instantiations;
+};
+
+struct tree_deferred_noexcept {
+  struct tree_base base;
+  tree pattern;
+  tree args;
+};
+
+struct tree_static_assert {
+  struct tree_common common;
+  tree condition;
+  tree message;
+  location_t location;
+};
+
+struct  tree_argument_pack_select {
+  struct tree_common common;
+  tree argument_pack;
+  int index;
+};
+
+enum cp_trait_kind
+{
+  CPTK_BASES,
+  CPTK_DIRECT_BASES,
+  CPTK_HAS_NOTHROW_ASSIGN,
+  CPTK_HAS_NOTHROW_CONSTRUCTOR,
+  CPTK_HAS_NOTHROW_COPY,
+  CPTK_HAS_TRIVIAL_ASSIGN,
+  CPTK_HAS_TRIVIAL_CONSTRUCTOR,
+  CPTK_HAS_TRIVIAL_COPY,
+  CPTK_HAS_TRIVIAL_DESTRUCTOR,
+  CPTK_HAS_VIRTUAL_DESTRUCTOR,
+  CPTK_IS_ABSTRACT,
+  CPTK_IS_BASE_OF,
+  CPTK_IS_CLASS,
+  CPTK_IS_EMPTY,
+  CPTK_IS_ENUM,
+  CPTK_IS_FINAL,
+  CPTK_IS_LITERAL_TYPE,
+  CPTK_IS_POD,
+  CPTK_IS_POLYMORPHIC,
+  CPTK_IS_SAME_AS,
+  CPTK_IS_STD_LAYOUT,
+  CPTK_IS_TRIVIAL,
+  CPTK_IS_TRIVIALLY_ASSIGNABLE,
+  CPTK_IS_TRIVIALLY_CONSTRUCTIBLE,
+  CPTK_IS_TRIVIALLY_COPYABLE,
+  CPTK_IS_UNION,
+  CPTK_UNDERLYING_TYPE
+};
+enum cp_tree_node_structure_enum {
+  TS_CP_GENERIC,
+  TS_CP_IDENTIFIER,
+  TS_CP_TPI,
+  TS_CP_PTRMEM,
+  TS_CP_BINDING,
+  TS_CP_OVERLOAD,
+  TS_CP_BASELINK,
+  TS_CP_TEMPLATE_DECL,
+  TS_CP_WRAPPER,
+  TS_CP_DEFAULT_ARG,
+  TS_CP_DEFERRED_NOEXCEPT,
+  TS_CP_STATIC_ASSERT,
+  TS_CP_ARGUMENT_PACK_SELECT,
+  TS_CP_TRAIT_EXPR,
+  TS_CP_LAMBDA_EXPR,
+  TS_CP_TEMPLATE_INFO,
+  TS_CP_CONSTRAINT_INFO,
+  TS_CP_USERDEF_LITERAL,
+  LAST_TS_CP_ENUM
+};
+
+enum cp_tree_index
+{
+    CPTI_JAVA_BYTE_TYPE,
+    CPTI_JAVA_SHORT_TYPE,
+    CPTI_JAVA_INT_TYPE,
+    CPTI_JAVA_LONG_TYPE,
+    CPTI_JAVA_FLOAT_TYPE,
+    CPTI_JAVA_DOUBLE_TYPE,
+    CPTI_JAVA_CHAR_TYPE,
+    CPTI_JAVA_BOOLEAN_TYPE,
+
+    CPTI_WCHAR_DECL,
+    CPTI_VTABLE_ENTRY_TYPE,
+    CPTI_DELTA_TYPE,
+    CPTI_VTABLE_INDEX_TYPE,
+    CPTI_CLEANUP_TYPE,
+    CPTI_VTT_PARM_TYPE,
+
+    CPTI_CLASS_TYPE,
+    CPTI_UNKNOWN_TYPE,
+    CPTI_INIT_LIST_TYPE,
+    CPTI_VTBL_TYPE,
+    CPTI_VTBL_PTR_TYPE,
+    CPTI_STD,
+    CPTI_ABI,
+    CPTI_CONST_TYPE_INFO_TYPE,
+    CPTI_TYPE_INFO_PTR_TYPE,
+    CPTI_ABORT_FNDECL,
+    CPTI_AGGR_TAG,
+
+    CPTI_CTOR_IDENTIFIER,
+    CPTI_COMPLETE_CTOR_IDENTIFIER,
+    CPTI_BASE_CTOR_IDENTIFIER,
+    CPTI_DTOR_IDENTIFIER,
+    CPTI_COMPLETE_DTOR_IDENTIFIER,
+    CPTI_BASE_DTOR_IDENTIFIER,
+    CPTI_DELETING_DTOR_IDENTIFIER,
+    CPTI_DELTA_IDENTIFIER,
+    CPTI_IN_CHARGE_IDENTIFIER,
+    CPTI_VTT_PARM_IDENTIFIER,
+    CPTI_NELTS_IDENTIFIER,
+    CPTI_THIS_IDENTIFIER,
+    CPTI_PFN_IDENTIFIER,
+    CPTI_VPTR_IDENTIFIER,
+    CPTI_STD_IDENTIFIER,
+
+    CPTI_LANG_NAME_C,
+    CPTI_LANG_NAME_CPLUSPLUS,
+    CPTI_LANG_NAME_JAVA,
+
+    CPTI_EMPTY_EXCEPT_SPEC,
+    CPTI_NOEXCEPT_TRUE_SPEC,
+    CPTI_NOEXCEPT_FALSE_SPEC,
+    CPTI_JCLASS,
+    CPTI_TERMINATE,
+    CPTI_CALL_UNEXPECTED,
+    CPTI_ATEXIT_FN_PTR_TYPE,
+    CPTI_ATEXIT,
+    CPTI_DSO_HANDLE,
+    CPTI_DCAST,
+
+    CPTI_KEYED_CLASSES,
+
+    CPTI_NULLPTR,
+    CPTI_NULLPTR_TYPE,
+
+    CPTI_ALIGN_TYPE,
+
+    CPTI_MAX
+};
+
+enum cp_lambda_default_capture_mode_type {
+  CPLD_NONE,
+  CPLD_COPY,
+  CPLD_REFERENCE
+};
+typedef struct ptrmem_cst * ptrmem_cst_t;
+
+struct tree_overload {
+  struct tree_common common;
+  tree function;
+};
+
+struct  tree_template_decl {
+  struct tree_decl_common common;
+  tree arguments;
+  tree result;
+};
+
+struct  tree_trait_expr {
+  struct tree_common common;
+  tree type1;
+  tree type2;  
+  enum cp_trait_kind kind;
+};
+
+struct tree_constraint_info {
+  struct tree_base base;
+  tree template_reqs;
+  tree declarator_reqs;
+  tree associated_constr;
+};
+
+struct qualified_typedef_usage_s {
+  tree typedef_decl;
+  tree context;
+  location_t locus;
+};
+typedef struct qualified_typedef_usage_s qualified_typedef_usage_t;
+
+struct  tree_template_info {
+  struct tree_common common;
+  vec<qualified_typedef_usage_t, va_gc> *typedefs_needing_access_checking;
+};
+enum overflow_type {
+  OT_UNDERFLOW = -1,
+  OT_NONE,
+  OT_OVERFLOW
+};
+
+struct  tree_userdef_literal {
+  struct tree_base base;
+  tree suffix_id;
+  tree value;
+  tree num_string;
+  enum overflow_type overflow;
+};
+
+struct  tree_lambda_expr
+{
+  struct tree_typed typed;
+  tree capture_list;
+  tree this_capture;
+  tree return_type;
+  tree extra_scope;
+  tree closure;
+  vec<tree, va_gc> *pending_proxies;
+  location_t locus;
+  enum cp_lambda_default_capture_mode_type default_capture_mode;
+  int discriminator;
+};

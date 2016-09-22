@@ -126,6 +126,59 @@ get_tree_code_name (enum tree_code code)
   return tree_code_name[code];
 }
 
+
+/* Langhook for tree_size: determine size of our 'x' and 'c' nodes.  */
+size_t
+lang_hooks_tree_size (enum tree_code code)
+{
+  switch (code)
+    {
+
+
+  switch (code)
+    {
+    case PTRMEM_CST:		return sizeof (struct ptrmem_cst);
+    case BASELINK:		return sizeof (struct tree_baselink);
+    case TEMPLATE_PARM_INDEX:	return sizeof (template_parm_index);
+    case DEFAULT_ARG:		return sizeof (struct tree_default_arg);
+    case DEFERRED_NOEXCEPT:	return sizeof (struct tree_deferred_noexcept);
+    case OVERLOAD:		return sizeof (struct tree_overload);
+    case STATIC_ASSERT:         return sizeof (struct tree_static_assert);
+    case TYPE_ARGUMENT_PACK:
+    case TYPE_PACK_EXPANSION:
+      return sizeof (struct tree_common);
+
+    case NONTYPE_ARGUMENT_PACK:
+    case EXPR_PACK_EXPANSION:
+      return sizeof (struct tree_exp);
+
+    case ARGUMENT_PACK_SELECT:
+      return sizeof (struct tree_argument_pack_select);
+
+    case TRAIT_EXPR:
+      return sizeof (struct tree_trait_expr);
+
+    case LAMBDA_EXPR:           return sizeof (struct tree_lambda_expr);
+
+    case TEMPLATE_INFO:         return sizeof (struct tree_template_info);
+
+      //case CONSTRAINT_INFO:       return sizeof (struct tree_constraint_info);
+
+    case USERDEF_LITERAL:	return sizeof (struct tree_userdef_literal);
+
+    case TEMPLATE_DECL:		return sizeof (struct tree_template_decl);
+
+    default:
+      if (TREE_CODE_CLASS (code) == tcc_declaration)
+	return sizeof (struct tree_decl_non_common);
+      assert(0);
+    }
+      
+     
+      //gcc_unreachable ();
+    }
+  /* NOTREACHED */
+}	  
 void gcc_unreachable(){}
 
 /* Compute the number of bytes occupied by a tree with code CODE.
@@ -165,8 +218,8 @@ tree_code_size (enum tree_code code)
 	  case NAMELIST_DECL:
 	    return sizeof (struct tree_decl_non_common);
 	  default:
-	    assert(0);
-	    //return lang_hooks.tree_size (code);
+	    //assert(0);
+	    return lang_hooks_tree_size (code);
 	  }
       }
 
@@ -193,8 +246,8 @@ tree_code_size (enum tree_code code)
 	case VECTOR_CST:	return sizeof (struct tree_vector);
 	  //case STRING_CST:	gcc_unreachable ();
 	default:
-	  //return lang_hooks.tree_size (code);
-	  assert(0);
+	  return lang_hooks_tree_size (code);
+	  //assert(0);
 	}
 
     case tcc_exceptional:  /* something random, like an identifier.  */
@@ -219,8 +272,8 @@ tree_code_size (enum tree_code code)
 	case TARGET_OPTION_NODE: return sizeof (struct tree_target_option);
 
 	default:
-	  //return lang_hooks.tree_size (code);
-	  assert(0);
+	  return lang_hooks_tree_size (code);
+	  //assert(0);
 	}
 
     default:

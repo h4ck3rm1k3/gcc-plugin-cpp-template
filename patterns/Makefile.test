@@ -1,7 +1,18 @@
+
+
+t5.bin: single_objects.cpp tree_nodes.cpp read.cpp
+	g++ -g single_objects.cpp tree_nodes.cpp read.cpp -o t5.bin
+
+t5: t5.bin
+	
+	./t5.bin	 ../bin/test_program_segment_6_.out 7fdea1029000 7fdea55aa000 0x7fdea1491780
+
+#0x7fdea1429f70 
+
+
 t4:
-	g++ pointers_objects.cpp tree_nodes.cpp
-	./a.out	 ../bin/test_program_segment_6_.out 7fdea1029000 7fdea55aa000
-		 #2> report.txt
+	g++ pointers_objects.cpp tree_nodes.cpp read.cpp
+	./a.out	 ../bin/test_program_segment_6_.out 7fdea1029000 7fdea55aa000 2> report.txt
 
 
 t3:
