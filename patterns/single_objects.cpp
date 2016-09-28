@@ -6,7 +6,7 @@
 using namespace std;
 
 //char * read_buffer(const char * filename);
-char * read_buffer_section(const char * filename, unsigned long from, unsigned long to);
+char * read_buffer_section(const char * filename, unsigned long from, unsigned long to, int level);
 
 int main(int argc, char ** argv){
 
@@ -30,7 +30,7 @@ int main(int argc, char ** argv){
 
     char * filebuf = read_buffer_section(argv[1],
 					 start - from,
-					 start - from +512);
+					 start - from +512, 1);
     if (!filebuf){
       cerr << "could not read file " << endl;
       break;

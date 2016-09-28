@@ -41,11 +41,16 @@ char * read_buffer(const char * filename) {
 }
 
 
-char * read_buffer_section(const char * filename, unsigned long from, unsigned long to) {
+char * read_buffer_section(const char * filename, unsigned long from, unsigned long to, int indent=0) {
 
-  cerr << "read section:" << filename << endl;
-  cerr << "from:" << hex << from << endl;
-  cerr << "to:" << hex << to << endl;
+  cerr << "indent:" << indent << endl;
+  
+  for (int i = 0; i < indent; i++) {
+    cerr << "\t";     
+  }
+  cerr << "read section:" << filename 
+       << "from:" << hex << from
+       << "to:" << hex << to << endl;
   fstream f(
 	    filename,
 	    //"bin/core",
@@ -59,24 +64,40 @@ char * read_buffer_section(const char * filename, unsigned long from, unsigned l
     return 0;
   }
   else {
+    for (int i = 0; i < indent; i++) {
+      cerr << "\t";     
+    }
     cerr << "opened file"  << endl;
   }
 
 
   unsigned long size = to - from;
+  for (int i = 0; i < indent; i++) {
+    cerr << "\t";     
+  }
   cerr << "size of buffer" << size << endl;
 
   char * filebuf;
   try {
     filebuf = new char[size];
+    for (int i = 0; i < indent; i++) {
+      cerr << "\t";     
+    }
     cerr << "alloc ok : " << size << endl;
   } catch (std::bad_alloc   err) {
     cerr << "failed alloc" << size << endl;
   }
 
+  for (int i = 0; i < indent; i++) {
+    cerr << "\t";     
+  }
   cerr << "seeking to" << from << endl;
   f.seekg(from, ios::beg);
   unsigned long pos = f.tellg();  // pos is 0
+
+  for (int i = 0; i < indent; i++) {
+    cerr << "\t";     
+  }
   cerr << "now at " << pos << endl;
   
   unsigned long bufv;
@@ -85,6 +106,10 @@ char * read_buffer_section(const char * filename, unsigned long from, unsigned l
   if(f){  
     f.read(filebuf,size);    
     pos = f.tellg();  // pos is 0
+    
+    for (int i = 0; i < indent; i++) {
+      cerr << "\t";     
+    }
     cerr << "end of block" << pos << endl;
   }
   else {

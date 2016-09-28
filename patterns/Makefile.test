@@ -4,7 +4,7 @@ t5.bin: single_objects.cpp tree_nodes.cpp read.cpp iso_tree_node.hpp
 	g++ -g single_objects.cpp tree_nodes.cpp read.cpp -o t5.bin
 
 t5: t5.bin
-	
+	1
 	./t5.bin	 ../bin/test_program_segment_6_.out 7fdea1029000 7fdea55aa000 0x7fdea1491780
 
 #0x7fdea1429f70 
